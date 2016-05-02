@@ -8,12 +8,21 @@
         public CardDB.cardIDEnum CARDID = CardDB.cardIDEnum.None;
         public int creator = 0; // the minion
         public int controllerOfCreator = 0; // own or enemys buff?
+        public int copyDeathrattle = 0;
 
         public miniEnch(CardDB.cardIDEnum id, int crtr, int controler)
         {
             this.CARDID = id;
             this.creator = crtr;
             this.controllerOfCreator = controler;
+        }
+
+        public miniEnch(CardDB.cardIDEnum id, int crtr, int controler, int copydr)
+        {
+            this.CARDID = id;
+            this.creator = crtr;
+            this.controllerOfCreator = controler;
+            this.copyDeathrattle = copydr;
         }
 
     }
@@ -23,14 +32,20 @@
         //dont silence----------------------------
         public int anzGotDmg = 0;
         public int gotDmgRaw = 0;
+        public int GotDmgValue = 0;
+        public bool gotInspire = false;
         public bool isHero = false;
         public bool own;
+        public int pID = 0;
 
         public CardDB.cardName name = CardDB.cardName.unknown;
+        public TAG_CLASS cardClass = TAG_CLASS.INVALID;
+        public int synergy = 0;
         public Handmanager.Handcard handcard;
         public int entitiyID = -1;
         //public int id = -1;//delete this
         public int zonepos = 0;
+        public CardDB.Card deathrattle2;
 
         public bool playedThisTurn = false;
         public int numAttacksThisTurn = 0;
@@ -42,16 +57,17 @@
         public bool shadowmadnessed = false;//´can be silenced :D
         public bool canAttackNormal = false;
 
-        public int ancestralspirit = 0;
         public bool destroyOnOwnTurnStart = false; // depends on own!
         public bool destroyOnEnemyTurnStart = false; // depends on own!
         public bool destroyOnOwnTurnEnd = false; // depends on own!
         public bool destroyOnEnemyTurnEnd = false; // depends on own!
 
         public bool concedal = false;
+        public int ancestralspirit = 0;
         public int souloftheforest = 0;
+        public int explorershat = 0;
+        public int infest = 0;
 
-        public int explorersHat = 0;
         public int ownBlessingOfWisdom = 0;
         public int enemyBlessingOfWisdom = 0;
         public int ownPowerWordGlory = 0;
@@ -85,6 +101,8 @@
         public bool cantLowerHPbelowONE = false;
 
         public bool silenced = false;
+        public bool extraParam = false;
+        public int extraParam2 = 0;
 
         public List<int> deathrattles = new List<int>();//we might have to use this for unearthed raptor
 
@@ -97,12 +115,17 @@
         {
             //dont silence----------------------------
             this.anzGotDmg = m.anzGotDmg;
+            this.GotDmgValue = m.GotDmgValue;
+            this.gotInspire = m.gotInspire;
             this.gotDmgRaw = m.gotDmgRaw;
             this.isHero = m.isHero;
             this.own = m.own;
             this.canAttackNormal = m.canAttackNormal;
             this.name = m.name;
+            this.cardClass = m.cardClass;
+            this.synergy = m.synergy;
             this.handcard = m.handcard;//new?
+            this.deathrattle2 = m.deathrattle2;
             this.entitiyID = m.entitiyID;
             this.zonepos = m.zonepos;
 
@@ -112,8 +135,8 @@
             this.playedThisTurn = m.playedThisTurn;
             this.numAttacksThisTurn = m.numAttacksThisTurn;
             this.immuneWhileAttacking = m.immuneWhileAttacking;
-            this.cantBeTargetedBySpellsOrHeroPowers = m.cantBeTargetedBySpellsOrHeroPowers;
-            //---------------------------------------
+
+            
             this.shadowmadnessed = m.shadowmadnessed;
 
             this.ancestralspirit = m.ancestralspirit;
@@ -124,8 +147,8 @@
 
             this.concedal = m.concedal;
             this.souloftheforest = m.souloftheforest;
-
-            this.explorersHat = m.explorersHat;
+            this.explorershat = m.explorershat;
+            this.infest = m.infest;
 
             this.ownBlessingOfWisdom = m.ownBlessingOfWisdom;
             this.enemyBlessingOfWisdom = m.enemyBlessingOfWisdom;
@@ -158,6 +181,9 @@
             this.cantLowerHPbelowONE = m.cantLowerHPbelowONE;
 
             this.silenced = m.silenced;
+
+            this.cantBeTargetedBySpellsOrHeroPowers = m.cantBeTargetedBySpellsOrHeroPowers;
+
             if (m.deathrattles != null)
             {
                 this.deathrattles = new List<int>();
@@ -173,11 +199,16 @@
             //dont silence----------------------------
             this.anzGotDmg = m.anzGotDmg;
             this.gotDmgRaw = m.gotDmgRaw;
+            this.GotDmgValue = m.GotDmgValue;
+            this.gotInspire = m.gotInspire;
             this.isHero = m.isHero;
             this.own = m.own;
             this.canAttackNormal = m.canAttackNormal;
             this.name = m.name;
+            this.cardClass = m.cardClass;
+            this.synergy = m.synergy;
             this.handcard = m.handcard;//new?
+            this.deathrattle2 = m.deathrattle2;
             //this.entitiyID = m.entitiyID;
             this.zonepos = m.zonepos;
 
@@ -196,11 +227,11 @@
             this.destroyOnEnemyTurnStart = m.destroyOnEnemyTurnStart; // depends on own!
             this.destroyOnOwnTurnEnd = m.destroyOnOwnTurnEnd; // depends on own!
             this.destroyOnEnemyTurnEnd = m.destroyOnEnemyTurnEnd; // depends on own!
-            this.cantBeTargetedBySpellsOrHeroPowers = m.cantBeTargetedBySpellsOrHeroPowers;
+
             this.concedal = m.concedal;
             this.souloftheforest = m.souloftheforest;
-
-            this.explorersHat = m.explorersHat;
+            this.explorershat = m.explorershat;
+            this.infest = m.infest;
 
             this.ownBlessingOfWisdom = m.ownBlessingOfWisdom;
             this.enemyBlessingOfWisdom = m.enemyBlessingOfWisdom;
@@ -234,6 +265,8 @@
 
             this.silenced = m.silenced;
 
+            this.cantBeTargetedBySpellsOrHeroPowers = m.cantBeTargetedBySpellsOrHeroPowers;
+
             if (m.deathrattles != null)
             {
                 this.deathrattles = new List<int>();
@@ -249,38 +282,56 @@
             return this.Angr;
         }
 
-        public void getDamageOrHeal(int dmgg, Playfield p, bool isMinionAttack, bool dontCalcLostDmg)
+        public void getDamageOrHeal(int dmg, Playfield p, bool isMinionAttack, bool dontCalcLostDmg)
         {
-            int dmg = dmgg;
             if (this.Hp <= 0) return;
 
             if (this.immune && dmg > 0) return;
 
             if (this.isHero)
             {
-                //dmg reduction from animated armor
-                if (this.own && dmg > 1)
+                if (this.own)
                 {
-                    if (p.ownWeaponDurability >=1 && p.ownWeaponName == CardDB.cardName.cursedblade)
+                    if (p.ownWeaponCard.name == CardDB.cardName.cursedblade) dmg += dmg;
+                    if (p.anzOwnAnimatedArmor > 0) dmg = 1;
+                    if (p.anzOwnBolfRamshield > 0)
                     {
-                        dmg = dmg*2;
-                    }
-
-                    if (p.anzOwnAnimatedArmor >= 1)
-                    {
-                        dmg = 1;
+                        int rest = this.armor - dmg;
+                        this.armor = Math.Max(0, rest);
+                        if (rest < 0)
+                        {
+                            foreach (Minion m in p.ownMinions)
+                            {
+                                if (m.name == CardDB.cardName.bolframshield)
+                                {
+                                    m.getDamageOrHeal(-rest, p, true, false);
+                                    break;
+                                }
+                            }
+                        }
+                        return;
                     }
                 }
                 else
                 {
-                    if (p.enemyWeaponDurability >=1 && p.enemyWeaponName == CardDB.cardName.cursedblade)
+                    if (p.anzEnemyAnimatedArmor > 0) dmg = 1;
+                    if (p.enemyWeaponCard.name == CardDB.cardName.cursedblade) dmg += dmg;
+                    if (p.anzEnemyBolfRamshield > 0)
                     {
-                        dmg = dmg * 2;
-                    }
-
-                    if (p.anzEnemyAnimatedArmor >= 1)
-                    {
-                        dmg = 1;
+                        int rest = this.armor - dmg;
+                        this.armor = Math.Max(0, rest);
+                        if (rest < 0)
+                        {
+                            foreach (Minion m in p.enemyMinions)
+                            {
+                                if (m.name == CardDB.cardName.bolframshield)
+                                {
+                                    m.getDamageOrHeal(-rest, p, true, false);
+                                    break;
+                                }
+                            }
+                        }
+                        return;
                     }
                 }
 
@@ -290,31 +341,11 @@
                     //if (dmg < 0) return;
 
                     //heal
-                    bool BolfRamshield = false;
-                    if (dmg > 0)
-                    {
 
-                        foreach (Minion m in (this.own) ? p.ownMinions : p.enemyMinions)
-                        {
-                            if (m.name == CardDB.cardName.bolframshield)
-                            {
-                                BolfRamshield = true;
-                                m.getDamageOrHeal(dmg, p, isMinionAttack, dontCalcLostDmg);
-                            }
-                        }
-                    }
-
-                    if (!BolfRamshield)
-                    {
-                        this.Hp = Math.Min(30, this.Hp - dmg);
-                    }
+                    this.Hp = Math.Min(30, this.Hp - dmg);
                     if (copy < this.Hp)
                     {
                         p.tempTrigger.charsGotHealed++;
-                        if (this.own)
-                        {
-                            p.tempTrigger.owncharsGotHealed++;
-                        }
                     }
                     if (copy - this.Hp >= 1)
                     {
@@ -329,20 +360,8 @@
                         int rest = this.armor - dmg;
                         if (rest < 0)
                         {
-                            bool BolfRamshield = false;
-                            foreach (Minion m in (this.own) ? p.ownMinions : p.enemyMinions)
-                            {
-                                if (m.name == CardDB.cardName.bolframshield)
-                                {
-                                    BolfRamshield = true;
-                                    m.getDamageOrHeal(-rest, p, isMinionAttack, dontCalcLostDmg);
-                                }
-                            }
-                            if (!BolfRamshield)
-                            {
-                                this.Hp += rest;
-                                p.secretTrigger_HeroGotDmg(this.own, rest);
-                            }
+                            this.Hp += rest;
+                            p.secretTrigger_HeroGotDmg(this.own, rest);
                         }
                         this.armor = Math.Max(0, this.armor - dmg);
 
@@ -350,19 +369,12 @@
                 }
                 if (this.cantLowerHPbelowONE && this.Hp <= 0) this.Hp = 1;
 
-
                 if (this.Hp < copy)
                 {
-                    if (this.own)
-                    {
-                        p.tempTrigger.ownHeroGotDmg++;
-                    }
-                    else
-                    {
-                        p.tempTrigger.enemyHeroGotDmg++;
-                    }
                     this.anzGotDmg++;
-                    this.gotDmgRaw += dmg;
+                    this.GotDmgValue += dmg;
+                    if (this.own) p.tempTrigger.ownMinionsGotDmg++;
+                    else p.tempTrigger.enemyMinionsGotDmg++;
                 }
                 return;
             }
@@ -435,26 +447,23 @@
                 //minionWasHealed
                 p.tempTrigger.minionsGotHealed++;
                 p.tempTrigger.charsGotHealed++;
-                if (this.own)
-                {
-                    p.tempTrigger.ownMinionsGotHealed++;
-                    p.tempTrigger.owncharsGotHealed++;
-                }
             }
-
-            if (this.Hp < hpcopy)
+            else if (this.Hp < hpcopy)
             {
-                if (this.own)
+                if (this.own) p.tempTrigger.ownMinionsGotDmg++;
+                else p.tempTrigger.enemyMinionsGotDmg++;
+
+                if (p.anzAcidmaw > 0)
                 {
-                    p.tempTrigger.ownMinionsGotDmg++;
-                }
-                else
-                {
-                    p.tempTrigger.enemyMinionsGotDmg++;
+                    if (p.anzAcidmaw == 1)
+                    {
+                        if (this.name != CardDB.cardName.acidmaw) this.Hp = 0;
+                    }
+                    else this.Hp = 0;
                 }
 
                 this.anzGotDmg++;
-                this.gotDmgRaw += dmg;
+                this.GotDmgValue += dmg;
             }
 
             if (this.maxHp == this.Hp)
@@ -488,8 +497,6 @@
                 this.minionDied(p);
             }
 
-
-
         }
 
         public void minionDied(Playfield p)
@@ -504,20 +511,20 @@
             }
 
 
-
             if (own)
             {
 
                 p.tempTrigger.ownMinionsDied++;
+                if (this.taunt) p.anzOwnTaunt--;
                 if (this.handcard.card.race == TAG_RACE.PET)
                 {
                     p.tempTrigger.ownBeastDied++;
                 }
-                if (this.handcard.card.race == TAG_RACE.MECHANICAL)
+                else if (this.handcard.card.race == TAG_RACE.MECHANICAL)
                 {
                     p.tempTrigger.ownMechanicDied++;
                 }
-                if (this.handcard.card.race == TAG_RACE.MURLOC)
+                else if (this.handcard.card.race == TAG_RACE.MURLOC)
                 {
                     p.tempTrigger.ownMurlocDied++;
                 }
@@ -525,15 +532,16 @@
             else
             {
                 p.tempTrigger.enemyMinionsDied++;
+                if (this.taunt) p.anzEnemyTaunt--;
                 if (this.handcard.card.race == TAG_RACE.PET)
                 {
                     p.tempTrigger.enemyBeastDied++;
                 }
-                if (this.handcard.card.race == TAG_RACE.MECHANICAL)
+                else if (this.handcard.card.race == TAG_RACE.MECHANICAL)
                 {
                     p.tempTrigger.enemyMechanicDied++;
                 }
-                if (this.handcard.card.race == TAG_RACE.MURLOC)
+                else if (this.handcard.card.race == TAG_RACE.MURLOC)
                 {
                     p.tempTrigger.enemyMurlocDied++;
                 }
@@ -615,6 +623,7 @@
 
         public void becomeSilence(Playfield p)
         {
+            deathrattle2 = null;
             p.minionGetOrEraseAllAreaBuffs(this, false);
             //buffs
             ancestralspirit = 0;
@@ -624,12 +633,12 @@
             destroyOnEnemyTurnEnd = false;
             concedal = false;
             souloftheforest = 0;
+            explorershat = 0;
+            infest = 0;
             ownBlessingOfWisdom = 0;
             enemyBlessingOfWisdom = 0;
             ownPowerWordGlory = 0;
             enemyPowerWordGlory = 0;
-
-            explorersHat = 0;
 
             cantBeTargetedBySpellsOrHeroPowers = false;
 
@@ -644,9 +653,16 @@
             cantLowerHPbelowONE = false;
             if(this.deathrattles!=null) this.deathrattles.Clear();
 
-            if (own) p.spellpower -= spellpower;
-            else p.enemyspellpower -= spellpower;
-
+            if (own)
+            {
+                p.spellpower -= spellpower;
+                if (this.taunt) p.anzOwnTaunt--;
+            }
+            else
+            {
+                p.enemyspellpower -= spellpower;
+                if (this.taunt) p.anzEnemyTaunt--;
+            }
             spellpower = 0;
 
             //delete enrage (if minion is silenced the first time)
@@ -687,6 +703,7 @@
             if (this.shadowmadnessed)
             {
                 this.shadowmadnessed = false;
+                p.shadowmadnessed--;
                 p.minionGetControlled(this, !own, false);
             }
         }
@@ -695,6 +712,28 @@
         {
             if (this.deathrattles == null || this.deathrattles.Count == 0) return false;
             return true;
+        }
+
+        public Minion GetTargetForMinionWithSurvival(Playfield p, bool own)
+        {
+            if (this.Angr == 0) return null;
+            if ((own ? p.enemyMinions.Count : p.ownMinions.Count) < 1) return (own ? p.enemyHero : p.ownHero);
+            Minion target = new Minion();
+            Minion targetTaumt = new Minion();
+            foreach (Minion m in own ? p.enemyMinions : p.ownMinions)
+            {
+                if (m.taunt && !m.silenced)
+                {
+                    if (this.Hp > m.Hp && (m.Hp + m.Angr + m.Angr * (m.windfury ? 1 : 0)) > (targetTaumt.Hp + targetTaumt.Angr + targetTaumt.Angr * (targetTaumt.windfury ? 1 : 0))) targetTaumt = m;
+                }
+                else
+                {
+                    if (this.Hp > m.Hp && (m.Hp + m.Angr + m.Angr * (m.windfury ? 1 : 0)) > (target.Hp + target.Angr + target.Angr * (target.windfury ? 1 : 0))) target = m;
+                }
+            }
+            if (targetTaumt.Hp > 0) return targetTaumt;
+            if (target.Hp > 0) return target;
+            return null;
         }
 
         public void loadEnchantments(List<miniEnch> enchants, int ownPlayerControler)
@@ -706,7 +745,7 @@
 
                 if (me.CARDID == CardDB.cardIDEnum.LOE_105e) //explorersHat
                 {
-                    this.explorersHat++;
+                    this.explorershat++;
                 }
 
 

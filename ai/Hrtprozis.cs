@@ -7,7 +7,6 @@
     {
         None,
         druid,
-        hogger,
         hunter,
         priest,
         warlock,
@@ -17,7 +16,8 @@
         shaman,
         mage,
         lordjaraxxus,
-        ragnarosthefirelord
+        ragnarosthefirelord,
+        hogger
     }
 
     public class Hrtprozis
@@ -190,169 +190,70 @@
 
         public string heroIDtoName(string s)
         {
-            string retval = "druid";
-
-            if (s == "XXX_040")
+            switch (s)
             {
-                retval = "hogger";
+                case "HERO_05": return "hunter";
+                case "HERO_05a": return "hunter";
+                case "HERO_09": return "priest";
+                case "HERO_06": return "druid";
+                case "HERO_07": return "warlock";
+                case "HERO_03": return "thief";
+                case "HERO_04": return "pala";
+                case "HERO_04a": return "pala";
+                case "HERO_01": return "warrior";
+                case "HERO_01a": return "warrior";
+                case "HERO_02": return "shaman";
+                case "HERO_08": return "mage";
+                case "HERO_08a": return "mage";
+                case "HERO_08b": return "mage";
+                case "EX1_323h": return "lordjaraxxus";
+                case "BRM_027h": return "ragnarosthefirelord";
+                case "XXX_040": return "hogger";
+                default:
+                    string retval = CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(s)).name.ToString();
+                    return retval;
             }
-            if (s == "HERO_05" || s == "HERO_05a")
-            {
-                retval = "hunter";
-            }
-            if (s == "HERO_09" || s == "HERO_09a")
-            {
-                retval = "priest";
-            }
-            if (s == "HERO_06" || s == "HERO_06a")
-            {
-                retval = "druid";
-            }
-            if (s == "HERO_07" || s == "HERO_07a")
-            {
-                retval = "warlock";
-            }
-            if (s == "HERO_03" || s == "HERO_03a")
-            {
-                retval = "thief";
-            }
-            if (s == "HERO_04" || s == "HERO_04a")
-            {
-                retval = "pala";
-            }
-            if (s == "HERO_01" || s == "HERO_01a")
-            {
-                retval = "warrior";
-            }
-            if (s == "HERO_02" || s == "HERO_02a")
-            {
-                retval = "shaman";
-            }
-            if (s == "HERO_08" || s == "HERO_08a")
-            {
-                retval = "mage";
-            }
-            if (s == "BRM_027h")
-            {
-                retval = "ragnarosthefirelord";
-            }
-            if (s == "EX1_323h")
-            {
-                retval = "lordjaraxxus";
-            }
-
-            return retval;
         }
 
 
-        public static string heroEnumtoName(HeroEnum s)
+        public static string heroEnumtoName(HeroEnum he)
         {
-
-            if (s ==HeroEnum.hogger )
+            switch (he)
             {
-                return "hogger";
+                case HeroEnum.druid: return "druid";
+                case HeroEnum.hunter: return "hunter";
+                case HeroEnum.mage: return "mage";
+                case HeroEnum.pala: return "pala";
+                case HeroEnum.priest: return "priest";
+                case HeroEnum.shaman: return "shaman";
+                case HeroEnum.thief: return "thief";
+                case HeroEnum.warlock: return "warlock";
+                case HeroEnum.warrior: return "warrior";
+                case HeroEnum.lordjaraxxus: return "lordjaraxxus";
+                case HeroEnum.ragnarosthefirelord: return "ragnarosthefirelord";
+                case HeroEnum.hogger: return "hogger";
+                default: return "druid";
             }
-            if (s == HeroEnum.hunter)
-            {
-                return "hunter";
-            }
-            if (s == HeroEnum.priest)
-            {
-                return "priest";
-            }
-            if (s == HeroEnum.druid)
-            {
-                return "druid";
-            }
-            if (s == HeroEnum.warlock)
-            {
-                return "warlock";
-            }
-            if (s == HeroEnum.thief)
-            {
-                return "thief";
-            }
-            if (s == HeroEnum.pala)
-            {
-                return "pala";
-            }
-            if (s == HeroEnum.warrior)
-            {
-                return "warrior";
-            }
-            if (s == HeroEnum.shaman)
-            {
-                return "shaman";
-            }
-            if (s == HeroEnum.mage)
-            {
-                return "mage";
-            }
-            if (s == HeroEnum.lordjaraxxus)
-            {
-                return "lordjaraxxus";
-            }
-            if (s == HeroEnum.ragnarosthefirelord)
-            {
-                return "ragnarosthefirelord";
-            }
-
-            return "druid";
         }
 
         public HeroEnum heroNametoEnum(string s)
         {
-
-            if (s == "hogger")
+            switch (s)
             {
-                return HeroEnum.hogger;
+                case "druid": return HeroEnum.druid;
+                case "hunter": return HeroEnum.hunter;
+                case "mage": return HeroEnum.mage;
+                case "pala": return HeroEnum.pala;
+                case "priest": return HeroEnum.priest;
+                case "shaman": return HeroEnum.shaman;
+                case "thief": return HeroEnum.thief;
+                case "warlock": return HeroEnum.warlock;
+                case "warrior": return HeroEnum.warrior;
+                case "lordjaraxxus": return HeroEnum.lordjaraxxus;
+                case "ragnarosthefirelord": return HeroEnum.ragnarosthefirelord;
+                case "hogger": return HeroEnum.hogger;
+                default: return HeroEnum.None;
             }
-            if (s == "hunter")
-            {
-                return HeroEnum.hunter;
-            }
-            if (s == "priest")
-            {
-                return HeroEnum.priest;
-            }
-            if (s == "druid")
-            {
-                return HeroEnum.druid;
-            }
-            if (s == "warlock")
-            {
-                return HeroEnum.warlock;
-            }
-            if (s == "thief")
-            {
-                return HeroEnum.thief;
-            }
-            if (s == "pala")
-            {
-                return HeroEnum.pala;
-            }
-            if (s == "warrior")
-            {
-                return HeroEnum.warrior;
-            }
-            if (s == "shaman")
-            {
-                return HeroEnum.shaman;
-            }
-            if (s == "mage")
-            {
-                return HeroEnum.mage;
-            }
-            if (s == "lordjaraxxus")
-            {
-                return HeroEnum.lordjaraxxus;
-            }
-            if (s == "ragnarosthefirelord")
-            {
-                return HeroEnum.ragnarosthefirelord;
-            }
-
-            return HeroEnum.None;
         }
 
 

@@ -743,7 +743,7 @@
                         tempminion.enemyPowerWordGlory = enemyPwordGlory;
                         tempminion.souloftheforest = souloftheforest;
 
-                        tempminion.explorersHat = explorersHat;
+                        tempminion.explorershat = explorersHat;
 
                         tempminion.canAttackNormal = false;
                         if (ready == true) tempminion.canAttackNormal = true;
@@ -872,7 +872,7 @@
                         tempminion.enemyPowerWordGlory = enemyPwordGlory;
                         tempminion.souloftheforest = souloftheforest;
 
-                        tempminion.explorersHat = explorersHat;
+                        tempminion.explorershat = explorersHat;
 
                         if (maxhp > hp) tempminion.wounded = true;
                         tempminion.updateReadyness();

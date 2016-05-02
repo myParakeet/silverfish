@@ -69,9 +69,22 @@ DocProject/Help/*.hhk
 DocProject/Help/*.hhp
 DocProject/Help/Html2
 DocProject/Help/html
-obj/Debug/silver.pdb
-obj/Debug/silver.dll
-SilverAi.suo
-obj/Debug/silver.dll
-HRCustomClasses.suo
-HRCustomClasses.sln
+*.suo
+*.sln
+*.pdb
+*.dll
+*.user
+*.csproj
+/HR/cards
+/HR/Penalties
+/HR/ai
+/HrtBddy/Penalties
+/HrtBddy/ai
+/HrtBddy/cards
+/external process/Penalties
+/external process/ai
+/external process/cards
+/Client/Penalties
+/Client/ai
+/Client/cards
+*.gitattributes

@@ -19,6 +19,7 @@
 
         public int ownMinionsDied;
         public int enemyMinionsDied;
+        public int ownBeastSummoned;
         public int ownBeastDied;
         public int enemyBeastDied;
         public int ownMechanicDied;
@@ -53,6 +54,7 @@
         //------------
 
         public int nextEntity = 70;
+        public int pID = 0;
 
         public triggerCounter tempTrigger = new triggerCounter();
 
@@ -65,21 +67,37 @@
         public int anzEnemyRaidleader = 0;
         public int anzOwnStormwindChamps = 0;
         public int anzEnemyStormwindChamps = 0;
+        public int anzOwnWarhorseTrainer = 0;
+        public int anzEnemyWarhorseTrainer = 0;
         public int anzOwnTundrarhino = 0;
         public int anzEnemyTundrarhino = 0;
         public int anzOwnTimberWolfs = 0;
         public int anzEnemyTimberWolfs = 0;
         public int anzMurlocWarleader = 0;
+        public int anzAcidmaw = 0;
         public int anzGrimscaleOracle = 0;
+        public int anzOwnShadowfiends = 0;
+        public int anzEnemyShadowfiends = 0;
         public int anzOwnAuchenaiSoulpriest = 0;
         public int anzEnemyAuchenaiSoulpriest = 0;
         public int anzOwnsorcerersapprentice = 0;
+        public int anzOwnsorcerersapprenticeStarted = 0;
         public int anzEnemysorcerersapprentice = 0;
+        public int anzEnemysorcerersapprenticeStarted = 0;
         public int anzOwnSouthseacaptain = 0;
         public int anzEnemySouthseacaptain = 0;
         public int anzOwnMalGanis = 0;
         public int anzEnemyMalGanis = 0;
-
+        public int anzOwnPiratesStarted = 0;
+        public int anzOwnMurlocStarted = 0;
+        public int anzOwnChromaggus = 0;
+        public int anzEnemyChromaggus = 0;
+        public int anzOwnDragonConsort = 0;
+        public int anzOwnDragonConsortStarted = 0;
+        public int anzOwnBolfRamshield = 0;
+        public int anzEnemyBolfRamshield = 0;
+        public int anzOwnHorsemen = 0;
+        public int anzEnemyHorsemen = 0;
         //new ones TGT##########################
 
         public int ownSaboteur = 0;
@@ -87,22 +105,24 @@
         public int anzOwnFencingCoach = 0;
         public int anzEnemyFencingCoach = 0;
 
+        public int ownHeroPowerCostLessOnce = 0;
+        public int enemyHeroPowerCostLessOnce = 0;
+        public int ownHeroPowerExtraDamage = 0;
+        public int enemyHeroPowerExtraDamage = 0;
+        public int ownHeroPowerAllowedQuantity = 1;
+        public int enemyHeroPowerAllowedQuantity = 1;
+        public int anzUsedOwnHeroPower = 0;
+
         public int anzOwnGarrisonCommander = 0;//also used for ColdarraDrake
         public int anzEnemyGarrisonCommander = 0;//also used for ColdarraDrake
         public int anzOwnFallenHeros = 0;
         public int anzEnemyFallenHeros = 0;
-        public int anzownShadowfiends = 0;
-        public int anzEnemyShadowfiends = 0;
         public int anzOwnFizzlebang=0;
         public int anzEnemyFizzlebang=0;
         public int anzOwnBuccaneer = 0;
         public int anzEnemyBuccaneer = 0;
         public int anzOwnAviana = 0;
         public int anzEnemyAviana = 0;
-        public int  anzOwnAcidMaw =0;
-        public int anzEnemyAcidMaw=0;
-        public int anzOwnWarhorseTrainer = 0;
-        public int anzEnemyWarhorseTrainer = 0;
         public int anzOwnMaidenOfTheLake = 0;
         public int anzEnemyMaidenOfTheLake = 0;
 
@@ -121,6 +141,21 @@
         public int anzEnemyMechwarper = 0;
         public int anzEnemyMechwarperStarted = 0;
 
+        public int anzOgOwnCThun = 0;
+        public int anzOgOwnCThunHpBonus = 0;
+        public int anzOgOwnCThunAngrBonus = 0;
+        public int anzOgOwnCThunTaunt = 0;
+
+        public int blackwaterpirate = 0;
+        public int blackwaterpirateStarted = 0;
+        public int choGall = 0;
+        public int embracetheshadow = 0;
+
+        public int anzEnemyTaunt = 0;
+        public int anzOwnTaunt = 0;
+        public int ownMinionsDiedTurn = 0;
+        public int enemyMinionsDiedTurn = 0;
+
         public bool feugenDead = false;
         public bool stalaggDead = false;
 
@@ -135,7 +170,9 @@
 
         public int doublepriest = 0;
         public int enemydoublepriest = 0;
+        public int ownMistcaller = 0;
 
+        public int lockandload = 0;
         public int ownDragonConsort = 0;
         public int enemyDragonConsort = 0;
 
@@ -184,14 +221,18 @@
 
         public Minion ownHero;
         public Minion enemyHero;
-        public HeroEnum ownHeroName = HeroEnum.druid;
-        public HeroEnum enemyHeroName = HeroEnum.druid;
+        public HeroEnum ownHeroName = HeroEnum.None;
+        public HeroEnum enemyHeroName = HeroEnum.None;
+        public TAG_CLASS ownHeroStartClass = TAG_CLASS.INVALID;
+        public TAG_CLASS enemyHeroStartClass = TAG_CLASS.INVALID;
 
         public CardDB.cardName ownWeaponName = CardDB.cardName.unknown;
+        public CardDB.Card ownWeaponCard = new CardDB.Card();
         public int ownWeaponAttack = 0;
         public int ownWeaponDurability = 0;
 
         public CardDB.cardName enemyWeaponName = CardDB.cardName.unknown;
+        public CardDB.Card enemyWeaponCard = new CardDB.Card();
         public int enemyWeaponAttack = 0;
         public int enemyWeaponDurability = 0;
 
@@ -213,24 +254,46 @@
 
         public int spellpower = 0;
         public int enemyspellpower = 0;
+        public int wehaveCounterspell = 0;
 
         public bool playedmagierinderkirintor = false;
         public bool playedPreparation = false;
 
         public int ownloatheb = 0;
         public int enemyloatheb = 0;
+        public int winzigebeschwoererin = 0;
+        public int startedWithWinzigebeschwoererin = 0;
 
         public int pintsizedsummoner = 0;
         public int managespenst = 0;
+        public int startedWithManagespenst = 0;
         public int soeldnerDerVenture = 0;
+        public int startedWithsoeldnerDerVenture = 0;
         public int beschwoerungsportal = 0;
+        public int startedWithbeschwoerungsportal = 0;
+        public int myCardsCostLess = 0;
+        public int startedWithmyCardsCostLess = 0;
+        public int allSpellCostLess = 0;
+        public int startedWithallSpellCostLess = 0;
         public int nerubarweblord = 0;
+        public int startedWithnerubarweblord = 0;
+
+        public bool startedWithDamagedMinions = false; // needed for manacalculation of the spell "Crush"
+
+        public int ownWeaponAttackStarted = 0;
+        public int ownMobsCountStarted = 0;
+        public int ownCardsCountStarted = 0;
+        public int enemyCardsCountStarted = 0;
+        public int ownHeroHpStarted = 30;
+        public int enemyHeroHpStarted = 30;
 
         public int mobsplayedThisTurn = 0;
+        public int startedWithMobsPlayedThisTurn = 0;
 
         
         public int optionsPlayedThisTurn = 0;
         public int cardsPlayedThisTurn = 0;
+        public int overload = 0; //=overload
         public int owedRecall = 0; //=recall
         public int currentRecall = 0;
         public int enemyRecall = 0;
@@ -264,6 +327,10 @@
         // just for saving which minion to revive with secrets (=the first one that died);
         public CardDB.cardIDEnum revivingOwnMinion = CardDB.cardIDEnum.None;
         public CardDB.cardIDEnum revivingEnemyMinion = CardDB.cardIDEnum.None;
+        public CardDB.cardIDEnum OwnLastDiedMinion = CardDB.cardIDEnum.None;
+
+        public int shadowmadnessed = 0; //minions has switched controllers this turn.
+
 
         //Helpfunctions help = Helpfunctions.Instance;
 
@@ -439,16 +506,14 @@
             anzEnemyGarrisonCommander = 0;
             anzOwnFallenHeros = 0;
             anzEnemyFallenHeros = 0;
-            anzownShadowfiends = 0;
+            anzOwnShadowfiends = 0;
             anzEnemyShadowfiends = 0;
-            anzOwnFizzlebang=0;
-            anzEnemyFizzlebang=0;
+            anzOwnFizzlebang = 0;
+            anzEnemyFizzlebang = 0;
             anzOwnBuccaneer = 0;
             anzEnemyBuccaneer = 0;
-            anzOwnAviana = 0;
             anzEnemyAviana = 0;
-            anzOwnAcidMaw =0;
-            anzEnemyAcidMaw=0;
+            anzAcidmaw = 0;
             anzOwnWarhorseTrainer = 0;
             anzEnemyWarhorseTrainer = 0;
             anzOwnMaidenOfTheLake = 0;
@@ -517,11 +582,11 @@
                 if (m.name == CardDB.cardName.coldarradrake) this.anzOwnGarrisonCommander += 1000;
                 if (m.name == CardDB.cardName.garrisoncommander) this.anzOwnGarrisonCommander += 1;
                 if (m.name == CardDB.cardName.fallenhero) this.anzOwnFallenHeros += 1;
-                if (m.name == CardDB.cardName.shadowfiend) this.anzownShadowfiends += 1;
+                if (m.name == CardDB.cardName.shadowfiend) this.anzOwnShadowfiends += 1;
                 if (m.name == CardDB.cardName.wilfredfizzlebang) this.anzOwnFizzlebang += 1;
                 if (m.name == CardDB.cardName.buccaneer) this.anzOwnBuccaneer += 1;
                 if (m.name == CardDB.cardName.aviana) this.anzOwnAviana += 1;
-                if (m.name == CardDB.cardName.acidmaw) this.anzOwnAcidMaw += 1;
+                if (m.name == CardDB.cardName.acidmaw) this.anzAcidmaw += 1;
                 if (m.name == CardDB.cardName.warhorsetrainer) this.anzOwnWarhorseTrainer += 1;
                 if (m.name == CardDB.cardName.maidenofthelake) this.anzOwnMaidenOfTheLake += 1;
                 if (m.name == CardDB.cardName.warsongcommander) this.anzOwnWarsongCommanders += 1;
@@ -615,7 +680,7 @@
                 if (m.name == CardDB.cardName.wilfredfizzlebang) this.anzEnemyFizzlebang += 1;
                 if (m.name == CardDB.cardName.buccaneer) this.anzEnemyBuccaneer += 1;
                 if (m.name == CardDB.cardName.aviana) this.anzEnemyAviana += 1;
-                if (m.name == CardDB.cardName.acidmaw) this.anzEnemyAcidMaw += 1;
+                if (m.name == CardDB.cardName.acidmaw) this.anzAcidmaw += 1;
                 if (m.name == CardDB.cardName.warhorsetrainer) this.anzEnemyWarhorseTrainer += 1;
                 if (m.name == CardDB.cardName.maidenofthelake) this.anzEnemyMaidenOfTheLake += 1;
                 if (m.name == CardDB.cardName.warsongcommander) this.anzEnemyWarsongCommanders += 1;
@@ -834,7 +899,7 @@
             anzOwnFallenHeros = p.anzOwnFallenHeros;
             anzEnemyFallenHeros = p.anzEnemyFallenHeros;
 
-            anzownShadowfiends = p.anzownShadowfiends;
+            anzOwnShadowfiends = p.anzOwnShadowfiends;
             anzEnemyShadowfiends = p.anzEnemyShadowfiends;
 
             //tgt new-----
@@ -844,8 +909,7 @@
             anzEnemyBuccaneer = p.anzEnemyBuccaneer;
             anzOwnAviana = p.anzOwnAviana;
             anzEnemyAviana = p.anzEnemyAviana;
-            anzOwnAcidMaw = p.anzOwnAcidMaw;
-            anzEnemyAcidMaw = p.anzEnemyAcidMaw;
+            anzAcidmaw = p.anzAcidmaw;
             anzOwnWarhorseTrainer = p.anzOwnWarhorseTrainer;
             anzEnemyWarhorseTrainer = p.anzEnemyWarhorseTrainer;
             anzOwnMaidenOfTheLake = p.anzOwnMaidenOfTheLake;
@@ -894,14 +958,14 @@
             Swap(ref ownDragonConsort, ref enemyDragonConsort);
             Swap(ref ownBaronRivendare, ref enemyBaronRivendare);
 
-            //tgt new
+             //tgt new
              Swap(ref anzOwnGarrisonCommander, ref anzEnemyGarrisonCommander);
              Swap(ref anzOwnFallenHeros, ref anzEnemyFallenHeros);
-             Swap(ref anzownShadowfiends, ref anzEnemyShadowfiends);
+             Swap(ref anzOwnShadowfiends, ref anzEnemyShadowfiends);
              Swap(ref anzOwnFizzlebang, ref anzEnemyFizzlebang);
              Swap(ref anzOwnBuccaneer, ref anzEnemyBuccaneer);
              Swap(ref anzOwnAviana, ref anzEnemyAviana);
-             Swap(ref anzOwnAcidMaw, ref anzEnemyAcidMaw);
+             //Swap(ref anzOwnmaw, ref anzEnemymaw);//dont need to swapped, we have one int for both players
              Swap(ref anzOwnWarhorseTrainer, ref anzEnemyWarhorseTrainer);
              Swap(ref anzOwnMaidenOfTheLake, ref anzEnemyMaidenOfTheLake);
 
@@ -2581,6 +2645,21 @@
         }
 
 
+        //HeroPowerDamage calculation---------------------------------------------------
+        public int getHeroPowerDamage(int dmg)
+        {
+            dmg += this.ownHeroPowerExtraDamage;
+            if (this.doublepriest >= 1) dmg *= (2 * this.doublepriest);
+            return dmg;
+        }
+
+        public int getEnemyHeroPowerDamage(int dmg)
+        {
+            dmg += this.enemyHeroPowerExtraDamage;
+            if (this.enemydoublepriest >= 1) dmg *= (2 * this.enemydoublepriest);
+            return dmg;
+        }
+
         //spelldamage calculation---------------------------------------------------
         public int getSpellDamageDamage(int dmg)
         {
@@ -3614,9 +3693,9 @@
             // only 4 minions.. we do this manually :D
             //allso dead minion trigger this!
 
-            if (this.anzOwnAcidMaw + this.anzEnemyAcidMaw >= 1)
+            if (this.anzAcidmaw == 1)
             {
-                int anzam = this.anzOwnAcidMaw + this.anzEnemyAcidMaw;
+                int anzam = this.anzAcidmaw;
                 foreach (Minion m in this.ownMinions)
                 {
                     if (m.anzGotDmg >= 1)
@@ -5245,7 +5324,7 @@
                     callKid(kid, pos, m.own);
                 }
 
-                for (int i = 0; i < m.explorersHat; i++)
+                for (int i = 0; i < m.explorershat; i++)
                 {
                     this.drawACard(CardDB.cardIDEnum.LOE_105, m.own, true);
                 }
@@ -5269,7 +5348,7 @@
                         callKid(kid, pos, m.own);
                     }
 
-                    for (int i = 0; i < m.explorersHat; i++)
+                    for (int i = 0; i < m.explorershat; i++)
                     {
                         this.drawACard(CardDB.cardIDEnum.LOE_105, m.own, true);
                     }
@@ -5315,7 +5394,7 @@
                             minionOwnReviving = true;
                         }
 
-                        if ((!m.silenced && m.handcard.card.deathrattle) || m.ancestralspirit >= 1 || m.souloftheforest >= 1 || m.explorersHat >= 1)
+                        if ((!m.silenced && m.handcard.card.deathrattle) || m.ancestralspirit >= 1 || m.souloftheforest >= 1 || m.explorershat >= 1)
                         {
                             deathrattles.Add(m);
                         }
@@ -5364,7 +5443,7 @@
                             minionEnemyReviving = true;
                         }
 
-                        if ((!m.silenced && m.handcard.card.deathrattle) || m.ancestralspirit >= 1 || m.souloftheforest >= 1 || m.explorersHat>=1)
+                        if ((!m.silenced && m.handcard.card.deathrattle) || m.ancestralspirit >= 1 || m.souloftheforest >= 1 || m.explorershat>=1)
                         {
                             deathrattles.Add(m);
                         }
@@ -5787,6 +5866,135 @@
             }
         }
 
+        public void drawACard(CardDB.cardName ss, bool own, bool nopen = false)
+        {
+            CardDB.cardName s = ss;
+
+            // cant hold more than 10 cards
+            if (own)
+            {
+
+                if (s == CardDB.cardName.unknown && !nopen) 
+                {
+                    if (ownDeckSize == 0)
+                    {
+                        this.ownHeroFatigue++;
+                        this.ownHero.getDamageOrHeal(this.ownHeroFatigue, this, false, true);
+                        return;
+                    }
+                    else
+                    {
+                        this.ownDeckSize--;
+                        if (this.owncards.Count >= 10)
+                        {
+                            this.evaluatePenality += 15;
+                            return;
+                        }
+                        this.owncarddraw++;
+                    }
+
+                }
+                else
+                {
+                    if (this.owncards.Count >= 10)
+                    {
+                        this.evaluatePenality += 5;
+                        return;
+                    }
+                    this.owncarddraw++;
+
+                }
+
+
+            }
+            else
+            {
+                if (s == CardDB.cardName.unknown && !nopen) 
+                {
+                    if (enemyDeckSize == 0)
+                    {
+                        this.enemyHeroFatigue++;
+                        this.enemyHero.getDamageOrHeal(this.enemyHeroFatigue, this, false, true);
+                        return;
+                    }
+                    else
+                    {
+                        this.enemyDeckSize--;
+                        if (this.enemyAnzCards >= 10)
+                        {
+                            this.evaluatePenality -= (this.turnCounter > 2) ? 20 : 50;
+                            return;
+                        }
+                        this.enemycarddraw++;
+                        this.enemyAnzCards++;
+                    }
+
+                }
+                else
+                {
+                    if (this.enemyAnzCards >= 10)
+                    {
+                        this.evaluatePenality -= (this.turnCounter > 2) ? 20 : 50;
+                        return;
+                    }
+                    this.enemycarddraw++;
+                    this.enemyAnzCards++;
+                }
+                this.triggerCardsChanged(false);
+
+                if (anzEnemyChromaggus > 0 && s == CardDB.cardName.unknown && !nopen)
+                {
+                    for (int i = 1; i <= anzEnemyChromaggus; i++)
+                    {
+                        if (this.enemyAnzCards >= 10)
+                        {
+                            this.evaluatePenality -= (this.turnCounter > 2) ? 20 : 50;
+                            return;
+                        }
+                        this.enemycarddraw++;
+                        this.enemyAnzCards++;
+                        this.triggerCardsChanged(false);
+
+                    }
+                }
+                return;
+            }
+
+            if (s == CardDB.cardName.unknown)
+            {
+                CardDB.Card plchldr = new CardDB.Card { name = CardDB.cardName.unknown };
+                Handmanager.Handcard hc = new Handmanager.Handcard { card = plchldr, position = this.owncards.Count + 1, manacost = 1000, entity = this.getNextEntity() };
+                this.owncards.Add(hc);
+                this.triggerCardsChanged(true);
+            }
+            else
+            {
+                CardDB.Card c = CardDB.Instance.getCardData(s);
+                Handmanager.Handcard hc = new Handmanager.Handcard { card = c, position = this.owncards.Count + 1, manacost = c.calculateManaCost(this), entity = this.getNextEntity() };
+                this.owncards.Add(hc);
+                this.triggerCardsChanged(true);
+            }
+
+            if (anzOwnChromaggus > 0 && s == CardDB.cardName.unknown && !nopen) 
+            {
+                CardDB.Card plchldr = new CardDB.Card { name = CardDB.cardName.unknown };
+                for (int i = 1; i <= anzOwnChromaggus; i++)
+                {
+                    if (this.owncards.Count >= 10)
+                    {
+                        this.evaluatePenality += 15;
+                        return;
+                    }
+                    this.owncarddraw++;
+
+                    Handmanager.Handcard hc = new Handmanager.Handcard { card = plchldr, position = this.owncards.Count + 1, manacost = 1000, entity = this.getNextEntity() };
+                    this.owncards.Add(hc);
+                    this.triggerCardsChanged(true);
+                }
+            }
+
+        }
+
         public void drawACard(CardDB.cardIDEnum ss, bool own, bool no_pen = false, bool reduceManaToZero = false)
         {
             CardDB.cardIDEnum s = ss;
@@ -5913,7 +6121,7 @@
                         else
                         {
                             CardDB.Card c = CardDB.Instance.getCardDataFromID(s);
-                            int manac = Math.Max(0, c.cost - this.anzownShadowfiends);
+                            int manac = Math.Max(0, c.cost - this.anzOwnShadowfiends);
                             if (i == 0 && reduceManaToZero) manac = 0;
                             Handmanager.Handcard hc = new Handmanager.Handcard { card = c, position = this.owncards.Count + 1, manacost = manac, entity = this.getNextEntity() };
                             this.owncards.Add(hc);
@@ -5966,7 +6174,7 @@
                     else
                     {
                         CardDB.Card c = CardDB.Instance.getCardDataFromID(s);
-                        int manac = Math.Max(0, c.cost - this.anzownShadowfiends);
+                        int manac = Math.Max(0, c.cost - this.anzOwnShadowfiends);
                         Handmanager.Handcard hc = new Handmanager.Handcard { card = c, position = this.owncards.Count + 1, manacost = manac, entity = this.getNextEntity() };
                         this.owncards.Add(hc);
                     }
@@ -5998,7 +6206,7 @@
             if (tempdeck.Count >= 1) 
             {
                 Handmanager.Handcard hc = tempdeck[0];
-                int manac =  Math.Max(0, hc.card.cost - ((own)?this.anzownShadowfiends:this.anzEnemyShadowfiends));
+                int manac =  Math.Max(0, hc.card.cost - ((own)?this.anzOwnShadowfiends:this.anzEnemyShadowfiends));
                 if (reducemana) manac = 0;
                 tempdeck.RemoveAt(0);
                 if (temphand.Count <= 9)
@@ -6157,6 +6365,25 @@
             if (logging) Helpfunctions.Instance.logg("minion got sheep" + m.name + " " + m.Angr);
         }
 
+        public CardDB.Card getRandomCardForManaMinion(int manaCost)
+        {
+            CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_231); 
+            switch (manaCost)
+            {
+                case 1: kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_011); break; 
+                case 2: kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_131); break; 
+                case 3: kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_134); break; 
+                case 4: kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_074); break; 
+                case 5: kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.DS1_055); break; 
+                case 6: kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_283); break; 
+                case 7: kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_088); break; 
+                case 8: kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NEW1_038); break; 
+                case 9: kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_573); break; 
+                case 10: kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_120); break; 
+            }
+            return kid;
+        }
+
         public void minionGetControlled(Minion m, bool newOwner, bool canAttack)
         {
             List<Minion> newOwnerList = (newOwner) ? this.ownMinions : this.enemyMinions;
@@ -6239,6 +6466,15 @@
             m.AdjacentAngr += angr;
         }
 
+        public void allMinionOfASideGetBuffed(bool own, int attackbuff, int hpbuff)
+        {
+            List<Minion> temp = (own) ? this.ownMinions : this.enemyMinions;
+            foreach (Minion m in temp)
+            {
+                minionGetBuffed(m, attackbuff, hpbuff);
+            }
+        }
+
         public void minionGetBuffed(Minion m, int attackbuff, int hpbuff)
         {
             m.Angr = Math.Max(0, m.Angr + attackbuff);
@@ -6281,6 +6517,24 @@
             minionGetOrEraseAllAreaBuffs(m, false);
             m.Hp = 1;
             m.maxHp = 1;
+            if (m.wounded && !m.silenced) m.handcard.card.sim_card.onEnrageStop(this, m);
+            m.wounded = false;
+            minionGetOrEraseAllAreaBuffs(m, true);
+        }
+
+        public void minionSetAngrToX(Minion m, int newAngr)
+        {
+            if (!m.silenced && m.name == CardDB.cardName.lightspawn) return;
+            m.Angr = newAngr;
+            m.tempAttack = 0;
+            this.minionGetOrEraseAllAreaBuffs(m, true);
+        }
+
+        public void minionSetLifetoX(Minion m, int newHp)
+        {
+            minionGetOrEraseAllAreaBuffs(m, false);
+            m.Hp = newHp;
+            m.maxHp = newHp;
             if (m.wounded && !m.silenced) m.handcard.card.sim_card.onEnrageStop(this, m);
             m.wounded = false;
             minionGetOrEraseAllAreaBuffs(m, true);
@@ -6342,6 +6596,77 @@
             this.minionGetDamageOrHeal(own ? this.ownHero : this.enemyHero, damages);
         }
 
+        public void allCharsOfASideGetRandomDamage(bool ownSide, int times) 
+        {
+            //Deal damage randomly split among all enemies.
+
+            if ((!ownSide && this.enemyHero.Hp + this.enemyHero.armor <= times) || (ownSide && this.ownHero.Hp + this.ownHero.armor <= times))
+            {
+                if (!ownSide)
+                {
+                    int dmg = this.enemyHero.Hp + this.enemyHero.armor - 1;
+                    times = times - dmg;
+                    if (this.anzEnemyAnimatedArmor > 0)
+                    {
+                        for (; dmg > 0; dmg--) this.minionGetDamageOrHeal(this.enemyHero, 1);
+                    }
+                    else this.minionGetDamageOrHeal(this.enemyHero, dmg);
+                }
+                else
+                {
+                    int dmg = this.ownHero.Hp + this.ownHero.armor - 1;
+                    times = times - dmg;
+                    if (this.anzOwnAnimatedArmor > 0)
+                    {
+                        for (; dmg > 0; dmg--) this.minionGetDamageOrHeal(this.ownHero, 1);
+                    }
+                    else this.minionGetDamageOrHeal(this.ownHero, dmg);
+                }
+            }
+
+            List<Minion> temp = (ownSide) ? new List<Minion>(this.ownMinions) : new List<Minion>(this.enemyMinions);
+            temp.Sort((a, b) => a.Hp.CompareTo(b.Hp));//need lowest hp
+
+            int border = 1;
+            for (int pos = 0; pos < temp.Count; pos++)
+            {
+                Minion m = temp[pos];
+                if (m.divineshild)
+                {
+                    m.divineshild = false;
+                    times--;
+                    if (times < 1) break;
+                }
+                if (m.Hp > border)
+                {
+                    int dmg = Math.Min(m.Hp - border, times);
+                    times -= dmg;
+                    this.minionGetDamageOrHeal(m, dmg);
+                }
+                if (times < 1) break;
+            }
+            if (times > 0)
+            {
+                int dmg = times;
+                if (!ownSide)
+                {
+                    if (this.anzEnemyAnimatedArmor > 0)
+                    {
+                        for (; dmg > 0; dmg--) this.minionGetDamageOrHeal(this.enemyHero, 1);
+                    }
+                    else this.minionGetDamageOrHeal(this.enemyHero, dmg);
+                }
+                else
+                {
+                    if (this.anzOwnAnimatedArmor > 0)
+                    {
+                        for (; dmg > 0; dmg--) this.minionGetDamageOrHeal(this.ownHero, 1);
+                    }
+                    else this.minionGetDamageOrHeal(this.ownHero, dmg);
+                }
+            }
+        }
+
         public void allCharsGetDamage(int damages)
         {
             foreach (Minion m in this.ownMinions)
@@ -6372,8 +6697,10 @@
         {
             searchLowestHP,
             searchHighestHP,
-            searchLowestAttack, 
+            searchLowestAttack,
             searchHighestAttack,
+            searchHighAttackLowHP,
+            searchHighHPLowAttack,
         }
 
         public Minion searchRandomMinion(List<Minion> minions, searchmode mode)
@@ -6783,7 +7110,7 @@
             if (m.ownPowerWordGlory >= 1) mini += " ownPWG(" + m.ownPowerWordGlory + ")";
             if (m.enemyPowerWordGlory >= 1) mini += " enemyPWG(" + m.enemyPowerWordGlory + ")";
 
-            if (m.explorersHat >= 1) mini += " explht(" + m.explorersHat + ")";
+            if (m.explorershat >= 1) mini += " explht(" + m.explorershat + ")";
 
 
             return mini;
