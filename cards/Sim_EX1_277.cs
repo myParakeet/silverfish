@@ -4,10 +4,10 @@ using System.Text;
 
 namespace HREngine.Bots
 {
-    class Sim_EX1_277 : SimTemplate //arcanemissiles
+    class Sim_EX1_277 : SimTemplate //* Arcane Missiles
     {
 
-        //    verursacht $3 schaden, der zufällig auf feindliche charaktere verteilt wird.
+        //Deal $3 damage randomly split among all enemies.
 
         public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {

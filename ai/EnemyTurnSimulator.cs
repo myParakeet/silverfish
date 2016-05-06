@@ -170,6 +170,7 @@
             int i = 0;
             int count = 0;
             Playfield p = null;
+            Playfield bestold = null;
 
             while (havedonesomething)
             {
@@ -177,8 +178,7 @@
                 temp.Clear();
                 temp.AddRange(posmoves);
                 havedonesomething = false;
-                Playfield bestold = null;
-                float bestoldval = 20000000;
+                float bestoldval = int.MaxValue;
 
                 //foreach (Playfield p in temp)
                 count = temp.Count;

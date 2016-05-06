@@ -1163,7 +1163,7 @@ namespace HREngine.Bots
 
     public class Silverfish
     {
-        public string versionnumber = "118.1";
+        public string versionnumber = "118.2";
         private bool singleLog = false;
         private string botbehave = "rush";
         public bool waitingForSilver = false;
@@ -1791,7 +1791,7 @@ namespace HREngine.Bots
                 Entity entitiy = item;
                 int zp = entitiy.ZonePosition;
 
-                if (entitiy.CardType == TAG_CARDTYPE.MINION && zp >= 1)
+                if ((TAG_CARDTYPE)entitiy.CardType == TAG_CARDTYPE.MINION && zp >= 1)
                 {
                     //Helpfunctions.Instance.ErrorLog("zonepos " + zp);
                     CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(entitiy.CardId));

@@ -4551,10 +4551,10 @@
                 foreach (Minion m in this.ownMinions)
                 {
                     if (m.silenced) continue;
-                    if (m.name == CardDB.cardName.knifejuggler)
-                    {
+//                    if (m.name == CardDB.cardName.knifejuggler)
+//                    {
                         m.handcard.card.sim_card.onMinionWasSummoned(this, m, mnn);
-                    }
+//                    }
 
                     if (m.handcard.card.name == CardDB.cardName.eeriestatue)
                     {
@@ -4568,10 +4568,10 @@
                 foreach (Minion m in this.enemyMinions)
                 {
                     if (m.silenced) continue;
-                    if (m.name == CardDB.cardName.knifejuggler)
-                    {
+//                    if (m.name == CardDB.cardName.knifejuggler)
+//                    {
                         m.handcard.card.sim_card.onMinionWasSummoned(this, m, mnn);
-                    }
+//                    }
 
                     if (m.handcard.card.name == CardDB.cardName.eeriestatue)
                     {
@@ -6604,8 +6604,8 @@
             {
                 if (!ownSide)
                 {
-                    int dmg = this.enemyHero.Hp + this.enemyHero.armor - 1;
-                    times = times - dmg;
+                    int dmg = this.enemyHero.Hp + this.enemyHero.armor;  //optimistic
+                    if (this.enemyMinions.Count > 2) dmg--;
                     if (this.anzEnemyAnimatedArmor > 0)
                     {
                         for (; dmg > 0; dmg--) this.minionGetDamageOrHeal(this.enemyHero, 1);
@@ -6625,7 +6625,7 @@
             }
 
             List<Minion> temp = (ownSide) ? new List<Minion>(this.ownMinions) : new List<Minion>(this.enemyMinions);
-            temp.Sort((a, b) => a.Hp.CompareTo(b.Hp));//need lowest hp
+            temp.Sort((a, b) => { int tmp = a.Hp.CompareTo(b.Hp); return tmp == 0 ? a.Angr - b.Angr : tmp; });
 
             int border = 1;
             for (int pos = 0; pos < temp.Count; pos++)
