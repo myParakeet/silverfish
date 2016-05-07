@@ -4720,6 +4720,623 @@ namespace HREngine.Bots
                 return retval;
             }
 
+            // todo sepefeets - merge 2 old functions with the new 1
+            public List<Minion> getTargetsForCard(Playfield p)
+            {
+                //todo make it faster!! 
+                //todo remove the isRequirementInList with an big list of bools to ask the state of the bool
+                bool addOwnHero = false;
+                bool addEnemyHero = false;
+                bool[] ownMins = new bool[p.ownMinions.Count];
+                bool[] enemyMins = new bool[p.enemyMinions.Count];
+                for (int i = 0; i < ownMins.Length; i++) ownMins[i] = false;
+                for (int i = 0; i < enemyMins.Length; i++) enemyMins[i] = false;
+
+                int k = 0;
+                List<Minion> retval = new List<Minion>();
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_FOR_COMBO) && p.cardsPlayedThisTurn == 0) return retval;
+
+                if ((isRequirementInList(CardDB.ErrorType2.REQ_TARGET_IF_AVAILABLE_AND_MINIMUM_FRIENDLY_MINIONS) && p.ownMinions.Count < this.needMinOwnMinions)) return retval;
+
+                bool moreh = isRequirementInList(CardDB.ErrorType2.REQ_MINION_OR_ENEMY_HERO);
+                if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_TO_PLAY) || isRequirementInList(CardDB.ErrorType2.REQ_NONSELF_TARGET) || isRequirementInList(CardDB.ErrorType2.REQ_TARGET_IF_AVAILABLE) || isRequirementInList(CardDB.ErrorType2.REQ_TARGET_FOR_COMBO) || (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_IF_AVAILABLE_AND_MINIMUM_FRIENDLY_MINIONS) && p.ownMinions.Count >= this.needMinOwnMinions))
+                {
+                    addEnemyHero = true;
+                    addOwnHero = true;
+
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if ((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) continue;
+                        ownMins[k] = true;
+
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) || m.stealth) continue;
+                        enemyMins[k] = true;
+                    }
+
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_IF_AVAILABLE_AND_DRAGON_IN_HAND))
+                {
+                    bool dragonInHand = false;
+                    foreach (Handmanager.Handcard hc in p.owncards)
+                    {
+                        if (hc.card.race == TAG_RACE.DRAGON)
+                        {
+                            dragonInHand = true;
+                            break;
+                        }
+                    }
+                    if (dragonInHand == false) return retval;
+                    //you have dragon on hand!
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if ((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) continue;
+                        ownMins[k] = true;
+
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) || m.stealth) continue;
+                        enemyMins[k] = true;
+                    }
+                    addEnemyHero = true;
+                    addOwnHero = true;
+
+                }
+
+                if (moreh)
+                {
+                    addEnemyHero = true;//moreh = req_minion_or_enemyHero
+                    if (p.weHaveSteamwheedleSniper)
+                    {
+                        k = -1;
+                        foreach (Minion m in p.ownMinions)
+                        {
+                            k++;
+                            if ((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) continue;
+                            ownMins[k] = true;
+
+                        }
+                        k = -1;
+                        foreach (Minion m in p.enemyMinions)
+                        {
+                            k++;
+                            if (((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) || m.stealth) continue;
+                            enemyMins[k] = true;
+                        }
+                    }
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_HERO_TARGET))
+                {
+                    for (int i = 0; i < ownMins.Length; i++) ownMins[i] = false;
+                    for (int i = 0; i < enemyMins.Length; i++) enemyMins[i] = false;
+
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_MINION_TARGET))
+                {
+                    addOwnHero = false;
+                    addEnemyHero = false;
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_FRIENDLY_TARGET))
+                {
+                    addEnemyHero = false;
+                    for (int i = 0; i < enemyMins.Length; i++) enemyMins[i] = false;
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_ENEMY_TARGET))
+                {
+                    addOwnHero = false;
+                    for (int i = 0; i < ownMins.Length; i++) ownMins[i] = false;
+                }
+
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_LEGENDARY_TARGET))
+                {
+                    addOwnHero = false;
+                    addEnemyHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if ((m.handcard.card.rarity < 5))
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if ((m.handcard.card.rarity < 5))
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_DAMAGED_TARGET))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if (!m.wounded)
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (!m.wounded)
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_WITH_DEATHRATTLE))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if ( !(m.hasDeathrattle() || (m.handcard.card.deathrattle && !m.silenced) ))
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (!(m.hasDeathrattle() || (m.handcard.card.deathrattle && !m.silenced)))
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+                
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_UNDAMAGED_TARGET))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if (m.wounded)
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (m.wounded)
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_MAX_ATTACK))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if (m.Angr > this.needWithMaxAttackValueOf)
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (m.Angr > this.needWithMaxAttackValueOf)
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_MIN_ATTACK))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if (m.Angr < this.needWithMinAttackValueOf)
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (m.Angr < this.needWithMinAttackValueOf)
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_WITH_RACE))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    addOwnHero = (p.ownHeroName == HeroEnum.lordjaraxxus && (TAG_RACE)this.needRaceForPlaying == TAG_RACE.DEMON);
+                    addEnemyHero = (p.enemyHeroName == HeroEnum.lordjaraxxus && (TAG_RACE)this.needRaceForPlaying == TAG_RACE.DEMON);
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if ((m.handcard.card.race != (TAG_RACE)this.needRaceForPlaying))
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if ((m.handcard.card.race != (TAG_RACE)this.needRaceForPlaying))
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_MUST_TARGET_TAUNTER))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if (!m.taunt)
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (!m.taunt)
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+                if (addEnemyHero) retval.Add(p.enemyHero);
+                if (addOwnHero) retval.Add(p.ownHero);
+
+                k = -1;
+                foreach (Minion m in p.ownMinions)
+                {
+                    k++;
+                    if (ownMins[k]) retval.Add(m);
+                }
+                k = -1;
+                foreach (Minion m in p.enemyMinions)
+                {
+                    k++;
+                    if (enemyMins[k]) retval.Add(m);
+                }
+
+                return retval;
+
+            }
+
+            public List<Minion> getTargetsForCardEnemy(Playfield p)
+            {
+                //todo make it faster!! 
+                //todo remove the isRequirementInList with an big list of bools to ask the state of the bool
+                bool addOwnHero = false;
+                bool addEnemyHero = false;
+                bool[] ownMins = new bool[p.ownMinions.Count];
+                bool[] enemyMins = new bool[p.enemyMinions.Count];
+                for (int i = 0; i < ownMins.Length; i++) ownMins[i] = false;
+                for (int i = 0; i < enemyMins.Length; i++) enemyMins[i] = false;
+
+                int k = 0;
+                List<Minion> retval = new List<Minion>();
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_FOR_COMBO) && p.cardsPlayedThisTurn == 0) return retval;
+
+                bool moreh = isRequirementInList(CardDB.ErrorType2.REQ_MINION_OR_ENEMY_HERO);
+                if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_TO_PLAY) || isRequirementInList(CardDB.ErrorType2.REQ_NONSELF_TARGET) || isRequirementInList(CardDB.ErrorType2.REQ_TARGET_IF_AVAILABLE) || isRequirementInList(CardDB.ErrorType2.REQ_TARGET_FOR_COMBO))
+                {
+                    addEnemyHero = true;
+                    addOwnHero = true;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if (((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) || m.stealth) continue;
+                        ownMins[k] = true;
+
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if ((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) continue;
+                        enemyMins[k] = true;
+                    }
+
+                }
+
+                if (moreh)
+                {
+                    addOwnHero = true;
+
+                    if (p.enemyHaveSteamwheedleSniper)
+                    {
+                        k = -1;
+                        foreach (Minion m in p.ownMinions)
+                        {
+                            k++;
+                            if (((this.type == cardtype.SPELL || this.type == cardtype.HEROPWR) && (m.cantBeTargetedBySpellsOrHeroPowers)) || m.stealth) continue;
+                            ownMins[k] = true;
+
+                        }
+
+                    }
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_HERO_TARGET))
+                {
+                    for (int i = 0; i < ownMins.Length; i++) ownMins[i] = false;
+                    for (int i = 0; i < enemyMins.Length; i++) enemyMins[i] = false;
+
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_MINION_TARGET))
+                {
+                    addOwnHero = false;
+                    addEnemyHero = false;
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_FRIENDLY_TARGET))
+                {
+                    addOwnHero = false;
+                    for (int i = 0; i < ownMins.Length; i++) ownMins[i] = false;
+
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_ENEMY_TARGET))
+                {
+                    addEnemyHero = false;
+                    for (int i = 0; i < enemyMins.Length; i++) enemyMins[i] = false;
+                }
+
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_LEGENDARY_TARGET))
+                {
+                    addOwnHero = false;
+                    addEnemyHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if ((m.handcard.card.rarity < 5))
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if ((m.handcard.card.rarity < 5))
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_DAMAGED_TARGET))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if (!m.wounded)
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (!m.wounded)
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_UNDAMAGED_TARGET))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if (m.wounded)
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (m.wounded)
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_MAX_ATTACK))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if (m.Angr > this.needWithMaxAttackValueOf)
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (m.Angr > this.needWithMaxAttackValueOf)
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_MIN_ATTACK))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if (m.Angr < this.needWithMinAttackValueOf)
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (m.Angr < this.needWithMinAttackValueOf)
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_WITH_RACE))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    addOwnHero = (p.ownHeroName == HeroEnum.lordjaraxxus && (TAG_RACE)this.needRaceForPlaying == TAG_RACE.DEMON);
+                    addEnemyHero = (p.enemyHeroName == HeroEnum.lordjaraxxus && (TAG_RACE)this.needRaceForPlaying == TAG_RACE.DEMON);
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if ((m.handcard.card.race != (TAG_RACE)this.needRaceForPlaying))
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if ((m.handcard.card.race != (TAG_RACE)this.needRaceForPlaying))
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+                if (isRequirementInList(CardDB.ErrorType2.REQ_MUST_TARGET_TAUNTER))
+                {
+                    addEnemyHero = false;
+                    addOwnHero = false;
+                    k = -1;
+                    foreach (Minion m in p.ownMinions)
+                    {
+                        k++;
+                        if (!m.taunt)
+                        {
+                            ownMins[k] = false;
+                        }
+                    }
+                    k = -1;
+                    foreach (Minion m in p.enemyMinions)
+                    {
+                        k++;
+                        if (!m.taunt)
+                        {
+                            enemyMins[k] = false;
+                        }
+                    }
+                }
+
+                if (addEnemyHero) retval.Add(p.enemyHero);
+                if (addOwnHero) retval.Add(p.ownHero);
+
+                k = -1;
+                foreach (Minion m in p.ownMinions)
+                {
+                    k++;
+                    if (ownMins[k]) retval.Add(m);
+                }
+                k = -1;
+                foreach (Minion m in p.enemyMinions)
+                {
+                    k++;
+                    if (enemyMins[k]) retval.Add(m);
+                }
+
+                return retval;
+
+            }
+
             public int calculateManaCost(Playfield p)//calculates the mana from orginal mana, needed for back-to hand effects and new draw
             {
                 int retval = this.cost;
@@ -5240,14 +5857,14 @@ namespace HREngine.Bots
 
                 if (haveToDoRequires)
                 {
-                    if (this.getTargetsForCard(p, false, true).Count == 0) return false;
+                    if (this.getTargetsForCard(p).Count == 0) return false;
 
                     //it requires a target-> return false if 
                 }
 
                 if (isRequirementInList(CardDB.ErrorType2.REQ_TARGET_IF_AVAILABLE) && isRequirementInList(CardDB.ErrorType2.REQ_MINION_CAP_IF_TARGET_AVAILABLE))
                 {
-                    if (this.getTargetsForCard(p, false, true).Count >= 1 && p.ownMinions.Count > 7 - this.needMinionsCapIfAvailable) return false;
+                    if (this.getTargetsForCard(p).Count >= 1 && p.ownMinions.Count > 7 - this.needMinionsCapIfAvailable) return false;
                 }
 
                 if (isRequirementInList(CardDB.ErrorType2.REQ_ENTIRE_ENTOURAGE_NOT_IN_PLAY))

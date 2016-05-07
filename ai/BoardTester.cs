@@ -893,15 +893,29 @@
                 {
 
                     Handmanager.Handcard card = new Handmanager.Handcard();
-                    
-                    String[] hc = s.Split(' ');
-                    card.position = Convert.ToInt32(hc[1]);
-                    string minionname = hc[2];
-                    card.manacost = Convert.ToInt32(hc[3]);
-                    card.entity = Convert.ToInt32(hc[5]);
-                    card.card = CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(hc[6]));
-                    if (hc.Length > 8) card.addattack = Convert.ToInt32(hc[7]);
-                    if (hc.Length > 9) card.addHp = Convert.ToInt32(hc[8]);
+
+                    string minionname = s.Split(' ')[2];
+                    string minionid = s.Split(' ')[6];
+                    int pos = Convert.ToInt32(s.Split(' ')[1]);
+                    int mana = Convert.ToInt32(s.Split(' ')[3]);
+                    card.card = CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(minionid));
+                    card.entity = Convert.ToInt32(s.Split(' ')[5]);
+                    card.addattack = 0;
+                    if (s.Split(' ').Length >= 8 && s.Split(' ')[7] != "")
+                    {
+                        card.addattack = Convert.ToInt32(s.Split(' ')[7]);
+                    }
+                    card.addHp = 0;
+                    try
+                    {
+                        card.addHp = Convert.ToInt32(s.Split(' ')[8]);
+                    }
+                    catch
+                    {
+
+                    }
+                    card.manacost = mana;
+                    card.position = pos;
 
                     handcards.Add(card);
 
