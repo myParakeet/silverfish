@@ -178,6 +178,10 @@
                     }
                     continue;
                 }
+                if (string.IsNullOrWhiteSpace(s))
+                {
+                    continue;
+                }
 
                 if (s.StartsWith("activeChoice: "))
                 {
