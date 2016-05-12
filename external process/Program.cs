@@ -176,7 +176,7 @@ namespace HREngine.Bots
         private Silverfish()
         {
             this.singleLog = Settings.Instance.writeToSingleFile;
-            Helpfunctions.Instance.ErrorLog("init Silverfish");
+            Helpfunctions.Instance.ErrorLog("init Silverfish V" + versionnumber);
             string path = "";
             //System.IO.Directory.CreateDirectory(path);
             sttngs.setFilePath("");
