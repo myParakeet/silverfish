@@ -2733,7 +2733,6 @@
             DamageTargetDatabase.Add(CardDB.cardName.arcaneblast, 2);
             DamageTargetDatabase.Add(CardDB.cardName.arcaneshot, 2);
             DamageTargetDatabase.Add(CardDB.cardName.backstab, 2);
-            DamageTargetDatabase.Add(CardDB.cardName.baneofdoom, 2);
             DamageTargetDatabase.Add(CardDB.cardName.barreltoss, 2);
             DamageTargetDatabase.Add(CardDB.cardName.betrayal, 2);
             DamageTargetDatabase.Add(CardDB.cardName.blackwingcorruptor, 3);//if dragon in hand
@@ -2795,7 +2794,6 @@
             DamageTargetDatabase.Add(CardDB.cardName.sonicbreath, 3);
             DamageTargetDatabase.Add(CardDB.cardName.ballistashot, 3);
             DamageTargetDatabase.Add(CardDB.cardName.unbalancingstrike, 3);
-            DamageTargetDatabase.Add(CardDB.cardName.bloodtoichor, 1);
             DamageTargetDatabase.Add(CardDB.cardName.discipleofcthun, 2);
             DamageTargetDatabase.Add(CardDB.cardName.firebloomtoxin, 2);
             DamageTargetDatabase.Add(CardDB.cardName.forbiddenflame, 1);
@@ -2821,6 +2819,8 @@
             DamageTargetSpecialDatabase.Add(CardDB.cardName.slam, 2);//draw card if it survives
             DamageTargetSpecialDatabase.Add(CardDB.cardName.soulfire, 4);//delete a card
             DamageTargetSpecialDatabase.Add(CardDB.cardName.quickshot, 3); //draw a card
+            DamageTargetSpecialDatabase.Add(CardDB.cardName.bloodtoichor, 1); 
+            DamageTargetSpecialDatabase.Add(CardDB.cardName.baneofdoom, 2); 
         }
 
         private void setupsilenceDatabase()

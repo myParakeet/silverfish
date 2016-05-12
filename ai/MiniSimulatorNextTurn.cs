@@ -97,6 +97,7 @@
             int deep = 0;
             //Helpfunctions.Instance.logg("NXTTRN" + playf.mana + " " + posmoves.Count);
             this.calculated = 0;
+            Playfield bestold = null;
             while (havedonesomething)
             {
                 //if (this.printNormalstuff) Helpfunctions.Instance.logg("ailoop");
@@ -104,7 +105,6 @@
                 temp.Clear();
                 temp.AddRange(this.posmoves);
                 havedonesomething = false;
-                Playfield bestold = null;
                 float bestoldval = -20000000;
                 foreach (Playfield p in temp)
                 {

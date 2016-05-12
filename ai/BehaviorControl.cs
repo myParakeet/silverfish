@@ -164,6 +164,7 @@
 
             bool useAbili = false;
             int usecoin = 0;
+            int deletecardsAtLast = 0;
             //bool lastCoin = false;
             foreach (Action a in p.playactions)
             {
@@ -181,6 +182,8 @@
                 {
                     usecoin = 2;
                 }
+                if (a.card.card.name == CardDB.cardName.soulfire || a.card.card.name == CardDB.cardName.doomguard || a.card.card.name == CardDB.cardName.succubus) deletecardsAtLast = 1;
+                if (deletecardsAtLast == 1 && !(a.card.card.name == CardDB.cardName.soulfire || a.card.card.name == CardDB.cardName.doomguard || a.card.card.name == CardDB.cardName.succubus)) retval -= 20;
                 //save spell for all classes: (except for rouge if he has no combo)
                 if (a.target == null) continue;
                 if (p.ownHeroName != HeroEnum.thief && a.card.card.type == CardDB.cardtype.SPELL && (!a.target.own && a.target.isHero) && a.card.card.name != CardDB.cardName.shieldblock) retval -= 11;
@@ -270,16 +273,6 @@
             {
                 // if our damage on board is lethal, give a strong bonus so enemy AI avoids this outcome in its turn (i.e. AI will clear our minions if it can instead of ignoring them)
                 if (p.turnCounter == 1 && p.guessHeroDamage(true) >= p.enemyHero.Hp + p.enemyHero.armor) retval += 100;
-            }
-
-
-            //soulfire etc
-            int deletecardsAtLast = 0;
-            foreach (Action a in p.playactions)
-            {
-                if (a.actionType != actionEnum.playcard) continue;
-                if (a.card.card.name == CardDB.cardName.soulfire || a.card.card.name == CardDB.cardName.doomguard || a.card.card.name == CardDB.cardName.succubus) deletecardsAtLast = 1;
-                if (deletecardsAtLast == 1 && !(a.card.card.name == CardDB.cardName.soulfire || a.card.card.name == CardDB.cardName.doomguard || a.card.card.name == CardDB.cardName.succubus)) retval -= 20;
             }
 
             if (p.enemyHero.Hp >= 1 && p.ownHero.Hp <= 0)
