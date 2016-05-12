@@ -22,6 +22,11 @@
         {
             return 0;
         }
+        
+        public virtual int getPlayPenalty(Playfield p, Minion m, Minion target, int choice, bool isLethal)
+        {
+            return 0;
+        }
 
         //could be used for Behaviour-class to get the value of the minion on your side
         public virtual float getValueOfOwnMinion(Minion m)
