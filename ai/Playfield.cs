@@ -1528,10 +1528,8 @@
 
             if (cardname == CardDB.cardName.unleashthehounds && currmana >= 5)
             {
-                bool dontkill = false;
                 int prob = Probabilitymaker.Instance.getProbOfEnemyHavingCardInHand(CardDB.cardIDEnum.EX1_538, this.enemyAnzCards, this.enemyDeckSize);
                 if (playAroundProb > prob) return currmana;
-                if (pap2 > prob) dontkill = true;
 
                 int anz = this.ownMinions.Count;
                 int posi = this.enemyMinions.Count - 1;

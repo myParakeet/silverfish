@@ -5966,7 +5966,6 @@ namespace HREngine.Bots
             cardlist.Clear();
             this.cardidToCardList.Clear();
             Card c = new Card();
-            int de = 0;
             //placeholdercard
             Card plchldr = new Card { name = cardName.unknown, cost = 1000 };
             plchldr.sim_card = new SimTemplate();
@@ -6007,7 +6006,6 @@ namespace HREngine.Bots
                 if (s.Contains("<Entity version=\"") && s.Contains(" CardID=\""))
                 {
                     c = new Card();
-                    de = 0;
                     string temp = s.Split(new string[] { "CardID=\"" }, StringSplitOptions.None)[1];
                     temp = temp.Replace("\">", "");
                     //c.CardID = temp;
