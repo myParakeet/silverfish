@@ -5820,7 +5820,6 @@ namespace HREngine.Bots
             {
                 //is playrequirement?
                 bool haveToDoRequires = isRequirementInList(CardDB.ErrorType2.REQ_TARGET_TO_PLAY);
-                bool retval = true;
                 // cant play if i have to few mana
 
                 if (p.mana < this.getManaCost(p, manacost)) return false;

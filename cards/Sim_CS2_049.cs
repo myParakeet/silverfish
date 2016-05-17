@@ -67,8 +67,8 @@ namespace HREngine.Bots
                 }
 
             int posi = (ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;
-            bool spawnspellpower = true;
-            /*foreach (Minion m in (ownplay) ? p.ownMinions : p.enemyMinions)
+            /*bool spawnspellpower = true;
+            foreach (Minion m in (ownplay) ? p.ownMinions : p.enemyMinions)
             {
                 if (m.handcard.card.cardIDenum == CardDB.cardIDEnum.CS2_052)
                 {
