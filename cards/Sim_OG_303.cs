@@ -10,10 +10,10 @@ namespace HREngine.Bots
         public override void onCardIsGoingToBePlayed(Playfield p, CardDB.Card c, bool wasOwnCard, Minion triggerEffectMinion, Minion target, int choice)
         {
             if (triggerEffectMinion.own == wasOwnCard && c.type == CardDB.cardtype.SPELL)
-			{
-				p.anzOgOwnCThunHpBonus ++;
-				p.anzOgOwnCThunAngrBonus ++;
-			}
+            {
+                p.anzOgOwnCThunHpBonus++;
+                p.anzOgOwnCThunAngrBonus++;
+            }
         }
 		
         public override void onAuraStarts(Playfield p, Minion own)
