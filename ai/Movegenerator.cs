@@ -381,6 +381,17 @@
                             if (usePenalityManager)
                             {
                                 cardplayPenality = pen.getPlayCardPenality(hc, null, p, 0, isLethalCheck);
+
+                                // todo sepefeets: find better placement
+                                if (hc.card.name == CardDB.cardName.tuskarrtotemic)
+                                {
+                                    for (int i = 1; i <= p.ownMinions.Count; i++)
+                                    {
+                                        Action a = new Action(actionEnum.playcard, hc, null, i, null, cardplayPenality, 0);
+                                        ret.Add(a);
+                                    }
+                                }
+
                                 if (cardplayPenality <= 499)
                                 {
 
