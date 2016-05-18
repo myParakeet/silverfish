@@ -1,3 +1,11 @@
+// This File: deck.txt
+//    Author: Sepefeets
+//   Version: 0.1 (17-May-2016)
+// Deck Name: Wild Secret Paladin (oldschool)
+//      Hero: Paladin
+// Deck Type: Midrange (Control)
+
+// Cards
 Avenge x2
 Competitive Spirit x1
 Noble Sacrifice x2
