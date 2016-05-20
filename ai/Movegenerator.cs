@@ -1,5 +1,6 @@
 ﻿namespace HREngine.Bots
 {
+    using System;
     using System.Collections.Generic;
 
     public class Movegenerator
@@ -382,18 +383,15 @@
                             {
                                 cardplayPenality = pen.getPlayCardPenality(hc, null, p, 0, isLethalCheck);
 
-                                // todo sepefeets: find better placement
-                                if (hc.card.name == CardDB.cardName.tuskarrtotemic)
-                                {
-                                    for (int i = 1; i <= p.ownMinions.Count; i++)
-                                    {
-                                        Action a = new Action(actionEnum.playcard, hc, null, i, null, cardplayPenality, 0);
-                                        ret.Add(a);
-                                    }
-                                }
 
                                 if (cardplayPenality <= 499)
                                 {
+                                    if (hc.card.name == CardDB.cardName.tuskarrtotemic)
+                                    {
+                                        bestplace = (int)Math.Floor((decimal)p.ownMinions.Count / 2) + 1; //just put it center left
+                                        Action a = new Action(actionEnum.playcard, hc, null, bestplace, null, cardplayPenality, 0);
+                                        ret.Add(a);
+                                    }
 
                                     if (useplacement && ((hc.card.name == CardDB.cardName.direwolfalpha || hc.card.name == CardDB.cardName.flametonguetotem || hc.card.name == CardDB.cardName.defenderofargus || hc.card.name == CardDB.cardName.voidterror) || (superplacement && hc.card.type == CardDB.cardtype.MOB)))
                                     {

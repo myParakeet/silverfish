@@ -3524,6 +3524,7 @@
             priorityTargets.Add(CardDB.cardName.cultsorcerer, 10);
             priorityTargets.Add(CardDB.cardName.darkshirecouncilman, 10);
             priorityTargets.Add(CardDB.cardName.dementedfrostcaller, 10);
+            priorityTargets.Add(CardDB.cardName.fandralstaghelm, 10);
             priorityTargets.Add(CardDB.cardName.giantsandworm, 10);
             priorityTargets.Add(CardDB.cardName.hoggerdoomofelwynn, 10);
             priorityTargets.Add(CardDB.cardName.hoodedacolyte, 10);
