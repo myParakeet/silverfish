@@ -858,7 +858,7 @@ namespace HREngine.Bots
         private void writeSettings()
         {
             return;
-            string version = sf.versionnumber;
+            /*string version = sf.versionnumber;
             string[] lines = new string[0] { };
             try
             {
@@ -929,7 +929,7 @@ namespace HREngine.Bots
             catch
             {
                 Helpfunctions.Instance.logg("cant write Settings.ini");
-            }
+            }*/
         }
 
         private void resetSettings()

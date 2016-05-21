@@ -49,7 +49,6 @@
 
             public combo(string s)
             {
-                int i = 0;
                 this.neededMana = 0;
                 requiredWeapon = CardDB.cardName.unknown;
                 this.type = combotype.combo;

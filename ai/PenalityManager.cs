@@ -382,7 +382,6 @@
         {
             CardDB.cardName name = card.name;
             if (name == CardDB.cardName.darkwispers && choice != 1) return 0;
-            int pen = 0;
             //buff enemy?
             if (!this.healthBuffDatabase.ContainsKey(name)) return 0;
              if (target == null)
@@ -890,7 +889,6 @@
         private int getCardDrawPenality(CardDB.cardName name, Minion target, Playfield p, int choice, bool lethal)
         {
             // penality if carddraw is late or you have enough cards
-            int pen = 0;
             if (!cardDrawBattleCryDatabase.ContainsKey(name)) return 0;
             if (name == CardDB.cardName.ancientoflore && choice != 1) return 0;
             if (name == CardDB.cardName.wrath && choice != 2) return 0;
@@ -1029,7 +1027,6 @@
             bool hasknife = false;
             bool hasflamewaker = false;
             bool hasmech = false;
-            bool hadkn = false;
 
             
 
@@ -3527,6 +3524,7 @@
             priorityTargets.Add(CardDB.cardName.cultsorcerer, 10);
             priorityTargets.Add(CardDB.cardName.darkshirecouncilman, 10);
             priorityTargets.Add(CardDB.cardName.dementedfrostcaller, 10);
+            priorityTargets.Add(CardDB.cardName.fandralstaghelm, 10);
             priorityTargets.Add(CardDB.cardName.giantsandworm, 10);
             priorityTargets.Add(CardDB.cardName.hoggerdoomofelwynn, 10);
             priorityTargets.Add(CardDB.cardName.hoodedacolyte, 10);

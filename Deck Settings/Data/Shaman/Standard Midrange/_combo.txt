@@ -1,0 +1,14 @@
+// This File: _combo.txt
+//    Author: Sepefeets
+//   Version: 0.1 (17-May-2016)
+// Deck Name: Standard Midrange Shaman
+//      Hero: Shaman
+// Deck Type: Midrange (Control)
+
+
+// Force this starter over [2] Totem Golem (AT_052)
+// [Nudge] [0] The Coin (GAME_005) + [1] Tunnel Trogg (LOE_018) + [1] Tunnel Trogg (LOE_018)
+GAME_005,0;LOE_018,0;LOE_018,0;bonus:50;hero:shaman
+
+// [NUDGE] [5] Thunder Bluff Valiant (AT_049) + [2] Totemic Call (CS2_049)
+AT_049,25;CS2_049,0;bonus:25;hero:shaman

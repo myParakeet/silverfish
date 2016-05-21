@@ -1,0 +1,100 @@
+// This File: _combo.txt (Generic)
+//    Author: Blackoak
+//   Credits: anax, godshades, Dre, Handypants, gatomianurex
+//   Version: 0.89
+//      Date: 03-Nov-15
+//   History: [fix] Knife Juggler
+//			: [fix] Fel Reaver for all classes & [fix] Murloc Knight thanks Dre
+//			: [add] Hero Pwer based combos back
+//			: [fix] Mechwarper
+//			: [fix] removed unsupported hero power combos
+// Deck Name: N/A
+//      Hero: All
+// Deck Type: All
+// ----------------------------------------------
+// Breakdown of comments structure:
+// [TYPE] [MANA]Name of Card(CARD_ID)
+//
+// TYPE:	Nudge - Nudge the bot a little to do this combo.
+// 			Push - A harder nudge.
+// 			Combo - Force a Combo on the bot.
+// MANA:	Mana Cost
+// CARD_ID:	Card Id (from ..\ExternBot\silverfish\_carddb.txt)
+//			"+" and
+//			">" next turn
+
+// - A L L --------------------------------------
+// [Push] [5] Fel Reaver (GVG_016) + [2] Ironbeak Owl (CS2_203)
+GVG_016,50;CS2_203,0;bonus:100
+GVG_016,50;nxttrn;CS2_203,0;bonusfirst:0;bonussecond:150
+
+// - D R U I D --------------------------------
+// [Nudge] [6]Force of Nature(EX1_571) + [3]Savage Roar(CS2_011)
+EX1_571,5;CS2_011,5;bonus:5;hero:druid
+// [0]The Coin(GAME_005) + Wild Growth (CS2_013)
+GAME_005,0;CS2_013,0;bonus:500;mana:1;hero:druid
+// [Push] [5] Fel Reaver (GVG_016) + [4] Keeper of the Grove (EX1_166)
+GVG_016,50;EX1_166,0;bonus:100;hero:druid
+GVG_016,50;nxttrn;EX1_166,0;bonusfirst:0;bonussecond:150;hero:druid
+
+// - H U N T E R --------------------------------
+// [Nudge] [2] Snake Trap (EX1_554) + [2] Knife Juggler (NEW1_019)
+EX1_554,25;NEW1_019,0;bonus:50;hero:hunter
+// [Nudge] Knife Juggler (NEW1_019) + Unleash the Hounds(EX1_538)
+NEW1_019,25;EX1_538,0;bonus:25;hero:hunter
+// [Nudge] [3] Unleash the Hounds (EX1_538) + [3] Kill Command (EX1_539)
+EX1_538,0;EX1_539,5;bonus:20;hero:hunter
+
+// - M A G E ------------------------------------
+// [Nudge] [2]Mechwarper(GVG_006) + [4]Goblin Blastmage(GVG_004)
+GVG_006,0;GVG_004,10;bonus:25;hero:mage
+
+// - P A L A D I N ------------------------------
+// [Nudge] Equality(EX1_619) + Consecration(CS2_093)
+EX1_619,0;CS2_093,0;bonus:5;hero:pala
+// [Nudge] Knife Juggler (NEW1_019) + Muster for Battle (GVG_061)
+NEW1_019,25;GVG_061,50;bonus:150;hero:pala
+// [Nudge] Reinforce(CS2_101)
+//		[2] Knife Juggler (NEW1_019)
+NEW1_019,25;CS2_101,0;bonus:50;hero:pala
+//		[4] Murloc Knight (AT_076)
+AT_076,50;CS2_101,0;bonus:150;hero:pala
+
+// - P R I E S T --------------------------------
+// [Combo] [7]Confessor Paletress(AT_018) + [2]Lesser Heal(CS1h_001)
+AT_018,450;CS1h_001,0;bonus:0;hero:priest
+// [Combo] [4]Dragonkin Sorcerer(BRM_020) + [1]Power Word: Shield(CS2_004)
+BRM_020,0;CS2_004,0;bonus:100;hero:priest
+BRM_020,0;nxttrn;CS2_004,0;bonusfirst:0;bonussecond:50;hero:priest
+// [4]Dragonkin Sorcerer(BRM_020) + [3]Velen's Chosen(GVG_010)
+BRM_020,0;GVG_010,0;bonus:60;hero:priest
+BRM_020,0;nxttrn;CS2_004,0;bonusfirst:0;bonussecond:30;hero:priest
+// [Nudge] [3]Injured Blademaster(CS2_181) + [0]Circle of Healing(EX1_621)
+CS2_181,0;EX1_621,0;bonus:5;hero:priest
+// [Nudge] [4]Auchenai Soulpriest(EX1_591) + [0]Circle of Healing (EX1_621)
+EX1_591,0;EX1_621,0;bonus:5;hero:priest
+// [Nudge] [3]Injured Blademaster(CS2_181) + [1]Light of the Naaru(GVG_012)
+CS2_181,0;GVG_012,0;bonus:5;hero:priest
+// [COMBO] [2] Shrinkmeister (GVG_011) + [2] Shadow Word: Pain (CS2_234)
+GVG_011,50;CS2_234,0;bonus:75;hero:priest
+// [COMBO] [2] Shrinkmeister (GVG_011),50 + [6] Cabal Shadow Priest (EX1_091)
+GVG_011,50;EX1_091,0;bonus:75;hero:priest
+// [Nudge] [0]The Coin(GAME_005) + [2]Wyrmrest Agent(AT_116) > [1]Twilight Whelp(BRM_004)
+GAME_005,0;AT_116,0;nxttrn;BRM_004,0;bonusfirst:5;bonussecond:0;hero:priest
+
+// - R O G U E ----------------------------------
+// [Nudge] [0] Preparation (EX1_145) + // [7] Sprint (CS2_077)
+EX1_145,5;CS2_077,25;bonus:100;hero:thief
+
+// - W A R L O C K ------------------------------
+// [Nudge] [2]Knife Juggler(NEW1_019) + [4]Imp-losion(GVG_045)
+NEW1_019,25;GVG_045,0;bonus:25;hero:warlock
+
+
+
+
+
+
+
+
+

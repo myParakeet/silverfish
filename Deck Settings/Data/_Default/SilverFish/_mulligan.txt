@@ -1,0 +1,793 @@
+// This File: _mulligan.txt (Generic)
+//    Author: Blackoak
+//   Credits: emilcoff, sadpwner, Quicksilver, Dre
+//   Version: 0.208 (18-Oct-15)
+//   History: Fiery War Axe (always keep)
+// Deck Name: N/A
+//      Hero: All
+// Deck Type: All
+// ----------------------------------------------
+// My Comments:
+// "+" - and, "/" - or, "coin" - The Coin
+// - A L L --------------------------------------
+// [1] Abusive Sergeant (CS2_188)
+// [1] Argent Squire (EX1_008)
+// [1] Clockwork Gnome (GVG_082)
+// [1] Cogmaster (GVG_013)
+// [1] Leper Gnome (EX1_029)
+// [1] Secretkeeper (EX1_080)
+// [1] Worgen Infiltrator (EX1_010)
+// [1] Zombie Chow (FP1_001)
+// [2] Annoy-o-Tron (GVG_085)
+// [2] Dire Wolf Alpha (EX1_162)
+// [2] Garrison Commander (AT_080)
+// [2] Haunted Creeper (FP1_002)
+// [2] Ironbeak Owl (CS2_203)
+// [2] Knife Juggler (NEW1_019)
+// [2] Loot Hoarder (EX1_096)
+// [2] Mad Scientist (FP1_004)
+// [2] Mechwarper (GVG_006)
+// [2] Nerubian Egg (FP1_007)
+// [2] Unstable Ghoul (FP1_024)
+// [3] Acolyte of Pain (EX1_007)
+// [3] Big Game Hunter (EX1_005)
+// [3] Blood Knight (EX1_590)
+// [3] Harvest Golem (EX1_556)
+// [3] Mind Control Tech (EX1_085)
+// [3] Shade of Naxxramas (FP1_005)
+// [3] Silver Hand Regent (AT_100)
+// [4] Dark Iron Dwarf (EX1_046)
+// [4] Defender of Argus (EX1_093
+// [4] Kezan Mystic (GVG_074)
+// [4] Piloted Shredder (GVG_096)
+// [4] Sen'jin Shieldmasta (CS2_179)
+// [5] Grim Patron (BRM_019)
+// [5] Harrison Jones (EX1_558)
+// [5] Loatheb (FP1_030)
+// [5] Sludge Belcher (FP1_012)
+// [6] Emperor Thaurissan (BRM_017)
+// [7] Dr. Boom (GVG_110)
+// - A L L --------------------------------------
+// 1-DROP
+// 1 x Abusive Sergeant + Haunted Creeper / Nerubian Egg / Argent Squire / Leper Gnome / Mad Scientist
+hold;all;all;CS2_188:1:FP1_002/FP1_007/EX1_008/EX1_029/FP1_004
+// Clockwork Gnome
+hold;all;all;GVG_082
+// 1 x Cogmaster
+hold;all;all;GVG_013:1
+// Leper Gnome
+hold;all;all;EX1_029
+// Zombie Chow
+hold;all;all;FP1_001
+
+// 2-DROP
+// 1 x Annoy-o-Tron + Mechwarper / Coin
+hold;all;all;GVG_085:1:GVG_006
+hold;all;all;GVG_085:1;coin
+// Haunted Creeper
+hold;all;all;FP1_002
+// 1 x Knife Juggler + Haunted Creeper + Coin [not Mage, Rogue, Warrior]
+hold;all;druid;NEW1_019:1:FP1_002;coin
+hold;all;hunter;NEW1_019:1:FP1_002;coin
+hold;all;pala;NEW1_019:1:FP1_002;coin
+hold;all;priest;NEW1_019:1:FP1_002;coin
+hold;all;shaman;NEW1_019:1:FP1_002;coin
+hold;all;warlock;NEW1_019:1:FP1_002;coin
+// 1 x Mad Scientist
+hold;all;all;FP1_004:1
+
+// Mechwarper
+hold;all;all;GVG_006
+
+// 6-DROP
+// Emperor Thaurissan + Coin
+hold;all;warrior;BRM_017:1;coin
+
+
+// - D R U I D ----------------------------------
+// [0] Innervate (EX1_169)
+// [1] Living Roots (AT_037)
+// [2] Darnassus Aspirant (AT_038)
+// [2] Anodized Robo Cub (GVG_030)
+// [2] Wild Growth (CS2_013)
+// [2] Wrath (EX1_154)
+// [4] Keeper of the Grove (EX1_166)
+// [4] Savage Combatant (AT_039)
+// [4] Swipe (CS2_012)
+// [5] Druid of the Claw (EX1_165)
+// [7] Ancient of Lore (NEW1_008)
+
+// 0-DROP
+// Innervate
+hold;druid;all;EX1_169
+
+// 1-DROP
+// 1 x Living Roots
+hold;druid;all;AT_037:1
+// 2 x Living Roots + Coin
+hold;druid;all;AT_037:2;coin
+
+// 2-DROP
+// 1 x Anodized Robo Cub
+hold;druid;all;GVG_030:1
+// 1 x Darnassus Aspirant
+hold;druid;all;AT_038:1
+// 2 x Darnassus Aspirant + Coin
+hold;druid;all;AT_038:2;coin
+
+
+// 1 x Wild Growth [vs non-aggro]
+hold;druid;druid;CS2_013:1
+hold;druid;mage;CS2_013:1
+hold;druid;priest;CS2_013:1
+hold;druid;shaman;CS2_013:1
+hold;druid;thief;CS2_013:1
+hold;druid;warrior;CS2_013:1
+// 1 x Wrath [vs aggro]
+hold;druid;hunter;EX1_154:1
+hold;druid;pala;EX1_154:1
+hold;druid;warlock;EX1_154:1
+
+// 3-DROP
+// 1 x Big Game Hunter + Darnassus Aspirant / Innervate [Warlock]
+hold;druid;warlock;EX1_005:1:AT_038/EX1_169
+// 1 x Mind Control Tech + Darnassus Aspirant / Innervate [Shaman]
+hold;druid;shaman;EX1_085:1:AT_038/EX1_169
+// 1 x Shade of Naxxramas + Innervate + Coin
+hold;druid;all;FP1_005:1:EX1_169;coin
+
+// 4-DROP
+// 1 x Keeper of the Grove + Darnassus Aspirant + Innervate / Coin [Hunter, Paladin, Warlock]
+hold;druid;hunter;EX1_166:1:AT_038+EX1_169
+hold;druid;hunter;EX1_166:1:AT_038;coin
+hold;druid;pala;EX1_166:1:AT_038+EX1_169
+hold;druid;pala;EX1_166:1:AT_038;coin
+hold;druid;warlock;EX1_166:1:EX1_169/AT_038
+hold;druid;warlock;EX1_166:1:AT_038;coin
+// 1 x Kezan Mystic + Darnassus Aspirant + Innervate / Coin [Hunter, Mage]
+hold;druid;hunter;GVG_074:1:AT_038+EX1_169
+hold;druid;hunter;GVG_074:1:AT_038;coin
+hold;druid;mage;GVG_074:1:AT_038+EX1_169
+hold;druid;mage;GVG_074:1:AT_038;coin
+// 1 x Piloted Shredder + Wild Growth / Innervate / Darnassus Aspirant
+hold;druid;all;GVG_096:1:CS2_013/EX1_169/AT_038
+// 1 x Savage Combatant + Wild Growth / Innervate / Darnassus Aspirant
+hold;druid;all;AT_039:1:CS2_013/EX1_169/AT_038
+// 1 x Sen'jin Shieldmasta + Darnassus Aspirant + Innervate / Coin
+hold;druid;all;CS2_179:1:AT_038+EX1_169
+hold;druid;all;CS2_179:1:AT_038;coin
+// 1 x Swipe [Paladin]
+hold;druid;pala;CS2_012:1
+// 1 x Swipe + Darnassus Aspirant + Innervate / Coin [Hunter, Warlock]
+hold;druid;hunter;CS2_012:1:AT_038+EX1_169
+hold;druid;hunter;CS2_012:1:AT_038;coin
+hold;druid;warlock;CS2_012:1:AT_038+EX1_169
+hold;druid;warlock;CS2_012:1:AT_038;coin
+
+// 5-DROP
+// 1 x Druid of the Claw + Wild Growth / Innervate / Darnassus Aspirant
+hold;druid;all;EX1_165:1:CS2_013/EX1_169/AT_038
+// Harrison Jones + Darnassus Aspirant + Innervate / Coin [Paladin, Warrior]
+hold;druid;pala;EX1_558:1:AT_038+EX1_169
+hold;druid;pala;EX1_558:1:AT_038;coin
+hold;druid;warrior;EX1_558:1:AT_038+EX1_169
+hold;druid;warrior;EX1_558:1:AT_038;coin
+// 1 x Sludge Belcher + Wild Growth / Innervate / Darnassus Aspirant
+hold;druid;all;FP1_012:1:CS2_013/EX1_169/AT_038
+
+// 6-DROP
+// Emperor Thaurissan + Innervate / Darnassus Aspirant / Wild Growth [Priest, Rogue, Warrior]
+hold;druid;priest;BRMA03_1:1:EX1_169/AT_038/CS2_013
+hold;druid;thief;BRMA03_1:1:EX1_169/AT_038/CS2_013
+// hold;druid;warrior;BRMA03_1:1:EX1_169/AT_038/CS2_013
+
+// 7-DROP
+// 1 x Ancient of Lore + Innervate + Wild Growth / Coin
+hold;druid;all;NEW1_008:1:EX1_169+CS2_013
+hold;druid;all;NEW1_008:1:EX1_169;coin
+
+
+// - H U N T E R --------------------------------
+// [1] Webspinner (FP1_011)
+// [2] Glaivezooka (GVG_043)
+// [2] King's Elekk (AT_058)
+// [2] Scavenging Hyena (EX1_531)
+// [3] Animal Companion (NEW1_031)
+// [3] Dreadscale (AT_063t) 
+// [3] Eaglehorn Bow (EX1_536)
+// [3] Unleash the Hounds (EX1_538)
+// [6] Savannah Highmane (EX1_534)
+
+// 0-DROP
+
+
+// 1-DROP
+// Worgen Infiltrator
+hold;hunter;all;EX1_010
+// 1 x Webspinner
+hold;hunter;all;FP1_011:1
+// 1 x Webspinner [not priest]
+// hold;hunter;druid;FP1_011:1
+// hold;hunter;hunter;FP1_011:1
+// hold;hunter;mage;FP1_011:1
+// hold;hunter;pala;FP1_011:1
+// hold;hunter;thief;FP1_011:1
+// hold;hunter;shaman;FP1_011:1
+// hold;hunter;warlock;FP1_011:1
+// hold;hunter;warrior;FP1_011:1
+
+// 2-DROP
+// 1 x King's Elekk
+hold;hunter;all;AT_058:1
+// 2 x King's Elekk + coin
+hold;hunter;all;AT_058:2;coin
+// 1 x [2] King's Elekk (AT_058) [not Hunter, Paladin]
+// hold;hunter;druid;AT_058:1
+// hold;hunter;mage;AT_058:1
+// hold;hunter;priest;AT_058:1
+// hold;hunter;thief;AT_058:1
+// hold;hunter;shaman;AT_058:1
+// hold;hunter;warlock;AT_058:1
+// hold;hunter;warrior;AT_058:1
+// 1 x Knife Juggler
+hold;hunter;all;NEW1_019:1
+// 1 x Scavenging Hyena + Webspinner
+hold;hunter;all;EX1_531:1:FP1_011;nocoin
+// 1 x Scavenging Hyena + Haunted Creeper + Coin
+hold;hunter;all;EX1_531:1:FP1_002;coin
+// 1 x Steamwheedle Sniper [Hunter, Mage, Paladin, Shaman]
+hold;hunter;hunter;GVG_087:1
+hold;hunter;mage;GVG_087:1
+hold;hunter;pala;GVG_087:1
+hold;hunter;shaman;GVG_087:1
+
+// 3-DROP
+// 1 x Animal Companion [Priest, Rogue, Warrior]
+hold;hunter;priest;NEW1_031:1
+hold;hunter;thief;NEW1_031:1
+hold;hunter;warrior;NEW1_031:1
+// 1 x Animal Companion + Coin
+hold;hunter;all;NEW1_031:1;coin
+// 1 x Dreadscale [Hunter, Paladin]
+hold;hunter;hunter;AT_063t:1
+hold;hunter;paladin;AT_063t:1
+// 1 x Eaglehorn Bow
+hold;hunter;all;EX1_536:1
+// 1 x Eaglehorn Bow [Druid, Priest, Warrior]
+// hold;hunter;druid;EX1_536:1
+// hold;hunter;priest;EX1_536:1
+// hold;hunter;warrior;EX1_536:1
+
+// 4-DROP
+// 1 x Piloted Shredder [Warrior]
+hold;hunter;warrior;GVG_096:1;coin
+// 1 x Piloted Shredder [Druid, Priest, Rogue, Warlock, Warrior]
+// hold;hunter;druid;GVG_096:1
+// hold;hunter;priest;GVG_096:1
+// hold;hunter;thief;GVG_096:1
+// hold;hunter;warlock;GVG_096:1
+hold;hunter;warrior;GVG_096:1
+
+// vs Druid
+// 1 x Hunter's Mark
+hold;hunter;druid;CS2_084:1
+
+// vs Hunter
+// 1 x Ironbeak Owl
+hold;hunter;hunter;CS2_203:1
+
+// vs Mage
+// 1 x Ironbeak Owl
+hold;hunter;mage;CS2_203:1
+
+// vs Paladin
+// 1 x Unleash the Hounds + 2-Drop / Coin
+hold;hunter;pala;EX1_538:1:FP1_011/NEW1_019/FP1_004/AT_058/FP1_002/EX1_531/EX1_029
+hold;hunter;pala;EX1_538:1;coin
+
+// vs Warlock
+// 1 x Ironbeak Owl
+hold;hunter;warlock;CS2_203:1
+// 1 x Hunter's Mark
+hold;hunter;warlock;CS2_084:1
+
+// vs Warrior
+// 1 x Glaivezooka + Coin
+hold;hunter;warrior;GVG_043:1;coin
+// 1 x Savannah Highmane
+hold;hunter;warrior;EX1_534:1
+// 1 x Ironbeak Owl + Coin
+hold;hunter;warrior;CS2_203:1;coin
+
+
+// - M A G E ------------------------------------
+// [1] Arcane Missiles (EX1_277)
+// [1] Frostbolt (CS2_024)
+// [1] Mana Wyrm (NEW1_012)
+// [2] Snowchugger (GVG_002)
+
+// vs All
+// 1-Drop ---------------------------------------
+// 1 x Clockwork Gnome
+hold;mage;all;GVG_082:1
+// 1 x Cogmaster
+hold;mage;all;GVG_013:1
+// 1 x Mana Wyrm
+hold;mage;all;NEW1_012:1
+// 2 x Mana Wyrm + Coin
+hold;mage;all;NEW1_012:2;coin
+
+// 2-Drop ---------------------------------------
+// 1 x Snowchugger
+hold;mage;all;GVG_002:1:GVG_082/GVG_013/NEW1_012
+hold;mage;hunter;GVG_002:1
+hold;mage;pala;GVG_002:1
+hold;mage;thief;GVG_002:1
+hold;mage;warrior;GVG_002:1
+// 1 x Annoy-o-Tron
+hold;mage;all;GVG_085:1:GVG_082/GVG_013/NEW1_012
+hold;mage;all;GVG_085:1;coin
+// 1 x Mad Scientist
+hold;mage;all;FP1_004:1:GVG_082/GVG_013/NEW1_012
+hold;mage;all;FP1_004:1;coin
+// 1 x Mechwarper
+hold;mage;all;GVG_006:1:GVG_082/GVG_013/NEW1_012
+hold;mage;all;GVG_006:1;coin
+
+// 3-Drop ---------------------------------------
+// [3] Spider Tank
+hold;mage;all;GVG_044:1:GVG_082/GVG_013/NEW1_012;coin
+// [3] Tinkertown Technician
+hold;mage;all;GVG_102:1:GVG_082/GVG_013/NEW1_012;coin
+
+// vs Hunter
+// 1 x Arcane Missiles
+hold;mage;hunter;EX1_277:1
+
+// vs Mage
+// 1 x Frostbolt + Mana Wyrm [Mage]
+hold;mage;mage;CS2_024:1:NEW1_012
+
+// vs Paladin
+// 1 x Arcane Missiles [Hunter, Paladin]
+hold;mage;pala;EX1_277:1
+// 1 x  Blood Knight
+hold;mage;pala;EX1_590:1
+
+// vs Priest
+// Unstable Portal + Mana Wyrm
+hold;mage;priest;GVG_003:1:NEW1_012
+hold;mage;priest;GVG_003:2:NEW1_012;coin
+
+// vs Warlock
+// 1 x Unstable Portal + Mana Wyrm [Priest, Warlock]
+hold;mage;warlock;GVG_003:1:NEW1_012
+hold;mage;warlock;GVG_003:2:NEW1_012;coin
+
+// P A L A D I N ================================
+
+// [1] Noble Sacrifice (EX1_130)
+// [1] Redemption (EX1_136)
+// [2] Argent Protector  (EX1_362)
+// [2] Equality (EX1_619)
+// [2] Shielded Minibot (GVG_058)
+// [3] Aldor Peacekeeper (EX1_382)
+// [3] Coghammer (GVG_059)
+// [3] Muster for Battle (GVG_061)
+// [3] Warhorse Trainer (GVG_059)
+// [4] Consecration (CS2_093)
+// [4] Truesilver Champion (CS2_097)
+
+// All Decks
+// Aldor Peacekeeper [Druid, Shaman]
+hold;pala;druid;EX1_382:1
+hold;pala;shaman;EX1_382:1
+// Argent Squire
+hold;pala;all;EX1_008
+// 1 x Argent Protector
+hold;pala;all;EX1_362:1
+// 1 x Coghammer + Coin [vs Aggro: Hunter, Paladin, Warlock]
+hold;pala;hunter;GVG_059:1;coin
+hold;pala;pala;GVG_059:1;coin
+hold;pala;warlock;GVG_059:1;coin
+// 1 x Consecration [Mage, Hunter, Paladin, Shaman, Warlock]
+hold;pala;mage;CS2_093:1
+hold;pala;hunter;CS2_093:1
+hold;pala;pala;CS2_093:1
+hold;pala;shaman;CS2_093:1
+hold;pala;warlock;CS2_093:1
+// 1 x Equality [Druid, Priest, Warrior]
+hold;pala;druid;EX1_619:1
+hold;pala;priest;EX1_619:1
+hold;pala;warrior;EX1_619:1
+// 1 x Garrison Commander
+hold;pala;all;AT_080:1
+// Harrison Jones [Rogue, Warrior]
+hold;pala;thief;EX1_558
+hold;pala;warrior;EX1_558
+// 1 x Ironbeak Owl [Hunter, Warlock]
+hold;pala;hunter;CS2_203:1
+hold;pala;warlock;CS2_203:1
+// Shielded Minibot
+hold;pala;all;GVG_058
+// Silver Hand Regent
+hold;pala;all;AT_100
+// 1 x Truesilver Champion [Druid, Preist, Rogue, Shaman, Warrior]
+hold;pala;druid;CS2_097:1
+hold;pala;priest;CS2_097:1
+hold;pala;thief;CS2_097:1
+hold;pala;shaman;CS2_097:1
+hold;pala;warrior;CS2_097:1
+// Warhorse Trainer
+hold;pala;all;GVG_059
+
+// vs Druid
+// 1 x Piloted Shredder
+hold;pala;druid;GVG_096:1
+
+// vs Rogue
+// 1 x Piloted Shredder = hold;pala;thief;GVG_096:1
+
+// Deck: Secret Paladin
+// 1 x Knife Juggler
+hold;pala;all;NEW1_019:1
+// 1 x Noble Sacrifice + Secretkeeper
+hold;pala;all;EX1_130:1:EX1_080
+// 1 x Muster for Battle
+hold;pala;all;GVG_061:1
+// 1 x Piloted Shredder + Coin [Priest, Paladin, Warrior]
+hold;pala;priest;GVG_096:1;coin
+hold;pala;thief;GVG_096:1;coin
+hold;pala;warrior;GVG_096:1;coin
+// 1 x Redemption + Secretkeeper
+hold;pala;all;EX1_136:1:EX1_080
+// Secretkeeper
+hold;pala;all;EX1_080
+
+// vs Druid
+// 1 x Mysterious Challenger (AT_079) ?Slow Decks?
+hold;pala;druid;AT_079:1
+
+// P R I E S T ==================================
+
+// [1] Northshire Cleric (CS2_235)
+// [1] Twilight Whelp (BRM_004)
+// [2] Wyrmrest Agent (AT_116)
+// [3] Dark Cultist (FP1_023)
+// [4] Twilight Guardian (AT_017)
+// [7] Chillmaw (AT_123)
+// [3] Velen's Chosen (GVG_010)
+// [1] Power Word: Shield (CS2_004)
+
+// Deck: DragonPriest
+// Chillmaw (AT_123) + Twilight Whelp / Wyrmrest Agent
+hold;priest;all;AT_123:1:BRM_004/AT_116
+// 1 x Dark Cultist + Twilight Whelp + Wyrmrest Agent hold;priest;all;FP1_023:1:BRM_004+AT_116;nocoin
+// 1 x Dark Cultist + Coin + 1-2 Drop hold;priest;all;FP1_023:1:CS2_235/BRM_004/AT_116;coin
+// 1 x Dark Cultist + Northshire Cleric + Coin
+hold;priest;all;FP1_023:1:CS2_235;coin
+// 1 x Northshire Cleric
+hold;priest;all;CS2_235:1
+// 1 x Power Word: Shield + Coin + 1-2 Drop
+hold;priest;all;CS2_004:1:CS2_235/BRM_004/AT_116;coin
+// 1 x Shadow Word: Pain + Coin + 1-2 Drop [Paladin, Warrior, Warlock]
+hold;priest;pala;CS2_234:1:CS2_235/BRM_004/AT_116;coin
+hold;priest;warrior;CS2_234:1:CS2_235/BRM_004/AT_116;coin
+hold;priest;warlock;CS2_234:1:CS2_235/BRM_004/AT_116;coin
+// 1 x Twilight Guardian + Coin + Twilight Whelp / Wyrmrest Agent
+hold;priest;all;AT_017:1:BRM_004/AT_116;coin
+// Twilight Whelp
+hold;priest;all;BRM_004
+// 1 x Velen's Chosen + Coin + 1-2 Drop
+hold;priest;all;GVG_010:1:CS2_235/BRM_004/AT_116;coin
+// Wyrmrest Agent
+hold;priest;all;AT_116
+
+// vs Paladin
+// 1 x Lightbomb (GVG_008) + Coin + 1-2 Drop
+hold;priest;pala;GVG_008:1:CS2_235/BRM_004/AT_116;coin
+// 1 x Holy Nova (CS1_112) + Coin + 1-2 Drop
+hold;priest;pala;CS1_112:1:CS2_235/BRM_004/AT_116;coin
+
+// vs Warrior
+// 1 x Lightbomb + Coin
+hold;priest;warrior;GVG_008:1;coin
+
+
+// R O G U E ====================================
+
+// Deck: Pirate
+// vs All
+// One-eyed Cheat (GVG_025)
+hold;thief;all;GVG_025
+// Ship's Cannon (GVG_075)
+hold;thief;all;GVG_075
+
+// Deck: Face Rogue
+// 1 x Annoy-o-Tron (GVG_085) + 1-Drop [Hunter, Paladin]
+hold;thief;hunter;GVG_085:1:CS2_146/AT_029/:EX1_029
+hold;thief;pala;GVG_085:1:CS2_146/AT_029/:EX1_029
+// 1 x Blade Flurry (CS2_233) [Hunter, Paladin, Warlock]
+hold;thief;hunter;CS2_233:1
+hold;thief;pala;CS2_233:1
+hold;thief;warlock;CS2_233:1
+// Buccaneer (AT_029)
+hold;thief;all;AT_029
+// 1 x Deadly Poison (CS2_074)
+hold;thief;all;CS2_074:1
+// 1 x SI:7 Agent (EX1_134) + 1-Drop
+hold;thief;all;EX1_134:1:CS2_146/AT_029/EX1_029
+// 1 x Sap [Druid, Hunter, Priest, Warlock]
+hold;thief;druid;EX1_581:1
+hold;thief;hunter;EX1_581:1
+hold;thief;priest;EX1_581:1
+hold;thief;warlock;EX1_581:1
+// Southsea Deckhand (CS2_146)
+hold;thief;all;CS2_146
+
+// Mech Rogue ===================================
+// vs All
+
+
+// S H A M A N ==================================
+
+// [1] Earth Shock (EX1_245)
+// [1] Rockbiter Weapon (CS2_045)
+// [2] Whirling Zap-o-matic (GVG_037)
+// [3] Powermace (GVG_036)
+
+// Deck: Totem Shaman
+// 1 x Totem Golem (AT_052)
+hold;shaman;all;AT_052:1
+
+// Dek: Mech Shaman
+
+// 1 x Earth Shock
+hold;shaman;all;EX1_245:1
+// 1 x Harvest Golem + Mechwarper [Paladin, Priest]
+hold;shaman;pala;EX1_556:1:GVG_006
+hold;shaman;priest;EX1_556:1:GVG_006
+// 1 x Harvest Golem + 2-Drop [not Mechwarper]
+hold;shaman;priest;EX1_556:1:GVG_037/GVG_085
+// 1 x Powermace
+hold;shaman;all;GVG_036:1
+// 1 x Rockbiter Weapon + Coin
+hold;shaman;all;CS2_045:1;coin
+// 1 x Spider Tank + 2-Drop [not Mechwarper]
+hold;shaman;pala;GVG_044:1:GVG_037/GVG_085
+hold;shaman;priest;GVG_044:1:GVG_037/GVG_085
+// 2 x Spider Tank + Mechwarper+ Coin [Paladin, Priest]
+hold;shaman;pala;GVG_044:2:GVG_006;coin
+hold;shaman;priest;GVG_044:2:GVG_006;coin
+// Whirling Zap-o-matic
+hold;shaman;all;GVG_037
+
+// W A R L O C K ================================
+
+// [1] Flame Imp (EX1_319)
+// [1] Power Overwhelming (EX1_316)
+// [1] Voidwalker (CS2_065)
+// [3] Imp Gang Boss (BRM_006)
+// [3] Void Terror (EX1_304)
+// [4] Imp-losion (GVG_045)
+// [4] Voidcaller (FP1_022)
+// [5] Doomguard (EX1_310)
+
+// Deck: Zoo
+// vs All
+// Argent Squire
+hold;warlock;all;EX1_008
+// Flame Imp ?Not Hunter, Rogue?
+hold;warlock;all;EX1_319
+// 1 x Dire Wolf Alpha ?Shaman Only?
+hold;warlock;all;EX1_162:1
+// 1 x Imp-losion + Coin [Warlock, Warrior]
+hold;warlock;warlock;GVG_045:1;coin
+hold;warlock;warrior;GVG_045:1;coin
+// 1 x Imp Gang Boss + Voidwalker + Knife Juggler
+hold;warlock;all;BRM_006:1:CS2_065+NEW1_019
+// 1 x Imp Gang Boss + Voidwalker + Dire Wolf Alpha
+hold;warlock;all;BRM_006:1:CS2_065+EX1_162
+// 1 x Ironbeak Owl [Hunter, Warlock]
+hold;warlock;hunter;CS2_203:1
+hold;warlock;warlock;CS2_203:1
+// 1 x Nerubian Egg + Abusive Sergeant / Power Overwhelming / Void Terror
+hold;warlock;all;FP1_007:1:CS2_188/EX1_316/EX1_304
+// 2 x Nerubian Eggs + Defender of Argus + Coin
+hold;warlock;all;FP1_007:2:EX1_093;coin
+// 1 x Power Overwhelming + Haunted Creeper / Nerubian Egg
+hold;warlock;all;EX1_316:1:FP1_002/FP1_007
+// 1 x Void Terror + Nerubian Egg
+hold;warlock;all;EX1_304:1:FP1_007
+// Voidwalker
+hold;warlock;all;CS2_065
+// 1 x Voidcaller + Abusive Sergeant + Nerubian Egg
+hold;warlock;all;FP1_022:1:CS2_188+FP1_007
+// 1 x Voidcaller + Doomguard [Druid, Warlock, Warrior]
+hold;warlock;druid;FP1_022:1:AT_020,AT_020:1:FP1_022
+hold;warlock;warlock;FP1_022:1:AT_020,AT_020:1:FP1_022
+hold;warlock;warrior;FP1_022:1:AT_020,AT_020:1:FP1_022
+// 1 x Voidcaller + Flame Imp + Haunted Creeper
+hold;warlock;all;FP1_022:1:EX1_319+FP1_002
+// 1 x Voidcaller + Flame Imp + Voidwalker
+hold;warlock;all;FP1_022:1:EX1_319+CS2_065
+// 1 x Voidcaller + Flame Imp + Knife Juggler
+hold;warlock;all;FP1_022:1:EX1_319+NEW1_019
+// 1 x Voidcaller + Voidwalker + Haunted Creeper
+hold;warlock;all;FP1_022:1:CS2_065+FP1_002
+// 1 x Voidcaller + Voidwalker + Knife Juggler
+hold;warlock;all;FP1_022:1:CS2_065+NEW1_019
+// 1 x Voidcaller + Knife Juggler + Haunted Creeper
+hold;warlock;all;FP1_022:1:NEW1_019+FP1_002
+
+//vs Priest
+// 1 x Knife Juggler
+hold;warlock;priest;NEW1_019:1
+
+// vs Paladin
+// 1 x Knife Juggler + Voidwalker / Haunted Creeper / Flame Imp
+hold;warlock;pala;NEW1_019:1:CS2_065/FP1_002/EX1_319
+
+// vs Shaman
+// Dire Wolf Alpha + Flame Imp
+hold;warlock;shaman;EX1_162:1:EX1_319
+
+// W A R R I O R ================================
+
+// [1] Execute (CS2_108)
+// [1] Warbot (GVG_051)
+// [1] Whirlwind (EX1_400)
+// [2] Armorsmith (EX1_402)
+// [2] Battle Rage (EX1_392)
+// [2] Cruel Taskmaster (EX1_603)
+// [2] Fiery War Axe (CS2_106)
+// [2] Slam (EX1_391)
+// [3] Frothing Berserker (EX1_604)
+// [4] Death's Bite (FP1_021)
+
+// All Decks
+// 1 x Acolyte of Pain (EX1_007)
+hold;warrior;all;EX1_007:1
+// 1 x Fiery War Axe [aggro only Hunter Paladin Warlock]
+hold;warrior;all;CS2_106:1
+
+// Deck: Patron
+// 1 x Armorsmith [Hunter, Mage, Paladin, Rogue, Warlock]
+hold;warrior;hunter;EX1_402:1
+hold;warrior;mage;EX1_402:1
+hold;warrior;pala;EX1_402:1
+hold;warrior;thief;EX1_402:1
+hold;warrior;warlock;EX1_402:1
+// 1 x Cruel Taskmaster [Hunter, Mage]
+hold;warrior;hunter;EX1_603:1
+hold;warrior;mage;EX1_603:1
+// 1 x Death's Bite
+hold;warrior;all;FP1_021:1
+// 1 x Execute [Priest, Warlock]
+hold;warrior;priest;CS2_108:1
+hold;warrior;mage;CS2_108:1
+hold;warrior;warlock;CS2_108:1
+
+// 1 x Frothing Berserker [Druid, Rogue, Warlock, Warrior]
+hold;warrior;druid;EX1_604:1
+hold;warrior;thief;EX1_604:1
+hold;warrior;warlock;EX1_604:1
+hold;warrior;warrior;EX1_604:1
+// 1 x Grim Patron + Death’s Bite [Paladin, Priest, Warrior, Warlock]
+hold;warrior;pala;BRM_019:1:FP1_021
+hold;warrior;priest;BRM_019:1:FP1_021
+hold;warrior;warrior;BRM_019:1:FP1_021
+hold;warrior;warlock;BRM_019:1:FP1_021
+// 1 x Loot Hoarder [Mage,Priest, Shaman]
+hold;warrior;mage;EX1_096:1
+hold;warrior;priest;EX1_096:1
+hold;warrior;shaman;EX1_096:1
+// 1 x Raging Worgen (EX1_412) [Rogue, Warlock]
+hold;warrior;thief;EX1_412:1
+hold;warrior;warlock;EX1_412:1
+// 1 x Slam [Paladin, Shaman]
+hold;warrior;mage;EX1_391:1
+hold;warrior;pala;EX1_391:1
+hold;warrior;shaman;EX1_391:1
+// 1 x Slam + Weapon / Execute [Priest, Warlock]
+hold;warrior;priest;EX1_391:1:CS2_106/FP1_021/CS2_108
+hold;warrior;warlock;EX1_391:1:CS2_106/FP1_021/CS2_108
+// 1 x Unstable Ghoul + Acolyte of Pain / Coin [Mage, Warlock]
+hold;warrior;mage;FP1_024:1:EX1_007
+hold;warrior;mage;FP1_024:1;coin
+hold;warrior;warlock;FP1_024:1:EX1_007
+hold;warrior;warlock;FP1_024:1;coin
+// 1 x Whirlwind [Hunter, Mage, Paladin, Warlock]
+hold;warrior;hunter;EX1_400:1
+hold;warrior;mage;EX1_400:1
+hold;warrior;pala;EX1_400:1
+hold;warrior;warlock;EX1_400:1
+
+// vs Druid
+// 1 x Grim Patron + coin
+hold;warrior;druid;BRM_019:1;coin
+// 1 x Slam + Weapon
+hold;warrior;druid;EX1_391:1:CS2_106/FP1_021
+
+// vs Warlock
+// 1 x Slam + No Coin
+hold;warrior;warlock;EX1_391:1;nocoin
+
+// vs Hunter
+// 1 x Unstable Ghoul
+hold;warrior;hunter;FP1_024:1
+
+// vs Priest
+// Emperor Thaurissan [+ Coin?]
+hold;warrior;priest;BRM_017:1
+
+// vs Warlock
+// 1 x Big Game Hunter
+hold;warrior;warlock;EX1_005:1
+// 1 x Cruel Taskmaster + Acolyte of Pain
+hold;warrior;warlock;EX1_603:1:EX1_007
+// Emperor Thaurissan + coin
+hold;warrior;warlock;BRM_017:1;coin
+
+// vs Warrior
+// 1 x Battle Rage + Acolyte of Pain
+hold;warrior;warrior;EX1_392:1:EX1_007
+
+
+// Deck: Mech
+// 1 x Annoy-o-Tron
+hold;warrior;all;GVG_085:1
+
+// 1 x Spider Tank + Tinkertown Technician + Annoy-o-Tron / Warbot [Druid, Mage, Rogue, Shaman, Warrior]
+hold;warrior;druid;GVG_044:1:GVG_102+GVG_085
+hold;warrior;druid;GVG_044:1:GVG_102+GVG_051
+hold;warrior;mage;GVG_044:1:GVG_102+GVG_085
+hold;warrior;mage;GVG_044:1:GVG_102+GVG_051
+hold;warrior;thief;GVG_044:1:GVG_102+GVG_085
+hold;warrior;thief;GVG_044:1:GVG_102+GVG_051
+hold;warrior;shaman;GVG_044:1:GVG_102+GVG_085
+hold;warrior;shaman;GVG_044:1:GVG_102+GVG_051
+hold;warrior;warrior;GVG_044:1:GVG_102+GVG_085
+hold;warrior;warrior;GVG_044:1:GVG_102+GVG_051
+// 1 x Warbot
+hold;warrior;all;GVG_051:1
+// 2 x Warbot + Mechwarper + Coin
+hold;warrior;all;GVG_051:2:GVG_006;coin
+// - L E F T O V E R S --------------------------
+// 1 x Fiery War Axe + Tinkertown Technician + Annoy-o-Tron / Mechwarper / Warbot [Paladin, Priest]
+// hold;warrior;pala;CS2_106:1:GVG_102+GVG_085
+// hold;warrior;pala;CS2_106:1:GVG_102+GVG_006
+// hold;warrior;pala;CS2_106:1:GVG_102+GVG_051
+// hold;warrior;priest;CS2_106:1:GVG_102+GVG_085
+// hold;warrior;priest;CS2_106:1:GVG_102+GVG_006
+// hold;warrior;priest;CS2_106:1:GVG_102+GVG_051
+// 1 x Fiery War Axe + Tinkertown Technician + Annoy-o-Tron / Warbot [Hunter, Warlock]
+// hold;warrior;hunter;CS2_106:1:GVG_102+GVG_085
+// hold;warrior;hunter;CS2_106:1:GVG_102+GVG_051
+// hold;warrior;warlock;CS2_106:1:GVG_102+GVG_085
+// hold;warrior;warlock;CS2_106:1:GVG_102+GVG_051
+// 1 x [1] Zombie Chow (FP1_001) [not Druid, Warrior]
+// hold;hunter;hunter;FP1_004:1
+// hold;hunter;mage;FP1_004:1
+// hold;hunter;pala;FP1_004:1
+// hold;hunter;priest;FP1_004:1
+// hold;hunter;thief;FP1_004:1
+// hold;hunter;shaman;FP1_004:1
+// hold;hunter;warlock;FP1_004:1
+// 1 x Mad Scientist + Coin [not Warrior]
+// hold;all;druid;FP1_004:1;coin
+// hold;all;hunter;FP1_004:1;coin
+// hold;all;mage;FP1_004:1;coin
+// hold;all;pala;FP1_004:1;coin
+// hold;all;priest;FP1_004:1;coin
+// hold;all;thief;FP1_004:1;coin
+// hold;all;shaman;FP1_004:1;coin
+// hold;all;warlock;FP1_004:1;coin
+
+// 1 x [2] Haunted Creeper (FP1_002) [not Druid, Priest, Warrior]
+// hold;hunter;hunter;FP1_002:1
+// hold;hunter;mage;FP1_002:1
+// hold;hunter;pala;FP1_002:1
+// hold;hunter;thief;FP1_002:1
+// hold;hunter;shaman;FP1_002:1
+// hold;hunter;warlock;FP1_002:1

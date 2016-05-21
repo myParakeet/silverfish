@@ -1,0 +1,27 @@
+// This File: Settings.txt
+//    Author: Blackoak
+//   Version: 0.2 (11-Oct-15)
+// Deck Name: Arena
+//      Hero: All
+// Deck Type: Control
+
+enfacehp = 15;
+maxwide = 5000;
+twotsamount = 1000;
+simEnemySecondTurn = true;
+playarround = true;
+playaroundprob = 50;
+playaroundprob2 = 80;
+enemyTurnMaxWide = 20;
+enemyTurnMaxWideSecondTime = 200;
+enemySecondTurnMaxWide = 20;
+nextTurnDeep = 6;
+nextTurnMaxWide = 20;
+nextTurnTotalBoards = 200;
+useSecretsPlayArround = true;
+alpha = 50;
+simulatePlacement = true;
+useExternalProcess = true;
+passiveWaiting = false;
+behave = control;
+concedeOnBadBoard = false;
