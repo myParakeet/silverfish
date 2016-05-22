@@ -742,139 +742,6 @@
             int spellpowerbuffs = 0;
             foreach (miniEnch me in enchants)
             {
-
-                if (me.CARDID == CardDB.cardIDEnum.LOE_105e) //explorersHat
-                {
-                    this.explorershat++;
-                }
-
-
-                if (me.CARDID == CardDB.cardIDEnum.AT_132_DRUIDe) //Claws better
-                {
-                    this.tempAttack += 2;
-                }
-
-                if (me.CARDID == CardDB.cardIDEnum.AT_013e) //power word: glory
-                {
-                    if (me.controllerOfCreator == ownPlayerControler)
-                    {
-                        this.ownPowerWordGlory++;
-                    }
-                    else
-                    {
-                        this.enemyPowerWordGlory++;
-                    }
-                }
-
-                if (me.CARDID == CardDB.cardIDEnum.AT_109e)
-                {
-                    this.canAttackNormal = true;
-                }
-
-                if (me.CARDID == CardDB.cardIDEnum.AT_039e) //Claw
-                {
-                    this.tempAttack += 2;
-                }
-                // deathrattles reborns and destoyings----------------------------------------------
-
-
-                if (me.CARDID == CardDB.cardIDEnum.CS2_038e) //ancestral spirit
-                {
-                    this.ancestralspirit++;
-                }
-
-                //spellpower is now readed in m.spellpower = entity.getTag(SPELLPOWER)!
-                if (me.CARDID == CardDB.cardIDEnum.EX1_584e) //ancient mage
-                {
-                    //this.spellpower++;
-                    correctSpellPower = true;
-                    spellpowerbuffs++;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.GVG_010b) //Velen's Chosen (+2+4, +spellpower)
-                {
-                    //this.spellpower++;
-                    correctSpellPower = true;
-                    spellpowerbuffs++;
-                }
-
-                if (me.CARDID == CardDB.cardIDEnum.EX1_158e) //soul of the forest
-                {
-                    this.souloftheforest++;
-                }
-
-                if (me.CARDID == CardDB.cardIDEnum.EX1_128e) //conceal
-                {
-                    this.concedal = true;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.PART_004e) //conceal
-                {
-                    this.concedal = true;
-                }
-
-                if (me.CARDID == CardDB.cardIDEnum.CS2_063e) //corruption
-                {
-                    if (me.controllerOfCreator == ownPlayerControler)
-                    {
-                        this.destroyOnOwnTurnStart = true;
-                    }
-                    else
-                    {
-                        this.destroyOnEnemyTurnStart = true;
-                    }
-                }
-
-                if (me.CARDID == CardDB.cardIDEnum.EX1_363e || me.CARDID == CardDB.cardIDEnum.EX1_363e2) //corruption
-                {
-                    if (me.controllerOfCreator == ownPlayerControler)
-                    {
-                        this.ownBlessingOfWisdom++;
-                    }
-                    else
-                    {
-                        this.enemyBlessingOfWisdom++;
-                    }
-                }
-
-
-
-                if (me.CARDID == CardDB.cardIDEnum.DREAM_05e) //nightmare
-                {
-                    if (me.controllerOfCreator == ownPlayerControler)
-                    {
-                        this.destroyOnOwnTurnStart = true;
-                    }
-                    else
-                    {
-                        this.destroyOnEnemyTurnStart = true;
-                    }
-                }
-
-                if (me.CARDID == CardDB.cardIDEnum.EX1_316e) //overwhelmingpower
-                {
-                    if (me.controllerOfCreator == ownPlayerControler)
-                    {
-                        this.destroyOnOwnTurnEnd = true;
-                    }
-                    else
-                    {
-                        this.destroyOnEnemyTurnEnd = true;
-                    }
-                }
-
-                if (me.CARDID == CardDB.cardIDEnum.NEW1_036e) //commanding shout
-                {
-                    this.cantLowerHPbelowONE = true;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.NEW1_036e2) //commanding shout
-                {
-                    this.cantLowerHPbelowONE = true;
-                }
-
-                if (me.CARDID == CardDB.cardIDEnum.EX1_334e) //Dark Command
-                {
-                    this.shadowmadnessed = true;
-                }
-
                 if (me.CARDID == CardDB.cardIDEnum.FP1_030e) //Necrotic Aura
                 {
                     //todo Eure Zauber kosten in diesem Zug (5) mehr.
@@ -889,93 +756,95 @@
                     // todo Your next Secret costs (0).
                 }
 
-                /*if (me.CARDID == CardDB.cardIDEnum.EX1_084e) //warsongcommander
+                switch (me.CARDID)
                 {
-                    this.charge++;
-                }*/
+                    //ToDo: TBUD_1	Each turn, if you have less health then a your opponent, summon a free minion
+                    
 
-                if (me.CARDID == CardDB.cardIDEnum.DS1_178e) //rhino
-                {
-                    this.charge++;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.CS2_103e2)// sturmangriff    +2 angriff und ansturm/.
-                {
-                    this.charge++;
-                }
+                    // special stuff-------------------------------------------------
+                    case CardDB.cardIDEnum.AT_013e: //power word: glory
+                        if (me.controllerOfCreator == ownPlayerControler) this.ownPowerWordGlory++;
+                        else this.enemyPowerWordGlory++;
+                        continue;
+                    case CardDB.cardIDEnum.EX1_363e: //blessing of wisdom
+                        if (me.controllerOfCreator == ownPlayerControler) this.ownBlessingOfWisdom++;
+                        else this.enemyBlessingOfWisdom++;
+                        continue;
+                    case CardDB.cardIDEnum.EX1_363e2: //blessing of wisdom
+                        if (me.controllerOfCreator == ownPlayerControler) this.ownBlessingOfWisdom++;
+                        else this.enemyBlessingOfWisdom++;
+                        continue;
+                    case CardDB.cardIDEnum.AT_109e: this.canAttackNormal = true; continue; //Argent Watchman
+                    case CardDB.cardIDEnum.EX1_334e: this.shadowmadnessed = true; continue; //Dark Command
 
-                if (me.CARDID == CardDB.cardIDEnum.AT_071e)// sturmangriff    +1 angriff und ansturm/.
-                {
-                    this.charge++;
-                }
+                    // destroy-------------------------------------------------
+                    case CardDB.cardIDEnum.CS2_063e:
+                        if (me.controllerOfCreator == ownPlayerControler) this.destroyOnOwnTurnStart = true;
+                        else this.destroyOnEnemyTurnStart = true;   //corruption
+                        continue;
+                    case CardDB.cardIDEnum.DREAM_05e:
+                        if (me.controllerOfCreator == ownPlayerControler) this.destroyOnOwnTurnStart = true;
+                        else this.destroyOnEnemyTurnStart = true;   //nightmare
+                        continue;
+                    case CardDB.cardIDEnum.EX1_316e:
+                        if (me.controllerOfCreator == ownPlayerControler) this.destroyOnOwnTurnEnd = true;
+                        else this.destroyOnEnemyTurnEnd = true;   //overwhelmingpower
+                        continue;
 
-                //ancientbuffs-------------------------------------------------
-                if (me.CARDID == CardDB.cardIDEnum.EX1_565o) //flametongue
-                {
-                    this.AdjacentAngr += 2;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.EX1_162o) //dire wolf alpha
-                {
-                    this.AdjacentAngr += 1;
-                }
-                //tempbuffs-------------------------------------------------
-
-                if (me.CARDID == CardDB.cardIDEnum.CS2_105e) //heldenhafter stoss
-                {
-                    this.tempAttack += 4;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.EX1_570e) //bite
-                {
-                    this.tempAttack += 4;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.CS2_083e) //sharpened
-                {
-                    this.tempAttack += 1;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.EX1_046e) //tempered
-                {
-                    this.tempAttack += 2;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.CS2_188o) //inspiring
-                {
-                    this.tempAttack += 2;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.CS2_045e) //rockbiter
-                {
-                    this.tempAttack += 3;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.CS2_046e) //bloodlust
-                {
-                    this.tempAttack += 3;
-                }
-
-                if (me.CARDID == CardDB.cardIDEnum.CS2_011o) //Savage Roar
-                {
-                    this.tempAttack += 2;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.CS2_017o) //Claws
-                {
-                    this.tempAttack += 1;
-                }
-
-                if (me.CARDID == CardDB.cardIDEnum.EX1_549o) //bestial wrath
-                {
-                    this.tempAttack += 2;
-                    this.immune = true;
-                }
-                if (me.CARDID == CardDB.cardIDEnum.CS2_005o) //Claw
-                {
-                    this.tempAttack += 2;
-                }
+                    // deathrattles-------------------------------------------------
+                    case CardDB.cardIDEnum.LOE_105e: this.explorershat++; continue;
+                    case CardDB.cardIDEnum.CS2_038e: this.ancestralspirit++; continue;
+                    case CardDB.cardIDEnum.EX1_158e: this.souloftheforest++; continue;
+                    case CardDB.cardIDEnum.OG_045a: this.infest++; continue;
+                    case CardDB.cardIDEnum.LOE_019e: this.extraParam2 = me.copyDeathrattle; continue; //unearthedraptor
 
 
+                    //concedal-------------------------------------------------
+                    case CardDB.cardIDEnum.EX1_128e: this.concedal = true; continue;
+                    case CardDB.cardIDEnum.NEW1_014e: this.concedal = true; continue;
+                    case CardDB.cardIDEnum.PART_004e: this.concedal = true; continue;
+                    case CardDB.cardIDEnum.OG_080de: this.concedal = true; continue;
 
-                if (me.CARDID == CardDB.cardIDEnum.GVG_011a) //Shrink Ray
-                {
-                    this.tempAttack -= 2; //todo might not be correct
-                }
-                if (me.CARDID == CardDB.cardIDEnum.GVG_057a) //Seal of Light
-                {
-                    this.tempAttack += 2;
+                    //cantLowerHPbelowONE-------------------------------------------------
+                    case CardDB.cardIDEnum.NEW1_036e: this.cantLowerHPbelowONE = true; continue; //commandingshout
+                    case CardDB.cardIDEnum.NEW1_036e2: this.cantLowerHPbelowONE = true; continue; //commandingshout
+
+                    //spellpower-------------------------------------------------
+                    case CardDB.cardIDEnum.GVG_010b: this.spellpower++; correctSpellPower = true; continue; //velenschosen
+                    case CardDB.cardIDEnum.AT_006e: this.spellpower++; correctSpellPower = true; continue; //dalaran
+                    case CardDB.cardIDEnum.EX1_584e: this.spellpower++; correctSpellPower = true; continue; //ancient mage
+
+                    //charge-------------------------------------------------
+                    case CardDB.cardIDEnum.AT_071e: this.charge++; continue;
+                    case CardDB.cardIDEnum.CS2_103e2: this.charge++; continue;
+                    case CardDB.cardIDEnum.TB_AllMinionsTauntCharge: this.charge++; continue;
+                    case CardDB.cardIDEnum.DS1_178e: this.charge++; continue;
+
+                    //adjacentbuffs-------------------------------------------------
+                    case CardDB.cardIDEnum.EX1_565o: this.AdjacentAngr += 2; continue; //flametongue
+                    case CardDB.cardIDEnum.EX1_162o: this.AdjacentAngr += 1; continue; //dire wolf alpha
+
+                    //tempbuffs-------------------------------------------------
+                    case CardDB.cardIDEnum.CS2_083e: this.tempAttack += 1; continue;
+                    case CardDB.cardIDEnum.EX1_549o: this.tempAttack += 2; this.immune = true; continue;
+                    case CardDB.cardIDEnum.AT_039e: this.tempAttack += 2; continue;
+                    case CardDB.cardIDEnum.AT_132_DRUIDe: this.tempAttack += 2; continue;
+                    case CardDB.cardIDEnum.CS2_005o: this.tempAttack += 2; continue;
+                    case CardDB.cardIDEnum.CS2_011o: this.tempAttack += 2; continue;
+                    case CardDB.cardIDEnum.EX1_046e: this.tempAttack += 2; continue;
+                    case CardDB.cardIDEnum.GVG_057a: this.tempAttack += 2; continue;
+                    case CardDB.cardIDEnum.CS2_046e: this.tempAttack += 3; continue;
+                    case CardDB.cardIDEnum.CS2_105e: this.tempAttack += 4; continue;
+                    case CardDB.cardIDEnum.EX1_570e: this.tempAttack += 4; continue;
+                    case CardDB.cardIDEnum.OG_047e: this.tempAttack += 4; continue;
+                    case CardDB.cardIDEnum.NAX12_04e: this.tempAttack += 6; continue;
+                    case CardDB.cardIDEnum.GVG_011a: this.tempAttack += -2; continue;
+                    case CardDB.cardIDEnum.BRM_001e: this.tempAttack += -1000; continue;
+                    case CardDB.cardIDEnum.TU4c_008e: this.tempAttack += 8; continue;
+                    case CardDB.cardIDEnum.CS2_045e: this.tempAttack += 3; continue;
+                    case CardDB.cardIDEnum.CS2_188o: this.tempAttack += 2; continue;
+                    case CardDB.cardIDEnum.CS2_017o: this.tempAttack += 1; continue;
+
                 }
             }
 
