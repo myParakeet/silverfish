@@ -19,6 +19,8 @@
         private bool useLethalCheck = true;
         private bool useComparison = true;
 
+        public Playfield bestplay = new Playfield();
+
 
         public int lethalMissing = 30; //RR
 
@@ -128,7 +130,7 @@
             if (isLethalCheck) this.posmoves[0].enemySecretList.Clear();
             this.mainTurnSimulator.doallmoves(this.posmoves[0], isLethalCheck);
 
-            Playfield bestplay = this.mainTurnSimulator.bestboard;
+            bestplay = this.mainTurnSimulator.bestboard;
             float bestval = this.mainTurnSimulator.bestmoveValue;
 
             help.loggonoff(true);
@@ -158,7 +160,7 @@
                 this.bestActions.Add(new Action(a));
                 a.print();
             }
-            //this.bestActions.Add(new Action(actionEnum.endturn, null, null, 0, null, 0, 0));
+            if (isLethalCheck) reorderingActions();
 
             if (this.bestActions.Count >= 1)
             {
@@ -180,6 +182,56 @@
                 nextMoveGuess.mana = -100;
             }
 
+        }
+
+        private void reorderingActions()
+        {
+            if (bestplay.enemySecretCount > 0) return;
+            if (bestplay.playactions.Count < 2) return;
+            if (Ai.Instance.botBase.getPlayfieldValue(bestplay) < 10000) return;
+            Playfield tmpPf = new Playfield();
+            if (tmpPf.anzEnemyTaunt > 0) return;
+
+            List<Action> reorderedActions = new List<Action>();
+            Dictionary<Action, int> actDmgDict = new Dictionary<Action, int>();
+            tmpPf.enemyHero.Hp = 30;
+            try
+
+            {
+                foreach (Action a in bestplay.playactions)
+                {
+                    int actDmd = tmpPf.enemyHero.Hp + tmpPf.enemyHero.armor;
+                    tmpPf.doAction(a);
+                    actDmd -= (tmpPf.enemyHero.Hp + tmpPf.enemyHero.armor);
+                    actDmgDict.Add(a, actDmd);
+                }
+            }
+            catch { return; }
+
+            foreach (var pair in actDmgDict.OrderByDescending(pair => pair.Value))
+            {
+                reorderedActions.Add(pair.Key);
+            }
+
+            tmpPf = new Playfield();
+            foreach (Action a in reorderedActions)
+            {
+                if (a.actionType == actionEnum.attackWithMinion && a.own.playedThisTurn) return;
+                tmpPf.doAction(a);
+            }
+            if (Ai.Instance.botBase.getPlayfieldValue(tmpPf) >= 10000)
+            {
+                bestplay.playactions.Clear();
+                bestActions.Clear();
+                bestplay.playactions.AddRange(reorderedActions);
+                help.logg("Reordered actions:");
+
+                foreach (Action a in bestplay.playactions)
+                {
+                    this.bestActions.Add(new Action(a));
+                    a.print();
+                }
+            }
         }
 
         private void selectBestTracking()
