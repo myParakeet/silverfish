@@ -216,7 +216,7 @@
             tmpPf = new Playfield();
             foreach (Action a in reorderedActions)
             {
-                if (a.actionType == actionEnum.attackWithMinion && a.own.playedThisTurn) return;
+                if (a.actionType == actionEnum.attackWithMinion && !a.own.Ready) return;
                 tmpPf.doAction(a);
             }
             if (Ai.Instance.botBase.getPlayfieldValue(tmpPf) >= 10000)
