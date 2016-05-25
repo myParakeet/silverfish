@@ -1916,7 +1916,7 @@
                     bool hasNerubianEgg = false;
                     foreach (Minion mnn in p.enemyMinions)
                     {
-                        if (mnn.handcard.card.name == CardDB.cardName.nerubianegg && !m.silenced && m.Hp <= 2)
+                        if (mnn.handcard.card.name == CardDB.cardName.nerubianegg && !mnn.silenced && mnn.Hp <= 2)
                         {
                             hasNerubianEgg = true;
                             break;
