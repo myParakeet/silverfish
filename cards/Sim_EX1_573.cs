@@ -5,10 +5,10 @@ using System.Text;
 namespace HREngine.Bots
 {
 	class Sim_EX1_573 : SimTemplate //cenarius
-	{
+    {
+        //Choose One - Give your minions +2/2; or summon two 2/2 treants with taunt
 
         CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_573t); //special treant
-//    wählt aus:/ verleiht euren anderen dienern +2/+2; oder ruft zwei treants (2/2) mit spott/ herbei.
 		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             if (choice == 1)

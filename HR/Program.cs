@@ -473,6 +473,9 @@ namespace HREngine.Bots
             {
                 Helpfunctions.Instance.ErrorLog("start things...");
                 //HR-only fix for being to fast
+                //IsProcessingPowers not good enough so always sleep
+                //todo find better solution
+                System.Threading.Thread.Sleep(200);
                 if (!this.doMultipleThingsAtATime)
                 {
                     //do fake action
