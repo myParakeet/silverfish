@@ -160,7 +160,7 @@
                 this.bestActions.Add(new Action(a));
                 a.print();
             }
-            if (isLethalCheck) reorderingActions();
+            //todo sepefeets - enable after implementing anzEnemyTaunt or finding alternative            //if (isLethalCheck) reorderingActions();
 
             if (this.bestActions.Count >= 1)
             {
