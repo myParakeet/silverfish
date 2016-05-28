@@ -148,7 +148,7 @@
             {
                 if (p.ownWeaponAttack >= 1 && p.enemyHero.Hp >= enfacehp)
                 {
-                    if (p.ownWeaponName == CardDB.cardName.lightsjustice && p.ownWeaponDurability >= 3) return 0;
+                    if (p.ownWeaponName == CardDB.cardName.lightsjustice && p.ownWeaponDurability >= 3) return -1;
                     if (!(p.ownHeroName == HeroEnum.thief && p.ownWeaponAttack == 1)) return 50 + p.ownWeaponAttack;
                 }
 
