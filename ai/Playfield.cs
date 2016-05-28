@@ -54,7 +54,6 @@
         //------------
 
         public int nextEntity = 70;
-        public int pID = 0;
 
         public triggerCounter tempTrigger = new triggerCounter();
 
@@ -178,7 +177,7 @@
         //new variables LOE
         public int selectedChoice = -1;
         public int anzOwnNagaSeaWitch = 0;
-        public int anzenemyNagaSeaWitch = 0;
+        public int anzEnemyNagaSeaWitch = 0;
         public int anzOwnAnimatedArmor = 0;
         public int anzEnemyAnimatedArmor = 0;
         public int anzEnemyCursed = 0;
@@ -403,7 +402,7 @@
             this.anzOwnWarsongCommanders = 0;
             this.anzEnemyWarsongCommanders = 0;
             this.anzOwnNagaSeaWitch = 0;
-            this.anzenemyNagaSeaWitch = 0;
+            this.anzEnemyNagaSeaWitch = 0;
 
             this.feugenDead = Probabilitymaker.Instance.feugenDead;
             this.stalaggDead = Probabilitymaker.Instance.stalaggDead;
@@ -680,7 +679,7 @@
                 if (m.name == CardDB.cardName.grimscaleoracle) this.anzGrimscaleOracle++;
                 if (m.name == CardDB.cardName.auchenaisoulpriest) this.anzEnemyAuchenaiSoulpriest++;
 
-                if (m.name == CardDB.cardName.nagaseawitch) this.anzenemyNagaSeaWitch++;
+                if (m.name == CardDB.cardName.nagaseawitch) this.anzEnemyNagaSeaWitch++;
 
                 if (m.name == CardDB.cardName.fallenhero) this.anzEnemyFallenHeros++;
 
@@ -906,7 +905,7 @@
             anzEnemyBranns = p.anzEnemyBranns;
 
             this.anzOwnNagaSeaWitch = p.anzOwnNagaSeaWitch;
-            this.anzenemyNagaSeaWitch = p.anzenemyNagaSeaWitch;
+            this.anzEnemyNagaSeaWitch = p.anzEnemyNagaSeaWitch;
             this.anzOwnAnimatedArmor = p.anzOwnAnimatedArmor ;
             this.anzEnemyAnimatedArmor = p.anzEnemyAnimatedArmor;
             //#########################################

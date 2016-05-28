@@ -20,7 +20,7 @@ namespace HREngine.Bots
             }
             else
             {
-                p.anzenemyNagaSeaWitch++;
+                p.anzEnemyNagaSeaWitch++;
             }
         }
 
@@ -32,7 +32,7 @@ namespace HREngine.Bots
             }
             else
             {
-                p.anzenemyNagaSeaWitch--;
+                p.anzEnemyNagaSeaWitch--;
             }
         }
 	}
