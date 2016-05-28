@@ -8,13 +8,13 @@ namespace HREngine.Bots
 	{
 		//Whenever a character is healed, give your C'Thun +1/+1 (wherever it is)
 		
-        public virtual void onAMinionGotHealedTrigger(Playfield p, Minion triggerEffectMinion, bool ownerOfMinionGotHealed)
+        public override void onAHeroGotHealedTrigger(Playfield p, Minion triggerEffectMinion, bool ownerOfHeroGotHealed)
         {
             p.anzOgOwnCThunHpBonus++;
             p.anzOgOwnCThunAngrBonus++;
         }
 
-        public virtual void onAHeroGotHealedTrigger(Playfield p, Minion triggerEffectMinion, bool ownerOfHeroGotHealed)
+        public override void onAMinionGotHealedTrigger(Playfield p, Minion triggerEffectMinion, bool ownerOfMinionGotHealed)
         {
             p.anzOgOwnCThunHpBonus++;
             p.anzOgOwnCThunAngrBonus++;

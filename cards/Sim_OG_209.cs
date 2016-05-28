@@ -12,9 +12,8 @@ namespace HREngine.Bots
         {
             if (triggerEffectMinion.own == wasOwnCard && c.type == CardDB.cardtype.SPELL)
             {
-                Minion target2 = (wasOwnCard) ? p.ownHero : p.enemyHero;
-                int spellpower = (wasOwnCard) ? p.spellpower : p.enemyspellpower;
-                p.minionGetDamageOrHeal(target2, spellpower);
+                target2 = (wasOwnCard) ? p.ownHero : p.enemyHero;
+                p.minionGetDamageOrHeal(target2, -PenalityManager.Instance.guessTotalSpellDamage(p, c.name, wasOwnCard));
             }
         }
     }

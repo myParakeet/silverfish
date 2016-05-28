@@ -10,7 +10,18 @@ namespace HREngine.Bots
 		
 		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
-			if (own.own) p.overload = 0;
+            if (own != null && own.own)
+            {
+                p.owedRecall = 0;
+                p.mana += p.currentRecall;
+                p.currentRecall = 0;
+            }
+            else
+            {
+                p.enemyRecall = 0;
+                p.mana += p.enemyCurrentRecall;
+                p.enemyCurrentRecall = 0;
+            }
 		}
 	}
 }
