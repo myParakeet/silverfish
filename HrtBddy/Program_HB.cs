@@ -79,7 +79,7 @@ namespace HREngine.Bots
         int numOptionPlayedThisTurn = 0;
         int numMinionsPlayedThisTurn = 0;
         int cardsPlayedThisTurn = 0;
-        int ueberladung = 0;
+        int ownOverload = 0;
 
         int enemyMaxMana = 0;
 
@@ -235,7 +235,7 @@ namespace HREngine.Bots
                 if (m.Hp >= 1) this.numOptionPlayedThisTurn += m.numAttacksThisTurn;
             }
 
-            Hrtprozis.Instance.updatePlayer(this.ownMaxMana, this.currentMana, this.cardsPlayedThisTurn, this.numMinionsPlayedThisTurn, this.numOptionPlayedThisTurn, this.ueberladung, ownHero.entitiyID, enemyHero.entitiyID, this.numberMinionsDiedThisTurn, this.ownCurrentOverload, this.enemyOverload, this.heroPowerUsesThisTurn,this.lockandload);
+            Hrtprozis.Instance.updatePlayer(this.ownMaxMana, this.currentMana, this.cardsPlayedThisTurn, this.numMinionsPlayedThisTurn, this.numOptionPlayedThisTurn, this.ownOverload, ownHero.entitiyID, enemyHero.entitiyID, this.numberMinionsDiedThisTurn, this.ownCurrentOverload, this.enemyOverload, this.heroPowerUsesThisTurn,this.lockandload);
             Hrtprozis.Instance.setPlayereffects(this.ownDragonConsort, this.enemyDragonConsort, this.ownLoathebs, this.enemyLoathebs, this.ownMillhouse, this.enemyMillhouse, this.ownKirintor, this.ownPrepa, this.ownsabo, this.enemysabo, this.ownFenciCoaches, this.enemyCursedCardsInHand);
             Hrtprozis.Instance.updateSecretStuff(this.ownSecretList, this.enemySecretCount);
 
@@ -577,7 +577,7 @@ namespace HREngine.Bots
             if (ownHero.Angr < this.heroWeaponAttack) ownHero.Angr = this.heroWeaponAttack;
             if (enemyHero.Angr < this.enemyWeaponAttack) enemyHero.Angr = this.enemyWeaponAttack;
 
-            this.ueberladung = ownPlayer.GetTag(GAME_TAG.OVERLOAD_OWED);// rangerbot.gameState.RecallOwnedNum;//was at the start, but copied it over here :D , its german for overload :D
+            this.ownOverload = ownPlayer.GetTag(GAME_TAG.OVERLOAD_OWED);// rangerbot.gameState.RecallOwnedNum;//was at the start, but copied it over here :D , its german for overload :D
             //Reading new values:###################################################################################################
             //ToDo:
 

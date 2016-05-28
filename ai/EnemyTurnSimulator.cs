@@ -62,7 +62,7 @@
             { Console.WriteLine("enemMana "+ enemMana); }
 
             //playing aoe-effects if activated (and we didnt play loatheb)
-            if (playaround && rootfield.ownloatheb == 0)
+            if (playaround && rootfield.anzOwnLoatheb == 0)
             {
                 float oldval = Ai.Instance.botBase.getPlayfieldValueEnemy(posmoves[0]);
                 posmoves[0].value = int.MinValue;
@@ -83,7 +83,7 @@
 
             //play ability!
 
-            if (posmoves[0].enemyAbilityReady && enemMana >= 2 && posmoves[0].enemyHeroAblility.card.canplayCard(posmoves[0], 0) && rootfield.ownSaboteur == 0)
+            if (posmoves[0].enemyAbilityReady && enemMana >= 2 && posmoves[0].enemyHeroAblility.card.canplayCard(posmoves[0], 0) && rootfield.anzOwnSaboteur == 0)
             {
                 int abilityPenality = 0;
 
@@ -283,7 +283,7 @@
             }
 
             //if he is a "mage" he will attack us (even if he decides to attack another minion with it :D)
-            if(p.ownSaboteur==0)
+            if(p.anzOwnSaboteur==0)
             {
                 if (p.enemyHeroAblility.card.name == CardDB.cardName.fireblast)
                 {

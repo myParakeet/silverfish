@@ -1056,7 +1056,7 @@
                 }
             }
 
-            if (p.mobsplayedThisTurn > old.mobsplayedThisTurn)
+            if (p.mobsPlayedThisTurn > old.mobsPlayedThisTurn)
             {
                 playedMob = true;
             }
@@ -1076,7 +1076,7 @@
             }
 
             //used heropower?
-            if (old.own_TIMES_HERO_POWER_USED_THIS_GAME < p.own_TIMES_HERO_POWER_USED_THIS_GAME)
+            if (old.ownHeroPowerUses < p.ownHeroPowerUses)
             {
                 usedHeropower = true;
             }

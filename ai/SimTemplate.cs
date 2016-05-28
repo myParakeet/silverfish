@@ -66,11 +66,6 @@
             return;
         }
 
-        public virtual void onACharGotHealed(Playfield p, Minion triggerEffectMinion)
-        {
-            return;
-        }        
-
         public virtual void onTurnEndsTrigger(Playfield p, Minion triggerEffectMinion, bool turnEndOfOwner)
         {
             return;

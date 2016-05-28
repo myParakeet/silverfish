@@ -729,7 +729,7 @@
             //is not called, because of trundeep is allways >0 (in enemys turn) 
             //currently all enemy heropower use is handled in enemyTurnSimulator
             //if he can use ability use it on his turnstart or never!###########################################################################################
-            if (turndeep == 0 && p.enemyAbilityReady && p.mana >= 2 && p.enemyHeroAblility.card.canplayCard(p, 0) && p.ownSaboteur==0)
+            if (turndeep == 0 && p.enemyAbilityReady && p.mana >= 2 && p.enemyHeroAblility.card.canplayCard(p, 0) && p.anzOwnSaboteur==0)
             {
                 int abilityPenality = 0;
 

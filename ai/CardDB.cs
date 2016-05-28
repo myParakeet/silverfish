@@ -5339,6 +5339,7 @@ namespace HREngine.Bots
 
             public int calculateManaCost(Playfield p)//calculates the mana from orginal mana, needed for back-to hand effects and new draw
             {
+                //todo sepefeets - add thing from below
                 int retval = this.cost;
                 int offset = 0;
 
@@ -5349,22 +5350,22 @@ namespace HREngine.Bots
                     case cardtype.MOB:
                         if (p.anzOwnAviana > 0) retval = 1;
 
-                        offset += p.soeldnerDerVenture * 3;
+                        offset += p.anzVentureCoMercenary * 3;
 
-                        offset += p.managespenst;
+                        offset += p.anzManaWraith;
 
-                        int temp = -(p.startedWithbeschwoerungsportal) * 2;
+                        int temp = -(p.anzSummoningPortal) * 2;
                         if (retval + temp <= 0) temp = -retval + 1;
                         offset = offset + temp;
 
-                        if (p.mobsplayedThisTurn == 0)
+                        if (p.mobsPlayedThisTurn == 0)
                         {
-                            offset -= p.winzigebeschwoererin;
+                            offset -= p.anzPintSizedSummoner;
                         }
 
                         if (this.battlecry)
                         {
-                            offset += p.nerubarweblord * 2;
+                            offset += p.anzNerubarWeblord * 2;
                         }
 
                         if ((TAG_RACE)this.race == TAG_RACE.MECHANICAL)
@@ -5373,7 +5374,7 @@ namespace HREngine.Bots
                         }
                         break;
                     case cardtype.SPELL:
-                        offset -= p.anzOwnsorcerersapprentice;
+                        offset -= p.anzOwnSorcerersApprentice;
                         offset -= p.allSpellCostLess;
                         if (p.playedPreparation)
                         { //if the number of zauberlehrlings change
@@ -5381,7 +5382,7 @@ namespace HREngine.Bots
                         }
                         break;
                     case cardtype.WEAPON:
-                        offset -= p.blackwaterpirate * 2;
+                        offset -= p.anzBlackwaterPirate * 2;
                         break;
                 }
 
@@ -5455,7 +5456,7 @@ namespace HREngine.Bots
                         break;
                 }
 
-                if (this.Secret && p.playedmagierinderkirintor)
+                if (this.Secret && p.playedKirinTorMage)
                 {
                     retval = 0;
                 }
@@ -5471,79 +5472,99 @@ namespace HREngine.Bots
 
                 int offset = 0; // if offset < 0 costs become lower, if >0 costs are higher at the end
 
-                // CARDS that increase the manacosts of others ##############################
-
-                if (this.type == cardtype.MOB)
+                // CARDS that increase/decrease the manacosts of others ##############################
+                switch (this.type)
                 {
-                    //Manacosts changes with soeldner der venture co.
-                    offset += p.soeldnerDerVenture * 3;
-                    //Manacosts changes with mana-ghost
-                    offset += p.managespenst;
+                    case cardtype.HEROPWR:                        
+                        if (p.anzOwnMaidenOfTheLake >= 1)
+                        {
+                            retval = 1;
+                        }
 
-                    if (this.battlecry)
-                    {
-                        offset += p.nerubarweblord * 2;
-                    }
+                        if (p.anzOwnFencingCoach >= 1)
+                        {
+                            retval -= 2 * p.anzOwnFencingCoach;
+                        }
 
+                        retval += (p.isOwnTurn) ? p.anzEnemySaboteur * 5 : p.anzOwnSaboteur * 5;
 
+                        break;
+                    case cardtype.MOB:
+                        //Manacosts changes with Venture Co. Mercenary
+                        offset += p.anzVentureCoMercenary * 3;
+                        //Manacosts changes with mana wraith
+                        offset += p.anzManaWraith;
+
+                        if (this.battlecry)
+                        {
+                            offset += p.anzNerubarWeblord * 2;
+                        }
+
+                        //Manacosts changes with the summoning-portal >_>
+                        if (p.anzSummoningPortal >= 1)
+                        {
+                            int temp = -p.anzSummoningPortal * 2;
+                            if (retval >= 1 && retval + temp <= 0) temp = -retval + 1;
+                            offset = offset + temp;
+                        }
+
+                        //Manacosts changes with the pint-sized summoner
+                        if (p.mobsPlayedThisTurn == 0)
+                        {
+                            offset -= p.anzPintSizedSummoner;
+                        }
+
+                        //manacosts changes with Mechwarper
+                        if ((TAG_RACE)this.race == TAG_RACE.MECHANICAL)
+                        {
+                            offset -= p.anzOwnMechwarper;
+                        }
+
+                        if (p.anzOwnAviana > 0)
+                        {
+                            retval = 1;
+                        }
+
+                        if (this.type == cardtype.MOB && this.race == TAG_RACE.DRAGON)
+                        {
+                            retval -= (p.isOwnTurn) ? p.anzOwnDragonConsort * 2 : p.anzEnemyDragonConsort * 2;
+                        }
+                        break;
+                    case cardtype.SPELL:
+                        //Manacosts changes with the Sorcerer's Apprentice
+                        offset -= p.anzOwnSorcerersApprentice;
+                        
+                        //manacosts are lowered, after we played preparation
+                        if (p.playedPreparation)
+                        {
+                            offset -= 3;
+                        }
+                        
+                        //loatheb
+                        retval += (p.isOwnTurn) ? p.anzEnemyLoatheb * 5 : p.anzOwnLoatheb * 5;
+
+                        //millhouse
+                        if ((p.isOwnTurn && p.anzEnemyMillhouseManastorm) || (!p.isOwnTurn && p.anzOwnMillhouseManastorm))
+                        {
+                            retval = 0;
+                        }
+
+                        break;
+                    case cardtype.WEAPON:
+                        offset += p.anzBlackwaterPirate * 2;
+                        break;
                 }
-
-                // CARDS that decrease the manacosts of others ##############################
-
-                if (this.type == cardtype.MOB)
-                {
-                    //Manacosts changes with the summoning-portal >_>
-                    if (p.beschwoerungsportal >= 1)
-                    {
-                        int temp = -p.beschwoerungsportal * 2;
-                        if (retval >= 1 && retval + temp <= 0) temp = -retval + 1;
-                        offset = offset + temp;
-                    }
-
-
-                    //Manacosts changes with the pint-sized summoner
-                    if (p.mobsplayedThisTurn == 0)
-                    {
-                        offset -= p.pintsizedsummoner;
-                    }
-
-                    //manacosts changes with Mechwarper
-                    if ((TAG_RACE)this.race == TAG_RACE.MECHANICAL)
-                    {
-                        offset -= p.anzOwnMechwarper;
-                    }
-
-                }
-
-
-
-                if (this.type == cardtype.SPELL)
-                {
-                    //Manacosts changes with the zauberlehrling summoner
-                    offset -= p.anzOwnsorcerersapprentice;
-
-                    //manacosts are lowered, after we played preparation
-                    if (p.playedPreparation)
-                    {
-                        offset -= 3;
-                    }
-                }
-
-                if ((this.type == cardtype.MOB || this.type == cardtype.SPELL || this.type == cardtype.WEAPON) && p.anzownNagaSeaWitch >= 1)
+                
+                if ((this.type == cardtype.MOB || this.type == cardtype.SPELL || this.type == cardtype.WEAPON) && p.anzOwnNagaSeaWitch >= 1)
                 {
                     retval = 5;
                 }
-
-                if (this.type == cardtype.MOB)
-                {
-                    if (p.anzOwnAviana >= 1) retval = 1;
-                }
-
-
+                
+                // CARDS that decrease their own manacosts ##############################
                 switch (this.name)
                 {
                     case CardDB.cardName.frostgiant:
-                        retval = retval + offset - p.own_TIMES_HERO_POWER_USED_THIS_GAME;
+                        retval = retval + offset - p.ownHeroPowerUses;
                         break;
                     case CardDB.cardName.skycapnkragg:
                         int pirates = 0;
@@ -5553,7 +5574,9 @@ namespace HREngine.Bots
                         }
                         retval = retval + offset - pirates;
                         break;
-
+                    case CardDB.cardName.knightofthewild:
+                        retval = retval + offset - p.tempTrigger.ownBeastSummoned;
+                        break;
                     case CardDB.cardName.dreadcorsair:
                         retval = retval + offset - p.ownWeaponAttack;
                         break;
@@ -5567,7 +5590,7 @@ namespace HREngine.Bots
                         retval = retval + offset - p.enemyAnzCards;
                         break;
                     case CardDB.cardName.moltengiant:
-                        retval = retval + offset - p.ownHero.Hp;
+                        retval = retval + offset - 30 + p.ownHero.Hp; //todo sepefeets - is there a variable for hero max hp instead of assuming 30?
                         break;
                     case CardDB.cardName.crush:
                         // cost 4 less if we have a dmged minion
@@ -5606,51 +5629,12 @@ namespace HREngine.Bots
                         retval = retval + offset;
                         break;
                 }
-
-
-
-                if (this.type == cardtype.SPELL)
-                {
-                    retval += (p.isOwnTurn) ? p.enemyloatheb * 5 : p.ownloatheb * 5;
-                }
-
-                if (this.Secret && p.playedmagierinderkirintor)
+                
+                if (this.Secret && p.playedKirinTorMage)
                 {
                     retval = 0;
                 }
-
-                if (this.type == cardtype.MOB && this.race == TAG_RACE.DRAGON)
-                {
-                    retval -= (p.isOwnTurn) ? p.ownDragonConsort * 2 : p.enemyDragonConsort * 2;
-                }
-
-                if (this.type == cardtype.SPELL)
-                {
-                    retval += (p.isOwnTurn) ? p.enemyloatheb * 5 : p.ownloatheb * 5;
-                }
-
-
-                if (this.type == cardtype.SPELL && ((p.isOwnTurn && p.enemyHavePlayedMillhouseManastorm) || (!p.isOwnTurn && p.weHavePlayedMillhouseManastorm)))
-                {
-                    retval = 0;
-                }
-
-
-                if (this.type == cardtype.HEROPWR && p.anzOwnMaidenOfTheLake >= 1)
-                {
-                    retval = 1;
-                }
-
-                if (this.type == cardtype.HEROPWR)
-                {
-                    retval += (p.isOwnTurn) ? p.enemySaboteur * 5 : p.ownSaboteur * 5; ;
-                }
-
-                if (this.type == cardtype.HEROPWR && p.anzOwnFencingCoach >= 1)
-                {
-                    retval -= 2 * p.anzOwnFencingCoach;
-                }
-
+                
                 retval = Math.Max(0, retval);
 
                 return retval;
@@ -5670,13 +5654,13 @@ namespace HREngine.Bots
                 {
 
                     //Manacosts changes with soeldner der venture co.
-                    offset += -p.soeldnerDerVenture * 3;
+                    offset += -p.anzVentureCoMercenary * 3;
                     //Manacosts changes with mana-ghost
-                    offset += -p.managespenst;
+                    offset += -p.anzManaWraith;
                     //weblord
                     if (this.battlecry)
                     {
-                        offset += -p.nerubarweblord * 2;
+                        offset += -p.anzNerubarWeblord * 2;
                     }
 
                     if (p.anzOwnAviana >= 1)
@@ -5685,7 +5669,7 @@ namespace HREngine.Bots
                     }
                     else
                     {
-                        if (p.anzownNagaSeaWitch >= 1)
+                        if (p.anzOwnNagaSeaWitch >= 1)
                         {
                             offset += this.cost - 5;
                         }
@@ -5693,7 +5677,7 @@ namespace HREngine.Bots
                 }
                 else  //nagaseawitch for other cards
                 {
-                    if (p.anzownNagaSeaWitch >= 1)
+                    if (p.anzOwnNagaSeaWitch >= 1)
                     {
                         offset += this.cost - 5;
                     }
@@ -5708,12 +5692,12 @@ namespace HREngine.Bots
 
                     //Manacosts changes with the summoning-portal >_>
                     //cant lower the mana to 0
-                    offset += p.beschwoerungsportal * 2;
+                    offset += p.anzSummoningPortal * 2;
 
                     //Manacosts changes with the pint-sized summoner
-                    if (p.mobsplayedThisTurn == 0)
+                    if (p.mobsPlayedThisTurn == 0)
                     {
-                        offset += p.pintsizedsummoner;
+                        offset += p.anzPintSizedSummoner;
                     }
 
                     //manacosts changes with Mechwarper
@@ -5734,7 +5718,7 @@ namespace HREngine.Bots
                     }
 
                     //Manacosts changes with the zauberlehrling summoner
-                    offset += p.anzOwnsorcerersapprentice;
+                    offset += p.anzOwnSorcerersApprentice;
 
                 }
 
@@ -5743,7 +5727,7 @@ namespace HREngine.Bots
                 {
 
                     case CardDB.cardName.frostgiant:
-                        retval = retval + offset + p.own_TIMES_HERO_POWER_USED_THIS_GAME;
+                        retval = retval + offset + p.ownHeroPowerUses;
                         break;
 
                     case CardDB.cardName.skycapnkragg:
@@ -5791,22 +5775,22 @@ namespace HREngine.Bots
                         break;
                 }
 
-                if (this.Secret && p.playedmagierinderkirintor)
+                if (this.Secret && p.playedKirinTorMage)
                 {
                     retval = this.cost;
                 }
 
                 if (this.type == cardtype.MOB && this.race == TAG_RACE.DRAGON)
                 {
-                    retval += (p.isOwnTurn) ? p.ownDragonConsort * 2 : p.enemyDragonConsort * 2;
+                    retval += (p.isOwnTurn) ? p.anzOwnDragonConsort * 2 : p.anzEnemyDragonConsort * 2;
                 }
 
                 if (this.type == cardtype.SPELL)
                 {
-                    retval -= (p.isOwnTurn) ? p.enemyloatheb * 5 : p.ownloatheb * 5;
+                    retval -= (p.isOwnTurn) ? p.anzEnemyLoatheb * 5 : p.anzOwnLoatheb * 5;
                 }
 
-                if (this.type == cardtype.SPELL && ((p.isOwnTurn && p.enemyHavePlayedMillhouseManastorm) || (!p.isOwnTurn && p.weHavePlayedMillhouseManastorm)))
+                if (this.type == cardtype.SPELL && ((p.isOwnTurn && p.anzEnemyMillhouseManastorm) || (!p.isOwnTurn && p.anzOwnMillhouseManastorm)))
                 {
                     retval = this.cost;
                 }

@@ -1248,7 +1248,7 @@
         {
             if (!this.destroyOwnDatabase.ContainsKey(name)) return 0;
             int pen = 0;
-            if ((name == CardDB.cardName.brawl || name == CardDB.cardName.deathwing || name == CardDB.cardName.twistingnether) && p.mobsplayedThisTurn >= 1) return 500;
+            if ((name == CardDB.cardName.brawl || name == CardDB.cardName.deathwing || name == CardDB.cardName.twistingnether) && p.mobsPlayedThisTurn >= 1) return 500;
 
             if (name == CardDB.cardName.brawl || name == CardDB.cardName.twistingnether)
             {
@@ -1929,7 +1929,7 @@
             }
 
 
-            if (card.name == CardDB.cardName.knifejuggler && (p.mobsplayedThisTurn > 1 || ((p.ownHeroName == HeroEnum.shaman || p.ownHeroName == HeroEnum.pala) && p.ownAbilityReady == false)))
+            if (card.name == CardDB.cardName.knifejuggler && (p.mobsPlayedThisTurn > 1 || ((p.ownHeroName == HeroEnum.shaman || p.ownHeroName == HeroEnum.pala) && p.ownAbilityReady == false)))
              {
                  return 20;
              }
@@ -2395,8 +2395,8 @@
                     };
 
                     // play first the small minion:
-                    if ((!this.isOwnLowestInHand(m, p) && p.mobsplayedThisTurn == 0)
-                        || (p.mobsplayedThisTurn == 0 && attackedbefore >= 1))
+                    if ((!this.isOwnLowestInHand(m, p) && p.mobsPlayedThisTurn == 0)
+                        || (p.mobsPlayedThisTurn == 0 && attackedbefore >= 1))
                     {
                         pen += 10;
                     }
@@ -2421,7 +2421,7 @@
                         taunt = c.tank,
                         name = c.name
                     };
-                    if ((!this.isOwnLowestInHand(m, p) && p.mobsplayedThisTurn == 0) || (attackedbefore == 0 && canattack > 0))
+                    if ((!this.isOwnLowestInHand(m, p) && p.mobsPlayedThisTurn == 0) || (attackedbefore == 0 && canattack > 0))
                     {
                         pen += 10;
                     }
@@ -2468,7 +2468,7 @@
 
             if (p.enemyHeroName == HeroEnum.mage)
             {
-                if (p.mobsplayedThisTurn == 0) pen += 10;
+                if (p.mobsPlayedThisTurn == 0) pen += 10;
 
                 bool islow = isOwnLowest(m, p);
 
@@ -2476,7 +2476,7 @@
                 {
                     pen += 10;
                 }
-                if (target.isHero && !target.own && islow && p.mobsplayedThisTurn >= 1)
+                if (target.isHero && !target.own && islow && p.mobsPlayedThisTurn >= 1)
                 {
                     pen -= 20;
                 }

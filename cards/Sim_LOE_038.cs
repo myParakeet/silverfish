@@ -16,7 +16,7 @@ namespace HREngine.Bots
             
             if (own.own)
             {
-                p.anzownNagaSeaWitch++;
+                p.anzOwnNagaSeaWitch++;
             }
             else
             {
@@ -28,7 +28,7 @@ namespace HREngine.Bots
         {
             if (own.own)
             {
-                p.anzownNagaSeaWitch--;
+                p.anzOwnNagaSeaWitch--;
             }
             else
             {

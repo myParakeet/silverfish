@@ -133,7 +133,6 @@ namespace HREngine.Bots
         int ownMaxMana = 0;
         int numMinionsPlayedThisTurn = 0;
         int cardsPlayedThisTurn = 0;
-        int ueberladung = 0;
 
         int enemyMaxMana = 0;
 
