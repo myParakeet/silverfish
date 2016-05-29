@@ -19,6 +19,7 @@
 
         public int ownMinionsDied;
         public int enemyMinionsDied;
+        public int ownTotemSummoned;
         public int ownBeastSummoned;
         public int ownBeastDied;
         public int enemyBeastDied;
@@ -5739,6 +5740,7 @@
             if (m.own)
             {
                 this.tempTrigger.ownMinionsChanged = true;
+                if (m.handcard.card.race == TAG_RACE.TOTEM) this.tempTrigger.ownTotemSummoned++;
                 if (m.handcard.card.race == TAG_RACE.PET) this.tempTrigger.ownBeastSummoned++;
             }
             else this.tempTrigger.enemyMininsChanged = true;
