@@ -5296,7 +5296,7 @@
                 for (int i = 0; i < m.souloftheforest; i++)
                 {
                     CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_158t);//Treant
-                    int pos = (m.own) ? this.ownMinions.Count : this.enemyMinions.Count;
+                    int pos = (m.own) ? this.ownMinions.Count : this.enemyMinions.Count; //these guys actually do spawn at the right
                     callKid(kid, pos, m.own);
                 }
 
