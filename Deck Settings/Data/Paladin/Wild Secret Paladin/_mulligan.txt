@@ -237,10 +237,3 @@ hold;pala;warrior;NEW1_019:2;coin
 // 1x Mysterious Challenger
 hold;pala;warrior;AT_079:1
 
-
-// - L E F T O V E R S --------------------------
-
-
-// - GENERIC RULE
-discard;all;all;;nocoin;3
-discard;all;all;;coin;4

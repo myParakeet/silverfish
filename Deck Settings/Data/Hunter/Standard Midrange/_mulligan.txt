@@ -117,8 +117,3 @@ hold;hunter;warlock;BRM_013:1
 // 1 x Knife Juggler
 hold;hunter;warrior;NEW1_019:1
 
-
-// - L E F T O V E R S --------------------------
-// - GENERIC RULE
-discard;all;all;;nocoin;3
-discard;all;all;;coin;4

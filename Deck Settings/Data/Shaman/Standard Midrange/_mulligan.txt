@@ -92,7 +92,4 @@ hold;shaman;warlock;EX1_259:1
 // - W A R R I O R ------------------------------
 
 
-// - L E F T O V E R S --------------------------
-// - GENERIC RULE
-discard;all;all;;nocoin;3
-discard;all;all;;coin;4
+
