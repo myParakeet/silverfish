@@ -162,6 +162,10 @@ namespace HREngine.Bots
         Minion ownHero;
         Minion enemyHero;
 
+        private int anzOgOwnCThunHpBonus = 0;
+        private int anzOgOwnCThunAngrBonus = 0;
+        private int anzOgOwnCThunTaunt = 0;
+
         private static Silverfish instance;
 
         public static Silverfish Instance

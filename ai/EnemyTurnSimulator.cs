@@ -553,10 +553,7 @@
                     p.enemyMinions[p.enemyMinions.Count - 1].cantBeTargetedBySpellsOrHeroPowers = true;  // prevent the bot from assuming it can efficiently remove whatever this minion is with spells
                 }
             }
-            
+            p.doDmgTriggers();
         }
-
-
     }
-
 }

@@ -4,25 +4,20 @@ using System.Text;
 
 namespace HREngine.Bots
 {
-    class Sim_LOE_115 : SimTemplate //raven idol
-	{
-        //Choose one: discover a minion, or discover a spell
+    class Sim_LOE_115 : SimTemplate //* Raven Idol
+    {
+        //Choose one - Discover a minion; or Discover a spell.
 
         public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
-            //TODO: make a difference :D
-
-            if (p.isServer)
+            if (choice == 1 || (p.anzOwnFandralStaghelm > 0 && ownplay))
             {
-                p.drawACard(CardDB.cardIDEnum.None, ownplay, true);
-                return;
+                p.drawACard(CardDB.cardName.lepergnome, ownplay, true);
             }
-
-            p.drawACard(CardDB.cardIDEnum.None, ownplay, true);
-
+            if (choice == 2 || (p.anzOwnFandralStaghelm > 0 && ownplay))
+            {
+                p.drawACard(CardDB.cardName.thecoin, ownplay, true);
+            }
         }
-
-
-	}
-
+    }
 }

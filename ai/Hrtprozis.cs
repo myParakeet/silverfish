@@ -50,6 +50,8 @@
 
         public List<CardDB.cardIDEnum> ownSecretList = new List<CardDB.cardIDEnum>();
         public int enemySecretCount = 0;
+        public Dictionary<CardDB.cardIDEnum, int> startDeck = new Dictionary<CardDB.cardIDEnum, int>();
+        public Dictionary<CardDB.cardIDEnum, int> turnDeck = new Dictionary<CardDB.cardIDEnum, int>();
 
 
 
@@ -93,6 +95,10 @@
         public List<Minion> enemyMinions = new List<Minion>();
         public Minion ownHero = new Minion();
         public Minion enemyHero = new Minion();
+
+        public int anzOgOwnCThunHpBonus = 0;
+        public int anzOgOwnCThunAngrBonus = 0;
+        public int anzOgOwnCThunTaunt = 0;
 
         public int ownDragonConsort = 0;
         public int enemyDragonConsort = 0;
@@ -363,6 +369,13 @@
 
             this.enemyHeroPowerUsesThisGame = heroPowerUsesThisGame;
 
+        }
+
+        public void updateCThunInfo(int OgOwnCThunAngrBonus, int OgOwnCThunHpBonus, int OgOwnCThunTaunt)
+        {
+            this.anzOgOwnCThunAngrBonus = OgOwnCThunAngrBonus;
+            this.anzOgOwnCThunHpBonus = OgOwnCThunHpBonus;
+            this.anzOgOwnCThunTaunt = OgOwnCThunTaunt;
         }
 
         public void updateFatigueStats(int ods, int ohf, int eds, int ehf)

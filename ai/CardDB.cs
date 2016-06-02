@@ -8773,6 +8773,8 @@ namespace HREngine.Bots
                     return new Sim_OG_033();
                 case cardIDEnum.OG_042:
                     return new Sim_OG_042();
+                case cardIDEnum.OG_044:
+                    return new Sim_OG_044();
                 case cardIDEnum.OG_045:
                     return new Sim_OG_045();
                 case cardIDEnum.OG_047:
@@ -10814,6 +10816,8 @@ namespace HREngine.Bots
                     return new Pen_LOE_118();
                 case cardIDEnum.LOE_119:
                     return new Pen_LOE_119();
+                case cardIDEnum.OG_202:
+                    return new Pen_OG_202();
                 case cardIDEnum.PlaceholderCard:
                     return new Pen_PlaceholderCard();
             }

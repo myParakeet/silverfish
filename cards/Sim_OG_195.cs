@@ -12,8 +12,7 @@ namespace HREngine.Bots
 		
         public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
-			
-            if (choice == 1)
+            if (choice == 1 || (p.anzOwnFandralStaghelm > 0 && ownplay))
             {
                 for (int i = 0; i < 7; i++)
                 {
@@ -21,7 +20,7 @@ namespace HREngine.Bots
                     p.callKid(kid, pos, ownplay);
                 }
             }
-            else if (choice == 2)
+            if (choice == 2 || (p.anzOwnFandralStaghelm > 0 && ownplay))
             {
                 List<Minion> temp = (ownplay) ? p.ownMinions : p.enemyMinions;
                 foreach (Minion m in temp)

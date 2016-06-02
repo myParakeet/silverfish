@@ -198,13 +198,17 @@
             try
 
             {
+                int useability = 0;
                 foreach (Action a in bestplay.playactions)
                 {
+                    if (a.actionType == actionEnum.useHeroPower) useability = 1;
+                    if (a.actionType == actionEnum.attackWithHero) useability++;
                     int actDmd = tmpPf.enemyHero.Hp + tmpPf.enemyHero.armor;
                     tmpPf.doAction(a);
                     actDmd -= (tmpPf.enemyHero.Hp + tmpPf.enemyHero.armor);
                     actDmgDict.Add(a, actDmd);
                 }
+                if (useability > 1) return;
             }
             catch { return; }
 
@@ -216,9 +220,42 @@
             tmpPf = new Playfield();
             foreach (Action a in reorderedActions)
             {
-                if (a.actionType == actionEnum.attackWithMinion && !a.own.Ready) return;
+                bool found = false;
+
+                switch (a.actionType)
+                {
+                    case actionEnum.playcard:
+                        foreach (Handmanager.Handcard hc in tmpPf.owncards)
+                        {
+                            if (hc.entity == a.card.entity)
+                            {
+                                if (tmpPf.mana >= hc.card.getManaCost(tmpPf, hc.manacost)) found = true;
+                                break;
+                            }
+                        }
+                        break;
+                    case actionEnum.attackWithMinion:
+                        foreach (Minion m in tmpPf.ownMinions)
+                        {
+                            if (m.entitiyID == a.own.entitiyID)
+                            {
+                                if (!a.own.Ready) return;
+                                found = true;
+                                break;
+                            }
+                        }
+                        break;
+                    case actionEnum.attackWithHero:
+                        if (tmpPf.ownHero.Ready) found = true;
+                        break;
+                    case actionEnum.useHeroPower:
+                        if (tmpPf.ownAbilityReady && tmpPf.mana >= tmpPf.ownHeroAblility.card.getManaCost(tmpPf, tmpPf.ownHeroAblility.manacost)) found = true;
+                        break;
+                }
+                if (!found) return;
                 tmpPf.doAction(a);
             }
+
             if (Ai.Instance.botBase.getPlayfieldValue(tmpPf) >= 10000)
             {
                 bestplay.playactions.Clear();
@@ -340,6 +377,7 @@
                 this.bestActions.RemoveAt(0);
             }
             if (this.nextMoveGuess == null) this.nextMoveGuess = new Playfield();
+            else Hrtprozis.Instance.updateCThunInfo(nextMoveGuess.anzOgOwnCThunAngrBonus, nextMoveGuess.anzOgOwnCThunHpBonus, nextMoveGuess.anzOgOwnCThunTaunt);
             this.oldMoveGuess = new Playfield(this.nextMoveGuess);
             //this.nextMoveGuess.printBoardDebug();
 
@@ -365,6 +403,15 @@
             {
                 //Helpfunctions.Instance.logg("nd trn");
                 nextMoveGuess.mana = -100;
+                int twilightelderBonus = 0;
+                foreach (Minion m in this.nextMoveGuess.ownMinions)
+                {
+                    if (m.name == CardDB.cardName.twilightelder && !m.silenced) twilightelderBonus++;
+                }
+                if (twilightelderBonus > 0)
+                {
+                    Hrtprozis.Instance.updateCThunInfo(nextMoveGuess.anzOgOwnCThunAngrBonus + twilightelderBonus, nextMoveGuess.anzOgOwnCThunHpBonus + twilightelderBonus, nextMoveGuess.anzOgOwnCThunTaunt);
+                }
             }
 
         }

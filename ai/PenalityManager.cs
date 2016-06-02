@@ -2803,7 +2803,7 @@
             DamageTargetDatabase.Add(CardDB.cardName.livingroots, 2);//choice 1
             DamageTargetDatabase.Add(CardDB.cardName.mindshatter, 3);
             DamageTargetDatabase.Add(CardDB.cardName.mindspike, 2);
-            DamageTargetDatabase.Add(CardDB.cardName.moonfire, 1); // if chioce keeperofthegrove then = 2
+            DamageTargetDatabase.Add(CardDB.cardName.moonfire, 1);
             DamageTargetDatabase.Add(CardDB.cardName.mortalcoil, 1);
             DamageTargetDatabase.Add(CardDB.cardName.mortalstrike, 4);
             DamageTargetDatabase.Add(CardDB.cardName.northseakraken, 4);

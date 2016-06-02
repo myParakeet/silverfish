@@ -58,7 +58,10 @@
 
         int ownSab = 0;
         int enemySab = 0;
-
+        
+        int anzOgOwnCThunHpBonus = 0;
+        int anzOgOwnCThunAngrBonus = 0;
+        int anzOgOwnCThunTaunt = 0;
 
         int ownDecksize = 30;
         int enemyDecksize = 30;
@@ -365,6 +368,14 @@
                     continue;
                 }
 
+                if (s.StartsWith("cthunbonus: "))
+                {
+                    String[] ss = s.Split(' ');
+                    anzOgOwnCThunAngrBonus = Convert.ToInt32(ss[1]);
+                    anzOgOwnCThunHpBonus = Convert.ToInt32(ss[2]);
+                    anzOgOwnCThunTaunt = Convert.ToInt32(ss[3]);
+                }
+
                 if (s.StartsWith("ownDiedMinions: "))
                 {
                     omd = s;
@@ -579,7 +590,7 @@
 
                 if (readstate == 1 && counter >= 5) // secrets
                 {
-                    if (!s.StartsWith("enemyhero:"))
+                    if (!(s.StartsWith("enemyhero:") || s.StartsWith("cthunbonus:")))
                     {
                         ownsecretlist.Add(s.Replace(" ", ""));
                     }
@@ -949,6 +960,7 @@
 
             Hrtprozis.Instance.updatePlayer(this.maxmana, this.mana, this.cardsPlayedThisTurn, this.numMinionsPlayedThisTurn, this.numOptionPlayedThisTurn, this.overdrive, ownHEntity, enemyHEntity, this.numberMinionsDiedThisturn, this.owncurrentRecall, this.enemyRecall, this.heropowerUsesThisTurn, this.locknload);
             Hrtprozis.Instance.setPlayereffects(this.ownDragonConsort, this.enemyDragonConsort, this.ownLoathebs, this.enemyLoathebs, this.ownMillhouse, this.enemyMillhouse, this.ownKirintor, this.ownPrep, this.ownSab, this.enemySab, this.ownFenci, this.enemyCursedCards);
+            Hrtprozis.Instance.updateCThunInfo(this.anzOgOwnCThunAngrBonus, this.anzOgOwnCThunHpBonus, this.anzOgOwnCThunTaunt);
 
 
             Hrtprozis.Instance.updateSecretStuff(this.ownsecretlist, enemySecretAmount);

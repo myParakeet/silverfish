@@ -25,12 +25,12 @@ namespace HREngine.Bots
                 }
                 else
                 {
-                    p.minionGetDamageOrHeal(p.ownHero, -30, true);//fully heal
+                    p.minionGetDamageOrHeal(p.ownHero, p.ownHero.Hp - p.ownHero.maxHp, true);//fully heal
                 }
             }
             else
             {
-                p.minionGetDamageOrHeal(p.enemyHero, -30, true);//fully heal
+                p.minionGetDamageOrHeal(p.enemyHero, p.enemyHero.Hp - p.enemyHero.maxHp, true);//fully heal
             }
         }
 

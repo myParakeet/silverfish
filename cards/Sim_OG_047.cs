@@ -10,13 +10,13 @@ namespace HREngine.Bots
 
         public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
-            if (choice == 1)//???????????????????????
+            if (choice == 1 || (p.anzOwnFandralStaghelm > 0 && ownplay))
             {
                 if (ownplay) p.minionGetTempBuff(p.ownHero, 4, 0);
                 else p.minionGetTempBuff(p.enemyHero, 4, 0);
             }
-            else if (choice == 2)
-            {        
+            if (choice == 2 || (p.anzOwnFandralStaghelm > 0 && ownplay))
+            {
                 if (ownplay) p.minionGetArmor(p.ownHero, 8);
                 else p.minionGetArmor(p.enemyHero, 8);
             }

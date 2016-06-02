@@ -12,20 +12,17 @@ namespace HREngine.Bots
         {
             List<Minion> temp = (own.own) ? p.ownMinions : p.enemyMinions;
             int pos = temp.Count;
-            if (pos > 2)
+            if (pos > 1)
             {
-                int i = 0;
-                int count = pos - 1;
-                CardDB.Card kid = null;
-                for (; pos < 7; pos++)
-                {   
-                    kid = temp[i].handcard.card;
-                    p.callKid(kid, pos, own.own);
+                foreach (Minion m in (own.own) ? p.ownMinions.ToArray() : p.enemyMinions.ToArray())
+                {
+                    if (m.entitiyID == own.entitiyID) continue;
+                    pos = (own.own) ? p.ownMinions.Count : p.enemyMinions.Count;
+                    if (pos > 6) break;
+                    p.callKid(m.handcard.card, pos, own.own);
+                    temp = (own.own) ? p.ownMinions : p.enemyMinions;
                     temp[pos].Hp = 1;
                     temp[pos].Angr = 1;
-                    count--;
-                    if (count < 1) break;
-                    i++;
                 }
             }
         }

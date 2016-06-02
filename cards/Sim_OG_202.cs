@@ -12,13 +12,13 @@ namespace HREngine.Bots
 
         public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
-            
-            if (choice == 1)
+
+            if (choice == 1 || (p.anzOwnFandralStaghelm > 0 && own.own))
             {
                 int pos = (own.own) ? p.ownMinions.Count : p.enemyMinions.Count;
                 p.callKid(kid, pos, own.own);
             }
-            if (choice == 2)
+            if (choice == 2 || (p.anzOwnFandralStaghelm > 0 && own.own))
             {
                 if (own.own) p.ownMaxMana = Math.Min(10, p.ownMaxMana + 1);
                 else p.enemyMaxMana = Math.Min(10, p.enemyMaxMana + 1);

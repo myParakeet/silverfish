@@ -129,6 +129,7 @@
 
         public int anzOwnBranns = 0;
         public int anzEnemyBranns = 0;
+        public int anzOwnFandralStaghelm = 0;
 
         //##########################
 
@@ -358,6 +359,9 @@
             this.ownSecretsIDList.AddRange(Hrtprozis.Instance.ownSecretList);
             this.enemySecretCount = Hrtprozis.Instance.enemySecretCount;
 
+            this.anzOgOwnCThunAngrBonus = Hrtprozis.Instance.anzOgOwnCThunAngrBonus;
+            this.anzOgOwnCThunHpBonus = Hrtprozis.Instance.anzOgOwnCThunHpBonus;
+            this.anzOgOwnCThunTaunt = Hrtprozis.Instance.anzOgOwnCThunTaunt;
 
             this.attackFaceHP = Hrtprozis.Instance.attackFaceHp;
 
@@ -506,6 +510,7 @@
             anzEnemyMaidenOfTheLake = 0;
             anzOwnBranns = 0;
             anzEnemyBranns = 0;
+            anzOwnFandralStaghelm = 0;
 
             anzOwnAnimatedArmor = 0;
             anzEnemyAnimatedArmor = 0;
@@ -517,6 +522,7 @@
             int anz = this.ownMinions.Count;
             foreach (Minion m in this.ownMinions)
             {
+                //todo sepefeets - convert this to a switch
                 i++;
                 if (m.playedThisTurn && m.name == CardDB.cardName.loatheb) this.anzOwnLoatheb ++;
 
@@ -591,6 +597,8 @@
                 if (m.name == CardDB.cardName.fallenhero) this.anzOwnFallenHeros++;
 
                 if (m.name == CardDB.cardName.brannbronzebeard) this.anzOwnBranns++;
+
+                if (m.name == CardDB.cardName.fandralstaghelm) this.anzOwnFandralStaghelm++;
 
                 if (m.name == CardDB.cardName.animatedarmor) this.anzOwnAnimatedArmor++;
 
@@ -1376,7 +1384,9 @@
         public override int GetHashCode()
         {
             int retval = 0;
-            retval += 10000 * this.ownMinions.Count + 100 * this.enemyMinions.Count + 1000 * this.mana + 100000 * (this.ownHero.Hp + this.enemyHero.Hp) + this.owncards.Count + this.enemycarddraw + this.cardsPlayedThisTurn + this.mobsPlayedThisTurn + this.ownHero.Angr + this.ownHero.armor + this.ownWeaponAttack + this.enemyWeaponDurability;
+            retval += 10000 * this.ownMinions.Count + 100 * this.enemyMinions.Count + 1000 * this.mana + 100000 * (this.ownHero.Hp + this.enemyHero.Hp);
+            retval += this.owncards.Count + this.enemycarddraw + this.cardsPlayedThisTurn + this.mobsPlayedThisTurn + this.ownHero.Angr + this.ownHero.armor;
+            retval += this.ownWeaponAttack + this.enemyWeaponDurability + this.anzOgOwnCThunAngrBonus;
             return retval;
         }
 
@@ -3581,7 +3591,7 @@
             foreach (Minion mnn in this.ownMinions)
             {
                 if (mnn.silenced) continue;
-                if (mnn.handcard.card.name == CardDB.cardName.lightwarden || mnn.handcard.card.name == CardDB.cardName.holychampion)
+                if (mnn.handcard.card.name == CardDB.cardName.lightwarden || mnn.handcard.card.name == CardDB.cardName.holychampion || mnn.handcard.card.name == CardDB.cardName.hoodedacolyte)
                 {
                     if (turnCounter == 0)
                     {
@@ -3612,21 +3622,13 @@
             foreach (Minion mnn in this.enemyMinions)
             {
                 if (mnn.silenced) continue;
-                if (mnn.handcard.card.name == CardDB.cardName.lightwarden || mnn.handcard.card.name == CardDB.cardName.holychampion)
+                if (mnn.handcard.card.name == CardDB.cardName.lightwarden || mnn.handcard.card.name == CardDB.cardName.holychampion || mnn.handcard.card.name == CardDB.cardName.shadowboxer || mnn.handcard.card.name == CardDB.cardName.hoodedacolyte)
                 {
                     for (int i = 0; i < this.tempTrigger.charsGotHealed; i++)
                     {
                         mnn.handcard.card.sim_card.onAHeroGotHealedTrigger(this, mnn, true);
                     }
 
-                }
-
-                if (mnn.handcard.card.name == CardDB.cardName.shadowboxer)
-                {
-                    for (int i = 0; i < this.tempTrigger.charsGotHealed; i++)
-                    {
-                        mnn.handcard.card.sim_card.onAHeroGotHealedTrigger(this, mnn, true);
-                    }
                 }
             }
         }
@@ -5756,6 +5758,8 @@
             triggerAMinionWasSummoned(m);
             doDmgTriggers();
 
+            m.updateReadyness();
+
         }
 
         public void equipWeapon(CardDB.Card c, bool own)
@@ -7015,18 +7019,19 @@
             data += "ownhero:" + "\r\n";
             data += Hrtprozis.heroEnumtoName(this.ownHeroName)+ " " + this.ownHero.Hp + " " + this.ownHero.maxHp + " " + this.ownHero.armor + " " + this.ownHero.immuneWhileAttacking + " " + this.ownHero.immune + " " + this.ownHero.entitiyID + " " + this.ownHero.Ready + " " + this.ownHero.numAttacksThisTurn + " " + this.ownHero.frozen + " " + this.ownHero.Angr + " " + this.ownHero.tempAttack+ "\r\n";
             data += "weapon: " + this.ownWeaponAttack + " " + this.ownWeaponDurability  + " " + this.ownWeaponName + "\r\n";
-            data += "ability: " + this.ownAbilityReady + " " + this.ownHeroAblility.card.cardIDenum + " " +  this.ownHeroPowerUses+"\r\n";
+            data += "ability: " + this.ownAbilityReady + " " + this.ownHeroAblility.card.cardIDenum + " " +  this.ownHeroPowerUses + "\r\n";
             string secs = "";
             foreach (CardDB.cardIDEnum sec in this.ownSecretsIDList)
             {
                 secs += sec + " ";
             }
-            data += "osecrets: " + secs+ "\r\n";
+            data += "osecrets: " + secs + "\r\n";
+            data += "cthunbonus: " + this.anzOgOwnCThunAngrBonus + " " + this.anzOgOwnCThunHpBonus + " " + this.anzOgOwnCThunTaunt + "\r\n";
             data += "enemyhero:"+ "\r\n";
             data += Hrtprozis.heroEnumtoName(this.enemyHeroName) + " " + this.enemyHero.Hp + " " + this.enemyHero.maxHp + " " + this.enemyHero.armor + " " + this.enemyHero.frozen + " " + this.enemyHero.immune + " " + this.enemyHero.entitiyID+ "\r\n";
-            data += "weapon: " + this.enemyWeaponAttack + " " + this.enemyWeaponDurability + " " + this.enemyWeaponName+ "\r\n";
+            data += "weapon: " + this.enemyWeaponAttack + " " + this.enemyWeaponDurability + " " + this.enemyWeaponName + "\r\n";
             data += "ability: " + "True" + " " + this.enemyHeroAblility.card.cardIDenum+ " " + this.enemyHeroPowerUses + "\r\n";
-            data += "fatigue: " + this.ownDeckSize + " " + this.ownHeroFatigue + " " + this.enemyDeckSize + " " + this.enemyHeroFatigue+ "\r\n";
+            data += "fatigue: " + this.ownDeckSize + " " + this.ownHeroFatigue + " " + this.enemyDeckSize + " " + this.enemyHeroFatigue + "\r\n";
 
             //print own Minions
 
