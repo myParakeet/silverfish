@@ -2064,9 +2064,12 @@
             Minion attackingHero = (own ? this.ownHero : this.enemyHero);
             HeroEnum attackingHeroName = (own ? this.ownHeroName : this.enemyHeroName);
             int weaponAttack = (own ? this.ownWeaponAttack : this.enemyWeaponAttack);
+            int weaponDurability = (own ? this.ownWeaponDurability : this.enemyWeaponDurability);
             CardDB.cardName weaponName = (own ? this.ownWeaponName : this.enemyWeaponName);
             List<Minion> targetMinions = (own ? this.enemyMinions : this.ownMinions);
             Minion targetHero = (own ? this.enemyHero : this.ownHero);
+            Handmanager.Handcard attackingHeroAbilility = (own ? this.ownHeroAblility : this.enemyHeroAblility);
+            int attackingHeroMana = (own) ? mana : enemyMaxMana;
 
             int ghd = 0;
             foreach (Minion m in attackingMinions)
@@ -2080,24 +2083,49 @@
                 if (m.windfury) ghd += m.Angr;
             }
 
-            if (!attackingHero.frozen)
+            switch (attackingHeroAbilility.card.cardIDenum)
             {
-                if (weaponAttack >= 1)
-                {
-                    ghd += weaponAttack;
-                    if (attackingHero.windfury || weaponName == CardDB.cardName.doomhammer) ghd += weaponAttack;
-                }
-                else
-                {
-                    if (attackingHeroName == HeroEnum.thief) ghd++;
-                }
-
-                if (attackingHeroName == HeroEnum.druid) ghd++;
+                //direct damage
+                case CardDB.cardIDEnum.DS1h_292: ghd += 2; break;
+                case CardDB.cardIDEnum.DS1h_292_H1: ghd += 2; break;
+                case CardDB.cardIDEnum.AT_132_HUNTER: ghd += 3; break;
+                case CardDB.cardIDEnum.DS1h_292_H1_AT_132: ghd += 3; break;
+                case CardDB.cardIDEnum.NAX15_02: ghd += 2; break;
+                case CardDB.cardIDEnum.NAX15_02H: ghd += 2; break;
+                case CardDB.cardIDEnum.NAX6_02: ghd += 3; break;
+                case CardDB.cardIDEnum.NAX6_02H: ghd += 3; break;
+                case CardDB.cardIDEnum.CS2_034: ghd += 1; break;
+                case CardDB.cardIDEnum.CS2_034_H1: ghd += 1; break;
+                case CardDB.cardIDEnum.CS2_034_H2: ghd += 1; break;
+                case CardDB.cardIDEnum.AT_050t: ghd += 2; break;
+                case CardDB.cardIDEnum.AT_132_MAGE: ghd += 2; break;
+                case CardDB.cardIDEnum.CS2_034_H1_AT_132: ghd += 2; break;
+                case CardDB.cardIDEnum.CS2_034_H2_AT_132: ghd += 2; break;
+                case CardDB.cardIDEnum.EX1_625t: ghd += 2; break;
+                case CardDB.cardIDEnum.EX1_625t2: ghd += 3; break;
+                case CardDB.cardIDEnum.TU4d_003: ghd += 1; break;
+                case CardDB.cardIDEnum.NAX7_03: ghd += 3; break;
+                case CardDB.cardIDEnum.NAX7_03H: ghd += 4; break;
+                //condition
+                case CardDB.cardIDEnum.BRMA05_2H: if (attackingHeroMana > 0) ghd += 10; break;
+                case CardDB.cardIDEnum.BRMA05_2: if (attackingHeroMana > 0) ghd += 5; break;
+                case CardDB.cardIDEnum.BRM_027p: if (attackingMinions.Count < 1) ghd += 8; break;
+                case CardDB.cardIDEnum.BRM_027pH: if (attackingMinions.Count < 2) ghd += 8; break;
+                case CardDB.cardIDEnum.TB_MechWar_Boss2_HeroPower: if (attackingMinions.Count < 2) ghd += 1; break;
+                //equip weapon
+                case CardDB.cardIDEnum.LOEA09_2: if (weaponDurability < 1 && !attackingHero.frozen) ghd += 2; break;
+                case CardDB.cardIDEnum.LOEA09_2H: if (weaponDurability < 1 && !attackingHero.frozen) ghd += 5; break;
+                case CardDB.cardIDEnum.CS2_017: if (weaponDurability < 1 && !attackingHero.frozen) ghd += 1; break;
+                case CardDB.cardIDEnum.CS2_083b: if (weaponDurability < 1 && !attackingHero.frozen) ghd += 1; break;
+                case CardDB.cardIDEnum.AT_132_ROGUE: if (weaponDurability < 1 && !attackingHero.frozen) ghd += 2; break;
+                case CardDB.cardIDEnum.AT_132_DRUID: if (weaponDurability < 1 && !attackingHero.frozen) ghd += 2; break;
             }
 
-            if (attackingHeroName == HeroEnum.mage) ghd++;
-            if (attackingHeroName == HeroEnum.hunter) ghd += 2;
-
+            if (!attackingHero.frozen && weaponAttack >= 1)
+            {
+                ghd += weaponAttack;
+                if ((attackingHero.windfury || weaponName == CardDB.cardName.doomhammer) && weaponDurability > 1) ghd += weaponAttack;
+            }
 
             foreach (Minion m in targetMinions)
             {
@@ -2108,6 +2136,7 @@
             int guessingHeroDamage = Math.Max(0, ghd);
             if (targetHero.immune) guessingHeroDamage = 0;
             //this.guessingHeroHP = this.ownHero.Hp + this.ownHero.armor - guessingHeroDamage;
+            //todo sepefeets - rebase secret code from HB
 
             return guessingHeroDamage;
         }
@@ -3552,7 +3581,7 @@
             foreach (Minion mnn in this.ownMinions)
             {
                 if (mnn.silenced) continue;
-                if (mnn.handcard.card.name == CardDB.cardName.lightwarden)
+                if (mnn.handcard.card.name == CardDB.cardName.lightwarden || mnn.handcard.card.name == CardDB.cardName.holychampion)
                 {
                     if (turnCounter == 0)
                     {
@@ -3569,7 +3598,7 @@
                             mnn.handcard.card.sim_card.onAHeroGotHealedTrigger(this, mnn, true);
                         }
                     }
-                    
+
                 }
 
                 if (mnn.handcard.card.name == CardDB.cardName.shadowboxer)
@@ -3577,32 +3606,13 @@
                     for (int i = 0; i < this.tempTrigger.charsGotHealed; i++)
                     {
                         mnn.handcard.card.sim_card.onAHeroGotHealedTrigger(this, mnn, true);
-                    }
-                }
-
-                if (mnn.handcard.card.name == CardDB.cardName.holychampion)
-                {
-                    if (turnCounter == 0)
-                    {
-                        for (int i = 0; i < this.tempTrigger.charsGotHealed; i++)
-                        {
-                            mnn.handcard.card.sim_card.onAHeroGotHealedTrigger(this, mnn, true);
-                        }
-                    }
-                    else 
-                    {
-                        //we are doing this, because we dont do a "real" search on enemys turn
-                        for (int i = 0; i < this.tempTrigger.owncharsGotHealed; i++)
-                        {
-                            mnn.handcard.card.sim_card.onAHeroGotHealedTrigger(this, mnn, true);
-                        }
                     }
                 }
             }
             foreach (Minion mnn in this.enemyMinions)
             {
                 if (mnn.silenced) continue;
-                if (mnn.handcard.card.name == CardDB.cardName.lightwarden)
+                if (mnn.handcard.card.name == CardDB.cardName.lightwarden || mnn.handcard.card.name == CardDB.cardName.holychampion)
                 {
                     for (int i = 0; i < this.tempTrigger.charsGotHealed; i++)
                     {
@@ -3612,14 +3622,6 @@
                 }
 
                 if (mnn.handcard.card.name == CardDB.cardName.shadowboxer)
-                {
-                    for (int i = 0; i < this.tempTrigger.charsGotHealed; i++)
-                    {
-                        mnn.handcard.card.sim_card.onAHeroGotHealedTrigger(this, mnn, true);
-                    }
-                }
-
-                if (mnn.handcard.card.name == CardDB.cardName.holychampion)
                 {
                     for (int i = 0; i < this.tempTrigger.charsGotHealed; i++)
                     {

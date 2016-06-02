@@ -7,7 +7,7 @@ namespace HREngine.Bots
 	class Sim_EX1_001 : SimTemplate //lightwarden
 	{
 
-//    erhält jedes mal +2 angriff, wenn ein charakter geheilt wird.
+        //   Whenever a character is healed, gain +2 Attack.
         public override void onAHeroGotHealedTrigger(Playfield p, Minion triggerEffectMinion, bool ownerOfHeroGotHealed)
         {
             p.minionGetBuffed(triggerEffectMinion, 2, 0);

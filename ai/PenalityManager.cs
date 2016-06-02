@@ -774,6 +774,7 @@
             if (p.anzOwnAuchenaiSoulpriest >= 1) return 0;
             if (name == CardDB.cardName.ancientoflore && choice != 2) return 0;
             int pen = 0;
+            int offset = 0;
             int heal = 0;
             /*if (HealHeroDatabase.ContainsKey(name))
             {
@@ -781,6 +782,20 @@
                 if (target == 200) pen = 500; // dont heal enemy
                 if ((target == 100 || target == -1) && p.ownHeroHp + heal > 30) pen = p.ownHeroHp + heal - 30;
             }*/
+
+            // small bonus if we have heal-trigger, big penalty if enemy does
+            foreach (Minion mnn in p.ownMinions)
+            {
+                if (mnn.name == CardDB.cardName.northshirecleric) offset -= 20;
+                if (mnn.name == CardDB.cardName.lightwarden) offset -= 20;
+                if (mnn.name == CardDB.cardName.holychampion) offset -= 50;
+            }
+            foreach (Minion mnn in p.enemyMinions)
+            {
+                if (mnn.name == CardDB.cardName.northshirecleric) offset += 30;
+                if (mnn.name == CardDB.cardName.lightwarden) offset += 30;
+                if (mnn.name == CardDB.cardName.holychampion) offset += 75;
+            }
 
             if (name == CardDB.cardName.treeoflife)
             {
@@ -794,8 +809,39 @@
                     if (mi.wounded) wounded++;
                 }
                 //Console.WriteLine(mheal + " circle");
-                if (mheal == 0) return 500;
-                if (mheal <= 7 && wounded <= 2) return 20;
+                if (p.ownHero.Hp < 16)
+                {
+                    pen += 16 - p.ownHero.Hp;
+                    if (p.guessHeroDamage(false) >= p.ownHero.Hp + p.ownHero.armor) return (pen * 10) + offset;
+                    else return (pen * 2) + offset;
+                }
+                else
+                {
+                    pen = ((p.ownHero.Hp - 15) / 2) + 20 - mheal + offset;
+                    return pen + 20 + offset;
+                }
+            }
+
+            if (name == CardDB.cardName.renojackson)
+            {
+                if (p.ownHero.Hp < 16)
+                {
+                    pen += 16 - p.ownHero.Hp;
+                    if (p.guessHeroDamage(false) >= p.ownHero.Hp + p.ownHero.armor) return (pen * 10) + offset;
+                    else return (pen * 2) + offset;
+                }
+                else
+                {
+                    pen = (p.ownHero.Hp - 15) / 2;
+                    if (p.ownAbilityReady && cardDrawBattleCryDatabase.ContainsKey(p.ownHeroAblility.card.name)) pen += 20;
+                    foreach (Handmanager.Handcard hc in p.owncards)
+                    {
+                        if (!cardDrawBattleCryDatabase.ContainsKey(hc.card.name)) continue;
+                        pen += 20;
+                        break;
+                    }
+                    return pen + offset;
+                }
             }
 
             if (name == CardDB.cardName.circleofhealing)
@@ -809,8 +855,8 @@
                     if (mi.wounded) wounded++;
                 }
                 //Console.WriteLine(mheal + " circle");
-                if (mheal == 0) return 500;
-                if (mheal <= 7 && wounded <= 2) return 20;
+                if (mheal == 0) return 500 + offset;
+                if (mheal <= 7 && wounded <= 2) return 20 + offset;
             }
 
             if (HealTargetDatabase.ContainsKey(name) || HealHeroDatabase.ContainsKey(name))
@@ -823,13 +869,13 @@
                 }
                 else
                 {
-                    if (target == null) return 10;
+                    if (target == null) return 10 + offset;
                     //Helpfunctions.Instance.ErrorLog("pencheck for " + name + " " + target.entitiyID + " " + target.isHero  + " " + target.own);
                     heal = HealTargetDatabase[name];
                 }
-                if (target.isHero && !target.own) return 510; // dont heal enemy
+                if (target.isHero && !target.own) return 510 + offset; // dont heal enemy
                 //Helpfunctions.Instance.ErrorLog("pencheck for " + name + " " + target.entitiyID + " " + target.isHero + " " + target.own);
-                if ((target.isHero && target.own) && p.ownHero.Hp == 30) return 150;
+                if ((target.isHero && target.own) && p.ownHero.Hp == 30) return 150 + offset;
                 if ((target.isHero && target.own) && p.ownHero.Hp + heal > 30) pen = p.ownHero.Hp + heal - 30;
                 Minion m = new Minion();
 
@@ -837,7 +883,7 @@
                 {
                     m = target;
                     int wasted = 0;
-                    if (m.Hp == m.maxHp) return 500;
+                    if (m.Hp == m.maxHp) return 500 + offset;
                     if (m.Hp + heal - 1 > m.maxHp) wasted = m.Hp + heal - m.maxHp;
                     pen = wasted;
 
@@ -849,32 +895,19 @@
                 if (!target.isHero && !target.own)
                 {
                     m = target;
-                    if (m.Hp == m.maxHp) return 500;
+                    if (m.Hp == m.maxHp) return 500 + offset;
                     // no penality if we heal enrage enemy
                     if (enrageDatabase.ContainsKey(m.name))
                     {
-                        return pen;
+                        return pen + offset;
                     }
-                    // no penality if we have heal-trigger :D
-                    int i = 0;
-                    foreach (Minion mnn in p.ownMinions)
-                    {
-                        if (mnn.name == CardDB.cardName.northshirecleric) i++;
-                        if (mnn.name == CardDB.cardName.lightwarden) i++;
-                    }
-                    foreach (Minion mnn in p.enemyMinions)
-                    {
-                        if (mnn.name == CardDB.cardName.northshirecleric) i--;
-                        if (mnn.name == CardDB.cardName.lightwarden) i--;
-                    }
-                    if (i >= 1) return pen;
 
                     // no pen if we have slam
 
                     foreach (Handmanager.Handcard hc in p.owncards)
                     {
-                        if (hc.card.name == CardDB.cardName.slam && m.Hp < 2) return pen;
-                        if (hc.card.name == CardDB.cardName.backstab) return pen;
+                        if (hc.card.name == CardDB.cardName.slam && m.Hp < 2) return pen + offset;
+                        if (hc.card.name == CardDB.cardName.backstab) return pen + offset;
                     }
 
                     pen = 500;
@@ -883,7 +916,7 @@
 
             }
 
-            return pen;
+            return pen + offset;
         }
 
         private int getCardDrawPenality(CardDB.cardName name, Minion target, Playfield p, int choice, bool lethal)
@@ -1280,12 +1313,12 @@
                 if (m.handcard.card.deathrattle) return 10;
                 if (lethal && name == CardDB.cardName.sacrificialpact)
                 {
-                    int beasts = 0;
+                    int demons = 0;
                     foreach (Minion mm in p.ownMinions)
                     {
-                        if (mm.Ready && mm.handcard.card.name == CardDB.cardName.lightwarden) beasts++;
+                        if (mm.Ready && mm.handcard.card.race == TAG_RACE.DEMON) demons++;
                     }
-                    if (beasts == 0) return 500;
+                    if (demons == 0) return 500;
                 }
                 else
                 {
@@ -1539,74 +1572,75 @@
 
                     if (name == CardDB.cardName.warsongcommander)
                     {
-                        int beasts = 0;
+                        int chargers = 0;
                         foreach (Minion mm in p.ownMinions)
                         {
-                            if (mm.charge>=1) beasts++;
+                            if (mm.charge>=1) chargers++;
                         }
-                        if (beasts == 0) return 500;
+                        if (chargers == 0) return 500;
                     }
 
                     if (name == CardDB.cardName.southseacaptain)
                     {
-                        int beasts = 0;
+                        int pirates = 0;
                         foreach (Minion mm in p.ownMinions)
                         {
-                            if (mm.Ready && (TAG_RACE)mm.handcard.card.race == TAG_RACE.PIRATE) beasts++;
+                            if (mm.Ready && (TAG_RACE)mm.handcard.card.race == TAG_RACE.PIRATE) pirates++;
                         }
-                        if (beasts == 0) return 500;
+                        if (pirates == 0) return 500;
                     }
                     if (name == CardDB.cardName.murlocwarleader || name == CardDB.cardName.grimscaleoracle || name == CardDB.cardName.coldlightseer)
                     {
-                        int beasts = 0;
+                        int murlocs = 0;
                         foreach (Minion mm in p.ownMinions)
                         {
-                            if (mm.Ready && (TAG_RACE)mm.handcard.card.race == TAG_RACE.MURLOC) beasts++;
+                            if (mm.Ready && (TAG_RACE)mm.handcard.card.race == TAG_RACE.MURLOC) murlocs++;
                         }
-                        if (beasts == 0) return 500;
+                        if (murlocs == 0) return 500;
                     }
 
                     if (name == CardDB.cardName.warhorsetrainer)
                     {
-                        int beasts = 0;
+                        int recruits = 0;
                         foreach (Minion mm in p.ownMinions)
                         {
-                            if (mm.Ready &&  mm.name == CardDB.cardName.silverhandrecruit) beasts++;
+                            if (mm.Ready &&  mm.name == CardDB.cardName.silverhandrecruit) recruits++;
                         }
-                        if (beasts == 0) return 500;
+                        if (recruits == 0) return 500;
                     }
 
                     if (name == CardDB.cardName.malganis)
                     {
-                        int beasts = 0;
+                        int demons = 0;
                         foreach (Minion mm in p.ownMinions)
                         {
-                            if (mm.Ready && mm.handcard.card.race == TAG_RACE.DEMON) beasts++;
+                            if (mm.Ready && mm.handcard.card.race == TAG_RACE.DEMON) demons++;
                         }
-                        if (beasts == 0) return 500;
+                        if (demons == 0) return 500;
                     }
                 }
                 else
                 {
                     if (name == CardDB.cardName.theblackknight)
                     {
-                        int beasts = 0;
+                        int taunts = 0;
                         foreach (Minion mm in p.enemyMinions)
                         {
-                            if (mm.taunt) beasts++;
+                            if (mm.taunt) taunts++;
                         }
-                        if (beasts == 0) return 500;
+                        if (taunts == 0) return 500;
                     }
                     else
                     {
                         if ((this.HealTargetDatabase.ContainsKey(name) || this.HealHeroDatabase.ContainsKey(name) || this.HealAllDatabase.ContainsKey(name)))
                         {
-                            int beasts = 0;
+                            int wardens = 0;
                             foreach (Minion mm in p.ownMinions)
                             {
-                                if (mm.Ready && mm.handcard.card.name == CardDB.cardName.lightwarden) beasts++;
+                                if (mm.Ready && mm.handcard.card.name == CardDB.cardName.lightwarden) wardens++;
+                                if (mm.Ready && mm.handcard.card.name == CardDB.cardName.holychampion) wardens++;
                             }
-                            if (beasts == 0) return 500;
+                            if (wardens == 0) return 500;
                         }
                         else
                         {
@@ -1622,7 +1656,7 @@
 
             //lethal end########################################################
 
-            //bonus for early thread
+            //bonus for early threat
             if (p.ownMaxMana == 1 )
             {
                 //if (card.name == CardDB.cardName.nerubianegg) return -10;
@@ -2603,10 +2637,10 @@
 
         private void setupHealDatabase()
         {
-            HealAllDatabase.Add(CardDB.cardName.holynova, 2);//to all own minions
-            HealAllDatabase.Add(CardDB.cardName.circleofhealing, 4);//allminions
+            HealAllDatabase.Add(CardDB.cardName.holynova, 2);//to all friends
+            HealAllDatabase.Add(CardDB.cardName.circleofhealing, 4);//all minions
             HealAllDatabase.Add(CardDB.cardName.darkscalehealer, 2);//all friends
-            HealAllDatabase.Add(CardDB.cardName.treeoflife, 3);//all friends
+            HealAllDatabase.Add(CardDB.cardName.treeoflife, 100);//all chars to max
 
             HealHeroDatabase.Add(CardDB.cardName.drainlife, 2);//tohero
             HealHeroDatabase.Add(CardDB.cardName.guardianofkings, 6);//tohero
@@ -2616,7 +2650,7 @@
             HealHeroDatabase.Add(CardDB.cardName.siphonsoul, 3); //tohero
             HealHeroDatabase.Add(CardDB.cardName.sealoflight, 4); //tohero
             HealHeroDatabase.Add(CardDB.cardName.antiquehealbot, 8); //tohero
-            HealHeroDatabase.Add(CardDB.cardName.renojackson, 25); //tohero
+            HealHeroDatabase.Add(CardDB.cardName.renojackson, 30); //tohero
             HealHeroDatabase.Add(CardDB.cardName.tuskarrjouster, 7);
             HealHeroDatabase.Add(CardDB.cardName.tournamentmedic, 2);
             HealHeroDatabase.Add(CardDB.cardName.refreshmentvendor, 4);
