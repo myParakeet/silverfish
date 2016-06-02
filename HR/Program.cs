@@ -1166,7 +1166,7 @@ namespace HREngine.Bots
 
     public class Silverfish
     {
-        public string versionnumber = "118.7SE";
+        public string versionnumber = "118.8SE";
         private bool singleLog = false;
         private string botbehave = "rush";
         public bool waitingForSilver = false;
@@ -1217,6 +1217,10 @@ namespace HREngine.Bots
 
         Minion ownHero;
         Minion enemyHero;
+
+        private int anzOgOwnCThunHpBonus = 0;
+        private int anzOgOwnCThunAngrBonus = 0;
+        private int anzOgOwnCThunTaunt = 0;
 
         // NEW VALUES--
 
