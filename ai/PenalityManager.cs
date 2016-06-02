@@ -811,14 +811,14 @@
                 //Console.WriteLine(mheal + " circle");
                 if (p.ownHero.Hp < 16)
                 {
-                    pen += 16 - p.ownHero.Hp;
-                    if (p.guessHeroDamage(false) >= p.ownHero.Hp + p.ownHero.armor) return (pen * 10) + offset;
-                    else return (pen * 2) + offset;
+                    pen += p.ownHero.Hp;
+                    if (p.guessHeroDamage(false) >= p.ownHero.Hp + p.ownHero.armor) return (pen * 2) + offset;
+                    else return (pen * 10) + offset;
                 }
                 else
                 {
-                    pen = ((p.ownHero.Hp - 15) / 2) + 20 - mheal + offset;
-                    return pen + 20 + offset;
+                    pen = (p.ownHero.Hp * 15) + 20 - mheal;
+                    return pen + offset;
                 }
             }
 
@@ -826,13 +826,14 @@
             {
                 if (p.ownHero.Hp < 16)
                 {
-                    pen += 16 - p.ownHero.Hp;
-                    if (p.guessHeroDamage(false) >= p.ownHero.Hp + p.ownHero.armor) return (pen * 10) + offset;
-                    else return (pen * 2) + offset;
+                    pen = p.ownHero.Hp;
+                    if (p.guessHeroDamage(false) >= p.ownHero.Hp + p.ownHero.armor) return (pen * 2) + offset;
+                    else return (pen * 10) + offset;
                 }
                 else
                 {
-                    pen = (p.ownHero.Hp - 15) / 2;
+                    pen = p.ownHero.Hp * 15;
+                    //extra penalty if we can draw cards
                     if (p.ownAbilityReady && cardDrawBattleCryDatabase.ContainsKey(p.ownHeroAblility.card.name)) pen += 20;
                     foreach (Handmanager.Handcard hc in p.owncards)
                     {
