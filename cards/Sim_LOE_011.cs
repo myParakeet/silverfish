@@ -25,34 +25,12 @@ namespace HREngine.Bots
                 }
                 else
                 {
-                    if (p.ownDeckSize <= 15)
-                    {
-                        p.minionGetDamageOrHeal(p.ownHero, -15, true);
-                    }
-                    if (p.ownDeckSize <= 10)
-                    {
-                        p.minionGetDamageOrHeal(p.ownHero, -5, true);//because he is also healed with 15hp :D
-                    }
-                    if (p.ownDeckSize <= 5)
-                    {
-                        p.minionGetDamageOrHeal(p.ownHero, -30, true);//fully heal
-                    }
+                    p.minionGetDamageOrHeal(p.ownHero, -30, true);//fully heal
                 }
             }
             else
             {
-                if (p.enemyDeckSize <= 15)
-                {
-                    p.minionGetDamageOrHeal(p.enemyHero, -15, true);
-                }
-                if (p.enemyDeckSize <= 10)
-                {
-                    p.minionGetDamageOrHeal(p.enemyHero, -5, true);//because he is also healed with 15hp :D
-                }
-                if (p.enemyDeckSize <= 5)
-                {
-                    p.minionGetDamageOrHeal(p.enemyHero, -30, true);//fully heal
-                }
+                p.minionGetDamageOrHeal(p.enemyHero, -30, true);//fully heal
             }
         }
 
