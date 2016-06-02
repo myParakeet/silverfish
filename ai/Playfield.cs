@@ -536,7 +536,7 @@
                     if (i > 0) this.ownMinions[i - 1].cantBeTargetedBySpellsOrHeroPowers = true;
                     if (i < anz - 1) this.ownMinions[i + 1].cantBeTargetedBySpellsOrHeroPowers = true;
                 }
-                if (m.name == CardDB.cardName.faeriedragon || m.name == CardDB.cardName.laughingsister || m.name == CardDB.cardName.spectralknight || m.name == CardDB.cardName.arcanenullifierx21) m.cantBeTargetedBySpellsOrHeroPowers = true;
+                if (m.name == CardDB.cardName.faeriedragon || m.name == CardDB.cardName.laughingsister || m.name == CardDB.cardName.spectralknight || m.name == CardDB.cardName.arcanenullifierx21 || m.name == CardDB.cardName.soggoththeslitherer) m.cantBeTargetedBySpellsOrHeroPowers = true;
 
                 if (m.name == CardDB.cardName.pintsizedsummoner)
                 {
@@ -642,7 +642,7 @@
                     if (i > 0) this.enemyMinions[i - 1].cantBeTargetedBySpellsOrHeroPowers = true;
                     if (i < anz - 1) this.enemyMinions[i + 1].cantBeTargetedBySpellsOrHeroPowers = true;
                 }
-                if (m.name == CardDB.cardName.faeriedragon || m.name == CardDB.cardName.laughingsister || m.name == CardDB.cardName.spectralknight || m.name == CardDB.cardName.arcanenullifierx21) m.cantBeTargetedBySpellsOrHeroPowers = true;
+                if (m.name == CardDB.cardName.faeriedragon || m.name == CardDB.cardName.laughingsister || m.name == CardDB.cardName.spectralknight || m.name == CardDB.cardName.arcanenullifierx21 || m.name == CardDB.cardName.soggoththeslitherer) m.cantBeTargetedBySpellsOrHeroPowers = true;
 
                 if (m.name == CardDB.cardName.prophetvelen) this.enemydoublepriest++;
                 if (m.name == CardDB.cardName.manawraith)
@@ -5368,7 +5368,7 @@
                     //delete adjacent buffs
                     this.minionGetAdjacentBuff(m, -m.AdjacentAngr, 0);
                     m.cantBeTargetedBySpellsOrHeroPowers = false;
-                    if ((m.name == CardDB.cardName.faeriedragon || m.name == CardDB.cardName.spectralknight || m.name == CardDB.cardName.laughingsister || m.name == CardDB.cardName.arcanenullifierx21) && !m.silenced)
+                    if ((m.name == CardDB.cardName.faeriedragon || m.name == CardDB.cardName.spectralknight || m.name == CardDB.cardName.laughingsister || m.name == CardDB.cardName.arcanenullifierx21 || m.name == CardDB.cardName.soggoththeslitherer) && !m.silenced)
                     {
                         m.cantBeTargetedBySpellsOrHeroPowers = true;
                     }
@@ -5417,7 +5417,7 @@
                     //delete adjacent buffs
                     this.minionGetAdjacentBuff(m, -m.AdjacentAngr, 0);
                     m.cantBeTargetedBySpellsOrHeroPowers = false;
-                    if ((m.name == CardDB.cardName.faeriedragon || m.name == CardDB.cardName.spectralknight || m.name == CardDB.cardName.laughingsister || m.name == CardDB.cardName.arcanenullifierx21) && !m.silenced)
+                    if ((m.name == CardDB.cardName.faeriedragon || m.name == CardDB.cardName.spectralknight || m.name == CardDB.cardName.laughingsister || m.name == CardDB.cardName.arcanenullifierx21 || m.name == CardDB.cardName.soggoththeslitherer) && !m.silenced)
                     {
                         m.cantBeTargetedBySpellsOrHeroPowers = true;
                     }
