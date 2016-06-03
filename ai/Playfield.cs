@@ -4772,13 +4772,13 @@
             if (own)
             {
                 oldrecall = this.owedRecall;
-                this.owedRecall = Math.Max(10,this.owedRecall+value);
+                this.owedRecall = Math.Min(10,this.owedRecall+value);
                 newrecall = this.owedRecall;
             }
             else
             {
                 oldrecall = this.enemyRecall;
-                this.enemyRecall = Math.Max(10, this.enemyRecall + value);
+                this.enemyRecall = Math.Min(10, this.enemyRecall + value);
                 newrecall = this.enemyRecall;
                 tempminions = this.enemyMinions;
             };
