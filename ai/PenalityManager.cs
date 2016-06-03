@@ -2902,7 +2902,7 @@
             priorityDatabase.Add(CardDB.cardName.stormwindchampion, 5);
             priorityDatabase.Add(CardDB.cardName.summoningportal, 5);
             priorityDatabase.Add(CardDB.cardName.summoningstone, 5);
-            priorityDatabase.Add(CardDB.cardName.thunderbluffvaliant, 1);
+            priorityDatabase.Add(CardDB.cardName.thunderbluffvaliant, 3);
             priorityDatabase.Add(CardDB.cardName.timberwolf, 5);
             priorityDatabase.Add(CardDB.cardName.tunneltrogg, 4);
             priorityDatabase.Add(CardDB.cardName.warhorsetrainer, 5);
@@ -3473,8 +3473,9 @@
             priorityTargets.Add(CardDB.cardName.dustdevil, 10);
             priorityTargets.Add(CardDB.cardName.wrathofairtotem, 2);
             priorityTargets.Add(CardDB.cardName.flametonguetotem, 10);
-            priorityTargets.Add(CardDB.cardName.manatidetotem, 10);
+            priorityTargets.Add(CardDB.cardName.manatidetotem, 7);
             priorityTargets.Add(CardDB.cardName.unboundelemental, 5);
+            priorityTargets.Add(CardDB.cardName.thunderbluffvaliant, 10);
 
             //rogue cards
 
