@@ -10816,6 +10816,16 @@ namespace HREngine.Bots
                     return new Pen_LOE_118();
                 case cardIDEnum.LOE_119:
                     return new Pen_LOE_119();
+                case cardIDEnum.OG_051:
+                    return new Pen_OG_051();
+                case cardIDEnum.OG_086:
+                    return new Pen_OG_086();
+                case cardIDEnum.OG_101:
+                    return new Pen_OG_101();
+                case cardIDEnum.OG_114:
+                    return new Pen_OG_114();
+                case cardIDEnum.OG_198:
+                    return new Pen_OG_198();
                 case cardIDEnum.OG_202:
                     return new Pen_OG_202();
                 case cardIDEnum.PlaceholderCard:
