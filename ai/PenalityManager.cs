@@ -58,6 +58,7 @@
         private Dictionary<CardDB.cardName, int> discoverMinions = new Dictionary<CardDB.cardName, int>();
 
         Dictionary<CardDB.cardName, int> strongInspireEffectMinions = new Dictionary<CardDB.cardName, int>();
+        Dictionary<CardDB.cardName, int> summonMinionSpellsDatabase = new Dictionary<CardDB.cardName, int>(); // spells/hero powers that summon minions immediately
 
 
         private static PenalityManager instance;
@@ -94,7 +95,8 @@
             setupSilenceTargets();
             setupTargetAbilitys();
             setupStrongInspireMinions();
-            
+            setupSummonMinionSpellsDatabase();
+
         }
 
         public void setCombos()
@@ -221,9 +223,9 @@
 
             retval += getDestroyPenality(name, target, p, lethal);
             retval += getbackToHandPenality(name, target, p, lethal);
-            retval += getSpecialCardComboPenalitys(hcard, target, p, lethal, choice);
+            retval += getSpecialCardComboPenalties(hcard, target, p, lethal, choice);
             //if (lethal) Console.WriteLine(retval+ " " + name);
-            retval += getRandomPenaltiy(card, p, target);
+            retval += getRandomPenalty(card, p, target);
             if (!lethal)
             {
                 retval += cb.getPenalityForDestroyingCombo(card, p);
@@ -1047,7 +1049,7 @@
             return 3 * p.optionsPlayedThisTurn;
         }
 
-        private int getRandomPenaltiy(CardDB.Card card, Playfield p, Minion target)
+        private int getRandomPenalty(CardDB.Card card, Playfield p, Minion target)
         {
             int pen = 0;
             if (p.turnCounter >= 1)
@@ -1101,22 +1103,22 @@
                         continue;
                     if (a.own.name == CardDB.cardName.gadgetzanauctioneer)
                     {
-                        if (!hasgadget && card.type == CardDB.cardtype.SPELL && p.owncards.Count <= 5) pen += 10;
+                        if (!hasgadget && card.type == CardDB.cardtype.SPELL && p.owncards.Count <= 5) pen += 20;
                     }
 
                     if (a.own.name == CardDB.cardName.starvingbuzzard)
                     {
-                        if (!hasstarving && card.race == TAG_RACE.PET) pen += 10; 
+                        if (!hasstarving && card.race == TAG_RACE.PET) pen += 20; 
                     }
 
                     if (a.own.name == CardDB.cardName.knifejuggler)
                     {
-                        if (!hasknife && card.type == CardDB.cardtype.MOB) pen += 10; 
+                        if (!hasknife && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) pen += 20; 
                     }
 
                     if (a.own.name == CardDB.cardName.flamewaker)
                     {
-                        if (!hasflamewaker && card.type == CardDB.cardtype.SPELL) pen += 10; 
+                        if (!hasflamewaker && card.type == CardDB.cardtype.SPELL) pen += 20; 
                     }
                 }
 
@@ -1229,7 +1231,7 @@
                     }
 
 
-                    if (hasknife && (a.card.card.type == CardDB.cardtype.MOB || a.card.card.name == CardDB.cardName.swordofjustice || a.card.card.name == CardDB.cardName.mirrorentity)) //and others
+                    if (hasknife && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) //and others
                      {
                         if (card.name == CardDB.cardName.knifejuggler && mobsafterKnife >= 1)
                         {
@@ -1248,7 +1250,7 @@
 
             if (first == false)
             {
-                pen += cards + p.playactions.Count + 1;
+                pen += cards + p.playactions.Count + 5;
             }
 
             return pen;
@@ -1542,7 +1544,7 @@
             return retval;
         }
 
-        private int getSpecialCardComboPenalitys(Handmanager.Handcard playedhcard, Minion target, Playfield p, bool lethal, int choice)
+        private int getSpecialCardComboPenalties(Handmanager.Handcard playedhcard, Minion target, Playfield p, bool lethal, int choice)
         {
             CardDB.Card card = playedhcard.card;
             CardDB.cardName name = card.name;
@@ -1964,7 +1966,7 @@
             }
 
 
-            if (card.name == CardDB.cardName.knifejuggler && (p.mobsPlayedThisTurn > 1 || ((p.ownHeroName == HeroEnum.shaman || p.ownHeroName == HeroEnum.pala) && p.ownAbilityReady == false)))
+            if (card.name == CardDB.cardName.knifejuggler && (p.mobsPlayedThisTurn > 1 || (p.ownAbilityReady == false && this.summonMinionSpellsDatabase.ContainsKey(p.ownHeroAblility.card.name))))
              {
                  return 20;
              }
@@ -2673,7 +2675,7 @@
             HealTargetDatabase.Add(CardDB.cardName.heal, 4);
             HealTargetDatabase.Add(CardDB.cardName.flashheal, 5);
             HealTargetDatabase.Add(CardDB.cardName.darkshirealchemist, 5);
-            HealTargetDatabase.Add(CardDB.cardName.forbiddenhealing, 2);
+            HealTargetDatabase.Add(CardDB.cardName.forbiddenhealing, 2);//heal = 2x mana spent
 
             //HealTargetDatabase.Add(CardDB.cardName.divinespirit, 2);
         }
@@ -2828,7 +2830,7 @@
             DamageTargetDatabase.Add(CardDB.cardName.unbalancingstrike, 3);
             DamageTargetDatabase.Add(CardDB.cardName.discipleofcthun, 2);
             DamageTargetDatabase.Add(CardDB.cardName.firebloomtoxin, 2);
-            DamageTargetDatabase.Add(CardDB.cardName.forbiddenflame, 1);
+            DamageTargetDatabase.Add(CardDB.cardName.forbiddenflame, 1); //dmg = mana spent
             DamageTargetDatabase.Add(CardDB.cardName.onthehunt, 1);
             DamageTargetDatabase.Add(CardDB.cardName.shadowstrike, 5);
             DamageTargetDatabase.Add(CardDB.cardName.stormcrack, 4);
@@ -3892,8 +3894,6 @@
 
         private void setupStrongInspireMinions()
         {
-            
-
             strongInspireEffectMinions.Add(CardDB.cardName.boneguardlieutenant, 0);
             strongInspireEffectMinions.Add(CardDB.cardName.confessorpaletress, 10);
             strongInspireEffectMinions.Add(CardDB.cardName.dalaranaspirant, 1);
@@ -3910,7 +3910,36 @@
             strongInspireEffectMinions.Add(CardDB.cardName.silverhandregent, 3);
         }
 
-
+        private void setupSummonMinionSpellsDatabase()
+        {
+            summonMinionSpellsDatabase.Add(CardDB.cardName.mirrorimage, 2);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.totemiccall, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.reinforce, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.animalcompanion, 3);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.powerofthewild, 1); //choice
+            summonMinionSpellsDatabase.Add(CardDB.cardName.feralspirit, 2);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.baneofdoom, 1); //only if it kills
+            summonMinionSpellsDatabase.Add(CardDB.cardName.unleashthehounds, 1); //count=enemy minions
+            summonMinionSpellsDatabase.Add(CardDB.cardName.forceofnature, 3);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.thesilverhand, 2);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.anyfincanhappen, 1); //count=dead murlocs
+            summonMinionSpellsDatabase.Add(CardDB.cardName.thetidalhand, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.onthehunt, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.forbiddenshaping, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.forbiddenritual, 1); //count=mana spent
+            summonMinionSpellsDatabase.Add(CardDB.cardName.wispsoftheoldgods, 7); //choice
+            summonMinionSpellsDatabase.Add(CardDB.cardName.callofthewild, 3);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.standagainstdarkness, 5);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.bloodtoichor, 1); //if it doesn't kill
+            summonMinionSpellsDatabase.Add(CardDB.cardName.iammurloc, 3); //3-5
+            summonMinionSpellsDatabase.Add(CardDB.cardName.powerofthehorde, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.lightofthenaaru, 1); //if it doesn't heal to full
+            summonMinionSpellsDatabase.Add(CardDB.cardName.darkwispers, 5); //choice
+            summonMinionSpellsDatabase.Add(CardDB.cardName.musterforbattle, 3);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.livingroots, 2); //choice
+            summonMinionSpellsDatabase.Add(CardDB.cardName.ballofspiders, 3);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.totemicslam, 1);
+        }
     }
 
 }
