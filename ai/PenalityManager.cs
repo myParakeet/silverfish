@@ -1662,18 +1662,16 @@
             //bonus for early threat
             if (p.ownMaxMana == 1 )
             {
-                //if (card.name == CardDB.cardName.nerubianegg) return -10;
-                if (card.name == CardDB.cardName.lepergnome) return -10;
-                if (card.name == CardDB.cardName.faeriedragon) return -20;
-                if (card.name == CardDB.cardName.shrinkmeister) return 0;
+                if (card.name == CardDB.cardName.faeriedragon) return -25;
+                if (card.name == CardDB.cardName.shrinkmeister) return 20; //don't play early
                 if (card.Attack >= 3 && card.Health >= 2) return -20;
-                if (card.name == CardDB.cardName.wildgrowth) return -150;
                 
             }
 
-            if (p.ownMaxMana == 2)
+            if (p.ownMaxMana == 2 || (p.mana == 2 && p.ownMaxMana == 1)) //todo sepefeets - does coin raise ownMaxMana?
             {
                 if (card.name == CardDB.cardName.nerubianegg) return -15;
+                if (card.name == CardDB.cardName.wildgrowth) return -150; //bonus for turn 1 coin+growth or turn 2 growth but not innervate+growth
             }
 
             /*if (card.name == CardDB.cardName.flamewaker && p.turnCounter == 0)
@@ -1992,7 +1990,12 @@
                 if (m.own && !m.Ready) return 500;
             }
 
-            if ((name == CardDB.cardName.wildgrowth || name == CardDB.cardName.nourish) && p.ownMaxMana == 9 && !(p.ownHeroName == HeroEnum.thief && p.cardsPlayedThisTurn == 0))
+            if (name == CardDB.cardName.wildgrowth && p.ownMaxMana > 5 && p.ownMaxMana < 10)
+            {
+                return 500;
+            }
+
+            if (name == CardDB.cardName.nourish && choice == 1 && p.ownMaxMana > 6)
             {
                 return 500;
             }
