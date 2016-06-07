@@ -46,13 +46,13 @@
 
         Dictionary<CardDB.cardName, int> returnHandDatabase = new Dictionary<CardDB.cardName, int>();
 
-        Dictionary<CardDB.cardName, int> priorityDatabase = new Dictionary<CardDB.cardName, int>();
+        Dictionary<CardDB.cardName, int> priorityDatabase = new Dictionary<CardDB.cardName, int>(); //minions we want to keep around
 
         public Dictionary<CardDB.cardName, int> DamageTargetDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> DamageTargetSpecialDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> cardDrawBattleCryDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> cardDrawDeathrattleDatabase = new Dictionary<CardDB.cardName, int>();
-        public Dictionary<CardDB.cardName, int> priorityTargets = new Dictionary<CardDB.cardName, int>();
+        public Dictionary<CardDB.cardName, int> priorityTargets = new Dictionary<CardDB.cardName, int>(); //enemy minions we want to kill
         public Dictionary<CardDB.cardName, int> specialMinions = new Dictionary<CardDB.cardName, int>(); //minions with cardtext, but no battlecry
 
         private Dictionary<CardDB.cardName, int> discoverMinions = new Dictionary<CardDB.cardName, int>();
@@ -356,6 +356,7 @@
                     }
                 }
 
+                if (m.Ready && this.priorityDatabase.ContainsKey(m.name) && this.buffing1TurnDatabase.ContainsKey(name)) return priorityDatabase[m.name];
                 if (!m.Ready && !m.taunt && hasownready)
                 {
                     if (this.buffing1TurnDatabase.ContainsKey(name)) return 50;
@@ -1058,40 +1059,46 @@
             }
 
             bool first = true;
-            bool hasgadget = false;
-            bool hasstarving = false;
-            bool hasknife = false;
-            bool hasflamewaker = false;
-            bool hasmech = false;
+            bool hasAuctioneer = false;
+            bool hasBuzzard = false;
+            bool hasJuggler = false;
+            bool hasFlamewaker = false;
+            bool hasMech = false;
+            bool hasCouncilman = false;
 
-            
+
 
             foreach (Minion mnn in p.ownMinions)
             {
 
-                if (mnn.handcard.card.race == TAG_RACE.MECHANICAL) hasmech = true;
+                if (mnn.handcard.card.race == TAG_RACE.MECHANICAL) hasMech = true;
 
                 if (mnn.silenced) continue;
 
 
                 if (mnn.name == CardDB.cardName.gadgetzanauctioneer)
                 {
-                    hasgadget = true;
+                    hasAuctioneer = true;
                 }
 
                 if (mnn.name == CardDB.cardName.starvingbuzzard)
                 {
-                    hasstarving = true;
+                    hasBuzzard = true;
                 }
 
                 if (mnn.name == CardDB.cardName.knifejuggler)
                 {
-                    hasknife = true;
+                    hasJuggler = true;
                 }
 
                 if (mnn.name == CardDB.cardName.flamewaker)
                 {
-                    hasflamewaker = true;
+                    hasFlamewaker = true;
+                }
+
+                if (mnn.name == CardDB.cardName.darkshirecouncilman) //not actually random but needs to be played early as if it were
+                {
+                    hasCouncilman = true;
                 }
             }
 
@@ -1103,22 +1110,27 @@
                         continue;
                     if (a.own.name == CardDB.cardName.gadgetzanauctioneer)
                     {
-                        if (!hasgadget && card.type == CardDB.cardtype.SPELL && p.owncards.Count <= 5) pen += 20;
+                        if (!hasAuctioneer && card.type == CardDB.cardtype.SPELL && p.owncards.Count <= 5) pen += 20;
                     }
 
                     if (a.own.name == CardDB.cardName.starvingbuzzard)
                     {
-                        if (!hasstarving && card.race == TAG_RACE.PET) pen += 20; 
+                        if (!hasBuzzard && card.race == TAG_RACE.PET) pen += 20; 
                     }
 
                     if (a.own.name == CardDB.cardName.knifejuggler)
                     {
-                        if (!hasknife && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) pen += 20; 
+                        if (!hasJuggler && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) pen += 20; 
                     }
 
                     if (a.own.name == CardDB.cardName.flamewaker)
                     {
-                        if (!hasflamewaker && card.type == CardDB.cardtype.SPELL) pen += 20; 
+                        if (!hasFlamewaker && card.type == CardDB.cardtype.SPELL) pen += 20;
+                    }
+
+                    if (a.own.name == CardDB.cardName.darkshirecouncilman)
+                    {
+                        if (!hasCouncilman && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) pen += 20;
                     }
                 }
 
@@ -1129,17 +1141,18 @@
 
             if (!this.randomEffects.ContainsKey(card.name) 
                 && !this.cardDrawBattleCryDatabase.ContainsKey(card.name)
-                && !(hasknife && card.type == CardDB.cardtype.MOB && p.enemyMinions.Count > 0) 
-                && !(hasgadget && card.type == CardDB.cardtype.SPELL)
-                && !(hasflamewaker && card.type == CardDB.cardtype.SPELL && p.enemyMinions.Count > 0)
-                && !(hasstarving && (TAG_RACE)card.race == TAG_RACE.PET))
+                && !(hasJuggler && card.type == CardDB.cardtype.MOB && p.enemyMinions.Count > 0)
+                && !(hasCouncilman && card.type == CardDB.cardtype.MOB)
+                && !(hasAuctioneer && card.type == CardDB.cardtype.SPELL)
+                && !(hasFlamewaker && card.type == CardDB.cardtype.SPELL && p.enemyMinions.Count > 0)
+                && !(hasBuzzard && (TAG_RACE)card.race == TAG_RACE.PET))
              {
                  return pen;
              }
 
 
             if (card.name == CardDB.cardName.brawl || ((card.name == CardDB.cardName.bouncingblade && p.enemyMinions.Count + p.ownMinions.Count == 1)
-                || ( (card.name == CardDB.cardName.goblinblastmage || card.name == CardDB.cardName.tinkertowntechnician) && !hasmech)
+                || ( (card.name == CardDB.cardName.goblinblastmage || card.name == CardDB.cardName.tinkertowntechnician) && !hasMech)
                 || (card.name == CardDB.cardName.coghammer && p.ownMinions.Count == 1)))
              {
                  return pen;
@@ -1174,7 +1187,8 @@
             int cards = 0;
             cards = this.randomEffects.ContainsKey(card.name) ? this.randomEffects[card.name] : (this.cardDrawBattleCryDatabase.ContainsKey(card.name) ? this.cardDrawBattleCryDatabase[card.name] : 0);
 
-            int mobsafterKnife = 0;
+            int mobsAfterKnife = 0;
+            int mobsAfterCouncilman = 0;
             foreach (Action a in p.playactions) // penalize for any non-random actions taken before playing this random one
             {
                 if (first == false) break;
@@ -1216,7 +1230,7 @@
                     }
 
                     // no penalty for spells or other cards that obtain bonuses from playing spells
-                    if ((hasgadget || hasflamewaker) && (a.card.card.type == CardDB.cardtype.SPELL
+                    if ((hasAuctioneer || hasFlamewaker) && (a.card.card.type == CardDB.cardtype.SPELL
                         || a.card.card.name == CardDB.cardName.gadgetzanauctioneer || a.card.card.name == CardDB.cardName.flamewaker
                         || a.card.card.name == CardDB.cardName.manawyrm || a.card.card.name == CardDB.cardName.manaaddict
                         || a.card.card.name == CardDB.cardName.questingadventurer || a.card.card.name == CardDB.cardName.wildpyromancer
@@ -1225,24 +1239,37 @@
                          continue;
                      }
 
-                    if (hasstarving && a.card.card.race == TAG_RACE.PET)
+                    if (hasBuzzard && a.card.card.race == TAG_RACE.PET)
                     {
                         continue;
                     }
 
 
-                    if (hasknife && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) //and others
+                    if (hasJuggler && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) //and others
                      {
-                        if (card.name == CardDB.cardName.knifejuggler && mobsafterKnife >= 1)
+                        if (card.name == CardDB.cardName.knifejuggler && mobsAfterKnife >= 1)
                         {
                             first = false;   // penalize playing 2nd knife juggler after other mobs
                         }
                         else
                         {
-                            if (a.card.card.type == CardDB.cardtype.MOB && a.card.card.name != CardDB.cardName.knifejuggler) mobsafterKnife++;
+                            if (a.card.card.type == CardDB.cardtype.MOB && a.card.card.name != CardDB.cardName.knifejuggler) mobsAfterKnife++;
                             continue;
                         }
-                     }
+                    }
+
+                    if (hasCouncilman && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) //and others
+                    {
+                        if (card.name == CardDB.cardName.darkshirecouncilman && mobsAfterCouncilman >= 1)
+                        {
+                            first = false;   // penalize playing 2nd darkshire councilman after other mobs
+                        }
+                        else
+                        {
+                            if (a.card.card.type == CardDB.cardtype.MOB && a.card.card.name != CardDB.cardName.darkshirecouncilman) mobsAfterCouncilman++;
+                            continue;
+                        }
+                    }
 
                     first = false;
                 }
@@ -1665,7 +1692,8 @@
                 if (card.name == CardDB.cardName.faeriedragon) return -25;
                 if (card.name == CardDB.cardName.shrinkmeister) return 20; //don't play early
                 if (card.Attack >= 3 && card.Health >= 2) return -20;
-                
+                if (card.Health > 0) return -card.Attack - card.Health; //nudge anything playable
+
             }
 
             if (p.ownMaxMana == 2 || (p.mana == 2 && p.ownMaxMana == 1)) //todo sepefeets - does coin raise ownMaxMana?
@@ -1967,7 +1995,12 @@
             if (card.name == CardDB.cardName.knifejuggler && (p.mobsPlayedThisTurn > 1 || (p.ownAbilityReady == false && this.summonMinionSpellsDatabase.ContainsKey(p.ownHeroAblility.card.name))))
              {
                  return 20;
-             }
+            }
+
+            if (card.name == CardDB.cardName.darkshirecouncilman && (p.mobsPlayedThisTurn > 0 || (p.ownAbilityReady == false && this.summonMinionSpellsDatabase.ContainsKey(p.ownHeroAblility.card.name))))
+            {
+                return 20;
+            }
 
             if (card.name == CardDB.cardName.flametonguetotem && p.ownMinions.Count == 0)
             {
@@ -2088,7 +2121,7 @@
 
             if (!lethal && choice == 1 && name == CardDB.cardName.druidoftheclaw)
             {
-                return 20;
+                return 10;
             }
 
 
@@ -2099,6 +2132,10 @@
                     if (target.name == CardDB.cardName.voidcaller) return 50;
                     if (target.name == CardDB.cardName.sylvanaswindrunner) return 100;
                     return 500;
+                }
+                else
+                {
+                    if (this.priorityDatabase.ContainsKey(target.name)) return 10 + priorityDatabase[target.name];
                 }
             }
 
@@ -2312,7 +2349,7 @@
                 if (ready == 0)
                 { return 5; }
             }
-            if (name == CardDB.cardName.abusivesergeant)
+/*            if (name == CardDB.cardName.abusivesergeant)  //penalty handled by buffing1TurnDatabase
             {
                 int ready = 0;
                 foreach (Minion min in p.ownMinions)
@@ -2324,7 +2361,7 @@
                 {
                     return 5;
                 }
-            }
+            }*/
 
             if (p.turnCounter >= 1 && name == CardDB.cardName.reversingswitch && target.Angr == target.Hp) return 500;
 
@@ -2881,7 +2918,8 @@
             priorityDatabase.Add(CardDB.cardName.brannbronzebeard, 4);
             priorityDatabase.Add(CardDB.cardName.confessorpaletress, 7);
             priorityDatabase.Add(CardDB.cardName.crowdfavorite, 6);
-            priorityDatabase.Add(CardDB.cardName.direwolfalpha, 6);
+            priorityDatabase.Add(CardDB.cardName.darkshirecouncilman, 4);
+            priorityDatabase.Add(CardDB.cardName.direwolfalpha, 5);
             priorityDatabase.Add(CardDB.cardName.emperorthaurissan, 5);
             priorityDatabase.Add(CardDB.cardName.flametonguetotem, 6);
             priorityDatabase.Add(CardDB.cardName.grimpatron, 5);
@@ -2889,6 +2927,7 @@
             priorityDatabase.Add(CardDB.cardName.holychampion, 5);
             priorityDatabase.Add(CardDB.cardName.kodorider, 6);
             priorityDatabase.Add(CardDB.cardName.kvaldirraider, 1);
+            priorityDatabase.Add(CardDB.cardName.knifejuggler, 4);
             priorityDatabase.Add(CardDB.cardName.leokk, 5);
             priorityDatabase.Add(CardDB.cardName.manatidetotem, 5);
             priorityDatabase.Add(CardDB.cardName.mechwarper, 1);
@@ -2908,7 +2947,7 @@
             priorityDatabase.Add(CardDB.cardName.summoningportal, 5);
             priorityDatabase.Add(CardDB.cardName.summoningstone, 5);
             priorityDatabase.Add(CardDB.cardName.thunderbluffvaliant, 3);
-            priorityDatabase.Add(CardDB.cardName.timberwolf, 5);
+            priorityDatabase.Add(CardDB.cardName.timberwolf, 3);
             priorityDatabase.Add(CardDB.cardName.tunneltrogg, 4);
             priorityDatabase.Add(CardDB.cardName.warhorsetrainer, 5);
             priorityDatabase.Add(CardDB.cardName.warsongcommander, 2);

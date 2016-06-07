@@ -946,14 +946,16 @@
                 if (m.name == CardDB.cardName.flametonguetotem || m.name == CardDB.cardName.direwolfalpha) return true;
             }
 
-            int haspets = 0;
-            bool hashyena = false;
+            int hasBeasts = 0;
+            bool hasHyena = false;
             bool hasJuggler = false;
-            bool spawnminions = false;
+            bool hasCouncilman = false;
+            bool spawnMinions = false;
             foreach (Minion m in ownm)
             {
                 if (m.name == CardDB.cardName.cultmaster) return true;
                 if (m.name == CardDB.cardName.knifejuggler) hasJuggler = true;
+                if (m.name == CardDB.cardName.darkshirecouncilman) hasCouncilman = true;
                 if (m.Ready && m.Angr >= 1)
                 {
                     if (m.AdjacentAngr >= 1) return true;//wolphalfa or flametongue is in play
@@ -978,15 +980,15 @@
                     if (m.name == CardDB.cardName.raidleader || m.name == CardDB.cardName.stormwindchampion || m.name == CardDB.cardName.timberwolf || m.name == CardDB.cardName.southseacaptain || m.name == CardDB.cardName.murlocwarleader || m.name == CardDB.cardName.grimscaleoracle || m.name == CardDB.cardName.leokk) return true;
 
 
-                    if (m.name == CardDB.cardName.scavenginghyena) hashyena = true;
-                    if (m.handcard.card.race == TAG_RACE.PET) haspets++;
-                    if (m.name == CardDB.cardName.harvestgolem || m.name == CardDB.cardName.hauntedcreeper || m.souloftheforest >= 1 || m.ancestralspirit >= 1 || m.name == CardDB.cardName.nerubianegg || m.name == CardDB.cardName.savannahhighmane || m.name == CardDB.cardName.sludgebelcher || m.name == CardDB.cardName.cairnebloodhoof || m.name == CardDB.cardName.feugen || m.name == CardDB.cardName.stalagg || m.name == CardDB.cardName.thebeast) spawnminions = true;
+                    if (m.name == CardDB.cardName.scavenginghyena) hasHyena = true;
+                    if (m.handcard.card.race == TAG_RACE.PET) hasBeasts++;
+                    if (m.name == CardDB.cardName.harvestgolem || m.name == CardDB.cardName.hauntedcreeper || m.souloftheforest >= 1 || m.ancestralspirit >= 1 || m.name == CardDB.cardName.nerubianegg || m.name == CardDB.cardName.savannahhighmane || m.name == CardDB.cardName.sludgebelcher || m.name == CardDB.cardName.cairnebloodhoof || m.name == CardDB.cardName.feugen || m.name == CardDB.cardName.stalagg || m.name == CardDB.cardName.thebeast) spawnMinions = true;
 
                 }
             }
 
-            if (haspets >= 1 && hashyena) return true;
-            if (hasJuggler && spawnminions) return true;
+            if (hasBeasts >= 1 && hasHyena) return true;
+            if ((hasJuggler || hasCouncilman) && spawnMinions) return true;
 
 
 
