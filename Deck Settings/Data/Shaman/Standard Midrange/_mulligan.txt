@@ -82,7 +82,7 @@ hold;shaman;shaman;EX1_259:1
 // - W A R L O C K ------------------------------
 // 1-DROP
 // 1x Lightning Bolt + Tunnel Trogg
-hold;shaman;warlock;Lightning Bolt:1:LOE_018
+hold;shaman;warlock;EX1_238:1:LOE_018
 
 // 3-DROP
 // 1 x Lightning Storm
