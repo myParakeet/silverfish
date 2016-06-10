@@ -6306,7 +6306,7 @@ namespace HREngine.Bots
                     temp = temp.Split('\"')[0];
                     int ti = Convert.ToInt32(temp);
                     //if (ti == 1) c.overloadBool = true;
-                    c.overload = 1;
+                    c.overload = ti;  //todo sepefeets - switch not needed now?
                     switch (c.name)
                     {
                         case CardDB.cardName.ancestralknowledge: c.overload = 2; continue;
