@@ -666,7 +666,7 @@
                 {
                     pen = 500;
                 }
-                if (name == CardDB.cardName.lavashock && p.owedRecall == 0 && p.currentRecall==0)
+                if (name == CardDB.cardName.lavashock && p.owedRecall == 0 && p.currentRecall == 0) //todo sepefeets - eternal sentinal penalty
                 {
                     pen = 30;
                 }

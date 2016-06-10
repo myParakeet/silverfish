@@ -4,11 +4,10 @@ using System.Text;
 
 namespace HREngine.Bots
 {
-	class Sim_EX1_304 : SimTemplate //voidterror
-	{
-
-//    kampfschrei:/ vernichtet die benachbarten diener und verleiht ihm deren angriff und leben.
-		public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
+	class Sim_EX1_304 : SimTemplate //* Void Terror
+    {
+        //Battlecry: Destroy the minions on either side of this minion and gain their Attack and Health.
+        public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
 		{
             List<Minion> temp = (own.own) ? p.ownMinions : p.enemyMinions;
 
@@ -16,7 +15,7 @@ namespace HREngine.Bots
             int hp = 0;
             foreach (Minion m in temp)
             {
-                if (m.zonepos == own.zonepos || m.zonepos == own.zonepos - 1)
+                if (m.zonepos == own.zonepos + 1|| m.zonepos == own.zonepos - 1)
                 {
                     angr += m.Angr;
                     hp += m.Hp;
@@ -28,7 +27,5 @@ namespace HREngine.Bots
             }
             p.minionGetBuffed(own, angr, hp);
 		}
-
-
 	}
 }

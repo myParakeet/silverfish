@@ -4407,7 +4407,8 @@ namespace HREngine.Bots
                 bool REQ_FROZEN_TARGET = false;
                 bool REQ_HERO_TARGET = false;
                 bool REQ_DAMAGED_TARGET = false;
-                bool REQ_LEGENDARY_TARGET = false;                
+                bool REQ_LEGENDARY_TARGET = false;
+                bool REQ_TARGET_IF_AVAILABLE = false;
 
                 foreach (CardDB.ErrorType2 PlayReq in this.playrequires)
                 {
@@ -4420,6 +4421,7 @@ namespace HREngine.Bots
                             targetOnlyMinion = true;
                             continue;
                         case ErrorType2.REQ_TARGET_IF_AVAILABLE:
+                            REQ_TARGET_IF_AVAILABLE = true;
                             targetAll = true;
                             continue;
                         case ErrorType2.REQ_FRIENDLY_TARGET:
@@ -4715,7 +4717,7 @@ namespace HREngine.Bots
                     }
                 }
 
-                if (retval.Count == 0 && !wereTargets) retval.Add(null);
+                if (retval.Count == 0 && (!wereTargets || REQ_TARGET_IF_AVAILABLE)) retval.Add(null);
 
                 return retval;
             }
