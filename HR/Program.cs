@@ -399,7 +399,7 @@ namespace HREngine.Bots
                     ranger_action.Actor = base.FriendHeroPower;
                     break;
                 case actionEnum.attackWithMinion:
-                    ranger_action.Actor = getEntityWithNumber(moveTodo.own.entitiyID);
+                    ranger_action.Actor = getEntityWithNumber(moveTodo.own.entityID);
                     if (ranger_action.Actor == null) return null;  // missing entity likely because new spawned minion
                     break;
                 default:
@@ -408,7 +408,7 @@ namespace HREngine.Bots
 
             if (moveTodo.target != null)
             {
-                ranger_action.Target = getEntityWithNumber(moveTodo.target.entitiyID);
+                ranger_action.Target = getEntityWithNumber(moveTodo.target.entityID);
                 if (ranger_action.Target == null) return null;  // missing entity likely because new spawned minion
             }
 
@@ -475,7 +475,7 @@ namespace HREngine.Bots
                 //HR-only fix for being to fast
                 //IsProcessingPowers not good enough so always sleep
                 //todo find better solution
-                System.Threading.Thread.Sleep(200);
+                //System.Threading.Thread.Sleep(200);
                 if (!this.doMultipleThingsAtATime)
                 {
                     //do fake action
@@ -588,6 +588,7 @@ namespace HREngine.Bots
                     //detect which choice
 
                     int trackingchoice = Ai.Instance.bestTracking;
+                    if (Ai.Instance.bestTrackingStatus == 3) Helpfunctions.Instance.logg("discovering using user choice..." + trackingchoice);
                     if (Ai.Instance.bestTrackingStatus == 0) Helpfunctions.Instance.logg("discovering using optimal choice..." + trackingchoice);
                     if (Ai.Instance.bestTrackingStatus == 1) Helpfunctions.Instance.logg("discovering using suboptimal choice..." + trackingchoice);
                     if (Ai.Instance.bestTrackingStatus == 2) Helpfunctions.Instance.logg("discovering using random choice..." + trackingchoice);
@@ -1292,6 +1293,7 @@ namespace HREngine.Bots
             Helpfunctions.Instance.ErrorLog("setlogpath to:" + path);
             PenalityManager.Instance.setCombos();
             Mulligan m = Mulligan.Instance; // read the mulligan list
+            Discovery d = Discovery.Instance; // read the discover list
         }
 
         public void setnewLoggFile()
@@ -1343,7 +1345,7 @@ namespace HREngine.Bots
                 if (m.Hp >= 1) this.numOptionPlayedThisTurn += m.numAttacksThisTurn;
             }
 
-            Hrtprozis.Instance.updatePlayer(this.ownMaxMana, this.currentMana, this.cardsPlayedThisTurn, this.numMinionsPlayedThisTurn, this.numOptionPlayedThisTurn, this.ownOverload, ownHero.entitiyID, enemyHero.entitiyID, this.numberMinionsDiedThisTurn, this.ownCurrentOverload, this.enemyOverload, this.heroPowerUsesThisTurn,this.lockandload);
+            Hrtprozis.Instance.updatePlayer(this.ownMaxMana, this.currentMana, this.cardsPlayedThisTurn, this.numMinionsPlayedThisTurn, this.numOptionPlayedThisTurn, this.ownOverload, ownHero.entityID, enemyHero.entityID, this.numberMinionsDiedThisTurn, this.ownCurrentOverload, this.enemyOverload, this.heroPowerUsesThisTurn,this.lockandload);
             Hrtprozis.Instance.setPlayereffects(this.ownDragonConsort, this.enemyDragonConsort, this.ownLoathebs, this.enemyLoathebs, this.ownMillhouse, this.enemyMillhouse, this.ownKirintor, this.ownPrepa, this.ownsabo, this.enemysabo, this.ownFenciCoaches, this.enemyCursedCardsInHand);
             Hrtprozis.Instance.updateSecretStuff(this.ownSecretList, this.enemySecretCount);
 
@@ -1635,8 +1637,8 @@ namespace HREngine.Bots
             this.enemyHero.own = false;
             this.ownHero.maxHp = ownhero.Health;
             this.enemyHero.maxHp = enemyhero.Health;
-            this.ownHero.entitiyID = ownhero.EntityId;
-            this.enemyHero.entitiyID = enemyhero.EntityId;
+            this.ownHero.entityID = ownhero.EntityId;
+            this.enemyHero.entityID = enemyhero.EntityId;
 
             this.ownHero.Angr = heroAtk;
             this.ownHero.Hp = heroHp;
@@ -1661,7 +1663,7 @@ namespace HREngine.Bots
             List<miniEnch> miniEnchlist = new List<miniEnch>();
             foreach (Entity ent in allEntitys.Values)
             {
-                if (ent.Attached == this.ownHero.entitiyID && ent.Zone == HSRangerLib.TAG_ZONE.PLAY)
+                if (ent.Attached == this.ownHero.entityID && ent.Zone == HSRangerLib.TAG_ZONE.PLAY)
                 {
                     CardDB.cardIDEnum id = CardDB.Instance.cardIdstringToEnum(ent.CardId);
                     int controler = ent.ControllerId;
@@ -1677,7 +1679,7 @@ namespace HREngine.Bots
 
             foreach (Entity ent in allEntitys.Values)
             {
-                if (ent.Attached == this.enemyHero.entitiyID && ent.Zone == HSRangerLib.TAG_ZONE.PLAY)
+                if (ent.Attached == this.enemyHero.entityID && ent.Zone == HSRangerLib.TAG_ZONE.PLAY)
                 {
                     CardDB.cardIDEnum id = CardDB.Instance.cardIdstringToEnum(ent.CardId);
                     int controler = ent.ControllerId;
@@ -1795,61 +1797,61 @@ namespace HREngine.Bots
 
             foreach (Entity item in list)
             {
-                Entity entitiy = item;
-                int zp = entitiy.ZonePosition;
+                Entity entity = item;
+                int zp = entity.ZonePosition;
 
-                if ((TAG_CARDTYPE)entitiy.CardType == TAG_CARDTYPE.MINION && zp >= 1)
+                if ((TAG_CARDTYPE)entity.CardType == TAG_CARDTYPE.MINION && zp >= 1)
                 {
                     //Helpfunctions.Instance.ErrorLog("zonepos " + zp);
-                    CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(entitiy.CardId));
+                    CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(entity.CardId));
                     Minion m = new Minion();
                     m.name = c.name;
                     m.handcard.card = c;
-                    m.Angr = entitiy.ATK;
-                    m.maxHp = entitiy.Health;
-                    m.Hp = m.maxHp - entitiy.Damage;
+                    m.Angr = entity.ATK;
+                    m.maxHp = entity.Health;
+                    m.Hp = m.maxHp - entity.Damage;
                     if (m.Hp <= 0) continue;
                     m.wounded = false;
                     if (m.maxHp > m.Hp) m.wounded = true;
 
 
-                    m.exhausted = entitiy.IsExhausted;
+                    m.exhausted = entity.IsExhausted;
 
-                    m.taunt = (entitiy.HasTaunt);
+                    m.taunt = (entity.HasTaunt);
 
-                    m.numAttacksThisTurn = entitiy.NumAttacksThisTurn;
+                    m.numAttacksThisTurn = entity.NumAttacksThisTurn;
 
-                    int temp = entitiy.NumTurnsInPlay;
+                    int temp = entity.NumTurnsInPlay;
                     m.playedThisTurn = (temp == 0) ? true : false;
 
-                    m.windfury = (entitiy.HasWindfury);
+                    m.windfury = (entity.HasWindfury);
 
-                    m.frozen = (entitiy.IsFrozen);
+                    m.frozen = (entity.IsFrozen);
 
-                    m.divineshild = (entitiy.HasDivineShield);
+                    m.divineshild = (entity.HasDivineShield);
 
-                    m.stealth = (entitiy.IsStealthed);
+                    m.stealth = (entity.IsStealthed);
 
-                    m.poisonous = (entitiy.IsPoisonous);
+                    m.poisonous = (entity.IsPoisonous);
 
-                    m.immune = (entitiy.IsImmune);
+                    m.immune = (entity.IsImmune);
 
-                    m.silenced = entitiy.IsSilenced;
+                    m.silenced = entity.IsSilenced;
 
-                    m.spellpower = entitiy.SpellPower;
+                    m.spellpower = entity.SpellPower;
 
                     m.charge = 0;
 
-                    if (!m.silenced && m.name == CardDB.cardName.southseadeckhand && entitiy.HasCharge) m.charge = 1;
+                    if (!m.silenced && m.name == CardDB.cardName.southseadeckhand && entity.HasCharge) m.charge = 1;
                     if (!m.silenced && m.handcard.card.Charge) m.charge = 1;
-                    if (m.charge == 0 && entitiy.HasCharge) m.charge = 1;
+                    if (m.charge == 0 && entity.HasCharge) m.charge = 1;
                     m.zonepos = zp;
 
-                    m.entitiyID = entitiy.EntityId;
+                    m.entityID = entity.EntityId;
 
                     if(m.name == CardDB.cardName.unknown) Helpfunctions.Instance.ErrorLog("unknown card error");
 
-                    Helpfunctions.Instance.ErrorLog(m.entitiyID + " ." + entitiy.CardId + ". " + m.name + " ready params ex: " + m.exhausted + " charge: " + m.charge + " attcksthisturn: " + m.numAttacksThisTurn + " playedthisturn " + m.playedThisTurn);
+                    Helpfunctions.Instance.ErrorLog(m.entityID + " ." + entity.CardId + ". " + m.name + " ready params ex: " + m.exhausted + " charge: " + m.charge + " attcksthisturn: " + m.numAttacksThisTurn + " playedthisturn " + m.playedThisTurn);
                     //Helpfunctions.Instance.ErrorLog("spellpower check " + entitiy.SpellPowerAttack + " " + entitiy.SpellPowerHealing + " " + entitiy.SpellPower);
 
 
@@ -1875,7 +1877,7 @@ namespace HREngine.Bots
 
                     }
 
-                    m.loadEnchantments(enchs, entitiy.ControllerId);
+                    m.loadEnchantments(enchs, entity.ControllerId);
 
 
 
@@ -1885,7 +1887,7 @@ namespace HREngine.Bots
                     m.updateReadyness();
 
 
-                    if (entitiy.ControllerId == this.ownPlayerController) // OWN minion
+                    if (entity.ControllerId == this.ownPlayerController) // OWN minion
                     {
                         m.own = true;
                         this.ownMinions.Add(m);

@@ -721,7 +721,7 @@
 
                         tempminion = createNewMinion(new Handmanager.Handcard(CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(minionid))), zp, true);
                         tempminion.own = true;
-                        tempminion.entitiyID = ent;
+                        tempminion.entityID = ent;
                         tempminion.handcard.entity = ent;
                         tempminion.Angr = attack;
                         tempminion.Hp = hp;
@@ -853,7 +853,7 @@
 
                         tempminion = createNewMinion(new Handmanager.Handcard(CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(minionid))), zp, false);
                         tempminion.own = false;
-                        tempminion.entitiyID = ent;
+                        tempminion.entityID = ent;
                         tempminion.handcard.entity = ent;
                         tempminion.Angr = attack;
                         tempminion.Hp = hp;
@@ -978,8 +978,8 @@
             this.enemyHero.own = false;
             this.ownHero.maxHp = this.ownheromaxhp;
             this.enemyHero.maxHp = this.enemyheromaxhp;
-            this.ownHero.entitiyID = ownHEntity;
-            this.enemyHero.entitiyID = enemyHEntity;
+            this.ownHero.entityID = ownHEntity;
+            this.enemyHero.entityID = enemyHEntity;
 
             this.ownHero.Angr = ownHeroAttack;
             this.ownHero.tempAttack = ownHeroTempAttack;//fix
@@ -1062,7 +1062,7 @@
             {
                 handcard = new Handmanager.Handcard(hc),
                 zonepos = zonepos,
-                entitiyID = hc.entity,
+                entityID = hc.entity,
                 Angr = hc.card.Attack,
                 Hp = hc.card.Health,
                 maxHp = hc.card.Health,
@@ -1073,7 +1073,7 @@
 
             m.own = own;
             m.isHero = false;
-            m.entitiyID = hc.entity;
+            m.entityID = hc.entity;
             m.playedThisTurn = true;
             m.numAttacksThisTurn = 0;
             m.windfury = hc.card.windfury;

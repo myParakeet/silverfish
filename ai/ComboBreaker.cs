@@ -389,16 +389,16 @@
             }
             catch
             {
-                Helpfunctions.Instance.logg("cant find _combo.txt");
-                Helpfunctions.Instance.ErrorLog("cant find _combo.txt (if you dont created your own combos, ignore this message)");
+                Helpfunctions.Instance.ErrorLog("cant find _combo.txt (if you didn't create your own combo file, ignore this message)");
                 return;
             }
-            Helpfunctions.Instance.logg("read _combo.txt...");
             Helpfunctions.Instance.ErrorLog("read _combo.txt...");
             foreach (string line in lines)
             {
                 string shortline = line.Replace(" ", "");
-                if(shortline.StartsWith("//")) continue;
+                if (shortline.StartsWith("//")) continue;
+                if (shortline.Length == 0) continue;
+
                 if (line.Contains("weapon:"))
                 {
                     try
@@ -407,7 +407,6 @@
                     }
                     catch
                     {
-                        Helpfunctions.Instance.logg("combomaker cant read: " + line);
                         Helpfunctions.Instance.ErrorLog("combomaker cant read: " + line);
                     }
                 }
@@ -426,7 +425,6 @@
                         }
                         catch
                         {
-                            Helpfunctions.Instance.logg("combomaker cant read: " + line);
                             Helpfunctions.Instance.ErrorLog("combomaker cant read: " + line);
                         }
                     }
@@ -439,14 +437,13 @@
                         }
                         catch
                         {
-                            Helpfunctions.Instance.logg("combomaker cant read: " + line);
                             Helpfunctions.Instance.ErrorLog("combomaker cant read: " + line);
                         }
                     }
                 }
-
             }
-
+            if (combos.Count > 0) Helpfunctions.Instance.ErrorLog(combos.Count + " combo rules found");
+            if (playByValue.Count > 0) Helpfunctions.Instance.ErrorLog(playByValue.Count + " card value rules found");
         }
 
         public int getPenalityForDestroyingCombo(CardDB.Card crd, Playfield p)

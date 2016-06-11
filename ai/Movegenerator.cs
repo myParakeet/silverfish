@@ -640,7 +640,7 @@
                     List<Minion> trgts = p.ownHeroAblility.card.getTargetsForCard(p);
                     if (isLethalCheck && (p.ownHeroName == HeroEnum.mage || (p.ownHeroName == HeroEnum.priest && (p.ownHeroAblility.card.name != CardDB.cardName.lesserheal || (p.ownHeroAblility.card.name == CardDB.cardName.lesserheal && p.anzOwnAuchenaiSoulpriest >= 1)))))// only target enemy hero during Lethal check!
                     {
-                        if (trgts.Count >= 1 && trgts[0].entitiyID == p.enemyHero.entitiyID)
+                        if (trgts.Count >= 1 && trgts[0].entityID == p.enemyHero.entityID)
                         {
                             trgts.Clear();
                             trgts.Add(p.enemyHero);

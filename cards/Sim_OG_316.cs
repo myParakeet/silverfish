@@ -16,7 +16,7 @@ namespace HREngine.Bots
             {
                 foreach (Minion m in (own.own) ? p.ownMinions.ToArray() : p.enemyMinions.ToArray())
                 {
-                    if (m.entitiyID == own.entitiyID) continue;
+                    if (m.entityID == own.entityID) continue;
                     pos = (own.own) ? p.ownMinions.Count : p.enemyMinions.Count;
                     if (pos > 6) break;
                     p.callKid(m.handcard.card, pos, own.own);

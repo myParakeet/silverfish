@@ -14,11 +14,11 @@ namespace HREngine.Bots
 		   {
 				foreach (Minion m in p.enemyMinions)
 				{
-				   if (triggerEffectMinion.entitiyID != m.entitiyID) p.minionGetDamageOrHeal(m, 1);
+				   if (triggerEffectMinion.entityID != m.entityID) p.minionGetDamageOrHeal(m, 1);
 				}
 				foreach (Minion m in p.ownMinions)
 				{
-				   if (triggerEffectMinion.entitiyID != m.entitiyID) p.minionGetDamageOrHeal(m, 1);
+				   if (triggerEffectMinion.entityID != m.entityID) p.minionGetDamageOrHeal(m, 1);
 				}
 		   }
 		}

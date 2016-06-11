@@ -2354,7 +2354,7 @@ namespace HREngine.Bots
             if (Enum.TryParse<cardIDEnum>(s, false, out CardEnum)) return CardEnum;
             else
             {
-                Helpfunctions.Instance.ErrorLog("[Unidentified card ID :" + s + "]");
+                Helpfunctions.Instance.ErrorLog("[Unidentified card ID: " + s + "]");
                 return CardDB.cardIDEnum.None;
             }
         }

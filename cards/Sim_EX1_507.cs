@@ -13,11 +13,11 @@ namespace HREngine.Bots
             p.anzMurlocWarleader++;
                 foreach (Minion m in p.ownMinions)
                 {
-                    if((TAG_RACE)m.handcard.card.race == TAG_RACE.MURLOC && own.entitiyID != m.entitiyID) p.minionGetBuffed(m, 2, 1);
+                    if((TAG_RACE)m.handcard.card.race == TAG_RACE.MURLOC && own.entityID != m.entityID) p.minionGetBuffed(m, 2, 1);
                 }
                 foreach (Minion m in p.enemyMinions)
                 {
-                    if ((TAG_RACE)m.handcard.card.race == TAG_RACE.MURLOC && own.entitiyID != m.entitiyID) p.minionGetBuffed(m, 2, 1);
+                    if ((TAG_RACE)m.handcard.card.race == TAG_RACE.MURLOC && own.entityID != m.entityID) p.minionGetBuffed(m, 2, 1);
                 }
 		}
 
@@ -26,11 +26,11 @@ namespace HREngine.Bots
             p.anzMurlocWarleader--;
                 foreach (Minion mn in p.ownMinions)
                 {
-                    if((TAG_RACE)mn.handcard.card.race == TAG_RACE.MURLOC && mn.entitiyID != m.entitiyID) p.minionGetBuffed(mn, -2, -1);
+                    if((TAG_RACE)mn.handcard.card.race == TAG_RACE.MURLOC && mn.entityID != m.entityID) p.minionGetBuffed(mn, -2, -1);
                 }
                 foreach (Minion mn in p.enemyMinions)
                 {
-                    if ((TAG_RACE)mn.handcard.card.race == TAG_RACE.MURLOC && mn.entitiyID != m.entitiyID) p.minionGetBuffed(mn, -2, -1);
+                    if ((TAG_RACE)mn.handcard.card.race == TAG_RACE.MURLOC && mn.entityID != m.entityID) p.minionGetBuffed(mn, -2, -1);
                 }
 		}
         

@@ -12,11 +12,11 @@ namespace HREngine.Bots
 		{
             foreach (Minion m in p.enemyMinions)
             {
-                if (own.entitiyID != m.entitiyID) p.minionGetDamageOrHeal(m, 1);
+                if (own.entityID != m.entityID) p.minionGetDamageOrHeal(m, 1);
             }
             foreach (Minion m in p.ownMinions)
             {
-                if (own.entitiyID != m.entitiyID) p.minionGetDamageOrHeal(m, 1);
+                if (own.entityID != m.entityID) p.minionGetDamageOrHeal(m, 1);
             }           
         }
 	}

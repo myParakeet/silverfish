@@ -232,7 +232,7 @@ namespace HREngine.Bots
                 if (!m.frozen && m.Angr >= 7)
                 {
                     List<Minion> myTaunts = p.ownMinions.FindAll(own => own.taunt);
-                    List<Minion> enemyAttackers = p.enemyMinions.FindAll(enm => enm.entitiyID != m.entitiyID && enm.Angr > 0 && !enm.frozen);
+                    List<Minion> enemyAttackers = p.enemyMinions.FindAll(enm => enm.entityID != m.entityID && enm.Angr > 0 && !enm.frozen);
                     int totalTauntHp = 0;
                     int totalAtkDmg = 0;
                     myTaunts.ForEach(taunt => totalTauntHp += taunt.Hp);

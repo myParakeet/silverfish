@@ -55,7 +55,7 @@
         public Dictionary<CardDB.cardName, int> priorityTargets = new Dictionary<CardDB.cardName, int>(); //enemy minions we want to kill
         public Dictionary<CardDB.cardName, int> specialMinions = new Dictionary<CardDB.cardName, int>(); //minions with cardtext, but no battlecry
 
-        private Dictionary<CardDB.cardName, int> discoverMinions = new Dictionary<CardDB.cardName, int>();
+        private Dictionary<CardDB.cardName, int> discoverCards = new Dictionary<CardDB.cardName, int>();
 
         Dictionary<CardDB.cardName, int> strongInspireEffectMinions = new Dictionary<CardDB.cardName, int>();
         Dictionary<CardDB.cardName, int> summonMinionSpellsDatabase = new Dictionary<CardDB.cardName, int>(); // spells/hero powers that summon minions immediately
@@ -108,7 +108,7 @@
         {
             int pen = 0;
             pen = getAttackSecretPenality(m, p, target);
-            if (!lethal && target.entitiyID == p.enemyHero.entitiyID && m.destroyOnOwnTurnEnd) pen += 50;
+            if (!lethal && target.entityID == p.enemyHero.entityID && m.destroyOnOwnTurnEnd) pen += 50;
             if (!lethal && m.name == CardDB.cardName.bloodimp) pen += 50;
             if (m.name == CardDB.cardName.leeroyjenkins)
             {
@@ -120,7 +120,7 @@
             }
 
             if (!lethal && target.isHero && !target.own && m.tempAttack >= 3
-                && p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entitiyID == m.entitiyID) != null)
+                && p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == m.entityID) != null)
             {
                 pen += 50;
             }
@@ -146,7 +146,7 @@
                 return 28;
             }
 
-            if (!leathal && target.entitiyID == p.enemyHero.entitiyID)
+            if (!leathal && target.entityID == p.enemyHero.entityID)
             {
                 if (p.ownWeaponAttack >= 1 && p.enemyHero.Hp >= enfacehp)
                 {
@@ -154,7 +154,7 @@
                     if (!(p.ownHeroName == HeroEnum.thief && p.ownWeaponAttack == 1)) return 50 + p.ownWeaponAttack;
                 }
 
-                if (p.ownHero.tempAttack > 0 && p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entitiyID == p.ownHero.entitiyID) != null)
+                if (p.ownHero.tempAttack > 0 && p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == p.ownHero.entityID) != null)
                 {
                     return 50;
                 }
@@ -2649,7 +2649,7 @@
             int val = getValueOfEnemyMinion(mnn);
             foreach (Minion m in p.enemyMinions)
             {
-                if (litt.Find(x => x.entitiyID == m.entitiyID) == null) continue;
+                if (litt.Find(x => x.entityID == m.entityID) == null) continue;
                 if (getValueOfEnemyMinion(m) < val) ret = false;
             }
             return ret;
@@ -3097,12 +3097,10 @@
             cardDrawBattleCryDatabase.Add(CardDB.cardName.maptothegoldenmonkey, 1);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.goldenmonkey, 1); //no carddraw, but new cards
 
-            cardDrawBattleCryDatabase.Add(CardDB.cardName.alightinthedarkness, 1);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.bloodwarriors, 1);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.cabaliststome, 3);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.darkshirelibrarian, 1);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.flameheart, 2);
-            cardDrawBattleCryDatabase.Add(CardDB.cardName.journeybelow, 1);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.kingsbloodtoxin, 1);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.markofyshaarj, 0);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.muklatyrantofthevale, 2);
@@ -3113,7 +3111,7 @@
 
 
             //add discover minions
-            foreach (CardDB.cardName discoverCard in this.discoverMinions.Keys)
+            foreach (CardDB.cardName discoverCard in this.discoverCards.Keys)
             {
                 cardDrawBattleCryDatabase.Add(discoverCard, 1);
             }
@@ -3919,18 +3917,18 @@
 
         private void setupDiscover()
         {
-            this.discoverMinions.Add(CardDB.cardName.tracking, 1);
-            this.discoverMinions.Add(CardDB.cardName.jeweledscarab, 1);
-            this.discoverMinions.Add(CardDB.cardName.ancientshade, 1);
-            this.discoverMinions.Add(CardDB.cardName.darkpeddler, 1);
-            this.discoverMinions.Add(CardDB.cardName.tombspider, 1);
-            this.discoverMinions.Add(CardDB.cardName.gorillabota3, 1);  // only if you have a mech
-            this.discoverMinions.Add(CardDB.cardName.etherealconjurer, 1);
-            this.discoverMinions.Add(CardDB.cardName.museumcurator, 1);
-            this.discoverMinions.Add(CardDB.cardName.ravenidol, 1);
-            this.discoverMinions.Add(CardDB.cardName.archthiefrafaam, 1);
-
-
+            discoverCards.Add(CardDB.cardName.tracking, 1);
+            discoverCards.Add(CardDB.cardName.jeweledscarab, 1);
+            discoverCards.Add(CardDB.cardName.ancientshade, 1);
+            discoverCards.Add(CardDB.cardName.darkpeddler, 1);
+            discoverCards.Add(CardDB.cardName.tombspider, 1);
+            discoverCards.Add(CardDB.cardName.gorillabota3, 1);  // only if you have a mech
+            discoverCards.Add(CardDB.cardName.etherealconjurer, 1);
+            discoverCards.Add(CardDB.cardName.museumcurator, 1);
+            discoverCards.Add(CardDB.cardName.ravenidol, 1);
+            discoverCards.Add(CardDB.cardName.archthiefrafaam, 1);
+            discoverCards.Add(CardDB.cardName.alightinthedarkness, 1);
+            discoverCards.Add(CardDB.cardName.journeybelow, 1);
         }
 
 

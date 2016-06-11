@@ -1254,14 +1254,14 @@
             for (int i = 0; i < this.ownMinions.Count; i++)
             {
                 Minion dis = this.ownMinions[i]; Minion pis = p.ownMinions[i];
-                if (dis.entitiyID != pis.entitiyID) Ai.Instance.updateEntitiy(pis.entitiyID, dis.entitiyID);
+                if (dis.entityID != pis.entityID) Ai.Instance.updateEntitiy(pis.entityID, dis.entityID);
 
             }
 
             for (int i = 0; i < this.enemyMinions.Count; i++)
             {
                 Minion dis = this.enemyMinions[i]; Minion pis = p.enemyMinions[i];
-                if (dis.entitiyID != pis.entitiyID) Ai.Instance.updateEntitiy(pis.entitiyID, dis.entitiyID);
+                if (dis.entityID != pis.entityID) Ai.Instance.updateEntitiy(pis.entityID, dis.entityID);
 
             }
             if (this.ownSecretsIDList.Count != p.ownSecretsIDList.Count)
@@ -1306,7 +1306,7 @@
                 Minion dis = this.ownMinions[i]; Minion pis = p.ownMinions[i];
                 //if (dis.entitiyID == 0) dis.entitiyID = pis.entitiyID;
                 //if (pis.entitiyID == 0) pis.entitiyID = dis.entitiyID;
-                if (dis.entitiyID != pis.entitiyID) minionbool = false;
+                if (dis.entityID != pis.entityID) minionbool = false;
                 if (dis.Angr != pis.Angr || dis.Hp != pis.Hp || dis.maxHp != pis.maxHp || dis.numAttacksThisTurn != pis.numAttacksThisTurn) minionbool = false;
                 if (dis.Ready != pis.Ready) minionbool = false; // includes frozen, exhaunted
                 if (dis.playedThisTurn != pis.playedThisTurn) minionbool = false;
@@ -1329,7 +1329,7 @@
                 Minion dis = this.enemyMinions[i]; Minion pis = p.enemyMinions[i];
                 //if (dis.entitiyID == 0) dis.entitiyID = pis.entitiyID;
                 //if (pis.entitiyID == 0) pis.entitiyID = dis.entitiyID;
-                if (dis.entitiyID != pis.entitiyID) minionbool = false;
+                if (dis.entityID != pis.entityID) minionbool = false;
                 if (dis.Angr != pis.Angr || dis.Hp != pis.Hp || dis.maxHp != pis.maxHp || dis.numAttacksThisTurn != pis.numAttacksThisTurn) minionbool = false;
                 if (dis.Ready != pis.Ready) minionbool = false; // includes frozen, exhaunted
                 if (dis.playedThisTurn != pis.playedThisTurn) minionbool = false;
@@ -1664,7 +1664,7 @@
                 }
                 foreach (Minion mnn in temp.ToArray())
                 {
-                    if (mnn.entitiyID == target.entitiyID)
+                    if (mnn.entityID == target.entityID)
                     {
                         mnn.cantLowerHPbelowONE = dontkill;
                         this.minionGetDamageOrHeal(mnn, damage1);
@@ -2747,7 +2747,7 @@
             {
                 foreach (Minion m in this.ownMinions)
                 {
-                    if (aa.target.entitiyID == m.entitiyID)
+                    if (aa.target.entityID == m.entityID)
                     {
                         trgt = m;
                         break;
@@ -2755,20 +2755,20 @@
                 }
                 foreach (Minion m in this.enemyMinions)
                 {
-                    if (aa.target.entitiyID == m.entitiyID)
+                    if (aa.target.entityID == m.entityID)
                     {
                         trgt = m;
                         break;
                     }
                 }
-                if (aa.target.entitiyID == this.ownHero.entitiyID) trgt = this.ownHero;
-                if (aa.target.entitiyID == this.enemyHero.entitiyID) trgt = this.enemyHero;
+                if (aa.target.entityID == this.ownHero.entityID) trgt = this.ownHero;
+                if (aa.target.entityID == this.enemyHero.entityID) trgt = this.enemyHero;
             }
             if (aa.own != null)
             {
                 foreach (Minion m in this.ownMinions)
                 {
-                    if (aa.own.entitiyID == m.entitiyID)
+                    if (aa.own.entityID == m.entityID)
                     {
                         o = m;
                         break;
@@ -2776,14 +2776,14 @@
                 }
                 foreach (Minion m in this.enemyMinions)
                 {
-                    if (aa.own.entitiyID == m.entitiyID)
+                    if (aa.own.entityID == m.entityID)
                     {
                         o = m;
                         break;
                     }
                 }
-                if (aa.own.entitiyID == this.ownHero.entitiyID) o = this.ownHero;
-                if (aa.own.entitiyID == this.enemyHero.entitiyID) o = this.enemyHero;
+                if (aa.own.entityID == this.ownHero.entityID) o = this.ownHero;
+                if (aa.own.entityID == this.enemyHero.entityID) o = this.enemyHero;
             }
 
             if (aa.card != null)
@@ -2833,7 +2833,7 @@
                     //search new target!
                     foreach (Minion m in this.ownMinions)
                     {
-                        if (m.entitiyID == newTarget)
+                        if (m.entityID == newTarget)
                         {
                             target = m;
                             break;
@@ -2841,14 +2841,14 @@
                     }
                     foreach (Minion m in this.enemyMinions)
                     {
-                        if (m.entitiyID == newTarget)
+                        if (m.entityID == newTarget)
                         {
                             target = m;
                             break;
                         }
                     }
-                    if (this.ownHero.entitiyID == newTarget) target = this.ownHero;
-                    if (this.enemyHero.entitiyID == newTarget) target = this.enemyHero;
+                    if (this.ownHero.entityID == newTarget) target = this.ownHero;
+                    if (this.enemyHero.entityID == newTarget) target = this.enemyHero;
                     //Helpfunctions.Instance.ErrorLog("missdirection target = " + target.entitiyID);
                 }
                 if (a.own.Hp >= 1) minionAttacksMinion(a.own, target);
@@ -3071,7 +3071,7 @@
                 }
             }
 
-            if (logging) Helpfunctions.Instance.logg("attck with weapon trgt: " + target.entitiyID);
+            if (logging) Helpfunctions.Instance.logg("attck with weapon trgt: " + target.entityID);
 
             // hero attacks enemy----------------------------------------------------------------------------------
 
@@ -3083,7 +3083,7 @@
                     //search new target!
                     foreach (Minion m in this.ownMinions)
                     {
-                        if (m.entitiyID == newTarget)
+                        if (m.entityID == newTarget)
                         {
                             target = m;
                             break;
@@ -3091,14 +3091,14 @@
                     }
                     foreach (Minion m in this.enemyMinions)
                     {
-                        if (m.entitiyID == newTarget)
+                        if (m.entityID == newTarget)
                         {
                             target = m;
                             break;
                         }
                     }
-                    if (this.ownHero.entitiyID == newTarget) target = this.ownHero;
-                    if (this.enemyHero.entitiyID == newTarget) target = this.enemyHero;
+                    if (this.ownHero.entityID == newTarget) target = this.ownHero;
+                    if (this.enemyHero.entityID == newTarget) target = this.enemyHero;
                 }
 
             }
@@ -3181,7 +3181,7 @@
                 //search new target!
                 foreach (Minion m in this.ownMinions)
                 {
-                    if (m.entitiyID == newTarget)
+                    if (m.entityID == newTarget)
                     {
                         target = m;
                         break;
@@ -3189,14 +3189,14 @@
                 }
                 foreach (Minion m in this.enemyMinions)
                 {
-                    if (m.entitiyID == newTarget)
+                    if (m.entityID == newTarget)
                     {
                         target = m;
                         break;
                     }
                 }
-                if (this.ownHero.entitiyID == newTarget) target = this.ownHero;
-                if (this.enemyHero.entitiyID == newTarget) target = this.enemyHero;
+                if (this.ownHero.entityID == newTarget) target = this.ownHero;
+                if (this.enemyHero.entityID == newTarget) target = this.enemyHero;
             }
             if (newTarget != -2) // trigger spell-secrets!
             {
@@ -3254,7 +3254,7 @@
                 //search new target!
                 foreach (Minion m in this.ownMinions)
                 {
-                    if (m.entitiyID == newTarget)
+                    if (m.entityID == newTarget)
                     {
                         target = m;
                         break;
@@ -3262,14 +3262,14 @@
                 }
                 foreach (Minion m in this.enemyMinions)
                 {
-                    if (m.entitiyID == newTarget)
+                    if (m.entityID == newTarget)
                     {
                         target = m;
                         break;
                     }
                 }
-                if (this.ownHero.entitiyID == newTarget) target = this.ownHero;
-                if (this.enemyHero.entitiyID == newTarget) target = this.enemyHero;
+                if (this.ownHero.entityID == newTarget) target = this.ownHero;
+                if (this.enemyHero.entityID == newTarget) target = this.enemyHero;
             }
             if (newTarget != -2) // trigger spell-secrets!
             {
@@ -5657,7 +5657,7 @@
             m.handcard = handc;
             m.own = own;
             m.isHero = false;
-            m.entitiyID = hc.entity;
+            m.entityID = hc.entity;
             m.Angr = hc.card.Attack + hc.addattack;
             m.Hp = hc.card.Health + hc.addHp;
 
@@ -6289,7 +6289,7 @@
             if (own)
             {
                 CardDB.Card c = m.handcard.card;
-                Handmanager.Handcard hc = new Handmanager.Handcard { card = c, position = this.owncards.Count + 1, entity = m.entitiyID, manacost = c.cost + manachange };
+                Handmanager.Handcard hc = new Handmanager.Handcard { card = c, position = this.owncards.Count + 1, entity = m.entityID, manacost = c.cost + manachange };
                 if (this.owncards.Count < 10)
                 {
                     this.owncards.Add(hc);
@@ -6306,7 +6306,7 @@
                 if (this.isServer)
                 {
                     CardDB.Card c = m.handcard.card;
-                    Handmanager.Handcard hc = new Handmanager.Handcard { card = c, position = this.owncards.Count + 1, entity = m.entitiyID, manacost = c.cost + manachange };
+                    Handmanager.Handcard hc = new Handmanager.Handcard { card = c, position = this.owncards.Count + 1, entity = m.entityID, manacost = c.cost + manachange };
                     if (this.EnemyCards.Count < 10)
                     {
                         this.EnemyCards.Add(hc);
@@ -6818,7 +6818,7 @@
                 if (m.taunt) attrib += " tnt";
                 if (m.Ready) attrib += " Ready";
                 if (m.stealth) attrib += " stlth";
-                Helpfunctions.Instance.logg("name,ang, hp: " + m.name + ", " + m.Angr + ", " + m.Hp + " " + m.entitiyID + attrib);
+                Helpfunctions.Instance.logg("name,ang, hp: " + m.name + ", " + m.Angr + ", " + m.Hp + " " + m.entityID + attrib);
             }
 
             Helpfunctions.Instance.logg("ENEMY MINIONS############");
@@ -6827,7 +6827,7 @@
                 String attrib = "";
                 if (m.taunt) attrib += " tnt";
                 if (m.stealth) attrib += " stlth";
-                Helpfunctions.Instance.logg("name,ang, hp: " + m.name + ", " + m.Angr + ", " + m.Hp + " " + m.entitiyID + attrib);
+                Helpfunctions.Instance.logg("name,ang, hp: " + m.name + ", " + m.Angr + ", " + m.Hp + " " + m.entityID + attrib);
             }
 
 
@@ -6836,16 +6836,16 @@
 
         public void printBoardDebug()
         {
-            Helpfunctions.Instance.logg("hero " + this.ownHero.Hp + " " + this.ownHero.armor + " " + this.ownHero.entitiyID);
-            Helpfunctions.Instance.logg("ehero " + this.enemyHero.Hp + " " + this.enemyHero.armor + " " + this.enemyHero.entitiyID);
+            Helpfunctions.Instance.logg("hero " + this.ownHero.Hp + " " + this.ownHero.armor + " " + this.ownHero.entityID);
+            Helpfunctions.Instance.logg("ehero " + this.enemyHero.Hp + " " + this.enemyHero.armor + " " + this.enemyHero.entityID);
             foreach (Minion m in ownMinions)
             {
-                Helpfunctions.Instance.logg(m.name + " " + m.entitiyID);
+                Helpfunctions.Instance.logg(m.name + " " + m.entityID);
             }
             Helpfunctions.Instance.logg("-");
             foreach (Minion m in enemyMinions)
             {
-                Helpfunctions.Instance.logg(m.name + " " + m.entitiyID);
+                Helpfunctions.Instance.logg(m.name + " " + m.entityID);
             }
             Helpfunctions.Instance.logg("-");
             foreach (Handmanager.Handcard hc in this.owncards)
@@ -7017,7 +7017,7 @@
             data += this.mobsPlayedThisTurn + " " + this.cardsPlayedThisTurn + " " + this.owedRecall + " " + ownPlayerController + " " + this.anzMinionsDiedThisTurn + " " + this.currentRecall + " " + this.enemyRecall + " " + this.heroPowerActivationsThisTurn +  " " +  this.lockAndLoads +"\r\n";
             data += this.anzOwnDragonConsort + " " + this.anzEnemyDragonConsort + " " + this.anzOwnLoatheb + " " + this.anzEnemyLoatheb + " " + ownmillhouse + " " + enemymillhouse + " " + ownKirinTorEffect + " " + ownPreparation+  " " + this.anzOwnSaboteur + " " + this.anzEnemySaboteur + " " +  this.anzOwnFencingCoach + "\r\n";
             data += "ownhero:" + "\r\n";
-            data += Hrtprozis.heroEnumtoName(this.ownHeroName)+ " " + this.ownHero.Hp + " " + this.ownHero.maxHp + " " + this.ownHero.armor + " " + this.ownHero.immuneWhileAttacking + " " + this.ownHero.immune + " " + this.ownHero.entitiyID + " " + this.ownHero.Ready + " " + this.ownHero.numAttacksThisTurn + " " + this.ownHero.frozen + " " + this.ownHero.Angr + " " + this.ownHero.tempAttack+ "\r\n";
+            data += Hrtprozis.heroEnumtoName(this.ownHeroName)+ " " + this.ownHero.Hp + " " + this.ownHero.maxHp + " " + this.ownHero.armor + " " + this.ownHero.immuneWhileAttacking + " " + this.ownHero.immune + " " + this.ownHero.entityID + " " + this.ownHero.Ready + " " + this.ownHero.numAttacksThisTurn + " " + this.ownHero.frozen + " " + this.ownHero.Angr + " " + this.ownHero.tempAttack+ "\r\n";
             data += "weapon: " + this.ownWeaponAttack + " " + this.ownWeaponDurability  + " " + this.ownWeaponName + "\r\n";
             data += "ability: " + this.ownAbilityReady + " " + this.ownHeroAblility.card.cardIDenum + " " +  this.ownHeroPowerUses + "\r\n";
             string secs = "";
@@ -7028,7 +7028,7 @@
             data += "osecrets: " + secs + "\r\n";
             data += "cthunbonus: " + this.anzOgOwnCThunAngrBonus + " " + this.anzOgOwnCThunHpBonus + " " + this.anzOgOwnCThunTaunt + "\r\n";
             data += "enemyhero:"+ "\r\n";
-            data += Hrtprozis.heroEnumtoName(this.enemyHeroName) + " " + this.enemyHero.Hp + " " + this.enemyHero.maxHp + " " + this.enemyHero.armor + " " + this.enemyHero.frozen + " " + this.enemyHero.immune + " " + this.enemyHero.entitiyID+ "\r\n";
+            data += Hrtprozis.heroEnumtoName(this.enemyHeroName) + " " + this.enemyHero.Hp + " " + this.enemyHero.maxHp + " " + this.enemyHero.armor + " " + this.enemyHero.frozen + " " + this.enemyHero.immune + " " + this.enemyHero.entityID+ "\r\n";
             data += "weapon: " + this.enemyWeaponAttack + " " + this.enemyWeaponDurability + " " + this.enemyWeaponName + "\r\n";
             data += "ability: " + "True" + " " + this.enemyHeroAblility.card.cardIDenum+ " " + this.enemyHeroPowerUses + "\r\n";
             data += "fatigue: " + this.ownDeckSize + " " + this.ownHeroFatigue + " " + this.enemyDeckSize + " " + this.enemyHeroFatigue + "\r\n";
@@ -7073,7 +7073,7 @@
 
         public string getMinionString(Minion m)
         {
-            string mini = m.name + " " + m.handcard.card.cardIDenum + " zp:" + m.zonepos + " e:" + m.entitiyID + " A:" + m.Angr + " H:" + m.Hp + " mH:" + m.maxHp + " rdy:" + m.Ready + " natt:" + m.numAttacksThisTurn;
+            string mini = m.name + " " + m.handcard.card.cardIDenum + " zp:" + m.zonepos + " e:" + m.entityID + " A:" + m.Angr + " H:" + m.Hp + " mH:" + m.maxHp + " rdy:" + m.Ready + " natt:" + m.numAttacksThisTurn;
             if (m.exhausted) mini += " ex";
             if (m.taunt) mini += " tnt";
             if (m.frozen) mini += " frz";

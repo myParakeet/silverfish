@@ -95,16 +95,15 @@ namespace HREngine.Bots
             }
             catch
             {
-                Helpfunctions.Instance.logg("cant find _mulligan.txt");
-                Helpfunctions.Instance.ErrorLog("cant find _mulligan.txt (if you dont created your own mulliganfile, ignore this message)");
+                Helpfunctions.Instance.ErrorLog("cant find _mulligan.txt (if you didn't create your own mulligan file, ignore this message)");
                 return;
             }
-            Helpfunctions.Instance.logg("read _mulligan.txt...");
             Helpfunctions.Instance.ErrorLog("read _mulligan.txt...");
             foreach (string line in lines)
             {
                 string shortline = line.Replace(" ", "");
                 if (shortline.StartsWith("//")) continue;
+                if (shortline.Length == 0) continue;
 
                 if (line.StartsWith("loser"))
                 {
@@ -128,7 +127,6 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.logg("mullimaker cant read: " + line);
                         Helpfunctions.Instance.ErrorLog("mullimaker cant read: " + line);
                     }
                     continue;
@@ -185,7 +183,6 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.logg("mullimaker cant read: " + line);
                         Helpfunctions.Instance.ErrorLog("mullimaker cant read: " + line);
                     }
                 }
@@ -224,7 +221,6 @@ namespace HREngine.Bots
                         }
                         catch
                         {
-                            Helpfunctions.Instance.logg("mullimaker cant read: " + line);
                             Helpfunctions.Instance.ErrorLog("mullimaker cant read: " + line);
                         }
                     }
@@ -236,6 +232,9 @@ namespace HREngine.Bots
 
             }
 
+            if (holdlist.Count > 0) Helpfunctions.Instance.ErrorLog(holdlist.Count + " hold rules found");
+            if (deletelist.Count > 0) Helpfunctions.Instance.ErrorLog(deletelist.Count + " discard rules found");
+            if (concedelist.Count > 0) Helpfunctions.Instance.ErrorLog(concedelist.Count + " concede rules found");
         }
 
         public bool hasmulliganrules(string ownclass, string enemclass)

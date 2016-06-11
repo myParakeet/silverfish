@@ -11,11 +11,11 @@ namespace HREngine.Bots
             p.anzGrimscaleOracle++;
             foreach (Minion m in p.ownMinions)
             {
-                if ((TAG_RACE)m.handcard.card.race == TAG_RACE.MURLOC && own.entitiyID != m.entitiyID) p.minionGetBuffed(m, 1, 0);
+                if ((TAG_RACE)m.handcard.card.race == TAG_RACE.MURLOC && own.entityID != m.entityID) p.minionGetBuffed(m, 1, 0);
             }
             foreach (Minion m in p.enemyMinions)
             {
-                if ((TAG_RACE)m.handcard.card.race == TAG_RACE.MURLOC && own.entitiyID != m.entitiyID) p.minionGetBuffed(m, 1, 0);
+                if ((TAG_RACE)m.handcard.card.race == TAG_RACE.MURLOC && own.entityID != m.entityID) p.minionGetBuffed(m, 1, 0);
             }
         }
 
@@ -24,11 +24,11 @@ namespace HREngine.Bots
             p.anzGrimscaleOracle--;
             foreach (Minion mn in p.ownMinions)
             {
-                if ((TAG_RACE)mn.handcard.card.race == TAG_RACE.MURLOC && mn.entitiyID != m.entitiyID) p.minionGetBuffed(m, -1, 0);
+                if ((TAG_RACE)mn.handcard.card.race == TAG_RACE.MURLOC && mn.entityID != m.entityID) p.minionGetBuffed(m, -1, 0);
             }
             foreach (Minion mn in p.enemyMinions)
             {
-                if ((TAG_RACE)mn.handcard.card.race == TAG_RACE.MURLOC && mn.entitiyID != m.entitiyID) p.minionGetBuffed(m, -1, 0);
+                if ((TAG_RACE)mn.handcard.card.race == TAG_RACE.MURLOC && mn.entityID != m.entityID) p.minionGetBuffed(m, -1, 0);
             }
         }
     }

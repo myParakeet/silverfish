@@ -421,7 +421,7 @@
             {
                 handcard = new Handmanager.Handcard(hc),
                 zonepos = id + 1,
-                entitiyID = hc.entity,
+                entityID = hc.entity,
                 Angr = hc.card.Attack,
                 Hp = hc.card.Health,
                 maxHp = hc.card.Health,

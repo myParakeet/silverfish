@@ -37,7 +37,7 @@ namespace HREngine.Bots
 
                 foreach (Minion m in p.ownMinions)
                 {
-                    if (m.entitiyID != survive.entitiyID)
+                    if (m.entityID != survive.entityID)
                     {
                         p.minionGetDestroyed(m);
                     }
@@ -67,7 +67,7 @@ namespace HREngine.Bots
 
                 foreach (Minion m in p.enemyMinions)
                 {
-                    if (m.entitiyID != survive.entitiyID)
+                    if (m.entityID != survive.entityID)
                     {
                         p.minionGetDestroyed(m);
                     }
@@ -82,13 +82,13 @@ namespace HREngine.Bots
                 if (m.Angr > maxat)
                 {
                     maxat = m.Angr;
-                    maxid = m.entitiyID;
+                    maxid = m.entityID;
                 }
             }
 
             foreach (Minion m in p.ownMinions)
             {
-                if (m.entitiyID!=maxid)
+                if (m.entityID!=maxid)
                 {
                     p.minionGetDestroyed(m);
                 }
@@ -101,13 +101,13 @@ namespace HREngine.Bots
                 if (m.Angr > maxat)
                 {
                     maxat = m.Angr;
-                    maxid = m.entitiyID;
+                    maxid = m.entityID;
                 }
             }
 
             foreach (Minion m in p.enemyMinions)
             {
-                if (m.entitiyID != maxid)
+                if (m.entityID != maxid)
                 {
                     p.minionGetDestroyed(m);
                 }

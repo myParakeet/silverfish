@@ -1038,20 +1038,20 @@
                     if (hcard.card.type == CardDB.cardtype.SPELL) usedspell = true;
                     int entityOfLastAffected = Silverfish.getCardTarget(hcard.entity);
                     if (entityOfLastAffected >= 1) lastEffectedIsMinion = 2;
-                    if (entityOfLastAffected == p.enemyHero.entitiyID) lastEffectedIsMinion = 1;
+                    if (entityOfLastAffected == p.enemyHero.entityID) lastEffectedIsMinion = 1;
                 }
 
                 if (hcard != null && hcard.card.type == CardDB.cardtype.MOB)
                 {
                     int entityOfLastAffected = Silverfish.getLastAffected(hcard.entity);
                     if (entityOfLastAffected >= 1) lastEffectedIsMinion = 2;
-                    if (entityOfLastAffected == p.enemyHero.entitiyID && (p.enemyHero.Hp < old.enemyHero.Hp || p.enemyHero.immune)) lastEffectedIsMinion = 1;
+                    if (entityOfLastAffected == p.enemyHero.entityID && (p.enemyHero.Hp < old.enemyHero.Hp || p.enemyHero.immune)) lastEffectedIsMinion = 1;
 
                     entityOfLastAffected = Silverfish.getCardTarget(hcard.entity);
                     if (entityOfLastAffected >= 1)
                     {
                         lastEffectedIsMinion = 2;
-                        if (entityOfLastAffected == p.enemyHero.entitiyID) lastEffectedIsMinion = 1;
+                        if (entityOfLastAffected == p.enemyHero.entityID) lastEffectedIsMinion = 1;
                     }
                 }
             }

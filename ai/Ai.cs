@@ -13,7 +13,7 @@
         public int playaroundprob2 = 80;
 
 
-        private bool usePenalityManager = true;
+        private bool usePenaltyManager = true;
         private bool useCutingTargets = true;
         private bool dontRecalc = true;
         private bool useLethalCheck = true;
@@ -237,7 +237,7 @@
                     case actionEnum.attackWithMinion:
                         foreach (Minion m in tmpPf.ownMinions)
                         {
-                            if (m.entitiyID == a.own.entitiyID)
+                            if (m.entityID == a.own.entityID)
                             {
                                 if (!a.own.Ready) return;
                                 found = true;
@@ -261,7 +261,7 @@
                 bestplay.playactions.Clear();
                 bestActions.Clear();
                 bestplay.playactions.AddRange(reorderedActions);
-                help.logg("Reordered actions:");
+                Helpfunctions.Instance.logg("Reordered actions:");
 
                 foreach (Action a in bestplay.playactions)
                 {
@@ -275,15 +275,23 @@
         {
             int trackingchoice = 0;
             int trackingstatus = 0;
-            //wich choice-card to draw?
-            if (mainTurnSimulator.bestboard.selectedChoice >= 1)
+            //which choice-card to draw?
+            int choice = Discovery.Instance.getChoice(mainTurnSimulator.bestboard);
+            if (choice >= 1)
+            {
+                trackingchoice = choice;
+                //Helpfunctions.Instance.ErrorLog("discovering using user choice..." + trackingchoice);
+                trackingstatus = 3;
+            }
+
+            if (trackingchoice == 0 && mainTurnSimulator.bestboard.selectedChoice >= 1)
             {
                 trackingchoice = mainTurnSimulator.bestboard.selectedChoice;
-                //Helpfunctions.Instance.logg("discovering using optimal choice..." + trackingchoice);
+                //Helpfunctions.Instance.ErrorLog("discovering using optimal choice..." + trackingchoice);
                 trackingstatus = 0;
             }
 
-            //TODO: select card based on mana + usefullness?
+            //TODO: select card based on mana + usefulness?
 
             if (trackingchoice == 0)
             {
@@ -294,7 +302,7 @@
                     if (trackingchoice == 0 && tc.selectedChoice >= 1) trackingchoice = tc.selectedChoice;
                 }
                 if (trackingchoice >= 1) trackingstatus = 1;//use tracking of other board
-                //if (trackingchoice >= 1) Helpfunctions.Instance.logg("discovering using suboptimal choice..." + trackingchoice);
+                //if (trackingchoice >= 1) Helpfunctions.Instance.ErrorLog("discovering using suboptimal choice..." + trackingchoice);
             }
 
             if (trackingchoice == 0)
@@ -302,7 +310,7 @@
                 //random card
                 Random randovar = new Random();
                 trackingchoice = randovar.Next(1, Handmanager.Instance.getNumberChoices() + 1);
-                //if (trackingchoice >= 1) Helpfunctions.Instance.logg("discovering using random choice..." + trackingchoice);
+                //if (trackingchoice >= 1) Helpfunctions.Instance.ErrorLog("discovering using random choice..." + trackingchoice);
                 trackingstatus = 2;//use random card
             }
 
@@ -444,7 +452,7 @@
             }
             else
             {
-                help.logg("Leathal-check###########");
+                help.logg("Lethal-check###########");
                 bestmoveValue = -1000000;
                 DateTime strt = DateTime.Now;
                 if (useLethalCheck)
@@ -699,17 +707,17 @@
             {
                 foreach (Minion m in this.nextMoveGuess.ownMinions)
                 {
-                    if (m.entitiyID == old) m.entitiyID = newone;
+                    if (m.entityID == old) m.entityID = newone;
                 }
                 foreach (Minion m in this.nextMoveGuess.enemyMinions)
                 {
-                    if (m.entitiyID == old) m.entitiyID = newone;
+                    if (m.entityID == old) m.entityID = newone;
                 }
             }
             foreach (Action a in this.bestActions)
             {
-                if (a.own != null && a.own.entitiyID == old) a.own.entitiyID = newone;
-                if (a.target != null && a.target.entitiyID == old) a.target.entitiyID = newone;
+                if (a.own != null && a.own.entityID == old) a.own.entityID = newone;
+                if (a.target != null && a.target.entityID == old) a.target.entityID = newone;
                 if (a.card != null && a.card.entity == old) a.card.entity = newone;
             }
 

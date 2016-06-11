@@ -42,7 +42,7 @@
         public TAG_CLASS cardClass = TAG_CLASS.INVALID;
         public int synergy = 0;
         public Handmanager.Handcard handcard;
-        public int entitiyID = -1;
+        public int entityID = -1;
         //public int id = -1;//delete this
         public int zonepos = 0;
         public CardDB.Card deathrattle2;
@@ -126,7 +126,7 @@
             this.synergy = m.synergy;
             this.handcard = m.handcard;//new?
             this.deathrattle2 = m.deathrattle2;
-            this.entitiyID = m.entitiyID;
+            this.entityID = m.entityID;
             this.zonepos = m.zonepos;
 
             this.allreadyAttacked = m.allreadyAttacked;
@@ -549,7 +549,7 @@
 
             if (p.diedMinions != null)
             {
-                GraveYardItem gyi = new GraveYardItem(this.handcard.card.cardIDenum, this.entitiyID, this.own);
+                GraveYardItem gyi = new GraveYardItem(this.handcard.card.cardIDenum, this.entityID, this.own);
                 p.diedMinions.Add(gyi);
             }
             p.anzMinionsDiedThisTurn++;

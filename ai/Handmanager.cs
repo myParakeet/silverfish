@@ -49,7 +49,7 @@
 
         public List<Handcard> handCards = new List<Handcard>();
 
-        List<Handcard> handcardchoices = new List<Handcard>();
+        public List<Handcard> handcardchoices = new List<Handcard>();
 
         public int anzcards = 0;
 

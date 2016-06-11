@@ -68,7 +68,7 @@ namespace HREngine.Bots
 
                 if (targetEnt >= 0)
                 {
-                    Minion m = new Minion { entitiyID = targetEnt };
+                    Minion m = new Minion { entityID = targetEnt };
                     this.target = m;
                 }
                 else
@@ -93,11 +93,11 @@ namespace HREngine.Bots
 
                 this.card = null;
 
-                Minion m = new Minion { entitiyID = targetEnt };
+                Minion m = new Minion { entityID = targetEnt };
                 this.target = m;
 
                 Minion o = new Minion();
-                o.entitiyID = ownEnt;
+                o.entityID = ownEnt;
                 this.own = o;
             }
 
@@ -112,7 +112,7 @@ namespace HREngine.Bots
 
                 this.card = null;
 
-                Minion m = new Minion { entitiyID = targetEnt };
+                Minion m = new Minion { entityID = targetEnt };
                 this.target = m;
 
                 this.own = p.ownHero;
@@ -130,7 +130,7 @@ namespace HREngine.Bots
 
                 this.card = null;
 
-                Minion m = new Minion { entitiyID = targetEnt };
+                Minion m = new Minion { entityID = targetEnt };
                 this.target = m;
 
                 this.own = null;
@@ -181,7 +181,7 @@ namespace HREngine.Bots
                     playaction += "id " + this.card.entity;
                     if (this.target != null)
                     {
-                        playaction += " target " + this.target.entitiyID;
+                        playaction += " target " + this.target.entityID;
                     }
 
                     if (this.place >= 0)
@@ -195,18 +195,18 @@ namespace HREngine.Bots
                 }
                 if (this.actionType == actionEnum.attackWithMinion)
                 {
-                    help.writeToBuffer("attack " + this.own.entitiyID + " enemy " + this.target.entitiyID + discover);
+                    help.writeToBuffer("attack " + this.own.entityID + " enemy " + this.target.entityID + discover);
                 }
                 if (this.actionType == actionEnum.attackWithHero)
                 {
-                    help.writeToBuffer("heroattack " + this.target.entitiyID + discover);
+                    help.writeToBuffer("heroattack " + this.target.entityID + discover);
                 }
                 if (this.actionType == actionEnum.useHeroPower)
                 {
 
                     if (this.target != null)
                     {
-                        help.writeToBuffer("useability on target " + this.target.entitiyID + discover);
+                        help.writeToBuffer("useability on target " + this.target.entityID + discover);
                     }
                     else
                     {
@@ -222,7 +222,7 @@ namespace HREngine.Bots
                 playaction += "id " + this.card.entity;
                 if (this.target != null)
                 {
-                    playaction += " target " + this.target.entitiyID;
+                    playaction += " target " + this.target.entityID;
                 }
 
                 if (this.place >= 0)
@@ -236,18 +236,18 @@ namespace HREngine.Bots
             }
             if (this.actionType == actionEnum.attackWithMinion)
             {
-                help.logg("attacker: " + this.own.entitiyID + " enemy: " + this.target.entitiyID + discover);
+                help.logg("attacker: " + this.own.entityID + " enemy: " + this.target.entityID + discover);
             }
             if (this.actionType == actionEnum.attackWithHero)
             {
-                help.logg("attack with hero, enemy: " + this.target.entitiyID + discover);
+                help.logg("attack with hero, enemy: " + this.target.entityID + discover);
             }
             if (this.actionType == actionEnum.useHeroPower)
             {
                 help.logg("useability " + discover);
                 if (this.target != null)
                 {
-                    help.logg("on enemy: " + this.target.entitiyID + discover);
+                    help.logg("on enemy: " + this.target.entityID + discover);
                 }
             }
             help.logg("");

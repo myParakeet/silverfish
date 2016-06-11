@@ -202,6 +202,7 @@ namespace HREngine.Bots
             }
             PenalityManager.Instance.setCombos();
             Mulligan m = Mulligan.Instance; // read the mulligan list
+            Discovery d = Discovery.Instance; // read the discover list
         }
 
         public void setnewLoggFile()
