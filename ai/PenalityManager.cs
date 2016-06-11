@@ -1713,6 +1713,17 @@
             }*/
 
 
+            switch (card.name)
+            {
+                case CardDB.cardName.twilightdarkmender:
+                case CardDB.cardName.twinemperorveklor:
+                case CardDB.cardName.klaxxiamberweaver:
+                case CardDB.cardName.ancientshieldbearer:
+                    if ((p.anzOgOwnCThunAngrBonus + 6) > 9) return 20;
+                    break;
+            }
+
+
 
             //if (card.name == CardDB.cardName.unstableportal && p.owncards.Count <= 9) return -15;
 
