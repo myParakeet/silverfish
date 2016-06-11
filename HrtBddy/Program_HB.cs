@@ -57,7 +57,7 @@ namespace HREngine.Bots
 
     public class Silverfish
     {
-        public string versionnumber = "119.0SE";
+        public string versionnumber = "120.0SE";
         private bool singleLog = false;
         private string botbehave = "rush";
         public bool waitingForSilver = false;
@@ -183,6 +183,7 @@ namespace HREngine.Bots
             Helpfunctions.Instance.ErrorLog("setlogpath to:" + path);
             PenalityManager.Instance.setCombos();
             Mulligan m = Mulligan.Instance; // read the mulligan list
+            Discovery d = Discovery.Instance; // read the discover list
         }
 
         public void setnewLoggFile()
@@ -239,7 +240,7 @@ namespace HREngine.Bots
                 if (m.Hp >= 1) this.numOptionPlayedThisTurn += m.numAttacksThisTurn;
             }
 
-            Hrtprozis.Instance.updatePlayer(this.ownMaxMana, this.currentMana, this.cardsPlayedThisTurn, this.numMinionsPlayedThisTurn, this.numOptionPlayedThisTurn, this.ownOverload, ownHero.entitiyID, enemyHero.entitiyID, this.numberMinionsDiedThisTurn, this.ownCurrentOverload, this.enemyOverload, this.heroPowerUsesThisTurn,this.lockandload);
+            Hrtprozis.Instance.updatePlayer(this.ownMaxMana, this.currentMana, this.cardsPlayedThisTurn, this.numMinionsPlayedThisTurn, this.numOptionPlayedThisTurn, this.ownOverload, ownHero.entityID, enemyHero.entityID, this.numberMinionsDiedThisTurn, this.ownCurrentOverload, this.enemyOverload, this.heroPowerUsesThisTurn,this.lockandload);
             Hrtprozis.Instance.setPlayereffects(this.ownDragonConsort, this.enemyDragonConsort, this.ownLoathebs, this.enemyLoathebs, this.ownMillhouse, this.enemyMillhouse, this.ownKirintor, this.ownPrepa, this.ownsabo, this.enemysabo, this.ownFenciCoaches, this.enemyCursedCardsInHand);
             Hrtprozis.Instance.updateSecretStuff(this.ownSecretList, this.enemySecretCount);
 
@@ -524,8 +525,8 @@ namespace HREngine.Bots
             this.enemyHero.own = false;
             this.ownHero.maxHp = ownhero.Health;
             this.enemyHero.maxHp = enemyhero.Health;
-            this.ownHero.entitiyID = ownhero.EntityId;
-            this.enemyHero.entitiyID = enemyhero.EntityId;
+            this.ownHero.entityID = ownhero.EntityId;
+            this.enemyHero.entityID = enemyhero.EntityId;
 
             this.ownHero.Angr = heroAtk;
             this.ownHero.Hp = heroHp;
@@ -550,7 +551,7 @@ namespace HREngine.Bots
             List<miniEnch> miniEnchlist = new List<miniEnch>();
             foreach (HSCard ent in allEntitys)
             {
-                if (ent.GetTag(GAME_TAG.ATTACHED) == this.ownHero.entitiyID && ent.GetZone() == Triton.Game.Mapping.TAG_ZONE.PLAY)
+                if (ent.GetTag(GAME_TAG.ATTACHED) == this.ownHero.entityID && ent.GetZone() == Triton.Game.Mapping.TAG_ZONE.PLAY)
                 {
                     CardDB.cardIDEnum id = CardDB.Instance.cardIdstringToEnum(ent.Id);
                     int controler = ent.ControllerId;
@@ -566,7 +567,7 @@ namespace HREngine.Bots
 
             foreach (HSCard ent in allEntitys)
             {
-                if (ent.GetTag(GAME_TAG.ATTACHED) == this.enemyHero.entitiyID && ent.GetZone() == Triton.Game.Mapping.TAG_ZONE.PLAY)
+                if (ent.GetTag(GAME_TAG.ATTACHED) == this.enemyHero.entityID && ent.GetZone() == Triton.Game.Mapping.TAG_ZONE.PLAY)
                 {
                     CardDB.cardIDEnum id = CardDB.Instance.cardIdstringToEnum(ent.Id);
                     int controler = ent.ControllerId;
@@ -688,68 +689,68 @@ namespace HREngine.Bots
 
             foreach (HSCard item in list)
             {
-                HSCard entitiy = item;
-                int zp = entitiy.ZonePosition;
+                HSCard entity = item;
+                int zp = entity.ZonePosition;
 
-                if (entitiy.IsMinion && zp >= 1)
+                if (entity.IsMinion && zp >= 1)
                 {
                     //Helpfunctions.Instance.ErrorLog("zonepos " + zp);
-                    CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(entitiy.Id));
+                    CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(entity.Id));
                     Minion m = new Minion();
                     m.name = c.name;
                     m.handcard.card = c;
-                    m.Angr = entitiy.GetTag(GAME_TAG.ATK);
-                    m.maxHp = entitiy.GetTag(GAME_TAG.HEALTH);
-                    m.Hp = m.maxHp - entitiy.GetTag(GAME_TAG.DAMAGE);
+                    m.Angr = entity.GetTag(GAME_TAG.ATK);
+                    m.maxHp = entity.GetTag(GAME_TAG.HEALTH);
+                    m.Hp = m.maxHp - entity.GetTag(GAME_TAG.DAMAGE);
                     if (m.Hp <= 0) continue;
                     m.wounded = false;
                     if (m.maxHp > m.Hp) m.wounded = true;
 
 
-                    m.exhausted = entitiy.IsExhausted;
+                    m.exhausted = entity.IsExhausted;
 
-                    m.taunt = (entitiy.HasTaunt);
+                    m.taunt = (entity.HasTaunt);
 
-                    m.numAttacksThisTurn = entitiy.GetTag(GAME_TAG.NUM_ATTACKS_THIS_TURN);
+                    m.numAttacksThisTurn = entity.GetTag(GAME_TAG.NUM_ATTACKS_THIS_TURN);
 
-                    int temp = entitiy.GetTag(GAME_TAG.NUM_TURNS_IN_PLAY);
+                    int temp = entity.GetTag(GAME_TAG.NUM_TURNS_IN_PLAY);
                     m.playedThisTurn = (temp == 0) ? true : false;
 
-                    m.windfury = (entitiy.HasWindfury);
+                    m.windfury = (entity.HasWindfury);
 
-                    m.frozen = (entitiy.IsFrozen);
+                    m.frozen = (entity.IsFrozen);
 
-                    m.divineshild = (entitiy.HasDivineShield);
+                    m.divineshild = (entity.HasDivineShield);
 
-                    m.stealth = (entitiy.IsStealthed);
+                    m.stealth = (entity.IsStealthed);
 
-                    m.poisonous = (entitiy.IsPoisonous);
+                    m.poisonous = (entity.IsPoisonous);
 
-                    m.immune = (entitiy.IsImmune);
+                    m.immune = (entity.IsImmune);
 
-                    m.silenced = entitiy.IsSilenced;
+                    m.silenced = entity.IsSilenced;
 
-                    m.spellpower = entitiy.GetTag(GAME_TAG.SPELLPOWER);
+                    m.spellpower = entity.GetTag(GAME_TAG.SPELLPOWER);
 
                     m.charge = 0;
 
-                    if (!m.silenced && m.name == CardDB.cardName.southseadeckhand && entitiy.HasCharge) m.charge = 1;
+                    if (!m.silenced && m.name == CardDB.cardName.southseadeckhand && entity.HasCharge) m.charge = 1;
                     if (!m.silenced && m.handcard.card.Charge) m.charge = 1;
-                    if (m.charge == 0 && entitiy.HasCharge) m.charge = 1;
+                    if (m.charge == 0 && entity.HasCharge) m.charge = 1;
                     m.zonepos = zp;
 
-                    m.entitiyID = entitiy.EntityId;
+                    m.entityID = entity.EntityId;
 
                     if(m.name == CardDB.cardName.unknown) Helpfunctions.Instance.ErrorLog("unknown card error");
 
-                    Helpfunctions.Instance.ErrorLog(m.entitiyID + " ." + entitiy.Id + ". " + m.name + " ready params ex: " + m.exhausted + " charge: " + m.charge + " attcksthisturn: " + m.numAttacksThisTurn + " playedthisturn " + m.playedThisTurn);
-                    //Helpfunctions.Instance.ErrorLog("spellpower check " + entitiy.SpellPowerAttack + " " + entitiy.SpellPowerHealing + " " + entitiy.SpellPower);
+                    Helpfunctions.Instance.ErrorLog(m.entityID + " ." + entity.Id + ". " + m.name + " ready params ex: " + m.exhausted + " charge: " + m.charge + " attcksthisturn: " + m.numAttacksThisTurn + " playedthisturn " + m.playedThisTurn);
+                    //Helpfunctions.Instance.ErrorLog("spellpower check " + entity.SpellPowerAttack + " " + entity.SpellPowerHealing + " " + entity.SpellPower);
 
 
                     List<miniEnch> enchs = new List<miniEnch>();
                     /*foreach (Entity ent in allEntitys.Values)
                     {
-                        if (ent.Attached == m.entitiyID && ent.Zone == HSRangerLib.TAG_ZONE.PLAY)
+                        if (ent.Attached == m.entityID && ent.Zone == HSRangerLib.TAG_ZONE.PLAY)
                         {
                             CardDB.cardIDEnum id = CardDB.Instance.cardIdstringToEnum(ent.CardId);
                             int creator = ent.CreatorId;
@@ -768,7 +769,7 @@ namespace HREngine.Bots
 
                     }
 
-                    m.loadEnchantments(enchs, entitiy.ControllerId);
+                    m.loadEnchantments(enchs, entity.ControllerId);
 
 
 
@@ -778,7 +779,7 @@ namespace HREngine.Bots
                     m.updateReadyness();
 
 
-                    if (entitiy.ControllerId == this.ownPlayerController) // OWN minion
+                    if (entity.ControllerId == this.ownPlayerController) // OWN minion
                     {
                         m.own = true;
                         this.ownMinions.Add(m);
@@ -848,24 +849,24 @@ namespace HREngine.Bots
             foreach (HSCard item in allEntitys)
             {
 
-                HSCard entitiy = item;
+                HSCard entity = item;
 
-                if (entitiy.ControllerId == this.ownPlayerController && entitiy.ZonePosition >= 1 && entitiy.GetZone() == Triton.Game.Mapping.TAG_ZONE.HAND) // own handcard
+                if (entity.ControllerId == this.ownPlayerController && entity.ZonePosition >= 1 && entity.GetZone() == Triton.Game.Mapping.TAG_ZONE.HAND) // own handcard
                 {
-                    CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(entitiy.Id));
+                    CardDB.Card c = CardDB.Instance.getCardDataFromID(CardDB.Instance.cardIdstringToEnum(entity.Id));
 
-                    //c.cost = entitiy.GetCost();
-                    //c.entityID = entitiy.GetEntityId();
+                    //c.cost = entity.GetCost();
+                    //c.entityID = entity.GetEntityId();
 
                     Handmanager.Handcard hc = new Handmanager.Handcard();
                     hc.card = c;
-                    hc.position = entitiy.ZonePosition;
-                    hc.entity = entitiy.EntityId;
-                    hc.manacost = entitiy.Cost;
+                    hc.position = entity.ZonePosition;
+                    hc.entity = entity.EntityId;
+                    hc.manacost = entity.Cost;
                     hc.addattack = 0;
-                    //Helpfunctions.Instance.ErrorLog("hc "+ entitiy.ZonePosition + " ." + entitiy.CardId + ". " + entitiy.Cost + "  " + c.name);
-                    int attackchange = entitiy.GetTag(GAME_TAG.ATK) - c.Attack;
-                    int hpchange = entitiy.GetTag(GAME_TAG.HEALTH) - c.Health;
+                    //Helpfunctions.Instance.ErrorLog("hc "+ entity.ZonePosition + " ." + entity.CardId + ". " + entity.Cost + "  " + c.name);
+                    int attackchange = entity.GetTag(GAME_TAG.ATK) - c.Attack;
+                    int hpchange = entity.GetTag(GAME_TAG.HEALTH) - c.Health;
                     hc.addattack = attackchange;
                     hc.addHp = hpchange;
 

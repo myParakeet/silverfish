@@ -992,6 +992,7 @@ def Execute():
                     //detect which choice
 
                     int trackingchoice = Ai.Instance.bestTracking;
+                    if (Ai.Instance.bestTrackingStatus == 3) Helpfunctions.Instance.logg("discovering using user choice..." + trackingchoice);
                     if (Ai.Instance.bestTrackingStatus == 0) Helpfunctions.Instance.logg("discovering using optimal choice..." + trackingchoice);
                     if (Ai.Instance.bestTrackingStatus == 1) Helpfunctions.Instance.logg("discovering using suboptimal choice..." + trackingchoice);
                     if (Ai.Instance.bestTrackingStatus == 2) Helpfunctions.Instance.logg("discovering using random choice..." + trackingchoice);
@@ -1026,7 +1027,7 @@ def Execute():
                 HSCard cardtoplay = getCardWithNumber(moveTodo.card.entity);
                 if (moveTodo.target != null)
                 {
-                    HSCard target = getEntityWithNumber(moveTodo.target.entitiyID);
+                    HSCard target = getEntityWithNumber(moveTodo.target.entityID);
                     Helpfunctions.Instance.ErrorLog("play: " + cardtoplay.Name + " target: " + target.Name +
                                                     " targetEnt " + target.EntityId);
                     Helpfunctions.Instance.logg("play: " + cardtoplay.Name + " target: " + target.Name + " choice: " +
@@ -1034,14 +1035,14 @@ def Execute():
 
                     if (moveTodo.druidchoice >= 1)
                     {
-                        dirtytarget = moveTodo.target.entitiyID;
+                        dirtytarget = moveTodo.target.entityID;
                         dirtychoice = moveTodo.druidchoice; //1=leftcard, 2= rightcard
                         choiceCardId = moveTodo.card.card.cardIDenum.ToString();
                     }
 
                     //safe targeting stuff for hsbuddy
                     dirtyTargetSource = moveTodo.card.entity;
-                    dirtytarget = moveTodo.target.entitiyID;
+                    dirtytarget = moveTodo.target.entityID;
 
 
                     //we can place mobs (if api supports it)
@@ -1120,8 +1121,8 @@ def Execute():
             //attack with minion
             if (moveTodo.actionType == actionEnum.attackWithMinion)
             {
-                HSCard attacker = getEntityWithNumber(moveTodo.own.entitiyID);
-                HSCard target = getEntityWithNumber(moveTodo.target.entitiyID);
+                HSCard attacker = getEntityWithNumber(moveTodo.own.entityID);
+                HSCard target = getEntityWithNumber(moveTodo.target.entityID);
                 Helpfunctions.Instance.ErrorLog("minion attack: " + attacker.Name + " target: " + target.Name);
                 Helpfunctions.Instance.logg("minion attack: " + attacker.Name + " target: " + target.Name);
 
@@ -1134,15 +1135,15 @@ def Execute():
             //attack with hero
             if (moveTodo.actionType == actionEnum.attackWithHero)
             {
-                HSCard attacker = getEntityWithNumber(moveTodo.own.entitiyID);
-                HSCard target = getEntityWithNumber(moveTodo.target.entitiyID);
-                dirtytarget = moveTodo.target.entitiyID;
+                HSCard attacker = getEntityWithNumber(moveTodo.own.entityID);
+                HSCard target = getEntityWithNumber(moveTodo.target.entityID);
+                dirtytarget = moveTodo.target.entityID;
                 Helpfunctions.Instance.ErrorLog("heroattack: " + attacker.Name + " target: " + target.Name);
                 Helpfunctions.Instance.logg("heroattack: " + attacker.Name + " target: " + target.Name);
 
                 //safe targeting stuff for hsbuddy
-                dirtyTargetSource = moveTodo.own.entitiyID;
-                dirtytarget = moveTodo.target.entitiyID;
+                dirtyTargetSource = moveTodo.own.entityID;
+                dirtytarget = moveTodo.target.entityID;
                 await attacker.DoAttack(target);
 				await Coroutine.Sleep(250);
                 return;
@@ -1158,9 +1159,9 @@ def Execute():
 
                 if (moveTodo.target != null)
                 {
-                    HSCard target = getEntityWithNumber(moveTodo.target.entitiyID);
+                    HSCard target = getEntityWithNumber(moveTodo.target.entityID);
                     dirtyTargetSource = 9000;
-                    dirtytarget = moveTodo.target.entitiyID;
+                    dirtytarget = moveTodo.target.entityID;
 
                     Helpfunctions.Instance.ErrorLog("use ablitiy: " + cardtoplay.Name + " target " + target.Name);
                     Helpfunctions.Instance.logg("use ablitiy: " + cardtoplay.Name + " target " + target.Name);

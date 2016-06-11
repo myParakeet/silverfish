@@ -84,7 +84,7 @@ as well as
         public class CardIDEntity
         {
             public CardDB.cardIDEnum id = CardDB.cardIDEnum.None;
-            public int entitiy = 0;
+            public int entity = 0;
             public int hold = 0;
             public int holdByRule = 0;
             public int holdByManarule = 1;
@@ -92,7 +92,7 @@ as well as
             public CardIDEntity(string id_string, int entt)
             {
                 this.id = CardDB.Instance.cardIdstringToEnum(id_string);
-                this.entitiy = entt;
+                this.entity = entt;
             }
         }
 
@@ -409,7 +409,7 @@ as well as
 
                         foreach (CardIDEntity tmp in cards)
                         {
-                            if (CardIDEntityC.entitiy == tmp.entitiy) continue;
+                            if (CardIDEntityC.entity == tmp.entity) continue;
                             if (MulliganRulesManual.ContainsKey(tmp.id))
                             {
                                 CardIDEntityC.holdByRule = -2;
@@ -437,7 +437,7 @@ as well as
                         bool foundFreeCard = false;
                         for (int i = 0; i < cards.Count; i++)
                         {
-                            if (CardIDEntityC.entitiy == cards[i].entitiy) continue;
+                            if (CardIDEntityC.entity == cards[i].entity) continue;
                             if (MulliganRulesManual.ContainsKey(cards[i].id)) //we found the right card
                             {
                                 CardIDEntityC.holdByRule = 2;
@@ -446,7 +446,7 @@ as well as
                                 {
                                     for (int j = i; j < cards.Count; j++)
                                     {
-                                        if (CardIDEntityC.entitiy == cards[j].entitiy) continue;
+                                        if (CardIDEntityC.entity == cards[j].entity) continue;
                                         if (MulliganRulesManual.ContainsKey(cards[j].id))
                                         {
                                             if (cards[j].holdByRule < 0) continue;
@@ -475,7 +475,7 @@ as well as
                                 {
                                     foreach (CardIDEntity tmp in cards)
                                     {
-                                        if (tmp.entitiy == CardIDEntityC.entitiy) continue;
+                                        if (tmp.entity == CardIDEntityC.entity) continue;
                                         if (tmp.id == CardIDEntityC.id)
                                         {
                                             tmp.holdByRule = -2;
@@ -498,7 +498,7 @@ as well as
                             CardIDEntityC.hold = 1;
                             foreach (CardIDEntity tmp in cards)
                             {
-                                if (tmp.entitiy == CardIDEntityC.entitiy) continue;
+                                if (tmp.entity == CardIDEntityC.entity) continue;
                                 if (tmp.id == CardIDEntityC.id)
                                 {
                                     tmp.hold = -2;
