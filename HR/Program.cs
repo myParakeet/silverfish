@@ -57,8 +57,7 @@ namespace HREngine.Bots
             get
             {
                 
-                return "Author of HR-Silver-translator: Rush4xDev "+"\r\n" +
-                       "This is silver fish A.I. module.\r\nyou are running version V" + Silverfish.Instance.versionnumber +" on speed\r\n" +
+                return "Silverfish A.I. version V" + Silverfish.Instance.versionnumber +" )\r\n" +
                        "\r\n\r\n\r\n\r\n\r\ni hope you dont see the following version number :P"
                        ;
 
