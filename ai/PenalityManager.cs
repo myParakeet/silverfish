@@ -971,7 +971,7 @@
                 Minion m = target;
                 carddraw = 0;
                 if (m != null && m.Hp == 1) carddraw = 1;
-                if (carddraw == 0) return 20;
+                if (carddraw == 0) return 20; // todo sepefeets - factor in spell dmg 
             }
 
             if (name == CardDB.cardName.tinkertowntechnician)
@@ -1000,7 +1000,7 @@
 
                 }
 
-                if (Ai.Instance.botBase is BehaviorRush && p.ownMaxMana <= 3 && cardOnLimit) return 6; //RR penalization for drawing the 3 first turns if we have a card in hand that we won't be able to play in Rush
+                if ((Ai.Instance.botBase is BehaviorRush || Ai.Instance.botBase is BehaviorFace) && p.ownMaxMana <= 3 && cardOnLimit) return 6; //RR penalization for drawing the 3 first turns if we have a card in hand that we won't be able to play in Rush
 
 
                 if (p.owncards.Count + p.cardsPlayedThisTurn <= 5 && minmana > p.ownMaxMana) return 0;
