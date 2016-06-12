@@ -668,7 +668,11 @@
                 }
                 if (name == CardDB.cardName.lavashock && p.owedRecall == 0 && p.currentRecall == 0) //todo sepefeets - eternal sentinal penalty
                 {
-                    pen = 30;
+                    pen = 20;
+                }
+                if (name == CardDB.cardName.fireblast && p.enemyMinions.Count > 0)
+                {
+                    pen = 10;
                 }
             }
 
@@ -760,10 +764,9 @@
 
                     if (name == CardDB.cardName.shieldslam && (m.Hp <= 4 || m.Angr <= 4)) pen = 20;
 
-                    if (name == CardDB.cardName.lavashock && p.owedRecall == 0 && p.currentRecall == 0)
-                    {
-                        pen = 15;
-                    }
+                    if (name == CardDB.cardName.lavashock && p.owedRecall == 0 && p.currentRecall == 0) pen = 15;
+
+                    if (name == CardDB.cardName.fireblast && !lethal && m.Hp == 1) pen = -10;
                 }
             }
 
