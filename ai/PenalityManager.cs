@@ -971,7 +971,7 @@
                 Minion m = target;
                 carddraw = 0;
                 if (m != null && m.Hp == 1) carddraw = 1;
-                if (carddraw == 0) return 15;
+                if (carddraw == 0) return 20;
             }
 
             if (name == CardDB.cardName.tinkertowntechnician)
