@@ -388,7 +388,7 @@
                                 {
                                     if (hc.card.name == CardDB.cardName.tuskarrtotemic)
                                     {
-                                        bestplace = (int)Math.Floor((decimal)p.ownMinions.Count / 2) + 1; //just put it center left
+                                        bestplace = (p.ownMinions.Count / 2) + 1; //just put it center left
                                         Action a = new Action(actionEnum.playcard, hc, null, bestplace, null, cardplayPenality, 0);
                                         ret.Add(a);
                                     }
