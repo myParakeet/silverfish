@@ -561,6 +561,7 @@
             if (name == CardDB.cardName.savagery && p.ownHero.Angr == 0) return 500;
             if (name == CardDB.cardName.keeperofthegrove && choice != 1) return 0; // look at silence penality
             if (name == CardDB.cardName.livingroots && choice != 1) return 0; // look at silence penality
+            if (name == CardDB.cardName.swipe && !target.own) return -p.enemyMinions.Count * 7; // treat it as single target spell with bonus for aoe
 
             if (this.DamageAllDatabase.ContainsKey(name) || (p.anzOwnAuchenaiSoulpriest >= 1 && HealAllDatabase.ContainsKey(name))) // aoe penality
             {
@@ -697,11 +698,11 @@
                     if (m.handcard.card.deathrattle) return 60;
                     if (m.Hp > dmg)
                     {
-                        if (m.name == CardDB.cardName.acolyteofpain && p.owncards.Count <= 3) return 0;
+                        if (m.name == CardDB.cardName.acolyteofpain && p.owncards.Count <= 3) return pen;
                         foreach (Handmanager.Handcard hc in p.owncards)
                         {
-                            if (hc.card.name == CardDB.cardName.battlerage) return -5;
-                            if (hc.card.name == CardDB.cardName.rampage) return -10;
+                            if (hc.card.name == CardDB.cardName.battlerage) return pen;
+                            if (hc.card.name == CardDB.cardName.rampage) return pen;
                         }
                     }
 
