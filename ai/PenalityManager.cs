@@ -689,15 +689,15 @@
                     int dmg = this.DamageTargetDatabase.ContainsKey(name) ? this.DamageTargetDatabase[name] : this.HealTargetDatabase[name];
 
                     if (m.name == CardDB.cardName.madscientist && p.ownHeroName == HeroEnum.hunter) return 500;
-                    if (m.name == CardDB.cardName.sylvanaswindrunner) return 0;
+                    if (m.name == CardDB.cardName.sylvanaswindrunner) return 5;
                     if (m.handcard.card.deathrattle) return 60;
                     if (m.Hp > dmg)
                     {
                         if (m.name == CardDB.cardName.acolyteofpain && p.owncards.Count <= 3) return 0;
                         foreach (Handmanager.Handcard hc in p.owncards)
                         {
-                            if (hc.card.name == CardDB.cardName.battlerage) return pen;
-                            if (hc.card.name == CardDB.cardName.rampage) return pen;
+                            if (hc.card.name == CardDB.cardName.battlerage) return -5;
+                            if (hc.card.name == CardDB.cardName.rampage) return -10;
                         }
                     }
 

@@ -70,18 +70,6 @@
                     }
                 }
 
-                if (c.name == CardDB.cardName.keeperofthegrove)
-                {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_166a);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_166b);
-                    }
-                }
-
                 if (c.name == CardDB.cardName.starfall)
                 {
                     if (i == 1)
