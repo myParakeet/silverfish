@@ -1,4 +1,4 @@
-// This File: _combo.txt
+// This File: deck.txt
 //    Author: Sepefeets
 //   Version: 0.1 (17-May-2016)
 // Deck Name: Standard Midrange Totems

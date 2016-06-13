@@ -1,6 +1,6 @@
 // This File: _mulligan.txt
 //    Author: Sepefeets
-//   Version: 0.1 (17-May-2016)
+//   Version: 0.2 (12-Jun-2016)
 // Deck Name: Standard Midrange Shaman
 //      Hero: Shaman
 // Deck Type: Midrange (Control)
