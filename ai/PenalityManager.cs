@@ -336,7 +336,7 @@
                 //vs mage or hunter we need board presence at early game? so we skip the minion ready-check.
                 // for everyone else, we penalize buffing minions when they are not ready
 
-                if (p.ownMaxMana > 2 || (p.enemyHeroName != HeroEnum.mage && p.enemyHeroName != HeroEnum.hunter))
+                if (p.ownMaxMana > 1)// || (p.enemyHeroName != HeroEnum.mage && p.enemyHeroName != HeroEnum.hunter))
                 {
                     if (card.name == CardDB.cardName.clockworkknight || card.name == CardDB.cardName.screwjankclunker)
                     {
@@ -356,13 +356,27 @@
                     }
                 }
 
-                if (m.Ready && this.priorityDatabase.ContainsKey(m.name) && this.buffing1TurnDatabase.ContainsKey(name)) return priorityDatabase[m.name];
+                if (this.buffing1TurnDatabase.ContainsKey(name))
+                {
+                    if (m.Ready)
+                    {
+                        if (this.priorityDatabase.ContainsKey(m.name)) return 5 + priorityDatabase[m.name];
+                        return m.taunt ? 5 : 0;
+                    }
+                    else
+                    {
+                        return (hasownready) ? 50 : 5;
+                    }
+                }
                 if (!m.Ready && !m.taunt && hasownready)
                 {
-                    if (this.buffing1TurnDatabase.ContainsKey(name)) return 50;
-
                     return 5 * attackBuffDatabase[name];
                 }
+                else
+                {
+                    return attackBuffDatabase[name];
+                }
+
                 if (m.Hp == 1 && !m.divineshild && !this.buffing1TurnDatabase.ContainsKey(name))
                 {
                     if (this.healthBuffDatabase.ContainsKey(name)) return 0;  // m.Hp no longer == 1
@@ -375,7 +389,7 @@
 
             if (target.own && name == CardDB.cardName.rockbiterweapon)
             {
-                return 10;
+                return (target.windfury) ? 5 : 10;
             }
 
             return 0;
