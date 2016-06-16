@@ -373,7 +373,7 @@
 
             if (m.handcard.card.targetPriority >= 1 && !m.silenced)
             {
-                retval += m.handcard.card.targetPriority;
+                retval += 5 + m.handcard.card.targetPriority;
             }
             if (m.name == CardDB.cardName.nerubianegg && m.Angr <= 3 && !m.taunt) retval = 0;
 
