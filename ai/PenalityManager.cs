@@ -1329,18 +1329,27 @@
         {
             if (!this.destroyOwnDatabase.ContainsKey(name)) return 0;
             int pen = 0;
-            if ((name == CardDB.cardName.brawl || name == CardDB.cardName.deathwing || name == CardDB.cardName.twistingnether) && p.mobsPlayedThisTurn >= 1) return 500;
 
-            if (name == CardDB.cardName.brawl || name == CardDB.cardName.twistingnether)
+            if (name == CardDB.cardName.brawl || name == CardDB.cardName.deathwing || name == CardDB.cardName.twistingnether || name == CardDB.cardName.doomsayer || name == CardDB.cardName.doom)
             {
+                if (p.mobsPlayedThisTurn >= 1) return 500;
                 if (name == CardDB.cardName.brawl && p.ownMinions.Count + p.enemyMinions.Count <= 1) return 500;
                 int highminion = 0;
                 int veryhighminion = 0;
+                int readyAngr = 0;
                 foreach (Minion m in p.enemyMinions)
                 {
+                    if (!m.frozen)
+                    {
+                        readyAngr += m.Angr;
+                    }
                     if (m.Angr >= 5 || m.Hp >= 5) highminion++;
                     if (m.Angr >= 8 || m.Hp >= 8) veryhighminion++;
                 }
+
+                if (name == CardDB.cardName.doomsayer && readyAngr > 5) return 500;
+                else if (p.enemyMinions.Count <= 2 || p.enemyMinions.Count + 2 <= p.ownMinions.Count || p.ownMinions.Count >= 3) return 30;
+                else return 0;
 
                 if (highminion >= 2 || veryhighminion >= 1)
                 {
@@ -1351,6 +1360,8 @@
                 {
                     return 30;
                 }
+
+                return 0;
             }
             if (target == null) return 0;
             if (target.own && !target.isHero)
@@ -1555,16 +1566,23 @@
 
         private int getPlayMobPenalty(Handmanager.Handcard card, Minion target, Playfield p, bool lethal)
         {
-            if (card.card.type != CardDB.cardtype.MOB) return 0;
+            if (card.card.type != CardDB.cardtype.MOB && !this.summonMinionSpellsDatabase.ContainsKey(card.card.name)) return 0;
             int retval = 0;
 
+            if (p.ownMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null || p.enemyMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null)
+            {
+                // penalize playing minions into doomsayer
+                // todo sepefeets - is this good enough? figure out way to penalize boards that play cards but don't kill it
+                // also check up on buff penalty, some buffs missing, and others penalized twice elsewhere?
+                return (card.card.Charge) ? 150 : 500;
+            }
             if (p.ownMinions.Find(m => m.name == CardDB.cardName.muklaschampion && !m.silenced) != null && p.playactions.Find(a => a.actionType == actionEnum.useHeroPower) != null)
             {
                 // penalize playing minions after mukla's +1/+1 buff
                 retval += 5;
             }
 
-            int buffs =0;
+            int buffs = 0;
             foreach (Action a in p.playactions)
             {
                 if (a.card == null || a.actionType != actionEnum.playcard) continue;
@@ -1573,8 +1591,8 @@
                 if (a.card.card.name == CardDB.cardName.savageroar) buffs++;
                 if (a.card.card.name == CardDB.cardName.bloodlust) buffs++;
                 if (a.card.card.name == CardDB.cardName.souloftheforest) buffs++;
-                if (a.card.card.name == CardDB.cardName.powerofthewild) buffs++;
-                if (a.card.card.name == CardDB.cardName.cenarius) buffs++;
+                if (a.card.card.name == CardDB.cardName.powerofthewild && a.druidchoice == 1) buffs++;
+                if (a.card.card.name == CardDB.cardName.cenarius && a.druidchoice == 1) buffs++;
                 if (a.card.card.name == CardDB.cardName.metaltoothleaper) buffs++;
                 if (a.card.card.name == CardDB.cardName.enhanceomechano) buffs++;
                 if (card.card.tank && a.card.card.name == CardDB.cardName.bolster) buffs++;
@@ -3160,6 +3178,9 @@
             this.destroyOwnDatabase.Add(CardDB.cardName.brawl, 0);
             this.destroyOwnDatabase.Add(CardDB.cardName.deathwing, 0);
             this.destroyOwnDatabase.Add(CardDB.cardName.twistingnether, 0);
+            this.destroyOwnDatabase.Add(CardDB.cardName.doom, 0);
+            this.destroyOwnDatabase.Add(CardDB.cardName.doomsayer, 0);
+
             this.destroyOwnDatabase.Add(CardDB.cardName.naturalize, 0);//not own mins
             this.destroyOwnDatabase.Add(CardDB.cardName.shadowworddeath, 0);//not own mins
             this.destroyOwnDatabase.Add(CardDB.cardName.shadowwordpain, 0);//not own mins
@@ -3181,7 +3202,6 @@
 
             this.destroyDatabase.Add(CardDB.cardName.mulch, 0);
             this.destroyDatabase.Add(CardDB.cardName.bladeofcthun, 0);
-            this.destroyDatabase.Add(CardDB.cardName.doom, 0);
             this.destroyDatabase.Add(CardDB.cardName.shadowwordhorror, 0);
             this.destroyDatabase.Add(CardDB.cardName.shatter, 0);
 
