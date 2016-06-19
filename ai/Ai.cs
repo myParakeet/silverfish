@@ -725,7 +725,7 @@
 
 
 
-        //queque stuff (done by xytrix)
+        //queue stuff (done by xytrix)
         // Looks through a list of playfields from previous moves to find one that matches our current board state.
         // If any is found, we "rollback" our bestactions list to that point in time.
         public bool restoreBestMoves(Playfield currentField, List<Playfield> oldMoveGuesses)

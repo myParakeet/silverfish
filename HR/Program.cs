@@ -277,6 +277,7 @@ namespace HREngine.Bots
         /// <param name="e">e.deck_list -- all cards id in the deck.</param>
         public override void OnGameStart(GameStartEventArgs e)
         {
+            //todo sepefeets - GameStartEventArgs has the deck name and list
             //do something here
 
             // reset instance vars
@@ -471,10 +472,10 @@ namespace HREngine.Bots
             try
             {
                 Helpfunctions.Instance.ErrorLog("start things...");
-                //HR-only fix for being to fast
+                //HR-only fix for being too fast
                 //IsProcessingPowers not good enough so always sleep
                 //todo find better solution
-                //System.Threading.Thread.Sleep(200);
+                System.Threading.Thread.Sleep(200);
                 if (!this.doMultipleThingsAtATime)
                 {
                     //do fake action
@@ -612,7 +613,7 @@ namespace HREngine.Bots
 
                 if (!doMultipleThingsAtATime)
                 {
-                    //this is used if you cant queque actions (so ai is just sending one action at a time)
+                    //this is used if you cant queue actions (so ai is just sending one action at a time)
                     Action moveTodo = Ai.Instance.bestmove;
 
                     if (moveTodo == null || moveTodo.actionType == actionEnum.endturn)
@@ -634,7 +635,7 @@ namespace HREngine.Bots
                 }
                 else
                 {//##########################################################################
-                    //this is used if you can queque multiple actions
+                    //this is used if you can queue multiple actions
                     //thanks to xytrix
 
                     this.queuedMoveGuesses.Clear();
@@ -699,7 +700,7 @@ namespace HREngine.Bots
         {
             //do nothing here
 
-            //queque stuff
+            //queue stuff
             numExecsReceived++;
 
             switch (e.done_result)
@@ -1166,7 +1167,7 @@ namespace HREngine.Bots
 
     public class Silverfish
     {
-        public string versionnumber = "120.3SE";
+        public string versionnumber = "120.4SE";
         private bool singleLog = false;
         private string botbehave = "rush";
         public bool waitingForSilver = false;
@@ -1311,8 +1312,14 @@ namespace HREngine.Bots
             }
         }
 
-        public bool updateEverything(HSRangerLib.BotBase rangerbot, Behavior botbase, bool quequeActions, bool runExtern = false, bool passiveWait = false)
+        public bool updateEverything(HSRangerLib.BotBase rangerbot, Behavior botbase, bool queueActions, bool runExtern = false, bool passiveWait = false)
         {
+            // data sync workaround for temp buffs - something is wrong
+            /*if (lastpf != null && lastpf.playactions[0].actionType == actionEnum.playcard && (lastpf.playactions[0].card.card.name == CardDB.cardName.savageroar ||
+                lastpf.playactions[0].card.card.name == CardDB.cardName.bloodlust || PenalityManager.Instance.buffing1TurnDatabase.ContainsKey(lastpf.playactions[0].card.card.name)))
+            {
+                System.Threading.Thread.Sleep(1000);
+            }*/
 
             Helpfunctions.Instance.ErrorLog("updateEverything");
             latestGameState = rangerbot.gameState;
@@ -1364,7 +1371,7 @@ namespace HREngine.Bots
             Playfield p = new Playfield();
 
 
-            if (!quequeActions)
+            if (!queueActions)
             {
                 if (lastpf != null)
                 {
@@ -1372,7 +1379,7 @@ namespace HREngine.Bots
                     {
                         return false;
                     }
-
+                    
                     //board changed we update secrets!
                     //if(Ai.Instance.nextMoveGuess!=null) Probabilitymaker.Instance.updateSecretList(Ai.Instance.nextMoveGuess.enemySecretList);
                     Probabilitymaker.Instance.updateSecretList(p, lastpf);
@@ -1380,12 +1387,10 @@ namespace HREngine.Bots
             }
             else
             {
-                //queque stuff 
+                //queue stuff 
                 if (lastpf != null)
                 {
-                    bool isSameAsLastUpdate = lastpf.isEqualf(p);
-
-                    if (isSameAsLastUpdate)
+                    if (lastpf.isEqualf(p))
                     {
                         ((Bot)rangerbot).shouldSendActions = false;  // let the bot know we haven't updated any actions
                         return false;
@@ -1393,7 +1398,7 @@ namespace HREngine.Bots
 
                     //board changed we update secrets!
                     //if(Ai.Instance.nextMoveGuess!=null) Probabilitymaker.Instance.updateSecretList(Ai.Instance.nextMoveGuess.enemySecretList);
-                    if (!isSameAsLastUpdate) Probabilitymaker.Instance.updateSecretList(p, lastpf);
+                    Probabilitymaker.Instance.updateSecretList(p, lastpf);
                 }
 
             }
@@ -1408,7 +1413,7 @@ namespace HREngine.Bots
                 Helpfunctions.Instance.ErrorLog("hc playfield" + hc.manacost + " " + hc.getManaCost(p));
             }*/
 
-            if (quequeActions)
+            if (queueActions)
             {
                 // Detect errors in HearthRanger execution of our last set of actions and try to fix it so we don't
                 // have to re-calculate the entire turn.
