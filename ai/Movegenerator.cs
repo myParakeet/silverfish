@@ -239,7 +239,7 @@
                         if (usePenalityManager)
                         {
                             cardplayPenality = pen.getPlayCardPenality(hc, null, p, i, lethalcheck);
-                            if (cardplayPenality <= 499)
+                            if (cardplayPenality < 500)
                             {
                                 //help.logg(hc.card.name + " is played");
                                 //pf.playCard(hc, hc.position - 1, hc.entity, -1, -1, i, bestplace, cardplayPenality);
@@ -267,7 +267,7 @@
                             {
                                 cardplayPenality = pen.getPlayCardPenality(hc, trgt, p, i, lethalcheck);
 
-                                if (cardplayPenality <= 499)
+                                if (cardplayPenality < 500)
                                 {
                                     //help.logg(hc.card.name + " is played");
                                     //pf.playCard(hc, hc.position - 1, hc.entity, trgt.target, trgt.targetEntity, i, bestplace, cardplayPenality);
@@ -372,7 +372,7 @@
                                 cardplayPenality = pen.getPlayCardPenality(hc, null, p, 0, isLethalCheck);
 
 
-                                if (cardplayPenality <= 499)
+                                if (cardplayPenality < 500)
                                 {
                                     if (hc.card.name == CardDB.cardName.tuskarrtotemic)
                                     {
@@ -426,7 +426,7 @@
                                 if (usePenalityManager)
                                 {
                                     cardplayPenality = pen.getPlayCardPenality(hc, trgt, p, 0, isLethalCheck);
-                                    if (cardplayPenality <= 499)
+                                    if (cardplayPenality < 500)
                                     {
                                         //pf.playCard(hc, hc.position - 1, hc.entity, trgt.target, trgt.targetEntity, 0, bestplace, cardplayPenality);
                                         Action a = new Action(actionEnum.playcard, hc, null, bestplace, trgt, cardplayPenality, 0);
@@ -653,7 +653,7 @@
                         if (usePenalityManager)
                         {
                             abilityPenality = pen.getPlayCardPenality(p.ownHeroAblility, trgt, p, 0, isLethalCheck);
-                            if (abilityPenality <= 499)
+                            if (abilityPenality < 500)
                             {
                                 //pf.activateAbility(p.ownHeroAblility, trgt.target, trgt.targetEntity, abilityPenality);
                                 Action a = new Action(actionEnum.useHeroPower, p.ownHeroAblility, null, 0, trgt, abilityPenality, 0);
@@ -677,7 +677,7 @@
                     if (usePenalityManager)
                     {
                         abilityPenality = pen.getPlayCardPenality(p.ownHeroAblility, null, p, 0, isLethalCheck);
-                        if (abilityPenality <= 499)
+                        if (abilityPenality < 500)
                         {
                             //havedonesomething = true;
                             //pf.activateAbility(p.ownHeroAblility, -1, -1, abilityPenality);
