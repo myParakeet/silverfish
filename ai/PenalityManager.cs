@@ -2594,8 +2594,7 @@
 
                 if (target.isHero && !target.own && p.enemyMinions.Count >= 1)
                 {
-                    //penality if we doestn attacked before
-                    if (hasMinionsWithLowHeal(p)) pen += 10; //penality if we doestn attacked minions before
+                    if (hasMinionsWithLowHeal(p)) pen += 10; //penality if we didn't attack minions before
                 }
             }
 
