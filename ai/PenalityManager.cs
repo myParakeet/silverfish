@@ -130,6 +130,26 @@
                 pen += p.playactions.Count;  // penalize not utilizing the card draw as early as possible
             }
 
+            bool freezingtrap = false;
+            foreach (CardDB.cardIDEnum secretID in p.ownSecretsIDList)
+            {
+                if (secretID == CardDB.cardIDEnum.EX1_611) //freezing trap
+                {
+                    freezingtrap = true;
+                }
+            }
+
+            // todo sepefeets - consider divine shield, killing off small minions, etc.
+            if (freezingtrap && target.taunt) //don't kill off our own minions for no reason
+            {
+                int totalAngr = 0;
+                foreach (Minion mnn in p.ownMinions)
+                {
+                    totalAngr += mnn.Angr;
+                }
+                if (totalAngr < target.Hp) return 500;
+            }
+
             return pen;
         }
 
@@ -244,7 +264,7 @@
                 if (card.name == p.ownHeroAblility.card.name) retval += getHeroPowerPenality(hcard, target, p);
             }
 
-            retval += playSecretPenality(card, p);
+            retval += getPlaySecretPenalty(card, p);
             retval += getPlayCardSecretPenality(card, p);
 
             retval += (int)card.pen_card.getPlayPenalty(p, hcard, target, choice, lethal);
@@ -2426,19 +2446,34 @@
             return pen;
         }
 
-        private int playSecretPenality(CardDB.Card card, Playfield p)
+        private int getPlaySecretPenalty(CardDB.Card card, Playfield p)
         {
-            //penality if we play secret and have playable kirintormage
             int pen = 0;
             if (card.Secret)
             {
                 foreach (Handmanager.Handcard hc in p.owncards)
                 {
+                    //penalty if we play secret and have playable kirintormage
                     if (hc.card.name == CardDB.cardName.kirintormage && p.mana >= hc.getManaCost(p))
                     {
                         pen = 500;
                     }
+
+                    if (hc.card.name == CardDB.cardName.secretkeeper && p.mana >= card.cost)
+                    {
+                        pen += 5;
+                    }
                 }
+
+                int smallAngr = 0;
+                foreach (Minion m in p.enemyMinions)
+                {
+                    if (m.Angr < 4)
+                    {
+                        smallAngr++;
+                    }
+                }
+                if (smallAngr > 0) pen += 100; //not 500 because we might need to protect ourself from lethal
             }
 
             return pen;
