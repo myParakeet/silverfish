@@ -154,7 +154,7 @@
                     if (!(p.ownHeroName == HeroEnum.thief && p.ownWeaponAttack == 1)) return 50 + p.ownWeaponAttack;
                 }
 
-                if (p.ownHero.tempAttack > 0 && p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == p.ownHero.entityID) != null)
+                if (p.ownHero.tempAttack > 0 && ! p.ownHero.windfury && p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == p.ownHero.entityID) != null)
                 {
                     return 50;
                 }
@@ -172,6 +172,14 @@
                 foreach (Handmanager.Handcard hc in p.owncards)
                 {
                     if (hc.card.Secret) return 20;
+                }
+            }
+
+            if (p.ownWeaponName == CardDB.cardName.doomhammer)
+            {
+                foreach (Handmanager.Handcard hc in p.owncards)
+                {
+                    if (hc.card.name == CardDB.cardName.rockbiterweapon) return 30;
                 }
             }
 
@@ -215,7 +223,7 @@
             retval += getSilencePenality(name, target, p, choice, lethal);
             retval += getDamagePenality(name, target, p, choice, lethal);
             retval += getHealPenality(name, target, p, choice, lethal);
-            //if(retval < 500) 
+
             retval += getCardDrawPenality(name, target, p, choice, lethal);
             retval += getCardDrawofEffectMinions(card, p);
             retval += getCardDiscardPenality(name, p);
@@ -226,6 +234,7 @@
             retval += getSpecialCardComboPenalties(hcard, target, p, lethal, choice);
             //if (lethal) Console.WriteLine(retval+ " " + name);
             retval += getRandomPenalty(card, p, target);
+
             if (!lethal)
             {
                 retval += cb.getPenalityForDestroyingCombo(card, p);
