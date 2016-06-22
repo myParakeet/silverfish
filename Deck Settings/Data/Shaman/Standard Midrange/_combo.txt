@@ -1,6 +1,6 @@
 // This File: _combo.txt
 //    Author: Sepefeets
-//   Version: 0.1 (17-May-2016)
+//   Version: 0.2 (22-Jun-2016)
 // Deck Name: Standard Midrange Shaman
 //      Hero: Shaman
 // Deck Type: Midrange (Control)
@@ -12,3 +12,6 @@ GAME_005,0;LOE_018,0;LOE_018,0;bonus:50;hero:shaman
 
 // [NUDGE] [5] Thunder Bluff Valiant (AT_049) + [2] Totemic Call (CS2_049)
 AT_049,25;CS2_049,0;bonus:25;hero:shaman
+
+//[NUDGE] [3] Tuskarr Totemic (AT_046) + [1] Primal Fustion (OG_023)
+AT_046,0;OG_023,0;bonus:10;hero:shaman
