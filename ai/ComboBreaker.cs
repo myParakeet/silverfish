@@ -25,6 +25,9 @@
 
         public int attackFaceHP = -1;
 
+        private string ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
+        private string deckName = Hrtprozis.Instance.deckName;
+
 
         class combo
         {
@@ -369,6 +372,14 @@
             }
         }
 
+        public void updateInstance()
+        {
+            instance = new ComboBreaker();
+            ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
+            deckName = Hrtprozis.Instance.deckName;
+            Helpfunctions.Instance.ErrorLog("ComboBreaker Deck: " + deckName + " , Class: " + ownClass);
+        }
+
         private ComboBreaker()
         {
             readCombos();
@@ -382,17 +393,48 @@
         {
             string[] lines = new string[0] { };
             combos.Clear();
+
+            string path = Settings.Instance.path;
+            string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
+
+            
+            if (deckName != "" && System.IO.File.Exists(deckpath + "_combo.txt"))
+            {
+                path = deckpath;
+                Helpfunctions.Instance.ErrorLog("read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "_combo.txt...");
+            }
+            else if (deckName != "" && System.IO.File.Exists(classpath + "_mulligan.txt"))
+            {
+                path = classpath;
+                Helpfunctions.Instance.ErrorLog("read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "_combo.txt...");
+            }
+            else if (deckName != "" && System.IO.File.Exists(datapath + "_mulligan.txt"))
+            {
+                path = datapath;
+                Helpfunctions.Instance.ErrorLog("read Data" + System.IO.Path.DirectorySeparatorChar + "_combo.txt...");
+            }
+            else if (System.IO.File.Exists(path + "_combo.txt"))
+            {
+                Helpfunctions.Instance.ErrorLog("read base _combo.txt...");
+            }
+            else
+            {
+                Helpfunctions.Instance.ErrorLog("can't find _combo.txt (if you didn't create your own combo file, ignore this message)");
+                return;
+            }
+
             try
             {
-                string path = Settings.Instance.path;
                 lines = System.IO.File.ReadAllLines(path + "_combo.txt");
             }
             catch
             {
-                Helpfunctions.Instance.ErrorLog("cant find _combo.txt (if you didn't create your own combo file, ignore this message)");
+                Helpfunctions.Instance.ErrorLog("_combo.txt read error. Continuing without user-defined rules.");
                 return;
             }
-            Helpfunctions.Instance.ErrorLog("read _combo.txt...");
+
             foreach (string line in lines)
             {
                 string shortline = line.Replace(" ", "");

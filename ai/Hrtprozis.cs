@@ -22,6 +22,7 @@
 
     public class Hrtprozis
     {
+        public string deckName = "";
 
         public int enemyCursedCardsinHand = 0;
         public int ownFenciCoaches=0;
@@ -183,6 +184,15 @@
 
         }
 
+        public void setDeckName(string deckname)
+        {
+            this.deckName = deckname;
+        }
+
+        public void setHeroName(string heron)
+        {
+            this.heroname = this.heroNametoEnum(heron);
+        }
 
         public void setOwnPlayer(int player)
         {
@@ -221,6 +231,24 @@
             }
         }
 
+        // for class/deck mulligan paths
+        public string heroEnumtoCommonName(HeroEnum he)
+        {
+            switch (he)
+            {
+                case HeroEnum.druid: return "Druid";
+                case HeroEnum.hunter: return "Hunter";
+                case HeroEnum.mage: return "Mage";
+                case HeroEnum.pala: return "Paladin";
+                case HeroEnum.priest: return "Priest";
+                case HeroEnum.shaman: return "Shaman";
+                case HeroEnum.thief: return "Rogue";
+                case HeroEnum.warlock: return "Warlock";
+                case HeroEnum.warrior: return "Warrior";
+                default: return "none";
+            }
+        }
+
 
         public static string heroEnumtoName(HeroEnum he)
         {
@@ -250,8 +278,10 @@
                 case "hunter": return HeroEnum.hunter;
                 case "mage": return HeroEnum.mage;
                 case "pala": return HeroEnum.pala;
+                case "paladin": return HeroEnum.pala; //for mulligan/combo/discovery
                 case "priest": return HeroEnum.priest;
                 case "shaman": return HeroEnum.shaman;
+                case "rogue": return HeroEnum.thief; //for mulligan/combo/discovery
                 case "thief": return HeroEnum.thief;
                 case "warlock": return HeroEnum.warlock;
                 case "warrior": return HeroEnum.warrior;
@@ -261,7 +291,7 @@
                 default: return HeroEnum.None;
             }
         }
-
+        
 
         public void updateMinions(List<Minion> om, List<Minion> em)
         {

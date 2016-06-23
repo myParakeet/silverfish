@@ -8,11 +8,8 @@ namespace HREngine.Bots
 
         public Behavior setSettings()
         {
-
             return readSettings();
-
         }
-
 
         public Behavior setDefaultSettings() //settings not to high to run without external process
         {
@@ -131,6 +128,9 @@ namespace HREngine.Bots
         public bool learnmode = false;
         public bool printlearnmode = true;
 
+        private string ownClass = "";
+        private string deckName = "";
+        
         private static Settings instance;
 
         public static Settings Instance
@@ -139,6 +139,13 @@ namespace HREngine.Bots
             {
                 return instance ?? (instance = new Settings());
             }
+        }
+
+        public Behavior updateInstance()
+        {
+            ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
+            deckName = Hrtprozis.Instance.deckName;
+            return readSettings();
         }
 
         public void setWeights(int alpha)
@@ -165,17 +172,47 @@ namespace HREngine.Bots
 
         public Behavior readSettings() //takes same path as carddb
         {
-            string[] lines = new string[]{};
-            Helpfunctions.Instance.ErrorLog("read settings.txt");
+            string[] lines = new string[] { };
+
+            string path = this.path;
+            string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
+
+
+            // if we have a deckName then we have a real ownClass too, not the default "druid"
+            if (deckName != "" && System.IO.File.Exists(deckpath + "settings.txt"))
+            {
+                path = deckpath;
+                Helpfunctions.Instance.ErrorLog("read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "settings.txt...");
+            }
+            else if (deckName != "" && System.IO.File.Exists(classpath + "settings.txt"))
+            {
+                path = classpath;
+                Helpfunctions.Instance.ErrorLog("read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "settings.txt...");
+            }
+            else if (deckName != "" && System.IO.File.Exists(datapath + "settings.txt"))
+            {
+                path = datapath;
+                Helpfunctions.Instance.ErrorLog("read Data" + System.IO.Path.DirectorySeparatorChar + "settings.txt...");
+            }
+            else if (System.IO.File.Exists(path + "settings.txt"))
+            {
+                Helpfunctions.Instance.ErrorLog("read base settings.txt...");
+            }
+            else
+            {
+                Helpfunctions.Instance.ErrorLog("can't find settings.txt, using default settings.");
+                return setDefaultSettings();
+            }
 
             try
             {
-                lines = System.IO.File.ReadAllLines(this.path + "settings.txt");
-                Helpfunctions.Instance.ErrorLog("read carddb.txt");
+                lines = System.IO.File.ReadAllLines(path + "settings.txt");
             }
             catch
             {
-                Helpfunctions.Instance.logg("cant find settings... take the default ones");
+                Helpfunctions.Instance.ErrorLog("settings.txt read error. Continuing without user-defined rules.");
                 return setDefaultSettings();
             }
 

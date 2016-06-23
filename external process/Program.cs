@@ -5,17 +5,32 @@ using System.IO;
 
 namespace HREngine.Bots
 {
+    public static class SilverFishBotPath
+    {
+        public static string AssemblyDirectory
+        {
+            get
+            {
+                string codeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return System.IO.Path.GetDirectoryName(path) + System.IO.Path.DirectorySeparatorChar;
+            }
+        }
+    }
+
     class Program
     {
         static void Main(string[] args)
         { 
             Bot b = new Bot();
-            bool readed =false;
+            bool readed = false;
             while(!readed)
             {
                 try
                 {
                     string data = System.IO.File.ReadAllText("crrntbrd.txt");
+                    //Helpfunctions.Instance.ErrorLog(data);
                     if (data != "" && data != "<EoF>")
                     {
                         data = data.Replace("<EoF>", "");
@@ -27,7 +42,24 @@ namespace HREngine.Bots
                 }
                 catch
                 {
-                    
+
+                }
+                try
+                {
+                    string data = System.IO.File.ReadAllText("curdeck.txt");
+                    //Helpfunctions.Instance.ErrorLog(data);
+                    if (data != "" && data != "<EoF>")
+                    {
+                        data = data.Replace("<EoF>", "");
+                        Helpfunctions.Instance.resetBuffer();
+                        Helpfunctions.Instance.writeBufferToDeckFile();
+                        //readed = true;
+                        b.doDeckData(data);
+                    }
+                }
+                catch
+                {
+
                 }
                 System.Threading.Thread.Sleep(10);
             }
@@ -59,7 +91,7 @@ namespace HREngine.Bots
             {
                 Helpfunctions.Instance.logg("teststuff");
                 Playfield p = new Playfield();
-                Ai.Instance.autoTester( printstuff);
+                Ai.Instance.autoTester(printstuff);
             }
             Helpfunctions.Instance.ErrorLog("wait for board...");
         }
@@ -72,7 +104,7 @@ namespace HREngine.Bots
             Helpfunctions.Instance.writeToBuffer("board " + Ai.Instance.currentCalculatedBoard);
             Helpfunctions.Instance.writeToBuffer("value " + Ai.Instance.bestmoveValue);
             Helpfunctions.Instance.writeToBuffer("discover " + Ai.Instance.bestTracking + "," + Ai.Instance.bestTrackingStatus);
-            
+
             if (Ai.Instance.bestmove != null)
             {
                 Ai.Instance.bestmove.print(true);
@@ -86,6 +118,20 @@ namespace HREngine.Bots
             Helpfunctions.Instance.ErrorLog("wait for next board...");
 
             //sf.readActionFile();
+        }
+
+        public void doDeckData(string data)
+        {
+            Helpfunctions.Instance.ErrorLog(data);
+            string deckname = data.Split(';')[0];
+            string ownname = data.Split(';')[1];
+
+            Hrtprozis.Instance.setDeckName(deckname);
+            Hrtprozis.Instance.setHeroName(ownname);
+            ComboBreaker.Instance.updateInstance();
+            Discovery.Instance.updateInstance();
+            Mulligan.Instance.updateInstance();
+            Settings.Instance.updateInstance();
         }
 
         public void testing(int start)
@@ -182,7 +228,7 @@ namespace HREngine.Bots
             Helpfunctions.Instance.ErrorLog("init Silverfish V" + versionnumber);
             string path = "";
             //System.IO.Directory.CreateDirectory(path);
-            sttngs.setFilePath("");
+            sttngs.setFilePath(SilverFishBotPath.AssemblyDirectory);
 
             if (!singleLog)
             {
@@ -418,6 +464,25 @@ namespace HREngine.Bots
                 try
                 {
                     System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
+                    writed = false;
+                }
+                catch
+                {
+                    writed = true;
+                }
+            }
+            this.sendbuffer = "";
+        }
+
+        public void writeBufferToDeckFile()
+        {
+            bool writed = true;
+            this.sendbuffer += "<EoF>";
+            while (writed)
+            {
+                try
+                {
+                    System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch

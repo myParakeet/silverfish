@@ -144,7 +144,6 @@
                 catch
                 {
                     this.datareaded = false;
-                    Helpfunctions.Instance.logg("cant find test.txt");
                     Helpfunctions.Instance.ErrorLog("cant find test.txt");
                     return;
                 }

@@ -64,6 +64,10 @@ namespace HREngine.Bots
         List<concedeItem> concedelist = new List<concedeItem>();
         public bool loserLoserLoser = false;
 
+        private string ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
+        private string deckName = Hrtprozis.Instance.deckName;
+
+
         private static Mulligan instance;
 
         public static Mulligan Instance
@@ -78,6 +82,13 @@ namespace HREngine.Bots
             }
         }
 
+        public void updateInstance()
+        {
+            instance = new Mulligan();
+            ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
+            deckName = Hrtprozis.Instance.deckName;
+        }
+
         private Mulligan()
         {
             readCombos();
@@ -88,17 +99,49 @@ namespace HREngine.Bots
             string[] lines = new string[0] { };
             this.holdlist.Clear();
             this.deletelist.Clear();
+            
+            string path = Settings.Instance.path;
+            string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
+
+
+            // if we have a deckName then we have a real ownClass too, not the default "druid"
+            if (deckName != "" && System.IO.File.Exists(deckpath + "_mulligan.txt"))
+            {
+                path = deckpath;
+                Helpfunctions.Instance.ErrorLog("read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "_mulligan.txt...");
+            }
+            else if (deckName != "" && System.IO.File.Exists(classpath + "_mulligan.txt"))
+            {
+                path = classpath;
+                Helpfunctions.Instance.ErrorLog("read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "_mulligan.txt...");
+            }
+            else if (deckName != "" && System.IO.File.Exists(datapath + "_mulligan.txt"))
+            {
+                path = datapath;
+                Helpfunctions.Instance.ErrorLog("read Data" + System.IO.Path.DirectorySeparatorChar + "_mulligan.txt...");
+            }
+            else if (System.IO.File.Exists(path + "_mulligan.txt"))
+            {
+                Helpfunctions.Instance.ErrorLog("read base _mulligan.txt...");
+            }
+            else
+            {
+                Helpfunctions.Instance.ErrorLog("can't find _mulligan.txt (if you didn't create your own mulligan file, ignore this message)");
+                return;
+            }
+
             try
             {
-                string path = Settings.Instance.path;
                 lines = System.IO.File.ReadAllLines(path + "_mulligan.txt");
             }
             catch
             {
-                Helpfunctions.Instance.ErrorLog("cant find _mulligan.txt (if you didn't create your own mulligan file, ignore this message)");
+                Helpfunctions.Instance.ErrorLog("_mulligan.txt read error. Continuing without user-defined rules.");
                 return;
             }
-            Helpfunctions.Instance.ErrorLog("read _mulligan.txt...");
+
             foreach (string line in lines)
             {
                 string shortline = line.Replace(" ", "");

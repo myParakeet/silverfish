@@ -23,6 +23,9 @@ namespace HREngine.Bots
 
         }
 
+        private string ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
+        private string deckName = Hrtprozis.Instance.deckName;
+
         private List<discoveryitem> discoverylist = new List<discoveryitem>();
 
         private static Discovery instance;
@@ -39,6 +42,13 @@ namespace HREngine.Bots
             }
         }
 
+        public void updateInstance()
+        {
+            instance = new Discovery();
+            ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
+            deckName = Hrtprozis.Instance.deckName;
+        }
+
         private Discovery()
         {
             readCombos();
@@ -48,17 +58,48 @@ namespace HREngine.Bots
         {
             string[] lines = new string[0] { };
             this.discoverylist.Clear();
+
+            string path = Settings.Instance.path;
+            string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
+
+
+            if (deckName != "" && System.IO.File.Exists(deckpath + "_discovery.txt"))
+            {
+                path = deckpath;
+                Helpfunctions.Instance.ErrorLog("read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "_discovery.txt...");
+            }
+            else if (deckName != "" && System.IO.File.Exists(classpath + "_discovery.txt"))
+            {
+                path = classpath;
+                Helpfunctions.Instance.ErrorLog("read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "_discovery.txt...");
+            }
+            else if (deckName != "" && System.IO.File.Exists(datapath + "_discovery.txt"))
+            {
+                path = datapath;
+                Helpfunctions.Instance.ErrorLog("read Data" + System.IO.Path.DirectorySeparatorChar + "_discovery.txt...");
+            }
+            else if (System.IO.File.Exists(path + "_discovery.txt"))
+            {
+                Helpfunctions.Instance.ErrorLog("read base _discovery.txt...");
+            }
+            else
+            {
+                Helpfunctions.Instance.ErrorLog("can't find _discovery.txt (if you didn't create your own discovery file, ignore this message)");
+                return;
+            }
+
             try
             {
-                string path = Settings.Instance.path;
                 lines = System.IO.File.ReadAllLines(path + "_discovery.txt");
             }
             catch
             {
-                Helpfunctions.Instance.ErrorLog("cant find _discovery.txt (if you didn't create your own discovery file, ignore this message)");
+                Helpfunctions.Instance.ErrorLog("_discovery.txt read error. Continuing without user-defined rules.");
                 return;
             }
-            Helpfunctions.Instance.ErrorLog("read _discovery.txt...");
+            
             foreach (string line in lines)
             {
                 string shortline = line.Replace(" ", "");

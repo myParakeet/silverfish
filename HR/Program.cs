@@ -9,7 +9,7 @@ using System.Linq;
 namespace HREngine.Bots
 {
 
-    public static class SiverFishBotPath
+    public static class SilverFishBotPath
     {
         public static string AssemblyDirectory
         {
@@ -81,7 +81,8 @@ namespace HREngine.Bots
         public int numActionsSent = 0;
         public bool shouldSendActions = true;
         public List<Playfield> queuedMoveGuesses = new List<Playfield>();
-
+        
+        private bool deckChanged = false;
 
         //
         bool isgoingtoconcede = false;
@@ -180,7 +181,7 @@ namespace HREngine.Bots
 
             if (Settings.Instance.learnmode)
             {
-                
+
                 e.handled = false;
                 return;
             }
@@ -189,76 +190,92 @@ namespace HREngine.Bots
 
             var list = e.card_list;
 
-             Entity enemyPlayer = base.EnemyHero;
-             Entity ownPlayer = base.FriendHero;
-                string enemName = Hrtprozis.Instance.heroIDtoName(enemyPlayer.CardId);
-                string ownName = Hrtprozis.Instance.heroIDtoName(ownPlayer.CardId);
+            Entity enemyPlayer = base.EnemyHero;
+            Entity ownPlayer = base.FriendHero;
+            string enemName = Hrtprozis.Instance.heroIDtoName(enemyPlayer.CardId);
+            string ownName = Hrtprozis.Instance.heroIDtoName(ownPlayer.CardId);
 
-                
+            // reload settings
+            HeroEnum heroname = Hrtprozis.Instance.heroNametoEnum(ownName);
+            if (deckChanged || heroname != Hrtprozis.Instance.heroname)
+            {
+                Hrtprozis.Instance.setHeroName(ownName);
+                Helpfunctions.Instance.ErrorLog("Deck: " + Hrtprozis.Instance.deckName + " , Class: " + ownName);
+                ComboBreaker.Instance.updateInstance();
+                Discovery.Instance.updateInstance();
+                Mulligan.Instance.updateInstance();
+                behave = Settings.Instance.updateInstance();
+                deckChanged = false;
 
-                if (Mulligan.Instance.hasmulliganrules(ownName, enemName))
+                //reload external process settings too
+                Helpfunctions.Instance.resetBuffer();
+                Helpfunctions.Instance.writeToBuffer(Hrtprozis.Instance.deckName + ";" + ownName + ";");
+                Helpfunctions.Instance.writeBufferToDeckFile();
+            }
+
+            if (Mulligan.Instance.hasmulliganrules(ownName, enemName))
+            {
+                bool hascoin = false;
+                List<Mulligan.CardIDEntity> celist = new List<Mulligan.CardIDEntity>();
+
+                foreach (var item in list)
                 {
-                    bool hascoin = false;
-                    List<Mulligan.CardIDEntity> celist = new List<Mulligan.CardIDEntity>();
-                    
-                    foreach (var item in list)
+                    Helpfunctions.Instance.ErrorLog("cards on hand for mulligan: " + item.CardId);
+                    if (item.CardId != "GAME_005")// dont mulligan coin
                     {
-                        Helpfunctions.Instance.ErrorLog("cards on hand for mulligan: " + item.CardId);
-                        if (item.CardId != "GAME_005")// dont mulligan coin
-                        {
-                            celist.Add(new Mulligan.CardIDEntity(item.CardId, item.EntityId));
-                        }
-                        else
-                        {
-                            hascoin = true;
-                        }
-                        
+                        celist.Add(new Mulligan.CardIDEntity(item.CardId, item.EntityId));
                     }
-                    if (celist.Count >= 4) hascoin = true;
-                    List<int> mullientitys = Mulligan.Instance.whatShouldIMulligan(celist, ownName, enemName, hascoin);
-                    foreach (var item in list)
+                    else
                     {
-                        if (mullientitys.Contains(item.EntityId))
-                        {
-                            Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because of your rules");                            
-                            //toggle this card
-                            e.replace_list.Add(item);
-                        }
+                        hascoin = true;
                     }
 
                 }
-                else
+                if (celist.Count >= 4) hascoin = true;
+                List<int> mullientitys = Mulligan.Instance.whatShouldIMulligan(celist, ownName, enemName, hascoin);
+                foreach (var item in list)
                 {
-                    foreach (var item in list)
+                    if (mullientitys.Contains(item.EntityId))
                     {
-                        if (item.Cost >= 4)
-                        {
-                            Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because it cost is >= 4.");
-                            
-                            e.replace_list.Add(item);
-
-                        }
-                        if (item.CardId == "EX1_308" || item.CardId == "EX1_622" || item.CardId == "EX1_005")
-                        {
-                            Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because it is soulfire or shadow word: death");
-                            e.replace_list.Add(item);
-                        }
+                        Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because of your rules");
+                        //toggle this card
+                        e.replace_list.Add(item);
                     }
                 }
 
-
-                sf.setnewLoggFile();
-
-                if (Mulligan.Instance.loserLoserLoser)
+            }
+            else
+            {
+                foreach (var item in list)
                 {
-                    if (!autoconcede())
+                    if (item.Cost >= 4)
                     {
-                        concedeVSenemy(ownName, enemName);
-                    }
+                        Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because it cost is >= 4.");
 
-                    //set concede flag
-                    e.concede = this.isgoingtoconcede;
-                }                
+                        e.replace_list.Add(item);
+
+                    }
+                    if (item.CardId == "EX1_308" || item.CardId == "EX1_622" || item.CardId == "EX1_005")
+                    {
+                        Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because it is soulfire or shadow word: death");
+                        e.replace_list.Add(item);
+                    }
+                }
+            }
+
+
+            sf.setnewLoggFile();
+
+            if (Mulligan.Instance.loserLoserLoser)
+            {
+                if (!autoconcede())
+                {
+                    concedeVSenemy(ownName, enemName);
+                }
+
+                //set concede flag
+                e.concede = this.isgoingtoconcede;
+            }
         }
 
         /// <summary>
@@ -283,6 +300,16 @@ namespace HREngine.Bots
             // reset instance vars
             numExecsReceived = 0;
             numActionsSent = 0;
+
+            if (Hrtprozis.Instance.deckName != e.deck_name)
+            {
+                deckChanged = true;
+                Hrtprozis.Instance.setDeckName(e.deck_name);
+            }
+            else
+            {
+                deckChanged = false;
+            }
         }
 
         /// <summary>
@@ -475,7 +502,7 @@ namespace HREngine.Bots
                 //HR-only fix for being too fast
                 //IsProcessingPowers not good enough so always sleep
                 //todo find better solution
-                System.Threading.Thread.Sleep(200);
+                //System.Threading.Thread.Sleep(200); //stupid me, C# passes arguments by value unless specified as a ref
                 if (!this.doMultipleThingsAtATime)
                 {
                     //do fake action
@@ -825,7 +852,7 @@ namespace HREngine.Bots
             string[] lines = new string[0] { };
             try
             {
-                string path = SiverFishBotPath.SettingsPath;
+                string path = SilverFishBotPath.SettingsPath;
                 //string path = (HRSettings.Get.CustomRuleFilePath).Remove(HRSettings.Get.CustomRuleFilePath.Length - 13) + "Common" + System.IO.Path.DirectorySeparatorChar;
                 lines = System.IO.File.ReadAllLines(path + "Settings.ini");
             }
@@ -850,7 +877,7 @@ namespace HREngine.Bots
 
             try
             {
-                string path = SiverFishBotPath.SettingsPath;
+                string path = SilverFishBotPath.SettingsPath;
                 System.IO.File.WriteAllLines(path + "Settings.ini", newlines.ToArray());
             }
             catch
@@ -941,7 +968,7 @@ namespace HREngine.Bots
             string[] lines = new string[0] { };
             try
             {
-                string path = SiverFishBotPath.SettingsPath;
+                string path = SilverFishBotPath.SettingsPath;
                 lines = System.IO.File.ReadAllLines(path + "Settings.ini");
             }
             catch
@@ -1058,7 +1085,7 @@ namespace HREngine.Bots
 
             try
             {
-                string path = SiverFishBotPath.SettingsPath;
+                string path = SilverFishBotPath.SettingsPath;
                 System.IO.File.WriteAllLines(path + "Settings.ini", newlines.ToArray());
             }
             catch
@@ -1119,7 +1146,7 @@ namespace HREngine.Bots
         {
             try
             {
-                string path = SiverFishBotPath.SettingsPath + System.IO.Path.DirectorySeparatorChar + "uaibattletrigger.txt";
+                string path = SilverFishBotPath.SettingsPath + System.IO.Path.DirectorySeparatorChar + "uaibattletrigger.txt";
                 string w = "concede";
                 if (what == 1) w = "win";
                 if (what == 2) w = "loss";
@@ -1272,10 +1299,10 @@ namespace HREngine.Bots
             this.singleLog = Settings.Instance.writeToSingleFile;
             Helpfunctions.Instance.logg("init Silverfish");
             Helpfunctions.Instance.ErrorLog("init Silverfish");
-            string path = SiverFishBotPath.AssemblyDirectory + System.IO.Path.DirectorySeparatorChar + "SilverLogs" + System.IO.Path.DirectorySeparatorChar;
+            string path = SilverFishBotPath.AssemblyDirectory + "SilverLogs" + System.IO.Path.DirectorySeparatorChar;
             System.IO.Directory.CreateDirectory(path);
             Helpfunctions.Instance.ErrorLog("setlogpath to:" + path);
-            sttngs.setFilePath(SiverFishBotPath.AssemblyDirectory);
+            sttngs.setFilePath(SilverFishBotPath.AssemblyDirectory);
 
             Helpfunctions.Instance.ErrorLog(path);
             
@@ -1286,7 +1313,7 @@ namespace HREngine.Bots
             }
             else
             {
-                sttngs.setLoggPath(SiverFishBotPath.LogPath + System.IO.Path.DirectorySeparatorChar);
+                sttngs.setLoggPath(SilverFishBotPath.LogPath + System.IO.Path.DirectorySeparatorChar);
                 sttngs.setLoggFile("SilverLog.txt");
                 Helpfunctions.Instance.createNewLoggfile();
             }
@@ -2490,6 +2517,25 @@ namespace HREngine.Bots
                 try
                 {
                     System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
+                    writed = false;
+                }
+                catch
+                {
+                    writed = true;
+                }
+            }
+            this.sendbuffer = "";
+        }
+
+        public void writeBufferToDeckFile()
+        {
+            bool writed = true;
+            this.sendbuffer += "<EoF>";
+            while (writed)
+            {
+                try
+                {
+                    System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
