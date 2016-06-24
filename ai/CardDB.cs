@@ -6175,6 +6175,19 @@ namespace HREngine.Bots
                         //Helpfunctions.Instance.logg(c.name + " is choice");
                     }
 
+                    if (temp.Contains("overload"))
+                    {
+                        try
+                        {
+                            c.overload = Convert.ToInt32(temp.Split('(', ')')[1]);
+                            //Helpfunctions.Instance.ErrorLog("CardDB - Card: " + c.cardIDenum + " Overload: " + c.overload);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+
                     continue;
                 }
                 //targetingarrowtext
@@ -6301,14 +6314,14 @@ namespace HREngine.Bots
                     if (ti == 1) c.Combo = true;
                     continue;
                 }
-                //overload
-                if (s.Contains("<Tag enumID=\"215\""))
+                //overload (value always 1 so we read it from the 184 card description)
+                /*if (s.Contains("<Tag enumID=\"215\""))
                 {
                     string temp = s.Split(new string[] { "value=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
                     temp = temp.Split('\"')[0];
                     int ti = Convert.ToInt32(temp);
                     //if (ti == 1) c.overloadBool = true;
-                    c.overload = ti;  //todo sepefeets - switch not needed now?
+                    //c.overload = ti;
                     switch (c.name)
                     {
                         case CardDB.cardName.ancestralknowledge: c.overload = 2; continue;
@@ -6324,7 +6337,7 @@ namespace HREngine.Bots
                         case CardDB.cardName.elementaldestruction: c.overload = 5; continue;
                     }
                     continue;
-                }
+                }*/
                 //immunetospellpower
                 if (s.Contains("<Tag enumID=\"349\""))
                 {

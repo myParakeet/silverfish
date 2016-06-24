@@ -1178,10 +1178,31 @@
 
                     if (a.own.name == CardDB.cardName.darkshirecouncilman)
                     {
-                        if (!hasCouncilman && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) pen += 20;
+                        if (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name)) pen += 20;
+                    }
+
+                    if (a.own.name == CardDB.cardName.tunneltrogg)
+                    {
+                        if (card.overload > 0 && card.name != CardDB.cardName.elementaldestruction) pen += 20 * card.overload;
                     }
                 }
+                if (a.actionType == actionEnum.playcard)
+                {
+                    if (a.card.card.overload > 0 && a.card.card.name != CardDB.cardName.elementaldestruction && card.name == CardDB.cardName.tunneltrogg)
+                    {
+                        pen += 25 * a.card.card.overload;
+                    }
 
+                    if (card.name == CardDB.cardName.knifejuggler && (a.card.card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(a.card.card.name))) //prioritize jugglers 1st
+                    {
+                        if (a.card.card.name != CardDB.cardName.knifejuggler) pen += 20;
+                    }
+
+                    if (card.name == CardDB.cardName.darkshirecouncilman && (a.card.card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(a.card.card.name))) //and councilman 2nd
+                    {
+                        if (a.card.card.name != CardDB.cardName.knifejuggler && a.card.card.name != CardDB.cardName.darkshirecouncilman) pen += 20;
+                    }
+                }
             }
 
             // Don't penalize for cases that don't actually have random outcomes
@@ -1189,8 +1210,8 @@
 
             if (!this.randomEffects.ContainsKey(card.name) 
                 && !this.cardDrawBattleCryDatabase.ContainsKey(card.name)
-                && !(hasJuggler && card.type == CardDB.cardtype.MOB && p.enemyMinions.Count > 0)
-                && !(hasCouncilman && card.type == CardDB.cardtype.MOB)
+                && !(hasJuggler && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name)) && p.enemyMinions.Count > 0)
+                && !(hasCouncilman && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name)))
                 && !(hasAuctioneer && card.type == CardDB.cardtype.SPELL)
                 && !(hasFlamewaker && card.type == CardDB.cardtype.SPELL && p.enemyMinions.Count > 0)
                 && !(hasBuzzard && (TAG_RACE)card.race == TAG_RACE.PET))
@@ -1291,8 +1312,8 @@
                     {
                         continue;
                     }
-
-
+                    
+                    //todo sepefeets - does this even do anything?
                     if (hasJuggler && (card.type == CardDB.cardtype.MOB || this.summonMinionSpellsDatabase.ContainsKey(card.name))) //and others
                      {
                         if (card.name == CardDB.cardName.knifejuggler && mobsAfterKnife >= 1)
@@ -3691,6 +3712,7 @@
             this.priorityTargets.Add(CardDB.cardName.djinniofzephyrs, 5);
             this.priorityTargets.Add(CardDB.cardName.rumblingelemental, 5);
             this.priorityTargets.Add(CardDB.cardName.animatedarmor, 5);
+            priorityTargets.Add(CardDB.cardName.tunneltrogg, 5);
 
             priorityTargets.Add(CardDB.cardName.addledgrizzly, 10);
             priorityTargets.Add(CardDB.cardName.cthun, 10);
