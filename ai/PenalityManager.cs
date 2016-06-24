@@ -1828,7 +1828,7 @@
             if (name == CardDB.cardName.finickycloakfield || name == CardDB.cardName.emergencycoolant || name == CardDB.cardName.reversingswitch)
                 return 20;
 
-            if (name == CardDB.cardName.flare) 
+            if (name == CardDB.cardName.flare || name == CardDB.cardName.kezanmystic || name == CardDB.cardName.eaterofsecrets) 
             {
                 if (p.enemyHeroName != HeroEnum.hunter && p.enemyHeroName != HeroEnum.mage && p.enemyHeroName != HeroEnum.pala) return 0;
                 //it is a hunter/mage or pala:
@@ -2507,7 +2507,7 @@
 
             bool hasHighHealthMinion = false;
 
-            if (c.name == CardDB.cardName.flare || c.name == CardDB.cardName.kezanmystic)
+            if (c.name == CardDB.cardName.flare || c.name == CardDB.cardName.kezanmystic || c.name == CardDB.cardName.eaterofsecrets)
             {
                 if (p.playactions.Count >= 1) return 100;
                 return 0;
@@ -2518,6 +2518,7 @@
                 {
                     if (hc.card.name == CardDB.cardName.flare && hc.canplayCard(p)) return 100 * p.enemySecretCount;
                     if (hc.card.name == CardDB.cardName.kezanmystic && hc.canplayCard(p)) return 50;
+                    if (hc.card.name == CardDB.cardName.eaterofsecrets && hc.canplayCard(p)) return 100 * p.enemySecretCount;
 
                     if (hc.card.type == CardDB.cardtype.MOB && hc.card.Health > 4 && hc.canplayCard(p)) hasHighHealthMinion = true;
                 }
@@ -2610,6 +2611,7 @@
             {
                 if (hc.card.name == CardDB.cardName.flare && hc.canplayCard(p)) return 100 * p.enemySecretCount;
                 if (hc.card.name == CardDB.cardName.kezanmystic && hc.canplayCard(p)) return 50;
+                if (hc.card.name == CardDB.cardName.eaterofsecrets && hc.canplayCard(p)) return 100 * p.enemySecretCount;
             }
 
             int pen = 0;
