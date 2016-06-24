@@ -122,7 +122,8 @@ namespace HREngine.Bots
 
         public void doDeckData(string data)
         {
-            Helpfunctions.Instance.ErrorLog(data);
+            data = data.Trim();
+            //Helpfunctions.Instance.ErrorLog(data);
             string deckname = data.Split(';')[0];
             string ownname = data.Split(';')[1];
 
