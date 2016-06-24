@@ -418,6 +418,7 @@
 
             if (target.own && name == CardDB.cardName.rockbiterweapon)
             {
+                if (!target.Ready) return 500;
                 return (target.windfury) ? 5 : 10;
             }
 
