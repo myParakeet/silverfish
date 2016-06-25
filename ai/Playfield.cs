@@ -6800,7 +6800,7 @@
 
             Helpfunctions.Instance.logg("ownhero: ");
             Helpfunctions.Instance.logg("ownherohp: " + this.ownHero.Hp + " + " + this.ownHero.armor);
-            Helpfunctions.Instance.logg("ownheroattac: " + this.ownHero.Angr);
+            Helpfunctions.Instance.logg("ownheroattack: " + this.ownHero.Angr);
             Helpfunctions.Instance.logg("ownheroweapon: " + this.ownWeaponAttack + " " + this.ownWeaponDurability + " " + this.ownWeaponName);
             Helpfunctions.Instance.logg("ownherostatus: frozen" + this.ownHero.frozen + " ");
             Helpfunctions.Instance.logg("enemyherohp: " + this.enemyHero.Hp + " + " + this.enemyHero.armor + ((this.enemyHero.immune) ? " immune" : ""));

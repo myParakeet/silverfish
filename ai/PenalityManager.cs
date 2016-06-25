@@ -156,17 +156,18 @@
 
         int enfacehp = -142;
         
-        public int getAttackWithHeroPenality(Minion target, Playfield p, bool leathal)
+        public int getAttackWithHeroPenality(Minion target, Playfield p, bool lethal)
         {
             if (enfacehp == -142) enfacehp = Settings.Instance.enfacehp;
             int retval = 0;
+            bool rockbiterHero = p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == p.ownHero.entityID) != null;
 
-            if (!leathal && p.ownWeaponName == CardDB.cardName.swordofjustice)
+            if (!lethal && p.ownWeaponName == CardDB.cardName.swordofjustice)
             {
                 return 28;
             }
 
-            if (!leathal && target.entityID == p.enemyHero.entityID)
+            if (!lethal && target.entityID == p.enemyHero.entityID)
             {
                 if (p.ownWeaponAttack >= 1 && p.enemyHero.Hp >= enfacehp)
                 {
@@ -174,11 +175,10 @@
                     if (!(p.ownHeroName == HeroEnum.thief && p.ownWeaponAttack == 1)) return 50 + p.ownWeaponAttack;
                 }
 
-                if (p.ownHero.tempAttack > 0 && ! p.ownHero.windfury && p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == p.ownHero.entityID) != null)
+                if (p.ownHero.tempAttack > 0 && !p.ownHero.windfury && rockbiterHero)
                 {
                     return 50;
                 }
-
             }
 
             if (p.ownWeaponDurability == 1 && p.ownWeaponName == CardDB.cardName.eaglehornbow)
@@ -199,11 +199,13 @@
             {
                 foreach (Handmanager.Handcard hc in p.owncards)
                 {
-                    if (hc.card.name == CardDB.cardName.rockbiterweapon) return 30;
+                    if (hc.card.name == CardDB.cardName.rockbiterweapon && hc.canplayCard(p)) return 10;
                 }
+                if (!target.isHero && target.Hp <= p.ownWeaponAttack && p.ownHero.tempAttack > 0) return 20;
+                if (target.isHero && !target.own && rockbiterHero) return -5; //bonus to not waste rockbiter
             }
 
-            //no penality, but a bonus, if he has weapon on hand!
+            //no penalty, but a bonus, if he has weapon on hand!
             if (target.isHero && !target.own && p.ownWeaponName == CardDB.cardName.gorehowl && p.ownWeaponAttack >= 3)
             {
                 return 10;
@@ -323,6 +325,14 @@
                 return 60;
             }
 
+            if (target.own && name == CardDB.cardName.rockbiterweapon)
+            {
+                if (p.playactions.Find(a => a.actionType == actionEnum.attackWithHero) != null) return 500;
+                if (!target.Ready && !target.isHero) return 500;
+                if (!target.isHero && p.ownHero.windfury) return 30;
+                return (target.windfury) ? 5 : 10;
+            }
+
             if (!target.isHero && !target.own)
             {
                 if (card.type == CardDB.cardtype.MOB && p.ownMinions.Count == 0) return 0;
@@ -414,12 +424,6 @@
                     return 10;
                 }
                 if (card.name == CardDB.cardName.blessingofmight) return 6;
-            }
-
-            if (target.own && name == CardDB.cardName.rockbiterweapon)
-            {
-                if (!target.Ready) return 500;
-                return (target.windfury) ? 5 : 10;
             }
 
             return 0;

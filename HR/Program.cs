@@ -83,6 +83,7 @@ namespace HREngine.Bots
         public List<Playfield> queuedMoveGuesses = new List<Playfield>();
         
         private bool deckChanged = false;
+        private bool shouldSendFakeAction = false;
 
         //
         bool isgoingtoconcede = false;
@@ -502,16 +503,27 @@ namespace HREngine.Bots
                 //HR-only fix for being too fast
                 //IsProcessingPowers not good enough so always sleep
                 //todo find better solution
-                //System.Threading.Thread.Sleep(200); //stupid me, C# passes arguments by value unless specified as a ref
                 if (!this.doMultipleThingsAtATime)
                 {
-                    //do fake action
-                    /*BotAction fakemove = new HSRangerLib.BotAction();
-                    fakemove.Type = BotActionType.HERO_ATTACK;
-                    fakemove.Actor = base.FriendHero;
-                    fakemove.Target = this.FriendHero;
-                    e.action_list.Add(fakemove);*/
-                    //return;
+                    // fake move causes missing turns in the log, default ai takes over???
+                    /*if (shouldSendFakeAction)
+                    {
+                        System.Threading.Thread.Sleep(200);
+                        //do fake action
+                        BotAction fakemove = new HSRangerLib.BotAction();
+                        fakemove.Type = BotActionType.HERO_ATTACK;
+                        fakemove.Actor = base.EnemyHero;
+                        fakemove.Target = this.EnemyHero;
+                        e.action_list.Add(fakemove);
+                        shouldSendFakeAction = false;
+                        Helpfunctions.Instance.logg("Sent fake action...");
+                        Helpfunctions.Instance.ErrorLog("Sent fake action...");
+                        return;
+                    }
+                    else
+                    {
+                        e.action_list.Clear(); //clear fake actions
+                    }*/
 
                     //better test... we checked if isprocessing is true.. after that, we wait little time and test it again.
                     if (this.gameState.IsProcessingPowers)
@@ -646,12 +658,16 @@ namespace HREngine.Bots
                     if (moveTodo == null || moveTodo.actionType == actionEnum.endturn)
                     {
                         //simply clear action list, hearthranger bot will endturn if no action can do.
-                        //e.action_list.Clear();
+                        e.action_list.Clear();
                         BotAction endturnmove = new HSRangerLib.BotAction();
                         endturnmove.Type = BotActionType.END_TURN;
                         Helpfunctions.Instance.ErrorLog("end turn action");
                         e.action_list.Add(endturnmove);
                         return;
+                    }
+                    else
+                    {
+                        shouldSendFakeAction = true;
                     }
 
                     Helpfunctions.Instance.ErrorLog("play action");
