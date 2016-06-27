@@ -623,21 +623,10 @@ def Execute():
         {
             var random = Client.Random;
             var type = random.Next(0, 100)%4;
-
-            if (type == 0)
-            {
-                return random.Next(1000, 1500);
-            }
-
-            if (type == 1)
-            {
-                return random.Next(2500, 3500);
-            }
-
-            if (type == 2)
-            {
-                return random.Next(4500, 5500);
-            }
+            
+            if (type == 0) return random.Next(800, 1200);
+            if (type == 1) return random.Next(1200, 2500);
+            if (type == 2) return random.Next(2500, 3700);
 
             return 0;
         }
