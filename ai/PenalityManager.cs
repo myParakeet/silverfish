@@ -215,7 +215,7 @@
                 bool hasweapon = false;
                 foreach (Handmanager.Handcard c in p.owncards)
                 {
-                    if (c.card.type == CardDB.cardtype.WEAPON) hasweapon = true;
+                    if (c.card.type == CardDB.cardtype.WEAPON || c.card.name == CardDB.cardName.musterforbattle) hasweapon = true;
                 }
                 if (p.ownWeaponAttack == 1 && p.ownHeroName == HeroEnum.thief) hasweapon = true;
                 if (hasweapon) retval = -p.ownWeaponAttack - 1; // so he doesnt "lose" the weapon in evaluation :D
