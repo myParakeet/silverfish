@@ -1783,7 +1783,7 @@
                 if (card.name == CardDB.cardName.faeriedragon) return -25;
                 if (card.name == CardDB.cardName.shrinkmeister) return 20; //don't play early
                 if (card.Attack >= 3 && card.Health >= 2) return -20;
-                if (card.Health > 0) return -card.Attack - card.Health; //nudge anything playable
+                if (card.Health > 0) return -2 //-card.Attack - card.Health; //nudge any minion playable
 
             }
 
