@@ -126,13 +126,17 @@ namespace HREngine.Bots
             //Helpfunctions.Instance.ErrorLog(data);
             string deckname = data.Split(';')[0];
             string ownname = data.Split(';')[1];
+            HeroEnum heroname = Hrtprozis.Instance.heroNametoEnum(ownname);
 
-            Hrtprozis.Instance.setDeckName(deckname);
-            Hrtprozis.Instance.setHeroName(ownname);
-            ComboBreaker.Instance.updateInstance();
-            Discovery.Instance.updateInstance();
-            Mulligan.Instance.updateInstance();
-            Settings.Instance.updateInstance();
+            if (Hrtprozis.Instance.deckName != deckname || heroname != Hrtprozis.Instance.heroname)
+            {
+                Hrtprozis.Instance.setDeckName(deckname);
+                Hrtprozis.Instance.setHeroName(ownname);
+                ComboBreaker.Instance.updateInstance();
+                Discovery.Instance.updateInstance();
+                Mulligan.Instance.updateInstance();
+                Settings.Instance.updateInstance();
+            }
         }
 
         public void testing(int start)

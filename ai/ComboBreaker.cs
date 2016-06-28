@@ -377,7 +377,7 @@
             instance = new ComboBreaker();
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             deckName = Hrtprozis.Instance.deckName;
-            Helpfunctions.Instance.ErrorLog("ComboBreaker Deck: " + deckName + " , Class: " + ownClass);
+            //Helpfunctions.Instance.ErrorLog("ComboBreaker Deck: " + deckName + " , Class: " + ownClass);
         }
 
         private ComboBreaker()
