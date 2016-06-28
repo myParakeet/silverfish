@@ -14,7 +14,7 @@ using System.Linq;
 namespace HREngine.Bots
 {
 
-    public static class SiverFishBotPath
+    public static class SilverFishBotPath
     {
         public static string AssemblyDirectory
         {
@@ -57,7 +57,7 @@ namespace HREngine.Bots
 
     public class Silverfish
     {
-        public string versionnumber = "120.0SE";
+        public string versionnumber = "121.3SE";
         private bool singleLog = false;
         private string botbehave = "rush";
         public bool waitingForSilver = false;
@@ -176,7 +176,7 @@ namespace HREngine.Bots
             }
             else
             {
-                sttngs.setLoggPath(SiverFishBotPath.LogPath + System.IO.Path.DirectorySeparatorChar);
+                sttngs.setLoggPath(SilverFishBotPath.LogPath + System.IO.Path.DirectorySeparatorChar);
                 sttngs.setLoggFile("SilverLog.txt");
                 Helpfunctions.Instance.createNewLoggfile();
             }
@@ -202,26 +202,50 @@ namespace HREngine.Bots
             }
         }
 
-        public bool updateEverything(Behavior botbase, bool quequeActions, bool runExtern = false, bool passiveWait = false, bool nodruidchoice=true)
+        public void setNewGame()
         {
-            quequeActions = false;
+            string deckname = Triton.Bot.Logic.Bots.DefaultBot.DefaultBotSettings.Instance.ConstructedCustomDeck;
+            this.heroname = Hrtprozis.Instance.heroIDtoName(TritonHs.OurHero.Id);
+            HeroEnum heroname = Hrtprozis.Instance.heroNametoEnum(this.heroname);
+            if (deckname != Hrtprozis.Instance.deckName || heroname != Hrtprozis.Instance.heroname)
+            {
+                if (deckname != Hrtprozis.Instance.deckName)
+                {
+                    Helpfunctions.Instance.ErrorLog("New Deck: \"" + deckname + "\", Old Deck: \"" + Hrtprozis.Instance.deckName + "\"");
+                }
+                if (heroname != Hrtprozis.Instance.heroname)
+                {
+                    Helpfunctions.Instance.ErrorLog("New Class: \"" + this.heroname + "\", Old Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname) + "\"");
+                }
+                // reload settings
+                Hrtprozis.Instance.setDeckName(deckname);
+                Hrtprozis.Instance.setHeroName(this.heroname);
+                ComboBreaker.Instance.updateInstance();
+                Discovery.Instance.updateInstance();
+                Mulligan.Instance.updateInstance();
+                Settings.Instance.updateInstance();
+            }
+
+            //reload external process settings too
+            Helpfunctions.Instance.resetBuffer();
+            Helpfunctions.Instance.writeToBuffer(Hrtprozis.Instance.deckName + ";" + this.heroname + ";");
+            Helpfunctions.Instance.writeBufferToDeckFile();
+            setnewLoggFile();
+        }
+
+        public bool updateEverything(Behavior botbase, bool queueActions, bool runExtern = false, bool passiveWait = false, bool nodruidchoice=true)
+        {
+            queueActions = false;
             Helpfunctions.Instance.ErrorLog("updateEverything");
 
             this.updateBehaveString(botbase);
 
             ownPlayerController = TritonHs.OurHero.ControllerId;
 
+            
 
             // create hero + minion data
             getHerostuff();
-
-            //small fix for not knowing when to mulligan:
-            if (ownMaxMana == 1 && currentMana == 1 && numMinionsPlayedThisTurn == 0 && cardsPlayedThisTurn == 0)
-            {
-                setnewLoggFile();
-                getHerostuff();
-            }
-
             getMinions();
             getHandcards(nodruidchoice);
             getDecks();

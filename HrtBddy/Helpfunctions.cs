@@ -123,6 +123,25 @@ namespace HREngine.Bots
             this.sendbuffer = "";
         }
 
+        public void writeBufferToDeckFile()
+        {
+            bool writed = true;
+            this.sendbuffer += "<EoF>";
+            while (writed)
+            {
+                try
+                {
+                    System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
+                    writed = false;
+                }
+                catch
+                {
+                    writed = true;
+                }
+            }
+            this.sendbuffer = "";
+        }
+
         public void writeBufferToActionFile()
         {
             bool writed = true;

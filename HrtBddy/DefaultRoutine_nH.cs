@@ -643,6 +643,8 @@ def Execute():
         /// <returns></returns>
         public async Task MulliganLogic(MulliganData mulliganData)
         {
+            Silverfish.Instance.setNewGame();
+
             Log.InfoFormat("[Mulligan] {0} vs {1}.", mulliganData.UserClass, mulliganData.OpponentClass);
 
             var count = mulliganData.Cards.Count;
@@ -1382,7 +1384,7 @@ def Execute():
         private void GameEventManagerOnNewGame(object sender, NewGameEventArgs newGameEventArgs)
         {
             Log.InfoFormat("[GameEventManagerOnNewGame]");
-            Hrtprozis.Instance.clearAll();
+            //Hrtprozis.Instance.clearAll();
             //Hrtprozis.Instance.ownHeroStartClass = TAG_CLASS.INVALID;
             //Hrtprozis.Instance.enemyHeroStartClass = TAG_CLASS.INVALID;
         }

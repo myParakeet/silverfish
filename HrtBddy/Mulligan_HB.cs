@@ -35,7 +35,7 @@ as well as
 	 
     public class Mulligan
     {
-        string PathHBMulligan = "";
+        string path = "";
         public bool mulliganRulesLoaded = false;
         Dictionary<string, string> MulliganRules = new Dictionary<string, string>();
         Dictionary<CardDB.cardIDEnum, string> MulliganRulesManual = new Dictionary<CardDB.cardIDEnum, string>();
@@ -96,6 +96,9 @@ as well as
             }
         }
 
+        private string ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
+        private string deckName = Hrtprozis.Instance.deckName;
+
 
         private static Mulligan instance;
 
@@ -111,6 +114,13 @@ as well as
             }
         }
 
+        public void updateInstance()
+        {
+            instance = new Mulligan();
+            ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
+            deckName = Hrtprozis.Instance.deckName;
+        }
+
         private Mulligan()
         {
             readRules();
@@ -118,30 +128,65 @@ as well as
 
         private void readRules()
         {
-            PathHBMulligan = Settings.Instance.path + "_mulligan.txt";
+            string[] lines = new string[0] { };
 
-            if (!System.IO.File.Exists(PathHBMulligan))
+            string path = Settings.Instance.path;
+            string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
+
+
+            // if we have a deckName then we have a real ownClass too, not the default "druid"
+            if (deckName != "" && System.IO.File.Exists(deckpath + "_mulligan.txt"))
             {
-                Helpfunctions.Instance.ErrorLog("cant find _mulligan.txt (if you dont created your own mulliganfile, ignore this message)");
+                path = deckpath;
+                Helpfunctions.Instance.ErrorLog("read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "_mulligan.txt...");
+            }
+            else if (deckName != "" && System.IO.File.Exists(classpath + "_mulligan.txt"))
+            {
+                path = classpath;
+                Helpfunctions.Instance.ErrorLog("read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "_mulligan.txt...");
+            }
+            else if (deckName != "" && System.IO.File.Exists(datapath + "_mulligan.txt"))
+            {
+                path = datapath;
+                Helpfunctions.Instance.ErrorLog("read Data" + System.IO.Path.DirectorySeparatorChar + "_mulligan.txt...");
+            }
+            else if (System.IO.File.Exists(path + "_mulligan.txt"))
+            {
+                Helpfunctions.Instance.ErrorLog("read base _mulligan.txt...");
+            }
+            else
+            {
+                Helpfunctions.Instance.ErrorLog("can't find _mulligan.txt (if you didn't create your own mulligan file, ignore this message)");
                 return;
             }
+
             try
             {
-                string[] readText = System.IO.File.ReadAllLines(PathHBMulligan);
-                MulliganRules.Clear();
-                foreach (string tmp in readText)
+                lines = System.IO.File.ReadAllLines(path);
+            }
+            catch
+            {
+                Helpfunctions.Instance.ErrorLog("_mulligan.txt read error. Continuing without user-defined rules.");
+                return;
+            }
+
+            MulliganRules.Clear();
+            foreach (string line in lines)
+            {
+                try
                 {
-                    if (tmp == "" || tmp == null) continue;
-                    if (tmp.StartsWith("//")) continue;
-                    string[] oneRule = tmp.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
+                    if (line == "" || line == null) continue;
+                    if (line.StartsWith("//")) continue;
+                    string[] oneRule = line.Split(new string[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
                     if (MulliganRules.ContainsKey(oneRule[0])) MulliganRules[oneRule[0]] = oneRule[1];
                     else MulliganRules.Add(oneRule[0], oneRule[1]);
                 }
-            }
-            catch (Exception ee)
-            {
-                Helpfunctions.Instance.ErrorLog("[Mulligan] _mulligan.txt - read error. We continue without user-defined rules. Only the default rules.");
-                return;
+                catch
+                {
+                    Helpfunctions.Instance.ErrorLog("mullimaker cant read: " + line);
+                }
             }
             Helpfunctions.Instance.ErrorLog("[Mulligan] Load rules...");
             validateRule();
