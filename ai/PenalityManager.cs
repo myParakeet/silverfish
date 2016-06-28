@@ -221,6 +221,7 @@
                 if (hasweapon) retval = -p.ownWeaponAttack - 1; // so he doesnt "lose" the weapon in evaluation :D
             }
             if (p.ownWeaponAttack == 1 && p.ownHeroName == HeroEnum.thief) retval += -1;
+            if (p.ownHero.Angr > 0) retval += -5; //bonus to not waste rockbiter
             return retval;
         }
 
