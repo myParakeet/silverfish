@@ -1785,12 +1785,12 @@
             //lethal end########################################################
 
             //bonus for early threat
-            if (p.ownMaxMana == 1 )
+            if (p.ownMaxMana == 1)
             {
                 if (card.name == CardDB.cardName.faeriedragon) return -25;
                 if (card.name == CardDB.cardName.shrinkmeister) return 20; //don't play early
                 if (card.Attack >= 3 && card.Health >= 2) return -20;
-                if (card.Health > 0) return -2; //-card.Attack - card.Health; //nudge any minion playable
+                if (card.Health > 0) p.evaluatePenality += -2; //-card.Attack - card.Health; //nudge any minion playable
 
             }
 
@@ -2452,11 +2452,10 @@
                 int ready = 0;
                 foreach (Minion min in p.ownMinions)
                 {
-                    if (min.Ready)
-                    { ready++; }
+                    if (min.Ready) ready++;
                 }
-                if (ready == 0)
-                { return 5; }
+                if (ready == 0) return 10;
+                if (ready == 1) return 5;
             }
 /*            if (name == CardDB.cardName.abusivesergeant)  //penalty handled by buffing1TurnDatabase
             {
@@ -3693,7 +3692,7 @@
             this.priorityTargets.Add(CardDB.cardName.troggzortheearthinator, 10);
             
             //BRM
-            this.priorityTargets.Add(CardDB.cardName.flamewaker, 5);
+            this.priorityTargets.Add(CardDB.cardName.flamewaker, 10);
             this.priorityTargets.Add(CardDB.cardName.impgangboss, 5);
             this.priorityTargets.Add(CardDB.cardName.grimpatron, 10);
             this.priorityTargets.Add(CardDB.cardName.dragonkinsorcerer, 4);

@@ -1814,6 +1814,7 @@
                         tempval -= m.Hp + 2;
                     }
 
+                    //todo sepefeets - make this a switch and add priority minions db
                     if (m.handcard.card.name == CardDB.cardName.flametonguetotem) tempval += 50;
                     if (m.handcard.card.name == CardDB.cardName.raidleader) tempval += 10;
                     if (m.handcard.card.name == CardDB.cardName.grimscaleoracle) tempval += 10;
@@ -5590,6 +5591,7 @@
 
         public void updateAdjacentBuffs(bool own)
         {
+            //todo sepefeets - more updates need to call this?
             //only call this after update board
             if (own)
             {
