@@ -4021,7 +4021,13 @@
             randomEffects.Add(CardDB.cardName.cthun, 10);
             randomEffects.Add(CardDB.cardName.fierybat, 1);
             randomEffects.Add(CardDB.cardName.spreadingmadness, 9);
-
+            
+            this.randomEffects.Add(CardDB.cardName.servantofyoggsaron, 1);
+            this.randomEffects.Add(CardDB.cardName.cabaliststome, 1);
+            this.randomEffects.Add(CardDB.cardName.nexuschampionsaraad, 1);
+            this.randomEffects.Add(CardDB.cardName.xarilpoisonedmind, 1);
+            this.randomEffects.Add(CardDB.cardName.yoggsaronhopesend, 1);
+            this.randomEffects.Add(CardDB.cardName.infest, 1);
         }
 
         private void setupTargetAbilitys()
