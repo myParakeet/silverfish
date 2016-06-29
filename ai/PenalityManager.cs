@@ -978,7 +978,7 @@
 
         private int getCardDrawPenality(CardDB.cardName name, Minion target, Playfield p, int choice, bool lethal)
         {
-            // penality if carddraw is late or you have enough cards
+            // penalty if carddraw is late or you have enough cards
             if (!cardDrawBattleCryDatabase.ContainsKey(name)) return 0;
             if (name == CardDB.cardName.ancientoflore && choice != 1) return 0;
             if (name == CardDB.cardName.wrath && choice != 2) return 0;
@@ -3980,6 +3980,7 @@
             this.randomEffects.Add(CardDB.cardName.totemiccall, 1);
             this.randomEffects.Add(CardDB.cardName.elitetaurenchieftain, 1);
             this.randomEffects.Add(CardDB.cardName.lifetap, 1);
+            this.randomEffects.Add(CardDB.cardName.soultap, 1);
 
             this.randomEffects.Add(CardDB.cardName.unstableportal, 1);
             this.randomEffects.Add(CardDB.cardName.crackle, 1);
