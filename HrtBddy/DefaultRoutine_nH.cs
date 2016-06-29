@@ -1384,6 +1384,7 @@ def Execute():
         private void GameEventManagerOnNewGame(object sender, NewGameEventArgs newGameEventArgs)
         {
             Log.InfoFormat("[GameEventManagerOnNewGame]");
+            Silverfish.Instance.setnewLoggFile();
             //Hrtprozis.Instance.clearAll();
             //Hrtprozis.Instance.ownHeroStartClass = TAG_CLASS.INVALID;
             //Hrtprozis.Instance.enemyHeroStartClass = TAG_CLASS.INVALID;

@@ -164,7 +164,7 @@ as well as
 
             try
             {
-                lines = System.IO.File.ReadAllLines(path);
+                lines = System.IO.File.ReadAllLines(path + "_mulligan.txt");
             }
             catch
             {

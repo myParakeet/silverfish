@@ -230,7 +230,6 @@ namespace HREngine.Bots
             Helpfunctions.Instance.resetBuffer();
             Helpfunctions.Instance.writeToBuffer(Hrtprozis.Instance.deckName + ";" + this.heroname + ";");
             Helpfunctions.Instance.writeBufferToDeckFile();
-            setnewLoggFile();
         }
 
         public bool updateEverything(Behavior botbase, bool queueActions, bool runExtern = false, bool passiveWait = false, bool nodruidchoice=true)
@@ -242,10 +241,15 @@ namespace HREngine.Bots
 
             ownPlayerController = TritonHs.OurHero.ControllerId;
 
-            
-
             // create hero + minion data
             getHerostuff();
+
+            //small fix for not knowing when to mulligan:
+            /*if (ownMaxMana == 1 && currentMana == 1 && numMinionsPlayedThisTurn == 0 && cardsPlayedThisTurn == 0)
+            {
+                setnewLoggFile();
+            }*/
+
             getMinions();
             getHandcards(nodruidchoice);
             getDecks();
