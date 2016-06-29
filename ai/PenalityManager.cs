@@ -1617,6 +1617,12 @@
                         || a.card.card.name == CardDB.cardName.lightningstorm || a.card.card.name == CardDB.cardName.elementaldestruction)).Count;
             }
 
+            // penalize playing shapeshift after other moves
+            if (name == CardDB.cardName.shapeshift || name == CardDB.cardName.direshapeshift)
+            {
+                return p.playactions.Count;
+            }
+
             return 0;
         }
 
