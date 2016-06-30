@@ -3957,43 +3957,43 @@
 
         private void setupRandomCards()
         {
-            this.randomEffects.Add(CardDB.cardName.deadlyshot, 1);
+            this.randomEffects.Add(CardDB.cardName.deadlyshot, 1); //destroy random enemy minion
             this.randomEffects.Add(CardDB.cardName.multishot, 1);
 
-            this.randomEffects.Add(CardDB.cardName.animalcompanion, 1);
-            this.randomEffects.Add(CardDB.cardName.arcanemissiles, 3);
-            this.randomEffects.Add(CardDB.cardName.goblinblastmage, 1);
-            this.randomEffects.Add(CardDB.cardName.avengingwrath, 8);
+            this.randomEffects.Add(CardDB.cardName.animalcompanion, 1); //random "companion" beast
+            this.randomEffects.Add(CardDB.cardName.arcanemissiles, 3); //random 3 dmg split enemies
+            this.randomEffects.Add(CardDB.cardName.goblinblastmage, 1); //random 4 dmg split enemies if have mech
+            this.randomEffects.Add(CardDB.cardName.avengingwrath, 8); //random 8 dmg split enemies
 
-            this.randomEffects.Add(CardDB.cardName.flamecannon, 4);
+            this.randomEffects.Add(CardDB.cardName.flamecannon, 4); //random 4 dmg enemy minion
 
             //this.randomEffects.Add(CardDB.cardName.baneofdoom, 1);
-            this.randomEffects.Add(CardDB.cardName.brawl, 1);
+            this.randomEffects.Add(CardDB.cardName.brawl, 1); //random 1 minion lives
             this.randomEffects.Add(CardDB.cardName.captainsparrot, 1);
             this.randomEffects.Add(CardDB.cardName.cleave, 1);
             this.randomEffects.Add(CardDB.cardName.forkedlightning, 1);
             this.randomEffects.Add(CardDB.cardName.gelbinmekkatorque, 1);
             this.randomEffects.Add(CardDB.cardName.iammurloc, 3);
-            this.randomEffects.Add(CardDB.cardName.lightningstorm, 1);
-            this.randomEffects.Add(CardDB.cardName.madbomber, 3);
+            this.randomEffects.Add(CardDB.cardName.lightningstorm, 1); //deal 2-3 dmg all enemy minions
+            this.randomEffects.Add(CardDB.cardName.madbomber, 3); //random 3 dmg split all
             this.randomEffects.Add(CardDB.cardName.mindgames, 1);
-            this.randomEffects.Add(CardDB.cardName.mindcontroltech, 1);
+            this.randomEffects.Add(CardDB.cardName.mindcontroltech, 1); //steal random minion if they have >3
             this.randomEffects.Add(CardDB.cardName.mindvision, 1);
             this.randomEffects.Add(CardDB.cardName.powerofthehorde, 1);
             this.randomEffects.Add(CardDB.cardName.sensedemons, 2);
             this.randomEffects.Add(CardDB.cardName.tinkmasteroverspark, 1);
-            this.randomEffects.Add(CardDB.cardName.totemiccall, 1);
-            this.randomEffects.Add(CardDB.cardName.elitetaurenchieftain, 1);
-            this.randomEffects.Add(CardDB.cardName.lifetap, 1);
-            this.randomEffects.Add(CardDB.cardName.soultap, 1);
+            this.randomEffects.Add(CardDB.cardName.totemiccall, 1); //random totem
+            this.randomEffects.Add(CardDB.cardName.elitetaurenchieftain, 1); //random "power cord" card both hands
+            this.randomEffects.Add(CardDB.cardName.lifetap, 1); //draw card
+            this.randomEffects.Add(CardDB.cardName.soultap, 1); //draw card
 
-            this.randomEffects.Add(CardDB.cardName.unstableportal, 1);
-            this.randomEffects.Add(CardDB.cardName.crackle, 1);
-            this.randomEffects.Add(CardDB.cardName.bouncingblade, 3);
-            this.randomEffects.Add(CardDB.cardName.coghammer, 1);
-            this.randomEffects.Add(CardDB.cardName.madderbomber, 6);
-            this.randomEffects.Add(CardDB.cardName.bomblobber, 1);
-            this.randomEffects.Add(CardDB.cardName.enhanceomechano, 1);
+            this.randomEffects.Add(CardDB.cardName.unstableportal, 1); //random minion to hand
+            this.randomEffects.Add(CardDB.cardName.crackle, 1); //deal 3-6 dmg
+            this.randomEffects.Add(CardDB.cardName.bouncingblade, 3); //random 1 dmg until minion dies
+            this.randomEffects.Add(CardDB.cardName.coghammer, 1); //random taunt/divine shield
+            this.randomEffects.Add(CardDB.cardName.madderbomber, 6); //random 6 dmg split all
+            this.randomEffects.Add(CardDB.cardName.bomblobber, 1); //random 4 dmg enemy
+            this.randomEffects.Add(CardDB.cardName.enhanceomechano, 1); //random taunt/windfury/divine shield own minions
 
             this.randomEffects.Add(CardDB.cardName.nefarian, 2);
             this.randomEffects.Add(CardDB.cardName.dieinsect, 2);
@@ -4008,26 +4008,63 @@
             this.randomEffects.Add(CardDB.cardName.armoredwarhorse, 1);
             this.randomEffects.Add(CardDB.cardName.masterjouster, 1);
             this.randomEffects.Add(CardDB.cardName.tuskarrjouster, 1);
-            this.randomEffects.Add(CardDB.cardName.tuskarrtotemic, 1);
-            this.randomEffects.Add(CardDB.cardName.healingwave, 1);
-            this.randomEffects.Add(CardDB.cardName.elementaldestruction, 1);
+            this.randomEffects.Add(CardDB.cardName.tuskarrtotemic, 1); //random totem
+            this.randomEffects.Add(CardDB.cardName.healingwave, 1); //heal 7/14 joust
+            this.randomEffects.Add(CardDB.cardName.elementaldestruction, 1); //deal 4-5 dmg to all minions
             this.randomEffects.Add(CardDB.cardName.darkbargain, 2);
-            this.randomEffects.Add(CardDB.cardName.varianwrynn, 3);
+            this.randomEffects.Add(CardDB.cardName.varianwrynn, 3); //draw 3 cards, minions get summoned
 
-            this.randomEffects.Add(CardDB.cardName.lockandload, 10);
-            this.randomEffects.Add(CardDB.cardName.flamejuggler, 1);
+            this.randomEffects.Add(CardDB.cardName.lockandload, 10); //random hunter card for each spell cast
+            this.randomEffects.Add(CardDB.cardName.flamejuggler, 1); //random 1 dmg
             this.randomEffects.Add(CardDB.cardName.grandcrusader, 1);
-            this.randomEffects.Add(CardDB.cardName.spellslinger, 1);
-            randomEffects.Add(CardDB.cardName.cthun, 10);
-            randomEffects.Add(CardDB.cardName.fierybat, 1);
-            randomEffects.Add(CardDB.cardName.spreadingmadness, 9);
-            
-            this.randomEffects.Add(CardDB.cardName.servantofyoggsaron, 1);
-            this.randomEffects.Add(CardDB.cardName.cabaliststome, 1);
-            this.randomEffects.Add(CardDB.cardName.nexuschampionsaraad, 1);
-            this.randomEffects.Add(CardDB.cardName.xarilpoisonedmind, 1);
-            this.randomEffects.Add(CardDB.cardName.yoggsaronhopesend, 1);
-            this.randomEffects.Add(CardDB.cardName.infest, 1);
+            this.randomEffects.Add(CardDB.cardName.spellslinger, 1); //random spell to both hands
+            randomEffects.Add(CardDB.cardName.cthun, 10); //random X dmg split enemies, X=attack
+            randomEffects.Add(CardDB.cardName.fierybat, 1); //random 1 dmg
+            randomEffects.Add(CardDB.cardName.spreadingmadness, 9); //random 9 dmg split all
+/*            
+            this.randomEffects.Add(CardDB.cardName.servantofyoggsaron, 1); //random 1 spell
+            this.randomEffects.Add(CardDB.cardName.cabaliststome, 1); //random 3 mage spells
+            this.randomEffects.Add(CardDB.cardName.nexuschampionsaraad, 1); //random spell inspire
+            this.randomEffects.Add(CardDB.cardName.xarilpoisonedmind, 1); //random toxin, random toxin deathrattle
+            this.randomEffects.Add(CardDB.cardName.yoggsaronhopesend, 1); //cast X random spells equal to # previous casts
+            this.randomEffects.Add(CardDB.cardName.infest, 1); //add random beast deathrattle
+
+            this.randomEffects.Add(CardDB.cardName.goldenmonkey, 1); //replace your cards with legendaries
+            this.randomEffects.Add(CardDB.cardName.timepieceofhorror, 1); //random 10 dmg split enemies
+            this.randomEffects.Add(CardDB.cardName.succubus, 1); //discard card
+            this.randomEffects.Add(CardDB.cardName.desertcamel, 1); //summon 1 cost from both decks
+            this.randomEffects.Add(CardDB.cardName.facelesssummoner, 1); //summon random 3 cost
+            this.randomEffects.Add(CardDB.cardName.hugetoad, 1); //random 1 dmg deathrattle
+            this.randomEffects.Add(CardDB.cardName.hungrydragon, 1); //summon random 1 cost for enemy
+            this.randomEffects.Add(CardDB.cardName.mountedraptor, 1); //summon random 1 cost deathrattle
+            this.randomEffects.Add(CardDB.cardName.murlocknight, 1); //summon random murloc inspire
+            this.randomEffects.Add(CardDB.cardName.rumblingelemental, 2); //random 2 dmg after each battlecry
+            this.randomEffects.Add(CardDB.cardName.soulfire, 1); //discard card
+            this.randomEffects.Add(CardDB.cardName.thoughtsteal, 1); //copy 2 cards from enemy deck
+            this.randomEffects.Add(CardDB.cardName.zealousinitiate, 1); //give random +1/1 deathrattle
+            this.randomEffects.Add(CardDB.cardName.burgle, 1); //add 2 random enemy class cards
+            this.randomEffects.Add(CardDB.cardName.darkshirelibrarian, 1); //discard card, draw card deathrattle
+            this.randomEffects.Add(CardDB.cardName.dementedfrostcaller, 1); //freeze random enemy every spell
+            this.randomEffects.Add(CardDB.cardName.doomguard, 1); //discard 2
+            this.randomEffects.Add(CardDB.cardName.evolve, 1); //replace all your minions with ones that cost 1 more
+            this.randomEffects.Add(CardDB.cardName.fistofjaraxxus, 1); //random 4 dmg
+            this.randomEffects.Add(CardDB.cardName.flamewaker, 1); //random 2 dmg split after spell
+            this.randomEffects.Add(CardDB.cardName.knifejuggler, 1); //random 1 dmg every summon
+            this.randomEffects.Add(CardDB.cardName.masterofevolution, 1); //replace minion with one that costs 1 more
+            this.randomEffects.Add(CardDB.cardName.ramwrangler, 1); //summon random beast if you have a beast
+            this.randomEffects.Add(CardDB.cardName.selflesshero, 1); //random divine shield deathrattle
+            this.randomEffects.Add(CardDB.cardName.shifterzerus, 1); //his morphing doesn't matter but w/e he becomes could have random effects //todo sepefeets - remove him once we properly detect what he becomes
+            this.randomEffects.Add(CardDB.cardName.shiftingshade, 1); //copy card from enemy deck deathrattle
+            this.randomEffects.Add(CardDB.cardName.stampedingkodo, 1); // destroy random <3 attack minion
+            this.randomEffects.Add(CardDB.cardName.summoningstone, 1); // summon minion with equal cost to any spell cast
+            this.randomEffects.Add(CardDB.cardName.undercityhuckster, 1); //add random enemy class card deathrattle
+            this.randomEffects.Add(CardDB.cardName.voidcrusher, 1); //destroy random minion for both players inspire
+            this.randomEffects.Add(CardDB.cardName.renouncedarkness, 1); //replace cards/power with a new class
+            this.randomEffects.Add(CardDB.cardName.confessorpaletress, 1); //random legendary inspire
+            this.randomEffects.Add(CardDB.cardName.eydisdarkbane, 1); //random 3 dmg when you target her with spell
+            this.randomEffects.Add(CardDB.cardName.malkorok, 1); //equip random weapon
+            this.randomEffects.Add(CardDB.cardName.sylvanaswindrunner, 1); //steal random enemy deathrattle
+            */
         }
 
         private void setupTargetAbilitys()
