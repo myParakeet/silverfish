@@ -4172,11 +4172,7 @@ namespace HREngine.Bots
         {
             CardDB.cardName NameEnum;
             if (Enum.TryParse<cardName>(s, false, out NameEnum)) return NameEnum;
-            else
-            {
-                if (s != "") Helpfunctions.Instance.ErrorLog("[Unidentified card Name: " + s + "]");
-                return CardDB.cardName.unknown;
-            }
+            else return CardDB.cardName.unknown;
         }
 
         public enum ErrorType2
