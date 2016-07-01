@@ -218,17 +218,12 @@ namespace HREngine.Bots
             if (this.actionType == actionEnum.playcard)
             {
                 string playaction = "play ";
+                playaction += this.card.card.name;
+                playaction += " id " + this.card.entity;
 
-                playaction += "id " + this.card.entity;
-                if (this.target != null)
-                {
-                    playaction += " target " + this.target.entityID;
-                }
+                if (this.target != null) playaction += " target " + this.target.name + " id " + this.target.entityID;
 
-                if (this.place >= 0)
-                {
-                    playaction += " pos " + this.place;
-                }
+                if (this.place >= 0) playaction += " pos " + this.place;
 
                 if (this.druidchoice >= 1) playaction += " choice " + this.druidchoice;
 
@@ -236,24 +231,21 @@ namespace HREngine.Bots
             }
             if (this.actionType == actionEnum.attackWithMinion)
             {
-                help.logg("attacker: " + this.own.entityID + " enemy: " + this.target.entityID + discover);
+                help.logg("attacker: " + this.own.Angr + "/" + this.own.Hp + " " + this.own.name + " id " + this.own.entityID + " enemy: " + this.target.Angr + "/" + this.target.Hp + " " + this.target.name + " id " + this.target.entityID + discover);
             }
             if (this.actionType == actionEnum.attackWithHero)
             {
-                help.logg("attack with hero, enemy: " + this.target.entityID + discover);
+                help.logg("attack with hero, enemy: " + this.target.Angr + "/" + this.target.Hp + " " + this.target.name + " id " + this.target.entityID + discover);
             }
             if (this.actionType == actionEnum.useHeroPower)
             {
                 help.logg("useability " + discover);
                 if (this.target != null)
                 {
-                    help.logg("on enemy: " + this.target.entityID + discover);
+                    help.logg("on enemy: " + this.target.Angr + "/" + this.target.Hp + " " + this.target.name + " id " + this.target.entityID + discover);
                 }
             }
             help.logg("");
         }
-
-    }
-
-    
+    }    
 }
