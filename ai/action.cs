@@ -171,7 +171,7 @@ namespace HREngine.Bots
         {
             Helpfunctions help = Helpfunctions.Instance;
             string discover = "";
-            if (this.tracking >= 1) discover = " discover "+tracking;
+            if (this.tracking >= 1) discover = " discover " + tracking;
             if (tobuffer)
             {
                 if (this.actionType == actionEnum.playcard)
@@ -186,7 +186,7 @@ namespace HREngine.Bots
 
                     if (this.place >= 0)
                     {
-                        playaction += " pos " +this.place;
+                        playaction += " pos " + this.place;
                     }
 
                     if (this.druidchoice >= 1) playaction += " choice " + this.druidchoice;
@@ -215,13 +215,35 @@ namespace HREngine.Bots
                 }
                 return;
             }
+
+            string cardname = "";
+            string targetname = "";
+            Playfield tmpPf = new Playfield();
+
+            if (this.target != null)
+            {
+                foreach (Minion m in tmpPf.enemyMinions)
+                {
+                    if (m.entityID == this.target.entityID) targetname = "" + m.name;
+                }
+                if (tmpPf.enemyHero.entityID == this.target.entityID) targetname = "" + tmpPf.enemyHeroName;
+            }
+            foreach (Minion m in tmpPf.ownMinions)
+            {
+                if (this.target != null && m.entityID == this.target.entityID) targetname = "" + m.name;
+                if (this.card != null && m.entityID == this.card.entity) cardname = "" + m.name;
+                if (this.own != null && m.entityID == this.own.entityID) cardname = "" + m.name;
+            }
+            if (this.target != null && tmpPf.ownHero.entityID == this.target.entityID) targetname = "" + tmpPf.ownHeroName;
+
+
             if (this.actionType == actionEnum.playcard)
             {
                 string playaction = "play ";
-                playaction += this.card.card.name;
+                playaction += cardname;
                 playaction += " id " + this.card.entity;
 
-                if (this.target != null) playaction += " target " + this.target.name + " id " + this.target.entityID;
+                if (this.target != null) playaction += " target " + targetname + " id " + this.target.entityID;
 
                 if (this.place >= 0) playaction += " pos " + this.place;
 
@@ -231,18 +253,18 @@ namespace HREngine.Bots
             }
             if (this.actionType == actionEnum.attackWithMinion)
             {
-                help.logg("attacker: " + this.own.Angr + "/" + this.own.Hp + " " + this.own.name + " id " + this.own.entityID + " enemy: " + this.target.Angr + "/" + this.target.Hp + " " + this.target.name + " id " + this.target.entityID + discover);
+                help.logg("attacker: " + cardname + " id " + this.own.entityID + " enemy: " + targetname + " id " + this.target.entityID + discover);
             }
             if (this.actionType == actionEnum.attackWithHero)
             {
-                help.logg("attack with hero, enemy: " + this.target.Angr + "/" + this.target.Hp + " " + this.target.name + " id " + this.target.entityID + discover);
+                help.logg("attack with hero, enemy: " + targetname + " id " + this.target.entityID + discover);
             }
             if (this.actionType == actionEnum.useHeroPower)
             {
                 help.logg("useability " + discover);
                 if (this.target != null)
                 {
-                    help.logg("on enemy: " + this.target.Angr + "/" + this.target.Hp + " " + this.target.name + " id " + this.target.entityID + discover);
+                    help.logg("on enemy: " + targetname + " id " + this.target.entityID + discover);
                 }
             }
             help.logg("");
