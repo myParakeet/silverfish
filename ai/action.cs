@@ -235,6 +235,10 @@ namespace HREngine.Bots
                 if (this.own != null && m.entityID == this.own.entityID) cardname = "" + m.name;
             }
             if (this.target != null && tmpPf.ownHero.entityID == this.target.entityID) targetname = "" + tmpPf.ownHeroName;
+            foreach (Handmanager.Handcard h in tmpPf.owncards)
+            {
+                if (this.card != null && h.entity == this.card.entity) cardname = "" + h.card.name;
+            }
 
 
             if (this.actionType == actionEnum.playcard)
@@ -243,17 +247,17 @@ namespace HREngine.Bots
                 playaction += cardname;
                 playaction += " id " + this.card.entity;
 
-                if (this.target != null) playaction += " target " + targetname + " id " + this.target.entityID;
+                if (this.target != null) playaction += ", target " + targetname + " id " + this.target.entityID;
 
-                if (this.place >= 0) playaction += " pos " + this.place;
+                if (this.place >= 0) playaction += ", pos " + this.place;
 
-                if (this.druidchoice >= 1) playaction += " choice " + this.druidchoice;
+                if (this.druidchoice >= 1) playaction += ", choice " + this.druidchoice;
 
                 help.logg(playaction + discover);
             }
             if (this.actionType == actionEnum.attackWithMinion)
             {
-                help.logg("attacker: " + cardname + " id " + this.own.entityID + " enemy: " + targetname + " id " + this.target.entityID + discover);
+                help.logg("attacker: " + cardname + " id " + this.own.entityID + ", enemy: " + targetname + " id " + this.target.entityID + discover);
             }
             if (this.actionType == actionEnum.attackWithHero)
             {
