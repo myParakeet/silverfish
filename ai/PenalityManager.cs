@@ -4021,6 +4021,41 @@
             randomEffects.Add(CardDB.cardName.cthun, 10);
             randomEffects.Add(CardDB.cardName.fierybat, 1);
             randomEffects.Add(CardDB.cardName.spreadingmadness, 9);
+            randomEffects.Add(CardDB.cardName.goldenmonkey, 1);
+            randomEffects.Add(CardDB.cardName.timepieceofhorror, 10);
+            randomEffects.Add(CardDB.cardName.succubus, 1);
+            randomEffects.Add(CardDB.cardName.desertcamel, 1);
+            randomEffects.Add(CardDB.cardName.facelesssummoner, 1);
+            randomEffects.Add(CardDB.cardName.hugetoad, 1);
+            randomEffects.Add(CardDB.cardName.hungrydragon, 1);
+            randomEffects.Add(CardDB.cardName.mountedraptor, 1);
+            randomEffects.Add(CardDB.cardName.murlocknight, 1);
+            randomEffects.Add(CardDB.cardName.rumblingelemental, 2);
+            randomEffects.Add(CardDB.cardName.soulfire, 4);
+            randomEffects.Add(CardDB.cardName.thoughtsteal, 1);
+            randomEffects.Add(CardDB.cardName.zealousinitiate, 1);
+            randomEffects.Add(CardDB.cardName.burgle, 1);
+            randomEffects.Add(CardDB.cardName.darkshirelibrarian, 1);
+            randomEffects.Add(CardDB.cardName.dementedfrostcaller, 1);
+            randomEffects.Add(CardDB.cardName.doomguard, 1);
+            randomEffects.Add(CardDB.cardName.evolve, 1);
+            randomEffects.Add(CardDB.cardName.fistofjaraxxus, 4);
+            randomEffects.Add(CardDB.cardName.flamewaker, 2);
+            randomEffects.Add(CardDB.cardName.knifejuggler, 1);
+            randomEffects.Add(CardDB.cardName.masterofevolution, 1);
+            randomEffects.Add(CardDB.cardName.ramwrangler, 1);
+            randomEffects.Add(CardDB.cardName.selflesshero, 1);
+            randomEffects.Add(CardDB.cardName.shifterzerus, 1);
+            randomEffects.Add(CardDB.cardName.shiftingshade, 1);
+            randomEffects.Add(CardDB.cardName.stampedingkodo, 1);
+            randomEffects.Add(CardDB.cardName.summoningstone, 1);
+            randomEffects.Add(CardDB.cardName.undercityhuckster, 1);
+            randomEffects.Add(CardDB.cardName.voidcrusher, 1);
+            randomEffects.Add(CardDB.cardName.renouncedarkness, 1);
+            randomEffects.Add(CardDB.cardName.confessorpaletress, 1);
+            randomEffects.Add(CardDB.cardName.eydisdarkbane, 1);
+            randomEffects.Add(CardDB.cardName.malkorok, 1);
+            randomEffects.Add(CardDB.cardName.sylvanaswindrunner, 1);
 
         }
 
