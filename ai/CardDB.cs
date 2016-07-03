@@ -5598,7 +5598,7 @@ namespace HREngine.Bots
                         retval = retval + offset - p.enemyAnzCards;
                         break;
                     case CardDB.cardName.moltengiant:
-                        retval = retval + offset - 30 + p.ownHero.Hp; //todo sepefeets - is there a variable for hero max hp instead of assuming 30?
+                        retval = retval + offset - p.ownHero.maxHp + p.ownHero.Hp; //todo sepefeets - is there a variable for hero max hp instead of assuming 30?
                         break;
                     case CardDB.cardName.crush:
                         // cost 4 less if we have a dmged minion
