@@ -620,7 +620,7 @@ namespace HREngine.Bots
 
                 if (Settings.Instance.enemyConcede) Helpfunctions.Instance.ErrorLog("bestmoveVal:" + Ai.Instance.bestmoveValue);
                 
-                if (Ai.Instance.bestmoveValue <= -900 && Settings.Instance.enemyConcede) 
+                if (Ai.Instance.bestmoveValue <= Settings.Instance.enemyConcedeValue && Settings.Instance.enemyConcede) 
                 {
                     e.action_list.Add(CreateRangerConcedeAction());
                     return;
