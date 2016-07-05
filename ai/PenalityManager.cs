@@ -1807,7 +1807,9 @@
             {
                 if (card.name == CardDB.cardName.faeriedragon) return -25;
                 if (card.name == CardDB.cardName.shrinkmeister) return 20; //don't play early
-                if (card.Attack >= 3 && card.Health >= 2) return -20;
+                if (card.Attack >= 3 && card.Health >= 4) return -20;
+                if (card.Attack >= 3 && card.Health >= 3) return -10;
+                if (card.Attack >= 3 && card.Health >= 2) return -5;
                 if (card.Health > 0) p.evaluatePenality += -2; //-card.Attack - card.Health; //nudge any minion playable
 
             }
