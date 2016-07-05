@@ -1315,6 +1315,12 @@
                         continue;
                     }
 
+                    //no penalty for using coin first
+                    if (a.card.card.name == CardDB.cardName.thecoin)
+                    {
+                        continue;
+                    }
+
                     // no penalty for spells or other cards that obtain bonuses from playing spells
                     if ((hasAuctioneer || hasFlamewaker) && (a.card.card.type == CardDB.cardtype.SPELL
                         || a.card.card.name == CardDB.cardName.gadgetzanauctioneer || a.card.card.name == CardDB.cardName.flamewaker
