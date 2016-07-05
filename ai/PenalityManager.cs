@@ -222,6 +222,18 @@
             }
             if (p.ownWeaponAttack == 1 && p.ownHeroName == HeroEnum.thief) retval += -1;
             if (p.ownHero.Angr > 0) retval += -5; //bonus to not waste rockbiter
+
+            //Avoid wasting durability into doomsayer
+            // must lower HP with spells prior
+            if (target.name == CardDB.cardName.doomsayer)
+            {
+                int totalAngr = 0;
+                foreach (Minion mnn in p.ownMinions)
+                {
+                    totalAngr += mnn.Angr;
+                }
+                if (totalAngr < target.Hp) return 500;
+            }
             return retval;
         }
 
