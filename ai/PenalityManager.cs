@@ -2338,34 +2338,6 @@
 
             }
 
-
-
-
-            if ((name == CardDB.cardName.polymorph || name == CardDB.cardName.hex))
-            {
-
-
-
-                if (target.own && !target.isHero)
-                {
-                    return 500;
-                }
-
-                if (!target.own && !target.isHero)
-                {
-                    int hexpen = 10;  // base penalty so we don't waste the spell on small minions
-                    if (target.allreadyAttacked) hexpen += 30;
-                    Minion frog = target;
-                    if (!frog.silenced && this.priorityTargets.ContainsKey(frog.name) && this.priorityTargets[frog.name] >= 5) return hexpen;
-                    if (frog.Angr >= 4 && frog.Hp >= 4) return 0;  // no base penalty because minion is not small
-                    if (frog.Angr >= 4 && !frog.silenced && this.silenceTargets.ContainsKey(frog.name)) return hexpen+5;
-                    return hexpen+30;
-
-                }
-
-            }
-
-
             if ((name == CardDB.cardName.defenderofargus || name == CardDB.cardName.sunfuryprotector) && p.ownMinions.Count == 1)
             {
                 return 40;
