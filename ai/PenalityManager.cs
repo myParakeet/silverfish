@@ -1805,7 +1805,6 @@
             //bonus for early threat
             if (p.ownMaxMana == 1)
             {
-                if (card.name == CardDB.cardName.faeriedragon) return -25;
                 if (card.name == CardDB.cardName.shrinkmeister) return 20; //don't play early
                 if (card.Attack >= 3 && card.Health >= 4) return -20;
                 if (card.Attack >= 3 && card.Health >= 3) return -10;
