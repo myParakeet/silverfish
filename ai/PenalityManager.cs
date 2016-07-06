@@ -1070,7 +1070,7 @@
             }
 
             if (p.owncards.Count + carddraw > 10) return 15 * (p.owncards.Count + carddraw - 10);
-            if (p.owncards.Count + p.cardsPlayedThisTurn > 5) return (5 * carddraw) + 1;
+            if (p.owncards.Count + p.cardsPlayedThisTurn > 7) return (5 * carddraw) + 1;
 
             return -carddraw + 2 * p.optionsPlayedThisTurn + p.ownMaxMana - p.mana;
             /*pen = -carddraw + p.ownMaxMana - p.mana;
