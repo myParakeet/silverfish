@@ -149,6 +149,16 @@
                 }
                 if (totalAngr < target.Hp) return 500;
             }
+            //Avoid wasting attacks into doomsayer
+            // must lower HP with spells prior
+            if (target.name == CardDB.cardName.doomsayer && !m.poisonous && m.ownBlessingOfWisdom <= 1  && m.ownPowerWordGlory <= 1)
+            {
+                int totalAngr = 0;
+                foreach (Minion mnn in p.ownMinions) totalAngr += mnn.Angr;
+                if (p.ownWeaponAttack >= 1) totalAngr += p.ownWeaponAttack;
+                if (p.ownHero.tempAttack >= 1) totalAngr += p.ownHero.tempAttack;
+                if (totalAngr < target.Hp) return 500;
+            }
 
             return pen;
         }
@@ -222,6 +232,17 @@
             }
             if (p.ownWeaponAttack == 1 && p.ownHeroName == HeroEnum.thief) retval += -1;
             if (p.ownHero.Angr > 0) retval += -5; //bonus to not waste rockbiter
+
+            //Avoid wasting durability into doomsayer
+            // must lower HP with spells prior
+            if (target.name == CardDB.cardName.doomsayer)
+            {
+                int totalAngr = 0;
+                foreach (Minion mnn in p.ownMinions) totalAngr += mnn.Angr;
+                if (p.ownWeaponAttack >= 1) totalAngr += p.ownWeaponAttack;
+                if (p.ownHero.tempAttack >= 1) totalAngr += p.ownHero.tempAttack;
+                if (totalAngr < target.Hp) return 500;
+            }
             return retval;
         }
 
@@ -1058,7 +1079,7 @@
             }
 
             if (p.owncards.Count + carddraw > 10) return 15 * (p.owncards.Count + carddraw - 10);
-            if (p.owncards.Count + p.cardsPlayedThisTurn > 5) return (5 * carddraw) + 1;
+            if (p.owncards.Count + p.cardsPlayedThisTurn > 7) return (5 * carddraw) + 1;
 
             return -carddraw + 2 * p.optionsPlayedThisTurn + p.ownMaxMana - p.mana;
             /*pen = -carddraw + p.ownMaxMana - p.mana;
@@ -1299,6 +1320,12 @@
                     }
 
                     if (this.randomEffects.ContainsKey(a.card.card.name))
+                    {
+                        continue;
+                    }
+
+                    //no penalty for using coin first
+                    if (a.card.card.name == CardDB.cardName.thecoin)
                     {
                         continue;
                     }
@@ -1787,9 +1814,10 @@
             //bonus for early threat
             if (p.ownMaxMana == 1)
             {
-                if (card.name == CardDB.cardName.faeriedragon) return -25;
                 if (card.name == CardDB.cardName.shrinkmeister) return 20; //don't play early
-                if (card.Attack >= 3 && card.Health >= 2) return -20;
+                if (card.Attack >= 3 && card.Health >= 4) return -20;
+                if (card.Attack >= 3 && card.Health >= 3) return -10;
+                if (card.Attack >= 3 && card.Health >= 2) return -5;
                 if (card.Health > 0) p.evaluatePenality += -2; //-card.Attack - card.Health; //nudge any minion playable
 
             }
@@ -2318,34 +2346,6 @@
                 }
 
             }
-
-
-
-
-            if ((name == CardDB.cardName.polymorph || name == CardDB.cardName.hex))
-            {
-
-
-
-                if (target.own && !target.isHero)
-                {
-                    return 500;
-                }
-
-                if (!target.own && !target.isHero)
-                {
-                    int hexpen = 10;  // base penalty so we don't waste the spell on small minions
-                    if (target.allreadyAttacked) hexpen += 30;
-                    Minion frog = target;
-                    if (!frog.silenced && this.priorityTargets.ContainsKey(frog.name) && this.priorityTargets[frog.name] >= 5) return hexpen;
-                    if (frog.Angr >= 4 && frog.Hp >= 4) return 0;  // no base penalty because minion is not small
-                    if (frog.Angr >= 4 && !frog.silenced && this.silenceTargets.ContainsKey(frog.name)) return hexpen+5;
-                    return hexpen+30;
-
-                }
-
-            }
-
 
             if ((name == CardDB.cardName.defenderofargus || name == CardDB.cardName.sunfuryprotector) && p.ownMinions.Count == 1)
             {
