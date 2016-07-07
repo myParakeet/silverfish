@@ -149,6 +149,15 @@
                 }
                 if (totalAngr < target.Hp) return 500;
             }
+            //Avoid wasting attacks into doomsayer
+            // must lower HP with spells prior
+            if (target.name == CardDB.cardName.doomsayer)
+            {
+                int totalAngr = 0;
+                foreach (Minion mnn in p.ownMinions) totalAngr += mnn.Angr;
+                if (p.ownWeaponAttack >= 1) totalAngr += p.ownWeaponAttack;
+                if (totalAngr < target.Hp) return 500;
+            }
 
             return pen;
         }
@@ -228,10 +237,8 @@
             if (target.name == CardDB.cardName.doomsayer)
             {
                 int totalAngr = 0;
-                foreach (Minion mnn in p.ownMinions)
-                {
-                    totalAngr += mnn.Angr;
-                }
+                foreach (Minion mnn in p.ownMinions) totalAngr += mnn.Angr;
+                if (p.ownWeaponAttack >= 1) totalAngr += p.ownWeaponAttack;
                 if (totalAngr < target.Hp) return 500;
             }
             return retval;
