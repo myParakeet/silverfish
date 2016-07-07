@@ -123,6 +123,7 @@ namespace HREngine.Bots
 
         public bool concede = false;
         public bool enemyConcede = false;
+        public int enemyConcedeValue = -900;
         public bool writeToSingleFile = false;
 
         public bool learnmode = false;
@@ -495,6 +496,20 @@ namespace HREngine.Bots
                     try
                     {
                         this.enemyConcede = Convert.ToBoolean(a);
+                    }
+                    catch
+                    {
+                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                    }
+                }
+
+                searchword = "concedeonboardvalue=";
+                if (s.StartsWith(searchword))
+                {
+                    string a = s.Replace(searchword, "");
+                    try
+                    {
+                        this.enemyConcedeValue = Convert.ToInt32(a);
                     }
                     catch
                     {
