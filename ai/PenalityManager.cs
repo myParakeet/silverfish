@@ -2355,9 +2355,9 @@
                 if (target.own && !target.isHero) return 500;
                 foreach (Action a in p.playactions)
                 {
-                    if (a.target == target) return 500;
-                    if (DamageAllDatabase.ContainsKey(a.card.card.name) || DamageAllEnemysDatabase.ContainsKey(a.card.card.name)
-                        || DamageRandomDatabase.ContainsKey(a.card.card.name) || randomEffects.ContainsKey(a.card.card.name)) return 500;
+                    if (a.target != null && a.target == target) return 500;
+                    if (a.card != null && (DamageAllDatabase.ContainsKey(a.card.card.name) || DamageAllEnemysDatabase.ContainsKey(a.card.card.name)
+                        || DamageRandomDatabase.ContainsKey(a.card.card.name) || randomEffects.ContainsKey(a.card.card.name))) return 500;
                 }
 
                 if (!target.own && !target.isHero)
