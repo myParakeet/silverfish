@@ -4047,7 +4047,8 @@
             randomEffects.Add(CardDB.cardName.cthun, 10); //random X dmg split enemies, X=attack
             randomEffects.Add(CardDB.cardName.fierybat, 1); //random 1 dmg
             randomEffects.Add(CardDB.cardName.spreadingmadness, 9); //random 9 dmg split all
-/*            
+
+            //todo these need more thought in getRandomPenalty
             this.randomEffects.Add(CardDB.cardName.servantofyoggsaron, 1); //random 1 spell
             this.randomEffects.Add(CardDB.cardName.cabaliststome, 1); //random 3 mage spells
             this.randomEffects.Add(CardDB.cardName.nexuschampionsaraad, 1); //random spell inspire
@@ -4090,7 +4091,6 @@
             this.randomEffects.Add(CardDB.cardName.eydisdarkbane, 1); //random 3 dmg when you target her with spell
             this.randomEffects.Add(CardDB.cardName.malkorok, 1); //equip random weapon
             this.randomEffects.Add(CardDB.cardName.sylvanaswindrunner, 1); //steal random enemy deathrattle
-            */
         }
 
         private void setupTargetAbilitys()
