@@ -13,7 +13,7 @@ namespace HREngine.Bots
             {
                 foreach (Handmanager.Handcard handcard in p.owncards)
                 {
-                    if (handcard.card.race == TAG_RACE.DRAGON) return 6;
+                    if (handcard.card.race == TAG_RACE.DRAGON) return -6;
                 }
             }
             return 0;
