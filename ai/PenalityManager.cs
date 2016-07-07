@@ -156,6 +156,7 @@
                 int totalAngr = 0;
                 foreach (Minion mnn in p.ownMinions) totalAngr += mnn.Angr;
                 if (p.ownWeaponAttack >= 1) totalAngr += p.ownWeaponAttack;
+                if (p.ownHero.tempAttack >= 1) totalAngr += p.ownHero.tempAttack;
                 if (totalAngr < target.Hp) return 500;
             }
 
@@ -239,6 +240,7 @@
                 int totalAngr = 0;
                 foreach (Minion mnn in p.ownMinions) totalAngr += mnn.Angr;
                 if (p.ownWeaponAttack >= 1) totalAngr += p.ownWeaponAttack;
+                if (p.ownHero.tempAttack >= 1) totalAngr += p.ownHero.tempAttack;
                 if (totalAngr < target.Hp) return 500;
             }
             return retval;
