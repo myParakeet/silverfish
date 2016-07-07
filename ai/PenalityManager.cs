@@ -151,7 +151,7 @@
             }
             //Avoid wasting attacks into doomsayer
             // must lower HP with spells prior
-            if (target.name == CardDB.cardName.doomsayer)
+            if (target.name == CardDB.cardName.doomsayer && !m.poisonous && m.ownBlessingOfWisdom <= 1  && m.ownPowerWordGlory <= 1)
             {
                 int totalAngr = 0;
                 foreach (Minion mnn in p.ownMinions) totalAngr += mnn.Angr;
