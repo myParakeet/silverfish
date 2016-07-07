@@ -252,7 +252,7 @@ namespace HREngine.Bots
                     }
             }
             PenalityManager.Instance.setCombos();
-            Mulligan m = Mulligan.Instance; // read the mulligan list
+            Mulligan.Instance.runDebugTest();
             Discovery d = Discovery.Instance; // read the discover list
         }
 

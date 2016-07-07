@@ -649,44 +649,45 @@ def Execute():
 
             var count = mulliganData.Cards.Count;
 
-            /*string ownName = mulliganData.UserClass.ToString();
-            string enemName = mulliganData.OpponentClass.ToString();
+            string ownName = mulliganData.UserClass.ToString().ToLower();
+            string enemName = mulliganData.OpponentClass.ToString().ToLower();
             if (Mulligan.Instance.hasmulliganrules(ownName, enemName))
             {
-                    bool hascoin = false;
-                    List<Mulligan.CardIDEntity> celist = new List<Mulligan.CardIDEntity>();
-                    
+                bool hascoin = false;
+                List<Mulligan.CardIDEntity> celist = new List<Mulligan.CardIDEntity>();
 
-                    for (var i = 0; i < mulliganData.Cards.Count; i++)
+
+                for (var i = 0; i < mulliganData.Cards.Count; i++)
+                {
+                    string id = mulliganData.Cards[i].Entity.Id;
+                    if (id != "GAME_005")// dont mulligan coin
                     {
-                        string id = mulliganData.Cards[i].Entity.Id
-                        if ( id != "GAME_005")// dont mulligan coin
-                        {
-                            celist.Add(new Mulligan.CardIDEntity(id, i));
-                        }
-                        else
-                        {
-                            hascoin = true;
-                        }
-                        
+                        celist.Add(new Mulligan.CardIDEntity(id, i));
                     }
-
-                    if (celist.Count >= 4) hascoin = true;
-                    List<int> mullientitys = Mulligan.Instance.whatShouldIMulligan(celist, ownName, enemName, hascoin);
-
-                    for (var i = 0; i < mulliganData.Cards.Count; i++)
+                    else
                     {
-                        if (mullientitys.Contains(i))
-                        {
-                            Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + mulliganData.Cards[i].Entity.Id + " because of your rules");                            
-
-                            
-                        }
+                        hascoin = true;
                     }
+                }
 
-            }*/
+                if (celist.Count >= 4) hascoin = true;
+                List<int> mullentities = Mulligan.Instance.whatShouldIMulligan(celist, ownName, enemName, hascoin);
 
-            if (Mulligan.Instance.mulliganRulesLoaded)
+                for (var i = 0; i < mulliganData.Cards.Count; i++)
+                {
+                    if (mullentities.Contains(i))
+                    {
+                        mulliganData.Mulligans[i] = true;
+                        Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + mulliganData.Cards[i].Entity.Name + " because of your rules");
+                    }
+                    else
+                    {                    
+                        mulliganData.Mulligans[i] = false;
+                    }
+                }
+            }
+
+            /*if (Mulligan.Instance.mulliganRulesLoaded)
             {
                 Mulligan.Instance.getHoldList(mulliganData);
             }
@@ -734,7 +735,7 @@ def Execute():
                         return;
                     }
                 }
-            }
+            }*/
 
             var thinkList = new List<KeyValuePair<int, int>>();
             for (var i = 0; i < count; i++)

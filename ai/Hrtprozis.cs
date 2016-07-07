@@ -291,7 +291,41 @@
                 default: return HeroEnum.None;
             }
         }
-        
+
+        public TAG_CLASS heroEnumtoTagClass(HeroEnum he)
+        {
+            switch (he)
+            {
+                case HeroEnum.druid: return TAG_CLASS.DRUID;
+                case HeroEnum.hunter: return TAG_CLASS.HUNTER;
+                case HeroEnum.mage: return TAG_CLASS.MAGE;
+                case HeroEnum.pala: return TAG_CLASS.PALADIN;
+                case HeroEnum.priest: return TAG_CLASS.PRIEST;
+                case HeroEnum.shaman: return TAG_CLASS.SHAMAN;
+                case HeroEnum.thief: return TAG_CLASS.ROGUE;
+                case HeroEnum.warlock: return TAG_CLASS.WARLOCK;
+                case HeroEnum.warrior: return TAG_CLASS.WARRIOR;
+                default: return TAG_CLASS.INVALID;
+            }
+        }
+
+        public HeroEnum heroTAG_CLASSstringToEnum(string s)
+        {
+            switch (s)
+            {
+                case "DRUID": return HeroEnum.druid;
+                case "HUNTER": return HeroEnum.hunter;
+                case "MAGE": return HeroEnum.mage;
+                case "PALADIN": return HeroEnum.pala;
+                case "PRIEST": return HeroEnum.priest;
+                case "SHAMAN": return HeroEnum.shaman;
+                case "ROGUE": return HeroEnum.thief;
+                case "WARLOCK": return HeroEnum.warlock;
+                case "WARRIOR": return HeroEnum.warrior;
+                default: return HeroEnum.None;
+            }
+        }
+
 
         public void updateMinions(List<Minion> om, List<Minion> em)
         {

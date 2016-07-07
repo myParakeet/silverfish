@@ -236,10 +236,10 @@ namespace HREngine.Bots
 
                 }
                 if (celist.Count >= 4) hascoin = true;
-                List<int> mullientitys = Mulligan.Instance.whatShouldIMulligan(celist, ownName, enemName, hascoin);
+                List<int> mullentities = Mulligan.Instance.whatShouldIMulligan(celist, ownName, enemName, hascoin);
                 foreach (var item in list)
                 {
-                    if (mullientitys.Contains(item.EntityId))
+                    if (mullentities.Contains(item.EntityId))
                     {
                         Helpfunctions.Instance.ErrorLog("Rejecting Mulligan Card " + HSRangerLib.CardDefDB.Instance.GetCardEnglishName(item.CardId) + " because of your rules");
                         //toggle this card
@@ -506,6 +506,7 @@ namespace HREngine.Bots
                 Helpfunctions.Instance.ErrorLog("start things...");
                 //HR-only fix for being too fast
                 //IsProcessingPowers not good enough so always sleep
+                //System.Threading.Thread.Sleep(200);
                 //todo find better solution
                 if (!this.doMultipleThingsAtATime)
                 {

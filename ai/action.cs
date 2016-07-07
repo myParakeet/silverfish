@@ -216,6 +216,7 @@ namespace HREngine.Bots
                 return;
             }
 
+            //todo sepefeets - consider adding names into actions from the start instead of mapping them here
             string cardname = "";
             string targetname = "";
             Playfield tmpPf = new Playfield();
