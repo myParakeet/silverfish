@@ -2352,12 +2352,12 @@
 
             if ((name == CardDB.cardName.polymorph || name == CardDB.cardName.hex))
             {
-
-
-
-                if (target.own && !target.isHero)
+                if (target.own && !target.isHero) return 500;
+                foreach (Action a in p.playactions)
                 {
-                    return 500;
+                    if (a.target == target) return 500;
+                    if (DamageAllDatabase.ContainsKey(a.card.card.name) || DamageAllEnemysDatabase.ContainsKey(a.card.card.name)
+                        || DamageRandomDatabase.ContainsKey(a.card.card.name) || randomEffects.ContainsKey(a.card.card.name)) return 500;
                 }
 
                 if (!target.own && !target.isHero)
@@ -2369,9 +2369,7 @@
                     if (frog.Angr >= 4 && frog.Hp >= 4) return 0;  // no base penalty because minion is not small
                     if (frog.Angr >= 4 && !frog.silenced && this.silenceTargets.ContainsKey(frog.name)) return hexpen+5;
                     return hexpen+30;
-
                 }
-
             }
 
 
