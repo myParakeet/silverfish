@@ -40,172 +40,132 @@
                 int basemana = hc.manacost;
                 if (c.cardIDenum == CardDB.cardIDEnum.AT_132_SHAMAN)
                 {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_SHAMANa);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_SHAMANb);
-                    }
-                    if (i == 3)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_SHAMANc);
-                    }
-                    if (i == 4)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_SHAMANd);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_SHAMANa);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_SHAMANb);
+                    if (i == 3) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_SHAMANc);
+                    if (i == 4) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_132_SHAMANd);
                 }
 
+                //Druid 'choose one' cards; count = 19
+                //  1.  darkwispers
+                //  2.  starfall
+                //  3.  ancientoflore
+                //  4.  powerofthewild
+                //  5.  ancientofwar
+                //  6.  druidoftheclaw
+                //  7.  druidoftheflame
+                //  8.  keeperofthegrove
+                //  9.  markofnature
+                //  10. nourish
+                //  11. wrath
+                //  12. livingroots
+                //  13. druidofthesaber
+                //  14. feralrage
+                //  15. grovetender
+                //  16. mirekeeper
+                //  17. ravenidol
+                //  18. wispsoftheoldgods
+                //  19. anodizedrobocub
+                // missing: cenarius
                 if (c.name == CardDB.cardName.darkwispers)
                 {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_041a);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_041b);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_041a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_041b);
                 }
 
                 if (c.name == CardDB.cardName.starfall)
                 {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NEW1_007b);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NEW1_007a);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NEW1_007b);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NEW1_007a);
                 }
 
                 if (c.name == CardDB.cardName.ancientoflore)
                 {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NEW1_008a);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NEW1_008b);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NEW1_008a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.NEW1_008b);
                 }
 
                 if (c.name == CardDB.cardName.powerofthewild)
                 {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_160b);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_160a);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_160b);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_160a);
                 }
                 if (c.name == CardDB.cardName.ancientofwar)
                 {
 
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_178b);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_178a);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_178b);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_178a);
                 }
                 if (c.name == CardDB.cardName.druidoftheclaw)
                 {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_165t1);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_165t2);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_165t1);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_165t2);
                 }
                 if (c.name == CardDB.cardName.druidoftheflame)
                 {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.BRM_010t);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.BRM_010t2);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.BRM_010t);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.BRM_010t2);
                 }
                 //cenarius dont need
                 if (c.name == CardDB.cardName.keeperofthegrove)//keeper of the grove
                 {
-
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_166a);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_166b);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_166a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_166b);
                 }
                 if (c.name == CardDB.cardName.markofnature)
                 {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_155a);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_155b);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_155a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_155b);
                 }
                 if (c.name == CardDB.cardName.nourish)
                 {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_164a);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_164b);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_164a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_164b);
                 }
                 if (c.name == CardDB.cardName.wrath)
                 {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_154a);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_154b);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_154a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_154b);
                 }
                 if (c.name == CardDB.cardName.livingroots)
                 {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_037a);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_037b);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_037a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_037b);
                 }
                 if (c.name == CardDB.cardName.druidofthesaber)
                 {
-                    if (i == 1)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_042a);
-                    }
-                    if (i == 2)
-                    {
-                        c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_042b);
-                    }
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_042a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.AT_042b);
+                }
+                if (c.name == CardDB.cardName.feralrage)
+                {
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.OG_047a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.OG_047b);
+                }
+                if (c.name == CardDB.cardName.grovetender)
+                {
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_032a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_032b);
+                }
+                if (c.name == CardDB.cardName.mirekeeper)
+                {
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.OG_202a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.OG_202b);
+                }
+                if (c.name == CardDB.cardName.ravenidol)
+                {
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.LOE_115a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.LOE_115b);
+                }
+                if (c.name == CardDB.cardName.wispsoftheoldgods)
+                {
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.OG_195a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.OG_195b);
+                }
+                if (c.name == CardDB.cardName.anodizedrobocub)
+                {
+                    if (i == 1) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_030a);
+                    if (i == 2) c = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_030b);
                 }
 
                 if (hcc.isChoiceTemp)
