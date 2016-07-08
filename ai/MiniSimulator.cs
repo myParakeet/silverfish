@@ -168,10 +168,10 @@
                     }
 
                     //sort stupid stuff ouf
-
-                    if (botBase.getPlayfieldValue(p) > bestoldval)
+                    float newPlayfieldValue = botBase.getPlayfieldValue(p);
+                    if (newPlayfieldValue > bestoldval)
                     {
-                        bestoldval = botBase.getPlayfieldValue(p);
+                        bestoldval = newPlayfieldValue;
                         bestold = p;
                     }
                     if (!test)
