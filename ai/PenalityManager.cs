@@ -1658,6 +1658,7 @@
             if (card.card.type != CardDB.cardtype.MOB && !this.summonMinionSpellsDatabase.ContainsKey(card.card.name)) return 0;
             int retval = 0;
 
+            if (card.card.name == CardDB.cardName.doomcaller && p.diedMinions.Find(ct => ct.own && ct.cardid == CardDB.cardIDEnum.OG_279).cardid == CardDB.cardIDEnum.OG_279) retval += 5; //OG_279 = cthun; penalize playing if cthun is not dead
             if (p.ownMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null || p.enemyMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null)
             {
                 // penalize playing minions into doomsayer
