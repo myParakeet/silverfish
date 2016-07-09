@@ -346,7 +346,17 @@ namespace HREngine.Bots
                 }
             }
 
-            if (holdlist.Count == 0 || !hasHoldListRule(ownclass, enemclass)) return discarditems;
+            string discards = "";
+            if (holdlist.Count == 0 || !hasHoldListRule(ownclass, enemclass))
+            {
+                //build the discard list
+                foreach (int i in discarditems)
+                {
+                    discards += " " + cards[i].id;
+                }
+                Helpfunctions.Instance.ErrorLog("[Mulligan] final discards:" + discards);
+                return discarditems;
+            }
 
             Dictionary<string, int> holddic = new Dictionary<string, int>();
             List<string> combosToHold = new List<string>();
@@ -530,6 +540,12 @@ namespace HREngine.Bots
                 }
 
             }
+            //build the discard list
+            foreach (int i in discarditems)
+            {
+                discards += " " + cards[i].id;
+            }
+            Helpfunctions.Instance.ErrorLog("[Mulligan] final discards:" + discards);
 
             return discarditems;
 
@@ -549,6 +565,35 @@ namespace HREngine.Bots
             }
 
             return false;
+        }
+
+        public void runDebugTest()
+        {
+            string[] lines = new string[0] { };
+            try
+            {
+                string path = Settings.Instance.path;
+                lines = System.IO.File.ReadAllLines(path + "mulltest.txt");
+            }
+            catch
+            {
+                Helpfunctions.Instance.ErrorLog("[Mulligan] cant find mulltest.txt");
+                return;
+            }
+            foreach (string line in lines)
+            {
+                string ln = line.Trim();
+                List<Mulligan.CardIDEntity> cards = new List<Mulligan.CardIDEntity>();
+
+                for (int i = 0; i < ln.Split(';')[0].Split(',').Length; i++)
+                {
+                    string card = ln.Split(';')[0].Split(',')[i];
+                    Helpfunctions.Instance.ErrorLog("[Mulligan] hand contains card: " + card);
+                    cards.Add(new Mulligan.CardIDEntity(card, i));
+                }
+                Mulligan.Instance.whatShouldIMulligan(cards, ln.Split(';')[1], ln.Split(';')[2], (ln.Split(';')[3] == "coin"));
+                continue;
+            }
         }
 
     }
