@@ -45,7 +45,7 @@ hold;shaman;all;EX1_008:2:EX1_565;coin
 // 1x Feral Spirit + Tunnel Trog
 hold;shaman;all;EX1_248:1:LOE_018
 // 1x Feral Spirit + 1-drop + coin
-hold;shaman;all;EX1_248:1:LEX1_008/LOE_076;coin
+hold;shaman;all;EX1_248:1:EX1_008/LOE_076;coin
 // 1x Argent Horserider + Flametongue Totem + Argent Squire + no coin
 hold;shaman;all;AT_087:1:EX1_565+EX1_008;nocoin
 // 1x Tuskarr Totemic + Flame Juggler + Argent Squire + no coin
