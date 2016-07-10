@@ -125,9 +125,7 @@ namespace HREngine.Bots
         int ownMillhouse = 0; // number of millhouse-manastorm WE PLAYED (so enemy has the buff)
         int enemyMillhouse = 0;
         int ownKirintor = 0;
-        int enemyKirintor = 0;
         int ownPrepa = 0;
-        int enemyPrepa = 0;
 
         // NEW VALUES#TGT#############################################################################################################
         // NEW VALUES#################################################################################################################
@@ -383,8 +381,6 @@ namespace HREngine.Bots
             this.ownMillhouse = 0;
             this.ownLoathebs = 0;
             this.enemyDragonConsort = 0;
-            this.enemyKirintor = 0;
-            this.enemyPrepa = 0;
             this.ownsabo = 0;
 
 

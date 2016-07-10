@@ -12,12 +12,9 @@
         //public int playaroundprob = 40;
         public int playaroundprob2 = 80;
 
-
-        private bool usePenaltyManager = true;
-        private bool useCutingTargets = true;
+        
         private bool dontRecalc = true;
         private bool useLethalCheck = true;
-        private bool useComparison = true;
 
         public Playfield bestplay = new Playfield();
 

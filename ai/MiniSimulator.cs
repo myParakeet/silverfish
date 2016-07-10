@@ -12,8 +12,6 @@
         private int totalboards = 50;
         private bool usePenalityManager = true;
         private bool useCutingTargets = true;
-        private bool dontRecalc = true;
-        private bool useLethalCheck = true;
         private bool useComparison = true;
 
 

@@ -14,8 +14,6 @@
 
         private bool usePenalityManager = true;
         private bool useCutingTargets = true;
-        private bool dontRecalc = true;
-        private bool useLethalCheck = true;
         private bool useComparison = true;
 
         public bool doEnemySecondTurn = false;

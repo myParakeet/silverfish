@@ -70,7 +70,6 @@ namespace HREngine.Bots
 
     public class Bot
     {
-        private int concedeLvl = 5; // the rank, till you want to concede
         PenalityManager penman = PenalityManager.Instance;
         DateTime starttime = DateTime.Now;
         Silverfish sf;
@@ -169,50 +168,17 @@ namespace HREngine.Bots
     {
         public string versionnumber = "122.1SE";
         private bool singleLog = false;
-        private string botbehave = "rush";
 
         Settings sttngs = Settings.Instance;
 
         List<Minion> ownMinions = new List<Minion>();
         List<Minion> enemyMinions = new List<Minion>();
         List<Handmanager.Handcard> handCards = new List<Handmanager.Handcard>();
-        int ownPlayerController = 0;
         List<string> ownSecretList = new List<string>();
-        int enemySecretCount = 0;
-
-        int currentMana = 0;
-        int ownMaxMana = 0;
-        int numMinionsPlayedThisTurn = 0;
-        int cardsPlayedThisTurn = 0;
-
-        int enemyMaxMana = 0;
-
-        string ownHeroWeapon = "";
-        int heroWeaponAttack = 0;
-        int heroWeaponDurability = 0;
-
-        string enemyHeroWeapon = "";
-        int enemyWeaponAttack = 0;
-        int enemyWeaponDurability = 0;
-
-        string heroname = "";
-        string enemyHeroname = "";
 
         CardDB.Card heroAbility = new CardDB.Card();
-        bool ownAbilityisReady = false;
         CardDB.Card enemyAbility = new CardDB.Card();
-
-        int anzcards = 0;
-        int enemyAnzCards = 0;
-
-        int ownHeroFatigue = 0;
-        int enemyHeroFatigue = 0;
-        int ownDecksize = 0;
-        int enemyDecksize = 0;
-
-        Minion ownHero;
-        Minion enemyHero;
-
+        
         private int anzOgOwnCThunHpBonus = 0;
         private int anzOgOwnCThunAngrBonus = 0;
         private int anzOgOwnCThunTaunt = 0;
@@ -407,8 +373,7 @@ namespace HREngine.Bots
 
             //System.IO.File.WriteAllText(Settings.Instance.logpath + Settings.Instance.logfile, "");
         }
-
-        private bool writelogg = true;
+        
         public void loggonoff(bool onoff)
         {
             //writelogg = onoff;

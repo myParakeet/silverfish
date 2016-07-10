@@ -38,14 +38,11 @@ namespace HREngine.Bots
         private readonly List<Tuple<string, string>> _mulliganRules = new List<Tuple<string, string>>();
 
         private int dirtyTargetSource = -1;
-        private int stopAfterWins = 30;
-        private int concedeLvl = 5; // the rank, till you want to concede
         private int dirtytarget = -1;
         private int dirtychoice = -1;
         private int dirtytrackingchoice = -1;
         private string choiceCardId = "";
         DateTime starttime = DateTime.Now;
-        bool enemyConcede = false;
 
         public bool learnmode = false;
         public bool printlearnmode = true;
@@ -69,9 +66,7 @@ namespace HREngine.Bots
 
             // Example rule for matchups.
             //_mulliganRules.Add(new Tuple<string, string>("mulliganData.userClass == TAG_CLASS.HUNTER && mulliganData.OpponentClass == TAG_CLASS.DRUID", "card.Cost >= 2"));
-
-            bool concede = false;
-
+            
             HREngine.Bots.Settings set = HREngine.Bots.Settings.Instance;
             Silverfish sfff = Silverfish.Instance;
             behave = set.setSettings();

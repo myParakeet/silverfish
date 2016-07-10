@@ -68,9 +68,6 @@ namespace HREngine.Bots
 
         //private int stopAfterWins = 30;
         private int concedeLvl = 5; // the rank, till you want to concede
-        private int dirtytarget = -1;
-        private int dirtychoice = -1;
-        private string choiceCardId = "";
         DateTime starttime = DateTime.Now;
         Silverfish sf;
 
@@ -868,8 +865,6 @@ namespace HREngine.Bots
         private void disableRelogger()
         {
             string version = sf.versionnumber;
-            int totalwin = 0;
-            int totallose = 0;
             string[] lines = new string[0] { };
             try
             {
@@ -1283,9 +1278,7 @@ namespace HREngine.Bots
         int ownMillhouse = 0; // number of millhouse-manastorm WE PLAYED (so enemy has the buff)
         int enemyMillhouse = 0;
         int ownKirintor = 0;
-        int enemyKirintor = 0;
         int ownPrepa = 0;
-        int enemyPrepa = 0;
 
         // NEW VALUES#TGT#############################################################################################################
         // NEW VALUES#################################################################################################################
@@ -1530,8 +1523,6 @@ namespace HREngine.Bots
             this.ownMillhouse = 0;
             this.ownLoathebs = 0;
             this.enemyDragonConsort = 0;
-            this.enemyKirintor = 0;
-            this.enemyPrepa = 0;
             this.ownsabo = 0;
 
 

@@ -438,6 +438,7 @@
                     return attackBuffDatabase[name];
                 }
 
+                //todo - why is this unreachable?
                 if (m.Hp == 1 && !m.divineshild && !this.buffing1TurnDatabase.ContainsKey(name))
                 {
                     if (this.healthBuffDatabase.ContainsKey(name)) return 0;  // m.Hp no longer == 1
@@ -1434,6 +1435,7 @@
                 else if (p.enemyMinions.Count <= 2 || p.enemyMinions.Count + 2 <= p.ownMinions.Count || p.ownMinions.Count >= 3) return 30;
                 else return 0;
 
+                //todo why is this unreachable?
                 if (highminion >= 2 || veryhighminion >= 1)
                 {
                     return 0;
