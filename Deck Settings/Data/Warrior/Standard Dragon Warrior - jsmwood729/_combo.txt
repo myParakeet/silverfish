@@ -1,0 +1,2 @@
+// [PUSH] [0] The Coin (GAME_005) + [2] Alexstrasza's Champion (AT_071)
+GAME_005,0;AT_071,0;bonus:500;mana:1;hero:warrior 
