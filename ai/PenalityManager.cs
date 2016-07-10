@@ -434,8 +434,7 @@
                     if (!m.taunt && hasownready) return 5 * attackBuffDatabase[name];
                     else return attackBuffDatabase[name];
                 }
-
-                //todo - why is this unreachable?
+                
                 if (m.Hp == 1 && !m.divineshild && !this.buffing1TurnDatabase.ContainsKey(name))
                 {
                     if (this.healthBuffDatabase.ContainsKey(name)) return 0;  // m.Hp no longer == 1
