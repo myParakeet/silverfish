@@ -105,7 +105,10 @@ namespace HREngine.Bots
             public mulliitem(string all, bool hrule, string id, string own, string enemy, int number, string[] req = null, int coinr = 0, int mrule = -1)
             {
                 if (own == "none") own = "all";
+                if (own != "all") own = Hrtprozis.Instance.heroNametoEnum(own).ToString();
                 if (enemy == "none") enemy = "all";
+                if (enemy != "all") enemy = Hrtprozis.Instance.heroNametoEnum(enemy).ToString();
+
 
                 this.holdrule = hrule;
                 this.cardid = id;
