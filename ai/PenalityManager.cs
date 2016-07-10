@@ -1521,7 +1521,7 @@
                     pen = 30;
                 }
 
-                if ( m.name == CardDB.cardName.doomsayer )
+                if ( m.name == CardDB.cardName.doomsayer)
                 {
                     pen = 0;
                 }
@@ -1664,7 +1664,9 @@
                 // penalize playing minions into doomsayer
                 // todo sepefeets - is this good enough? figure out way to penalize boards that play cards but don't kill it
                 // also check up on buff penalty, some buffs missing, and others penalized twice elsewhere?
-                return (card.card.Charge) ? 150 : 500;
+                if (card.card.Charge) return 25 * card.card.cost; //just estimate the value by the cost
+                else if (this.buffing1TurnDatabase.ContainsKey(card.card.name) || this.attackBuffDatabase.ContainsKey(card.card.name)) return 0;
+                else return 500;
             }
             if (p.ownMinions.Find(m => m.name == CardDB.cardName.muklaschampion && !m.silenced) != null && p.playactions.Find(a => a.actionType == actionEnum.useHeroPower) != null)
             {
