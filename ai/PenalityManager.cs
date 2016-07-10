@@ -154,7 +154,10 @@
             if (target.name == CardDB.cardName.doomsayer && !m.poisonous)
             {
                 int totalAngr = 0;
-                foreach (Minion mnn in p.ownMinions) totalAngr += mnn.Angr;
+                foreach (Minion mnn in p.ownMinions)
+                {
+                    if (mnn.Ready) totalAngr += mnn.Angr;
+                }
                 if (p.ownWeaponAttack >= 1) totalAngr += p.ownWeaponAttack;
                 if (p.ownHero.tempAttack >= 1) totalAngr += p.ownHero.tempAttack;
                 if (totalAngr < target.Hp) return 500;
@@ -238,7 +241,10 @@
             if (target.name == CardDB.cardName.doomsayer)
             {
                 int totalAngr = 0;
-                foreach (Minion mnn in p.ownMinions) totalAngr += mnn.Angr;
+                foreach (Minion mnn in p.ownMinions)
+                {
+                    if (mnn.Ready) totalAngr += mnn.Angr;
+                }
                 if (p.ownWeaponAttack >= 1) totalAngr += p.ownWeaponAttack;
                 if (p.ownHero.tempAttack >= 1) totalAngr += p.ownHero.tempAttack;
                 if (totalAngr < target.Hp) return 500;
