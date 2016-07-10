@@ -531,6 +531,11 @@
             {
                 this.mainTurnSimulator.printPosmoves();
                 simmulateWholeTurn(this.mainTurnSimulator.bestboard);
+
+                help.logg("Best Board Actions:");
+                this.mainTurnSimulator.bestboard.printActions();
+                help.logg("");
+
                 help.logg("calculated " + timeneeded);
             }
 

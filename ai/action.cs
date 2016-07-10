@@ -272,7 +272,6 @@ namespace HREngine.Bots
                     help.logg("on enemy: " + targetname + " id " + this.target.entityID + discover);
                 }
             }
-            help.logg("");
         }
     }    
 }

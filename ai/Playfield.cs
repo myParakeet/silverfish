@@ -6867,7 +6867,6 @@
             foreach (Action a in this.playactions)
             {
                 a.print(toBuffer);
-                Helpfunctions.Instance.logg("");
             }
         }
 
