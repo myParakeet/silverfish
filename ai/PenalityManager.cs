@@ -429,13 +429,10 @@
                         return (hasownready) ? 50 : 5;
                     }
                 }
-                if (!m.Ready && !m.taunt && hasownready)
+                if (!m.Ready)
                 {
-                    return 5 * attackBuffDatabase[name];
-                }
-                else
-                {
-                    return attackBuffDatabase[name];
+                    if (!m.taunt && hasownready) return 5 * attackBuffDatabase[name];
+                    else return attackBuffDatabase[name];
                 }
 
                 //todo - why is this unreachable?
@@ -1431,11 +1428,13 @@
                     if (m.Angr >= 8 || m.Hp >= 8) veryhighminion++;
                 }
 
-                if (name == CardDB.cardName.doomsayer && readyAngr > 5) return 500;
-                else if (p.enemyMinions.Count <= 2 || p.enemyMinions.Count + 2 <= p.ownMinions.Count || p.ownMinions.Count >= 3) return 30;
-                else return 0;
-
-                //todo why is this unreachable?
+                if (name == CardDB.cardName.doomsayer)
+                {
+                    if (readyAngr > 5) return 500;
+                    else if (p.enemyMinions.Count <= 2 || p.enemyMinions.Count + 2 <= p.ownMinions.Count || p.ownMinions.Count >= 3) return 30;
+                    else return 0;
+                }
+                
                 if (highminion >= 2 || veryhighminion >= 1)
                 {
                     return 0;
