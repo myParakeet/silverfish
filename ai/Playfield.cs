@@ -7272,32 +7272,52 @@
             return liste[random];
         }
 
-        public void disCardACard(bool own, bool all = false)
+        public void discardACard(bool own, bool all = false)
         {
             //TODO ... (guess random effect :D)
-            if (own)
+            if (!all)
             {
-                if (this.owncards.Count >= 1)
+                if (own)
                 {
-                    this.owncarddraw -= 1;
-                    Handmanager.Handcard removedCard = this.owncards[0];
-                    if (removedCard.card.cardIDenum == CardDB.cardIDEnum.AT_022)
+                    if (this.owncards.Count >= 1)
                     {
-                        removedCard.card.sim_card.onCardIsDiscarded(this, removedCard.card, true);
+                        this.owncarddraw -= 1;
+                        Handmanager.Handcard removedCard = this.owncards[0];
+                        if (removedCard.card.cardIDenum == CardDB.cardIDEnum.AT_022)
+                        {
+                            removedCard.card.sim_card.onCardIsDiscarded(this, removedCard.card, true);
+                        }
+                        this.owncards.RemoveAt(0);
+                        this.triggerACardWasDiscarded(true);
                     }
-                    this.owncards.RemoveAt(0);
-                    this.triggerACardWasDiscarded(true);
+
+
                 }
-
-
+                else
+                {
+                    if (this.enemyAnzCards >= 1)
+                    {
+                        this.enemycarddraw--;
+                        this.enemyAnzCards--;
+                        this.triggerACardWasDiscarded(false);
+                    }
+                }
             }
             else
             {
-                if (this.enemyAnzCards >= 1)
+                int anz = (own) ? owncards.Count : enemyAnzCards;
+                if (own)
                 {
-                    this.enemycarddraw--;
-                    this.enemyAnzCards--;
-                    this.triggerACardWasDiscarded(false);
+                    owncards.Clear();
+                }
+                else
+                {
+                    enemyAnzCards = 0;
+                }
+
+                for (int i = 0; i<anz; i++)
+                {
+                    triggerACardWasDiscarded(own);
                 }
             }
         }

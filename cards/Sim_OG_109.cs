@@ -15,24 +15,7 @@ namespace HREngine.Bots
 
         public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
-            if (own.own)
-            {
-                if (p.owncards.Count > 0)
-                {
-                    p.owncarddraw--;
-                    p.owncards.RemoveAt(0);
-                    p.triggerCardsChanged(true);
-                }
-            }
-            else
-            {
-                if (p.enemyAnzCards > 0)
-                {
-                    p.enemycarddraw--;
-                    p.enemyAnzCards--;
-                    p.triggerCardsChanged(false);
-                }
-            }
+            p.discardACard(own.own);
         }
     }
 }
