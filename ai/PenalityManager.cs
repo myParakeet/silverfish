@@ -748,6 +748,8 @@
                 {
                     pen = 10;
                 }
+
+                if (name == CardDB.cardName.mortalstrike && p.ownHero.Hp > 12) pen = 20;
             }
 
             if (target.own && !target.isHero)
@@ -841,6 +843,8 @@
                     if (name == CardDB.cardName.lavashock && p.owedRecall == 0 && p.currentRecall == 0) pen = 15;
 
                     if (name == CardDB.cardName.fireblast && !lethal && m.Hp == 1) pen = -10;
+
+                    if (name == CardDB.cardName.mortalstrike && p.ownHero.Hp > 12) pen = 20;
                 }
             }
 
