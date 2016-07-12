@@ -151,7 +151,7 @@
             }
             //Avoid wasting attacks into doomsayer
             // must lower HP with spells prior
-            if (target.name == CardDB.cardName.doomsayer && !m.poisonous)
+            /*if (target.name == CardDB.cardName.doomsayer && !m.poisonous)
             {
                 int totalAngr = 0;
                 foreach (Minion mnn in p.ownMinions)
@@ -161,7 +161,7 @@
                 if (p.ownWeaponAttack >= 1) totalAngr += p.ownWeaponAttack;
                 if (p.ownHero.tempAttack >= 1) totalAngr += p.ownHero.tempAttack;
                 if (totalAngr < target.Hp) return 500;
-            }
+            }*/
 
             return pen;
         }
@@ -238,7 +238,7 @@
 
             //Avoid wasting durability into doomsayer
             // must lower HP with spells prior
-            if (target.name == CardDB.cardName.doomsayer)
+            /*if (target.name == CardDB.cardName.doomsayer)
             {
                 int totalAngr = 0;
                 foreach (Minion mnn in p.ownMinions)
@@ -248,7 +248,7 @@
                 if (p.ownWeaponAttack >= 1) totalAngr += p.ownWeaponAttack;
                 if (p.ownHero.tempAttack >= 1) totalAngr += p.ownHero.tempAttack;
                 if (totalAngr < target.Hp) return 500;
-            }
+            }*/
             return retval;
         }
 
@@ -1665,7 +1665,7 @@
             int retval = 0;
 
             if (card.card.name == CardDB.cardName.doomcaller && p.diedMinions != null && p.diedMinions.Find(ct => ct.own && ct.cardid == CardDB.cardIDEnum.OG_279).cardid == CardDB.cardIDEnum.OG_279) retval += 5; //OG_279 = cthun; penalize playing if cthun is not dead
-            if (p.ownMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null || p.enemyMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null)
+            /*if (p.ownMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null || p.enemyMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null)
             {
                 // penalize playing minions into doomsayer
                 // todo sepefeets - is this good enough? figure out way to penalize boards that play cards but don't kill it
@@ -1673,7 +1673,7 @@
                 if (card.card.Charge) return 25 * card.card.cost; //just estimate the value by the cost
                 else if (this.buffing1TurnDatabase.ContainsKey(card.card.name) || this.attackBuffDatabase.ContainsKey(card.card.name)) return 0;
                 else return 500;
-            }
+            }*/
             if (p.ownMinions.Find(m => m.name == CardDB.cardName.muklaschampion && !m.silenced) != null && p.playactions.Find(a => a.actionType == actionEnum.useHeroPower) != null)
             {
                 // penalize playing minions after mukla's +1/+1 buff

@@ -85,6 +85,8 @@
             int ownMinionsCount = 0;
 
             bool enemyhaspatron = false;
+            bool enemydoomsayer = false;
+            bool owndoomsayer = false;
 
             //
             bool canPingMinions = (p.ownHeroAblility.card.name == CardDB.cardName.fireblast);
@@ -94,6 +96,7 @@
             foreach (Minion m in p.enemyMinions)
             {
                 if (m.name == CardDB.cardName.grimpatron && !m.silenced) enemyhaspatron = true;
+                if (m.name == CardDB.cardName.doomsayer && !m.silenced) enemydoomsayer = true;
 
                 int currMinionValue = this.getEnemyMinionValue(m, p);
 
@@ -118,6 +121,8 @@
 
             foreach (Minion m in p.ownMinions)
             {
+                if (m.name == CardDB.cardName.doomsayer && !m.silenced) owndoomsayer = true;
+
                 retval += 5;
                 retval += m.Hp * 2;
                 retval += m.Angr * 2;
@@ -169,25 +174,37 @@
             foreach (Action a in p.playactions)
             {
                 //lastCoin = false;
-                if (a.actionType == actionEnum.attackWithHero && p.enemyHero.Hp <= p.attackFaceHP) retval++;
                 if (a.actionType == actionEnum.useHeroPower) useAbili = true;
-                if (p.ownHeroName == HeroEnum.warrior && a.actionType == actionEnum.attackWithHero && useAbili) retval -= 1;
-                //if (a.actionType == actionEnum.useHeroPower && a.card.card.name == CardDB.cardName.lesserheal && (!a.target.own)) retval -= 5;
-                if (a.actionType != actionEnum.playcard) continue;
-                if (a.card.card.name == CardDB.cardName.thecoin)
+                //if (useAbili && a.card.card.name == CardDB.cardName.lesserheal && (!a.target.own)) retval -= 5;
+
+                if (a.actionType == actionEnum.attackWithHero)
                 {
-                    usecoin = 1;
+                    if (p.enemyHero.Hp <= p.attackFaceHP) retval++;
+                    if (p.ownHeroName == HeroEnum.warrior && useAbili) retval -= 1;
                 }
-                if (a.card.card.name == CardDB.cardName.innervate)
+
+                if (a.actionType == actionEnum.playcard)
                 {
-                    usecoin = 2;
+                    if (a.card.card.name == CardDB.cardName.thecoin)
+                    {
+                        usecoin = 1;
+                    }
+                    if (a.card.card.name == CardDB.cardName.innervate)
+                    {
+                        usecoin = 2;
+                    }
+                    if (a.card.card.name == CardDB.cardName.soulfire || a.card.card.name == CardDB.cardName.doomguard || a.card.card.name == CardDB.cardName.succubus) deletecardsAtLast = 1;
+                    if (deletecardsAtLast == 1 && !(a.card.card.name == CardDB.cardName.soulfire || a.card.card.name == CardDB.cardName.doomguard || a.card.card.name == CardDB.cardName.succubus)) retval -= 20;
+                    if (enemydoomsayer && a.card.card.type == CardDB.cardtype.MOB) retval -= 5000;
+                    if (owndoomsayer && a.card.card.type == CardDB.cardtype.MOB) retval -= 100;
+
+                    //save spell for all classes: (except for rogue if he has no combo)
+                    if (a.target == null) continue;
+                    if (p.ownHeroName != HeroEnum.thief && a.card.card.type == CardDB.cardtype.SPELL && (!a.target.own && a.target.isHero) && a.card.card.name != CardDB.cardName.shieldblock) retval -= 11;
+                    if (p.ownHeroName == HeroEnum.thief && a.card.card.type == CardDB.cardtype.SPELL && (a.target.isHero && !a.target.own)) retval -= 11;
                 }
-                if (a.card.card.name == CardDB.cardName.soulfire || a.card.card.name == CardDB.cardName.doomguard || a.card.card.name == CardDB.cardName.succubus) deletecardsAtLast = 1;
-                if (deletecardsAtLast == 1 && !(a.card.card.name == CardDB.cardName.soulfire || a.card.card.name == CardDB.cardName.doomguard || a.card.card.name == CardDB.cardName.succubus)) retval -= 20;
-                //save spell for all classes: (except for rouge if he has no combo)
-                if (a.target == null) continue;
-                if (p.ownHeroName != HeroEnum.thief && a.card.card.type == CardDB.cardtype.SPELL && (!a.target.own && a.target.isHero) && a.card.card.name != CardDB.cardName.shieldblock) retval -= 11;
-                if (p.ownHeroName == HeroEnum.thief && a.card.card.type == CardDB.cardtype.SPELL && (a.target.isHero && !a.target.own)) retval -= 11;
+
+                if (enemydoomsayer && a.target != null && a.target.name == CardDB.cardName.doomsayer) retval -= 5000;
             }
             //dont waste mana!!
             if (usecoin>=1 && useAbili && p.ownMaxMana <= 2) retval -= 40;
@@ -266,7 +283,6 @@
                     retval += 50;//10000
                     if (p.numPlayerMinionsAtTurnStart == 0) retval += 50; // if we can kill the enemy even after a board clear, bigger bonus
                     if (p.loathebLastTurn > 0) retval += 50;  // give a bonus to turn 2 sims where we played loatheb in turn 1 to protect our lethal board
-
                 }
             }
             else if (p.ownHero.Hp > 0)
@@ -297,10 +313,8 @@
                         retval -= 100;
                     }
                 }
-                
-                
-                
             }
+
 
             //if (p.ownHero.Hp <= 0 && p.turnCounter < 2) retval = -10000;
 
