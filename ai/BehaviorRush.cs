@@ -112,52 +112,61 @@ namespace HREngine.Bots
                 }
             }
 
-            foreach (Minion m in p.ownMinions)
-            {
-                retval += (m.Angr < 4 ? m.Hp * 1 : m.Hp * 2);
-                retval += m.Angr * 2;
-                retval += m.handcard.card.rarity;
-                if (m.windfury) retval += m.Angr;
-                if (m.divineshild) retval += ((m.Angr + 2) / 3) + ((m.Hp + 2) / 3);
-                if (m.stealth) retval += 1;
-                if (m.taunt) retval += 1;
-                if (m.handcard.card.isSpecialMinion)
-                {
-                    retval += 1;
-                    if (!m.taunt && m.stealth) retval += (m.Angr < 4 ? 10 : 20);
-                }
-                //if (m.handcard.card.name == CardDB.cardName.silverhandrecruit && m.Angr == 1 && m.Hp == 1) retval -= 5;
-                if (m.handcard.card.name == CardDB.cardName.direwolfalpha || m.handcard.card.name == CardDB.cardName.flametonguetotem || m.handcard.card.name == CardDB.cardName.stormwindchampion || m.handcard.card.name == CardDB.cardName.raidleader) retval += 10;
-                if (m.handcard.card.name == CardDB.cardName.nerubianegg)
-                {
-                    if (m.Angr >= 1) retval += 2;
-                    if ((!m.taunt && m.Angr == 0) && (m.divineshild || m.maxHp > 2)) retval -= 10;
-                    if (p.ownMinions.Count >= 3) retval += 15;
-                }
-            }
-
             bool canPingMinions = (p.ownHeroName == HeroEnum.mage);
             bool hasPingedMinion = false;
 
-            foreach (Minion m in p.enemyMinions)
+            bool enemyDoomsayer = false;
+            bool ownDoomsayer = false;
+
+            if (p.enemyMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null) enemyDoomsayer = true;
+            if (p.ownMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null) ownDoomsayer = true;
+
+            if (!enemyDoomsayer && !ownDoomsayer)
             {
-                int currMinionValue = this.getEnemyMinionValue(m, p);
-
-                // Give a bonus for 1 hp minions as a mage, since we can remove it easier in the future with ping.
-                // But we make sure we only give this bonus once among all enemies. We also give another +1 bonus once if the atk >= 4.
-                if (canPingMinions && !hasPingedMinion && currMinionValue > 2 && m.Hp == 1)
+                foreach (Minion m in p.ownMinions)
                 {
-                    currMinionValue -= 1;
-                    canPingMinions = false;  // only 1 per turn (-1 bonus regardless of atk)
-                    hasPingedMinion = true;
-                }
-                if (hasPingedMinion && currMinionValue > 2 && m.Hp == 1 && m.Angr >= 4)
-                {
-                    currMinionValue -= 1;
-                    hasPingedMinion = false;  // only 1 per turn (-1 bonus additional for atk >= 4)
+                    retval += (m.Angr < 4 ? m.Hp * 1 : m.Hp * 2);
+                    retval += m.Angr * 2;
+                    retval += m.handcard.card.rarity;
+                    if (m.windfury) retval += m.Angr;
+                    if (m.divineshild) retval += ((m.Angr + 2) / 3) + ((m.Hp + 2) / 3);
+                    if (m.stealth) retval += 1;
+                    if (m.taunt) retval += 1;
+                    if (m.handcard.card.isSpecialMinion)
+                    {
+                        retval += 1;
+                        if (!m.taunt && m.stealth) retval += (m.Angr < 4 ? 10 : 20);
+                    }
+                    //if (m.handcard.card.name == CardDB.cardName.silverhandrecruit && m.Angr == 1 && m.Hp == 1) retval -= 5;
+                    if (m.handcard.card.name == CardDB.cardName.direwolfalpha || m.handcard.card.name == CardDB.cardName.flametonguetotem || m.handcard.card.name == CardDB.cardName.stormwindchampion || m.handcard.card.name == CardDB.cardName.raidleader) retval += 10;
+                    if (m.handcard.card.name == CardDB.cardName.nerubianegg)
+                    {
+                        if (m.Angr >= 1) retval += 2;
+                        if ((!m.taunt && m.Angr == 0) && (m.divineshild || m.maxHp > 2)) retval -= 10;
+                        if (p.ownMinions.Count >= 3) retval += 15;
+                    }
                 }
 
-                retval -= currMinionValue;
+                foreach (Minion m in p.enemyMinions)
+                {
+                    int currMinionValue = this.getEnemyMinionValue(m, p);
+
+                    // Give a bonus for 1 hp minions as a mage, since we can remove it easier in the future with ping.
+                    // But we make sure we only give this bonus once among all enemies. We also give another +1 bonus once if the atk >= 4.
+                    if (canPingMinions && !hasPingedMinion && currMinionValue > 2 && m.Hp == 1)
+                    {
+                        currMinionValue -= 1;
+                        canPingMinions = false;  // only 1 per turn (-1 bonus regardless of atk)
+                        hasPingedMinion = true;
+                    }
+                    if (hasPingedMinion && currMinionValue > 2 && m.Hp == 1 && m.Angr >= 4)
+                    {
+                        currMinionValue -= 1;
+                        hasPingedMinion = false;  // only 1 per turn (-1 bonus additional for atk >= 4)
+                    }
+
+                    retval -= currMinionValue;
+                }
             }
 
             retval -= p.enemySecretCount;

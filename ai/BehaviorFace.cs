@@ -102,33 +102,42 @@ namespace HREngine.Bots
                 }
             }
 
-            foreach (Minion m in p.ownMinions)
-            {
-                retval += m.Hp * 1;
-                retval += m.Angr * 2;
-                retval += m.handcard.card.rarity;
-                if (m.windfury) retval += m.Angr;
-                if (m.divineshild) retval += ((m.Angr + 2) / 3) + ((m.Hp + 2) / 3);
-                if (m.stealth) retval += 1;
-                if (m.taunt) retval += 1;
-                if (m.handcard.card.isSpecialMinion)
-                {
-                    retval += 1;
-                    if (!m.taunt && m.stealth) retval += (m.Angr < 4 ? 10 : 20);
-                }
-                //if (m.handcard.card.name == CardDB.cardName.silverhandrecruit && m.Angr == 1 && m.Hp == 1) retval -= 5;
-                if (m.handcard.card.name == CardDB.cardName.direwolfalpha || m.handcard.card.name == CardDB.cardName.flametonguetotem || m.handcard.card.name == CardDB.cardName.stormwindchampion || m.handcard.card.name == CardDB.cardName.raidleader) retval += 10;
-                if (m.handcard.card.name == CardDB.cardName.nerubianegg)
-                {
-                    if (m.Angr >= 1) retval += 2;
-                    if ((!m.taunt && m.Angr == 0) && (m.divineshild || m.maxHp > 2)) retval -= 10;
-                    if (p.ownMinions.Count >= 3) retval += 15;
-                }
-            }
+            bool enemyDoomsayer = false;
+            bool ownDoomsayer = false;
 
-            foreach (Minion m in p.enemyMinions)
+            if (p.enemyMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null) enemyDoomsayer = true;
+            if (p.ownMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null) ownDoomsayer = true;
+
+            if (!enemyDoomsayer && !ownDoomsayer)
             {
-                retval -= this.getEnemyMinionValue(m, p);
+                foreach (Minion m in p.ownMinions)
+                {
+                    retval += m.Hp * 1;
+                    retval += m.Angr * 2;
+                    retval += m.handcard.card.rarity;
+                    if (m.windfury) retval += m.Angr;
+                    if (m.divineshild) retval += ((m.Angr + 2) / 3) + ((m.Hp + 2) / 3);
+                    if (m.stealth) retval += 1;
+                    if (m.taunt) retval += 1;
+                    if (m.handcard.card.isSpecialMinion)
+                    {
+                        retval += 1;
+                        if (!m.taunt && m.stealth) retval += (m.Angr < 4 ? 10 : 20);
+                    }
+                    //if (m.handcard.card.name == CardDB.cardName.silverhandrecruit && m.Angr == 1 && m.Hp == 1) retval -= 5;
+                    if (m.handcard.card.name == CardDB.cardName.direwolfalpha || m.handcard.card.name == CardDB.cardName.flametonguetotem || m.handcard.card.name == CardDB.cardName.stormwindchampion || m.handcard.card.name == CardDB.cardName.raidleader) retval += 10;
+                    if (m.handcard.card.name == CardDB.cardName.nerubianegg)
+                    {
+                        if (m.Angr >= 1) retval += 2;
+                        if ((!m.taunt && m.Angr == 0) && (m.divineshild || m.maxHp > 2)) retval -= 10;
+                        if (p.ownMinions.Count >= 3) retval += 15;
+                    }
+                }
+
+                foreach (Minion m in p.enemyMinions)
+                {
+                    retval -= this.getEnemyMinionValue(m, p);
+                }
             }
 
             retval -= p.enemySecretCount;

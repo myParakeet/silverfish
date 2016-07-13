@@ -121,10 +121,7 @@
 
                     //hasTank = hasTank || m.taunt;
                 }
-            }
 
-            if (!enemyDoomsayer && !ownDoomsayer)
-            {
                 foreach (Minion m in p.ownMinions)
                 {
                     retval += 5;

@@ -86,72 +86,81 @@
             int ownMinionsCount = 0;
 
             bool enemyhaspatron = false;
+            bool enemyDoomsayer = false;
+            bool ownDoomsayer = false;
+
+            if (p.enemyMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null) enemyDoomsayer = true;
+            if (p.ownMinions.Find(m => m.name == CardDB.cardName.doomsayer && !m.silenced) != null) ownDoomsayer = true;
+
 
             //
             bool canPingMinions = (p.ownHeroAblility.card.name == CardDB.cardName.fireblast);
             bool hasPingedMinion = false;
 
 
-            foreach (Minion m in p.enemyMinions)
+            if (!enemyDoomsayer && !ownDoomsayer)
             {
-                if (m.name == CardDB.cardName.grimpatron && !m.silenced) enemyhaspatron = true;
-
-                int currMinionValue = this.getEnemyMinionValue(m, p);
-
-                // Give a bonus for 1 hp minions as a mage, since we can remove it easier in the future with ping.
-                // But we make sure we only give this bonus once among all enemies. We also give another +1 bonus once if the atk >= 4.
-                if (canPingMinions && !hasPingedMinion && currMinionValue > 2 && m.Hp == 1)
+                foreach (Minion m in p.enemyMinions)
                 {
-                    currMinionValue -= 1;
-                    canPingMinions = false;  // only 1 per turn (-1 bonus regardless of atk)
-                    hasPingedMinion = true;
-                }
-                if (hasPingedMinion && currMinionValue > 2 && m.Hp == 1 && m.Angr >= 4)
-                {
-                    currMinionValue -= 1;
-                    hasPingedMinion = false;  // only 1 per turn (-1 bonus additional for atk >= 4)
+                    if (m.name == CardDB.cardName.grimpatron && !m.silenced) enemyhaspatron = true;
+
+                    int currMinionValue = this.getEnemyMinionValue(m, p);
+
+                    // Give a bonus for 1 hp minions as a mage, since we can remove it easier in the future with ping.
+                    // But we make sure we only give this bonus once among all enemies. We also give another +1 bonus once if the atk >= 4.
+                    if (canPingMinions && !hasPingedMinion && currMinionValue > 2 && m.Hp == 1)
+                    {
+                        currMinionValue -= 1;
+                        canPingMinions = false;  // only 1 per turn (-1 bonus regardless of atk)
+                        hasPingedMinion = true;
+                    }
+                    if (hasPingedMinion && currMinionValue > 2 && m.Hp == 1 && m.Angr >= 4)
+                    {
+                        currMinionValue -= 1;
+                        hasPingedMinion = false;  // only 1 per turn (-1 bonus additional for atk >= 4)
+                    }
+
+                    retval -= currMinionValue;
+
+                    //hasTank = hasTank || m.taunt;
                 }
 
-                retval -= currMinionValue;
-
-                //hasTank = hasTank || m.taunt;
-            }
-
-            foreach (Minion m in p.ownMinions)
-            {
-                retval += 5;
-                retval += m.Hp * 2;
-                retval += m.Angr * 2;
-                retval += m.handcard.card.rarity;
-                if (!m.playedThisTurn && m.windfury) retval += m.Angr;
-                if (m.divineshild) retval += 1;
-                if (m.stealth) retval += 1;
-                if (m.handcard.card.isSpecialMinion)
+                foreach (Minion m in p.ownMinions)
                 {
-                    retval += 1;
-                    if (!m.taunt && m.stealth) retval += 20;
+                    retval += 5;
+                    retval += m.Hp * 2;
+                    retval += m.Angr * 2;
+                    retval += m.handcard.card.rarity;
+                    if (!m.playedThisTurn && m.windfury) retval += m.Angr;
+                    if (m.divineshild) retval += 1;
+                    if (m.stealth) retval += 1;
+                    if (m.handcard.card.isSpecialMinion)
+                    {
+                        retval += 1;
+                        if (!m.taunt && m.stealth) retval += 20;
+                    }
+                    else
+                    {
+                        if (m.Angr <= 2 && m.Hp <= 2 && !m.divineshild) retval -= 5;
+                    }
+                    //if (m.Angr <= m.Hp + 1) retval += m.Angr;
+                    //if (!m.taunt && m.stealth && penman.specialMinions.ContainsKey(m.name)) retval += 20;
+                    //if (m.poisonous) retval += 1;
+                    if (m.divineshild && m.taunt) retval += 4;
+                    //if (m.taunt && m.handcard.card.name == CardDB.cardName.frog) owntaunt++;
+                    //if (m.handcard.card.isToken && m.Angr <= 2 && m.Hp <= 2) retval -= 5;
+                    //if (!penman.specialMinions.ContainsKey(m.name) && m.Angr <= 2 && m.Hp <= 2) retval -= 5;
+                    if (m.handcard.card.name == CardDB.cardName.direwolfalpha || m.handcard.card.name == CardDB.cardName.flametonguetotem || m.handcard.card.name == CardDB.cardName.stormwindchampion || m.handcard.card.name == CardDB.cardName.raidleader) retval += 10;
+                    if (m.handcard.card.name == CardDB.cardName.bloodmagethalnos) retval += 10;
+                    if (m.handcard.card.name == CardDB.cardName.nerubianegg)
+                    {
+                        if (m.Angr >= 1) retval += 2;
+                        if (m.divineshild || (m.maxHp > 2 && !m.destroyOnOwnTurnEnd)) retval -= 10;
+                        if (p.ownMinions.Count >= 3) retval += 15;
+                    }
+                    if (m.Ready) readycount++;
+                    if (m.maxHp >= 4 && (m.Angr > 2 || m.Hp > 3)) ownMinionsCount++;
                 }
-                else
-                {
-                    if (m.Angr <= 2 && m.Hp <= 2 && !m.divineshild) retval -= 5;
-                }
-                //if (m.Angr <= m.Hp + 1) retval += m.Angr;
-                //if (!m.taunt && m.stealth && penman.specialMinions.ContainsKey(m.name)) retval += 20;
-                //if (m.poisonous) retval += 1;
-                if (m.divineshild && m.taunt) retval += 4;
-                //if (m.taunt && m.handcard.card.name == CardDB.cardName.frog) owntaunt++;
-                //if (m.handcard.card.isToken && m.Angr <= 2 && m.Hp <= 2) retval -= 5;
-                //if (!penman.specialMinions.ContainsKey(m.name) && m.Angr <= 2 && m.Hp <= 2) retval -= 5;
-                if (m.handcard.card.name == CardDB.cardName.direwolfalpha || m.handcard.card.name == CardDB.cardName.flametonguetotem || m.handcard.card.name == CardDB.cardName.stormwindchampion || m.handcard.card.name == CardDB.cardName.raidleader) retval += 10;
-                if (m.handcard.card.name == CardDB.cardName.bloodmagethalnos) retval += 10;
-                if (m.handcard.card.name == CardDB.cardName.nerubianegg)
-                {
-                    if (m.Angr >= 1) retval += 2;
-                    if (m.divineshild || (m.maxHp > 2 && !m.destroyOnOwnTurnEnd)) retval -= 10;
-                    if (p.ownMinions.Count >= 3) retval += 15;
-                }
-                if (m.Ready) readycount++;
-                if (m.maxHp >= 4 && (m.Angr > 2 || m.Hp > 3)) ownMinionsCount++;
             }
 
 
