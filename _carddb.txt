@@ -581,7 +581,7 @@
     <Tag enumID="365" type="String">Unlocked at Level 49.</Tag>
     <Tag enumID="208" type="" value="1" />
     <Power definition="9eba5532-bfc5-4c4f-bf7f-98d33a819e7c" />
-    <TriggeredPowerHistoryInfo effectIndex="-1" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
   </Entity>
   <Entity version="2" CardID="CS2_034">
     <MasterPower>71be3917-6e17-4105-9e43-27d2de771947</MasterPower>
@@ -850,7 +850,7 @@
     <Tag enumID="203" type="" value="2" />
     <Tag enumID="48" type="" value="2" />
     <Tag enumID="251" type="" value="1" />
-    <Tag enumID="184" type="String">Hero Power Draw a card and take 2 damage.</Tag>
+    <Tag enumID="184" type="String">Hero Power Draw a card and take $2 damage.</Tag>
     <Tag enumID="268" type="" value="2" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
@@ -3432,6 +3432,7 @@
     <Tag enumID="251" type="" value="1" />
     <Tag enumID="268" type="" value="2" />
     <Tag enumID="321" type="" value="1" />
+    <Tag enumID="380" type="" value="725" />
     <Power definition="5652cff6-0c7b-4f82-855d-7042d8f775fb" />
   </Entity>
   <Entity version="2" CardID="HERO_02">
@@ -3444,6 +3445,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="251" type="" value="1" />
     <Tag enumID="321" type="" value="1" />
+    <Tag enumID="380" type="" value="687" />
     <Power definition="324f00a9-d936-4aa5-a35b-7c6e4070ca18" />
   </Entity>
   <Entity version="2" CardID="HERO_03">
@@ -3457,6 +3459,7 @@
     <Tag enumID="251" type="" value="1" />
     <Tag enumID="268" type="" value="2" />
     <Tag enumID="321" type="" value="1" />
+    <Tag enumID="380" type="" value="730" />
     <Power definition="fa70116c-dccd-4283-8f09-dfda53854b79" />
   </Entity>
   <Entity version="2" CardID="HERO_04">
@@ -3486,6 +3489,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="251" type="" value="1" />
     <Tag enumID="321" type="" value="1" />
+    <Tag enumID="380" type="" value="229" />
     <Power definition="75596ce4-da77-4efd-98b0-f68a3ba38091" />
   </Entity>
   <Entity version="2" CardID="HERO_06">
@@ -3499,6 +3503,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="251" type="" value="1" />
     <Tag enumID="321" type="" value="1" />
+    <Tag enumID="380" type="" value="1123" />
     <Power definition="15375f72-fc71-4829-a9d4-7d75f5a21b34" />
   </Entity>
   <Entity version="2" CardID="HERO_07">
@@ -3512,6 +3517,7 @@
     <Tag enumID="251" type="" value="1" />
     <Tag enumID="268" type="" value="2" />
     <Tag enumID="321" type="" value="1" />
+    <Tag enumID="380" type="" value="300" />
     <Power definition="e9d85c89-26ef-4ebf-b12c-972a5e5eb8d0" />
   </Entity>
   <Entity version="2" CardID="HERO_08">
@@ -3527,6 +3533,7 @@
     <Tag enumID="321" type="" value="1" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="807" />
     <Power definition="73d98ee0-f6f6-4970-bf3e-453bd6d25735" />
   </Entity>
   <Entity version="2" CardID="HERO_09">
@@ -3540,6 +3547,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="251" type="" value="1" />
     <Tag enumID="321" type="" value="1" />
+    <Tag enumID="380" type="" value="479" />
     <Power definition="7e3d6eaa-4d6e-4b5a-8c60-b69c801d8faf" />
   </Entity>
   <Entity version="2" CardID="hexfrog">
@@ -4612,7 +4620,7 @@
     <Tag enumID="192" type="" value="1" />
     <Power definition="8476ebd9-7d36-4fb3-8940-b670a538aa24" />
     <Power definition="4c915c2c-858f-4865-bc9f-f1b14a434e01" />
-    <TriggeredPowerHistoryInfo effectIndex="-1" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
   </Entity>
   <Entity version="2" CardID="EX1_014">
     <MasterPower>bfc8471e-08fb-412b-a569-c7f1709c90eb</MasterPower>
@@ -7158,12 +7166,6 @@
     <Power definition="745cbe07-c1e8-46ed-93a7-131722f6abbc">
       <PlayRequirement reqID="11" param="" />
     </Power>
-    <EntourageCard cardID="00000011-80a9-494c-8516-617d31cc37a2" />
-    <EntourageCard cardID="00000011-0aa5-4e9b-939a-42e05fa9d1a4" />
-    <EntourageCard cardID="00000011-e959-48db-83b5-1d43475f0625" />
-    <EntourageCard cardID="00000011-70e2-4599-a940-86769208ece8" />
-    <EntourageCard cardID="00000011-65cc-472a-9e59-b6231bc0053b" />
-    <EntourageCard cardID="00000011-db78-4a17-8719-a0931e674d61" />
   </Entity>
   <Entity version="2" CardID="EX1_323">
     <Tag enumID="185" type="String">Lord Jaraxxus</Tag>
@@ -8720,7 +8722,6 @@
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="342" type="String">Trevor Jacobs</Tag>
     <Tag enumID="351" type="String">"I think I'll just nap under these trees. Wait... AAAAAHHH!" - Blinkfizz, the Unfortunate Gnome</Tag>
-    <ReferencedTag name="Charge" enumID="197" type="Bool" value="1" />
     <Power definition="d693477e-0b88-45d1-bad5-5384baaeb1f7">
       <PlayRequirement reqID="12" param="1" />
     </Power>
@@ -10353,7 +10354,7 @@
     <Tag enumID="45" type="" value="6" />
     <Tag enumID="199" type="" value="2" />
     <Tag enumID="200" type="" value="20" />
-    <Tag enumID="184" type="String">Charge, Taunt</Tag>
+    <Tag enumID="184" type="String">Charge Taunt</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="197" type="" value="1" />
@@ -11023,6 +11024,38 @@
       <PlayRequirement reqID="11" param="" />
     </Power>
   </Entity>
+  <Entity version="2" CardID="CS2_049_H1">
+    <MasterPower>00000012-79f3-4a3c-8ccf-c13f6768dddd</MasterPower>
+    <Tag enumID="185" type="String">Totemic Call</Tag>
+    <Tag enumID="183" type="" value="17" />
+    <Tag enumID="203" type="" value="2" />
+    <Tag enumID="202" type="" value="10" />
+    <Tag enumID="48" type="" value="2" />
+    <Tag enumID="199" type="" value="8" />
+    <Tag enumID="184" type="String">Hero Power Summon a random Totem.</Tag>
+    <Power definition="00000012-79f3-4a3c-8ccf-c13f6768dddd">
+      <PlayRequirement reqID="44" param="" />
+      <PlayRequirement reqID="12" param="1" />
+    </Power>
+    <EntourageCard cardID="00000011-745e-49ba-af5f-c81b8cf2ea98" />
+    <EntourageCard cardID="00000011-b80b-4a38-b4e4-ed6c714435c6" />
+    <EntourageCard cardID="00000011-62db-42ab-ad54-fb6aceca7e92" />
+    <EntourageCard cardID="00000011-a93f-463e-ae4a-9da3db775e39" />
+  </Entity>
+  <Entity version="2" CardID="CS2_049_H1_AT_132">
+    <MasterPower>0782bdcc-d4f0-430c-8a73-29313cb6e1bc</MasterPower>
+    <Tag enumID="185" type="String">Totemic Slam</Tag>
+    <Tag enumID="183" type="" value="17" />
+    <Tag enumID="202" type="" value="10" />
+    <Tag enumID="48" type="" value="2" />
+    <Tag enumID="184" type="String">Hero Power Summon a Totem of your choice.</Tag>
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="199" type="" value="8" />
+    <Power definition="0782bdcc-d4f0-430c-8a73-29313cb6e1bc">
+      <PlayRequirement reqID="12" param="1" />
+    </Power>
+  </Entity>
   <Entity version="2" CardID="CS2_101_H1">
     <MasterPower>e4b86ac2-481e-4c6d-ba5c-95ec16afd869</MasterPower>
     <Tag enumID="185" type="String">Reinforce</Tag>
@@ -11123,6 +11156,18 @@
     <Tag enumID="380" type="" value="725" />
     <Power definition="0a338004-0e43-43b8-a3e0-c69ff9e268d9" />
   </Entity>
+  <Entity version="2" CardID="HERO_02a">
+    <MasterPower>00000012-6112-4cb7-91e0-e0722c5908b3</MasterPower>
+    <Tag enumID="185" type="String">Morgl the Oracle</Tag>
+    <Tag enumID="183" type="" value="17" />
+    <Tag enumID="321" type="" value="1" />
+    <Tag enumID="203" type="" value="4" />
+    <Tag enumID="202" type="" value="3" />
+    <Tag enumID="45" type="" value="30" />
+    <Tag enumID="199" type="" value="8" />
+    <Tag enumID="380" type="" value="687" />
+    <Power definition="00000012-6112-4cb7-91e0-e0722c5908b3" />
+  </Entity>
   <Entity version="2" CardID="HERO_04a">
     <MasterPower>a04713b6-67e8-40df-81e8-fc9c81644ee7</MasterPower>
     <Tag enumID="185" type="String">Lady Liadrin</Tag>
@@ -11188,7 +11233,9 @@
     <Tag enumID="184" type="String">Hero Power Put a minion from each deck into the battlefield.</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
-    <Power definition="3da37802-65fa-4d65-a9a7-d387805f0bca" />
+    <Power definition="3da37802-65fa-4d65-a9a7-d387805f0bca">
+      <PlayRequirement reqID="12" param="1" />
+    </Power>
   </Entity>
   <Entity version="2" CardID="BRMA02_2_2c_TB">
     <MasterPower>9bd3b6bd-4980-416c-95e5-2386d9d564d7</MasterPower>
@@ -11482,7 +11529,7 @@
     <Tag enumID="48" type="" value="4" />
     <Tag enumID="47" type="" value="4" />
     <Tag enumID="45" type="" value="8" />
-    <Tag enumID="184" type="String">Always wins Brawls.  Battlecry: Add a Brawl to your hand.</Tag>
+    <Tag enumID="184" type="String">Always wins Brawls. Battlecry: Add a Brawl to your hand.</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="203" type="" value="5" />
@@ -12175,13 +12222,11 @@
     <Tag enumID="185" type="String">Blingtron's Blade</Tag>
     <Tag enumID="183" type="" value="18" />
     <Tag enumID="184" type="String">When this breaks, randomly summon a new weapon.</Tag>
-    <Tag enumID="203" type="" value="6" />
     <Tag enumID="202" type="" value="6" />
   </Entity>
   <Entity version="2" CardID="TB_BlingBrawl_Blade2e">
     <Tag enumID="185" type="String">Blingtron's Blade HERO</Tag>
     <Tag enumID="183" type="" value="18" />
-    <Tag enumID="203" type="" value="6" />
     <Tag enumID="202" type="" value="6" />
     <Power definition="9e9fe999-01d5-4f07-af2e-ca221bd79916" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -12222,7 +12267,6 @@
   <Entity version="2" CardID="TB_BlingBrawl_Weapon">
     <Tag enumID="185" type="String">Foam Sword</Tag>
     <Tag enumID="183" type="" value="18" />
-    <Tag enumID="203" type="" value="6" />
     <Tag enumID="202" type="" value="7" />
     <Tag enumID="48" type="" value="1" />
     <Tag enumID="47" type="" value="2" />
@@ -12377,6 +12421,436 @@
     <Tag enumID="202" type="" value="5" />
     <Tag enumID="184" type="String">Destroy Lorewalker Cho.</Tag>
   </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_001">
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="184" type="String">The true battle begins....</Tag>
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Tag enumID="185" type="String">Glorious Finale</Tag>
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_002">
+    <MasterPower>6b502741-dc0a-45a2-91ad-518aa4b061f4</MasterPower>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="184" type="String">Restore 30 health to Nefarian. Deal 30 damage to all other minions.</Tag>
+    <Tag enumID="114" type="" value="0" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Tag enumID="185" type="String">Twisted Light</Tag>
+    <Tag enumID="199" type="" value="6" />
+    <Power definition="6b502741-dc0a-45a2-91ad-518aa4b061f4" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_003">
+    <MasterPower>7eade58d-5156-4642-9aa3-2f2d5b436ae7</MasterPower>
+    <Tag enumID="185" type="String">Bamboozle</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="184" type="String">Swap player's hands.</Tag>
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Power definition="7eade58d-5156-4642-9aa3-2f2d5b436ae7" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_004">
+    <MasterPower>6c862c68-c80e-471a-af1c-7b164a10537f</MasterPower>
+    <Tag enumID="185" type="String">Cleave</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="184" type="String">Deal 7 damage to a minion and its owner.</Tag>
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Power definition="6c862c68-c80e-471a-af1c-7b164a10537f" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_005">
+    <MasterPower>97675672-865e-495e-96be-e651b3122e75</MasterPower>
+    <Tag enumID="185" type="String">Cleave</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="184" type="String">Deal 4 damage to a minion and its owner.</Tag>
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Power definition="97675672-865e-495e-96be-e651b3122e75" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_006">
+    <MasterPower>00000012-42f1-4901-9c5e-95e77041ebd6</MasterPower>
+    <Tag enumID="185" type="String">Elemental Eruption</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="184" type="String">Deal 4-6 damage to all other minions.</Tag>
+    <Tag enumID="114" type="" value="0" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Tag enumID="199" type="" value="8" />
+    <Power definition="00000012-42f1-4901-9c5e-95e77041ebd6" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_007">
+    <MasterPower>b13e107c-4199-4ea6-bcb7-c802eb06c87b</MasterPower>
+    <Tag enumID="185" type="String">Flame Missiles</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="184" type="String">Deal 5 damage randomly split among all other characters.</Tag>
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Power definition="b13e107c-4199-4ea6-bcb7-c802eb06c87b" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_008">
+    <MasterPower>14ff396b-5b0e-4505-a63b-3227ab76a62c</MasterPower>
+    <Tag enumID="185" type="String">Flame Missiles</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="184" type="String">Deal 10 damage randomly split among all other characters.</Tag>
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Power definition="14ff396b-5b0e-4505-a63b-3227ab76a62c" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_009">
+    <MasterPower>9ef03bf7-81e6-4447-808f-4847f57e7824</MasterPower>
+    <Tag enumID="185" type="String">Explosive Rune</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="184" type="String">Summon an 'Explosive Rune.'</Tag>
+    <Tag enumID="48" type="" value="0" />
+    <Power definition="9ef03bf7-81e6-4447-808f-4847f57e7824" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_009e">
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="6" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="184" type="String">It's about to blow!</Tag>
+    <Tag enumID="185" type="String">Going Nova</Tag>
+    <Tag enumID="190" type="" value="1" />
+    <Power definition="cd6635ce-d66d-4b24-b09f-e409c96e7027" />
+    <Power definition="00000012-4188-47cf-b88f-669845c1bee3" />
+  </Entity>
+  <Entity version="2" CardID="TB_Coopv3_009t">
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="202" type="" value="4" />
+    <Tag enumID="48" type="" value="2" />
+    <Tag enumID="47" type="" value="0" />
+    <Tag enumID="45" type="" value="3" />
+    <Tag enumID="114" type="" value="0" />
+    <Tag enumID="184" type="String">At the start of your turn, this explodes, dealing 9 damage to your hero.</Tag>
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="185" type="String">Explosive Rune</Tag>
+    <Tag enumID="32" type="" value="1" />
+    <Tag enumID="190" type="" value="1" />
+    <Power definition="fe4e1c8f-d42b-443c-8d79-8f6d1ae5d5df" />
+    <Power definition="00000012-f143-447b-b005-faaab6e1cfc0" />
+    <Power definition="00000012-53bf-4157-a801-2d8385a6826f" />
+    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="1" showInHistory="False" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_010">
+    <MasterPower>00000012-1f27-4326-8ed0-98026b200389</MasterPower>
+    <Tag enumID="185" type="String">Explosive Runes</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="184" type="String">Summon two 'Explosive Runes.'</Tag>
+    <Tag enumID="48" type="" value="0" />
+    <Power definition="00000012-1f27-4326-8ed0-98026b200389" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_011">
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="184" type="String">He's getting angry....</Tag>
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Tag enumID="185" type="String">Don't Push Me!</Tag>
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_012">
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="184" type="String">Deal 4 damage to each hero.</Tag>
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Tag enumID="185" type="String">Immolate</Tag>
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_013">
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="184" type="String">Deal 7 damage to each hero.</Tag>
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Tag enumID="185" type="String">Immolate</Tag>
+  </Entity>
+  <Entity version="2" CardID="TB_Coopv3_100">
+    <Tag enumID="185" type="String">Dragonscale Warrior</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="202" type="" value="4" />
+    <Tag enumID="48" type="" value="3" />
+    <Tag enumID="47" type="" value="3" />
+    <Tag enumID="45" type="" value="4" />
+    <Tag enumID="114" type="" value="0" />
+    <Tag enumID="184" type="String">Whenever any player targets this minion with a spell, that player draws a card.</Tag>
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="32" type="" value="1" />
+    <ReferencedTag name="Divine Shield" enumID="194" type="Bool" value="1" />
+    <Power definition="f3b7a655-efa3-4006-9c3d-824e5c675e12" />
+    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
+  </Entity>
+  <Entity version="2" CardID="TB_Coopv3_101">
+    <Tag enumID="185" type="String">Freewheeling Skulker</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="202" type="" value="4" />
+    <Tag enumID="48" type="" value="5" />
+    <Tag enumID="47" type="" value="5" />
+    <Tag enumID="45" type="" value="6" />
+    <Tag enumID="114" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="184" type="String">At the end of your turn, switch sides.</Tag>
+    <Power definition="00000012-f144-4f02-8dcc-84079d6ee5f5" />
+    <Power definition="00000012-b713-4f15-a4cb-019415c8a926" />
+    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_101e">
+    <Tag enumID="185" type="String">Team Player Enchantment</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="6" />
+    <Tag enumID="184" type="String">Immune ahile attacking</Tag>
+    <Power definition="faff63e6-892d-45d6-a124-af4ca4b8ca2a" />
+    <Power definition="5e51f744-9260-42f9-a912-a6d9689c2226" />
+    <Power definition="a10ba551-4df7-4c85-a0fe-83e6fa39deb1" />
+    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="1" showInHistory="False" />
+  </Entity>
+  <Entity version="2" CardID="TB_Coopv3_102">
+    <MasterPower>00000012-6930-4379-9e60-398f974acda2</MasterPower>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="114" type="" value="0" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="184" type="String">Choose One - Each player draws 2 cards; or Restore 8 Health to each hero.</Tag>
+    <Tag enumID="48" type="" value="2" />
+    <Tag enumID="185" type="String">Shadow or Light?</Tag>
+    <Tag enumID="199" type="" value="6" />
+    <Power definition="00000012-6930-4379-9e60-398f974acda2" />
+  </Entity>
+  <Entity version="2" CardID="TB_Coopv3_102a">
+    <MasterPower>bab0ab7f-0e08-40d0-b36e-c7e9c99aca25</MasterPower>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Tag enumID="185" type="String">Secrets of Shadow</Tag>
+    <Tag enumID="184" type="String">Each player draws 2 cards.</Tag>
+    <Tag enumID="199" type="" value="6" />
+    <Power definition="bab0ab7f-0e08-40d0-b36e-c7e9c99aca25" />
+  </Entity>
+  <Entity version="2" CardID="TB_Coopv3_102b">
+    <MasterPower>7395aca0-e3bd-4c5a-b83e-91d7cddaacd3</MasterPower>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="48" type="" value="0" />
+    <Tag enumID="185" type="String">Alms of Light</Tag>
+    <Tag enumID="184" type="String">Restore 8 Health to each hero.</Tag>
+    <Tag enumID="199" type="" value="6" />
+    <Power definition="7395aca0-e3bd-4c5a-b83e-91d7cddaacd3" />
+  </Entity>
+  <Entity version="2" CardID="TB_Coopv3_103">
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="202" type="" value="4" />
+    <Tag enumID="48" type="" value="5" />
+    <Tag enumID="47" type="" value="3" />
+    <Tag enumID="45" type="" value="3" />
+    <Tag enumID="114" type="" value="0" />
+    <Tag enumID="184" type="String">Whenever ANY player plays a card, gain +1/+1.</Tag>
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="185" type="String">Intrepid Dragonstalker</Tag>
+    <Tag enumID="32" type="" value="1" />
+    <Power definition="efedab6a-85cf-4fdb-a95b-0edd891e238c" />
+    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
+  </Entity>
+  <Entity version="2" CardID="TB_Coopv3_104">
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="202" type="" value="4" />
+    <Tag enumID="48" type="" value="4" />
+    <Tag enumID="47" type="" value="4" />
+    <Tag enumID="45" type="" value="4" />
+    <Tag enumID="114" type="" value="0" />
+    <Tag enumID="184" type="String">Battlecry: Give all other minions +2/+2, except the Boss.</Tag>
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="185" type="String">Main Tank</Tag>
+    <Tag enumID="218" type="" value="1" />
+    <Power definition="00000012-94a8-4a30-93fb-9f2b9bfded35" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_104e">
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="6" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="184" type="String">+2/+2</Tag>
+    <Tag enumID="185" type="String">Unity</Tag>
+    <Power definition="00000012-657b-4f66-92bc-13ce56545ffa" />
+  </Entity>
+  <Entity version="2" CardID="TB_Coopv3_105">
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="202" type="" value="4" />
+    <Tag enumID="48" type="" value="4" />
+    <Tag enumID="47" type="" value="0" />
+    <Tag enumID="45" type="" value="7" />
+    <Tag enumID="114" type="" value="0" />
+    <Tag enumID="184" type="String">Whenever your hero is healed, also heal your teammate for that much.</Tag>
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="185" type="String">Raid Healer</Tag>
+    <Tag enumID="32" type="" value="1" />
+    <Power definition="00000012-21db-413b-aaba-27a7af71b3df" />
+    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_Boss">
+    <Tag enumID="185" type="String">Nefarian</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="203" type="" value="5" />
+    <Tag enumID="114" type="" value="1" />
+    <Tag enumID="202" type="" value="4" />
+    <Tag enumID="48" type="" value="10" />
+    <Tag enumID="47" type="" value="0" />
+    <Tag enumID="45" type="" value="200" />
+    <Tag enumID="184" type="String">Can't be targeted by spells. Boss: Nefarian wins if he defeats either of you!</Tag>
+    <Tag enumID="200" type="" value="24" />
+    <Tag enumID="190" type="" value="1" />
+    <Tag enumID="335" type="" value="1" />
+    <Power definition="7d33859a-e0a2-4eb7-8b1e-860e0070c5cc" />
+    <Power definition="8b0394bd-632a-425d-a5d7-77c513379bf4" />
+    <Power definition="b6185866-cc1a-43ef-a313-ab5e09c2e364" />
+    <Power definition="97d2946a-32e0-49f2-b4d5-8bd6592b36bf" />
+    <Power definition="3c3915a5-7784-4e04-868b-417727db384a" />
+    <Power definition="812781e3-a2bd-4e79-bfa6-737979a44874" />
+    <Power definition="00000012-44b5-49c4-a73a-e25390ee5dfb" />
+    <Power definition="693273ad-ccc8-4133-ba2d-870e73540b33" />
+    <Power definition="9d18ef8f-ae78-4fcb-9ce5-6bfcd563cc59" />
+    <Power definition="a41b1e5e-3205-485a-b68b-1767ade249cd" />
+    <Power definition="d5f1ca34-2cfd-4506-bf3c-efa9f2c3f442" />
+    <Power definition="34e694fb-4db7-4050-8431-96ec5bbe6969" />
+    <Power definition="d53f5f84-fff8-4141-bad1-b431c9cfff53" />
+    <Power definition="00000012-00e1-4a3e-87ab-594646a93e8e" />
+    <Power definition="00000012-b925-44c6-a04e-3c7b16db8536" />
+    <Power definition="41364b55-5529-432b-a540-314d1a4da914" />
+    <Power definition="00000012-1249-47cd-af6b-251964c017a4" />
+    <Power definition="00000012-596d-40fd-b552-e8a235c66716" />
+    <Power definition="7d3ac61d-4c3d-4a38-8f1c-2c0bb757506b" />
+    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="1" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="2" showInHistory="True" />
+    <TriggeredPowerHistoryInfo effectIndex="3" showInHistory="True" />
+    <TriggeredPowerHistoryInfo effectIndex="4" showInHistory="True" />
+    <TriggeredPowerHistoryInfo effectIndex="5" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="6" showInHistory="True" />
+    <TriggeredPowerHistoryInfo effectIndex="7" showInHistory="True" />
+    <TriggeredPowerHistoryInfo effectIndex="8" showInHistory="True" />
+    <TriggeredPowerHistoryInfo effectIndex="9" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="10" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="11" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="12" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="13" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="14" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="15" showInHistory="False" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_BOSS2e">
+    <Tag enumID="185" type="String">Getting Angry....</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="6" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="184" type="String">Now he's mad....</Tag>
+    <Tag enumID="212" type="" value="1" />
+    <Power definition="e4f6089e-3638-473c-8009-75f2a52e8ac9" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_BOSS3e">
+    <Tag enumID="185" type="String">Enough!</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="6" />
+    <Tag enumID="184" type="String">Nefarian is Immune this turn.</Tag>
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="338" type="" value="1" />
+    <Power definition="6aa2c7ee-3c86-4e99-b7d6-1569bcb3c643" />
+    <Power definition="aa3de597-fd54-4df6-9785-da6fd37c2bee" />
+    <Power definition="e305531c-fa80-4ab2-a3f0-5b6203f166e5" />
+    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_BOSS4e">
+    <Tag enumID="185" type="String">Cowed</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="6" />
+    <Tag enumID="184" type="String">Can't attack this turn.</Tag>
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="338" type="" value="1" />
+    <Power definition="00000012-7a42-440e-8206-903a181c8cb7" />
+    <Power definition="00000012-f02d-4b05-88f6-c69fa2ca7451" />
+  </Entity>
+  <Entity version="2" CardID="TB_CoOpv3_BOSSe">
+    <Tag enumID="185" type="String">WHY WON'T YOU DIE!?</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="6" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="184" type="String">Now he's REALLY mad....</Tag>
+    <Power definition="3c138e39-20f7-4c4a-ba1c-9b9c1a12c8fa" />
+  </Entity>
   <Entity version="2" CardID="TB_CoOp_Mechazod">
     <Tag enumID="185" type="String">Gearmaster Mechazod</Tag>
     <Tag enumID="183" type="" value="18" />
@@ -12429,6 +12903,14 @@
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
   </Entity>
+  <Entity version="2" CardID="TB_DeckRecipe_MyDeckID">
+    <Tag enumID="185" type="String">My Deck ID</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="6" />
+    <Tag enumID="344" type="String">Not player facing. No need to localize.</Tag>
+    <Power definition="7f86cdfc-92a9-4d4c-befc-753ce244293a" />
+    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
+  </Entity>
   <Entity version="2" CardID="TB_DecreasingCardCost">
     <Tag enumID="185" type="String">TB_DecreasingCardCost</Tag>
     <Tag enumID="183" type="" value="18" />
@@ -12465,7 +12947,6 @@
   <Entity version="2" CardID="TB_Face_Ench1">
     <Tag enumID="185" type="String">Safe</Tag>
     <Tag enumID="183" type="" value="18" />
-    <Tag enumID="203" type="" value="6" />
     <Tag enumID="202" type="" value="6" />
     <Tag enumID="184" type="String">This minion is safe from attacks and cannot have taunt.</Tag>
     <Power definition="0b0e4eb3-93f3-4ffc-8a08-18cb44314bfb" />
@@ -12668,6 +13149,7 @@
     <Tag enumID="184" type="String">At the end of your turn, summon a 3/1 Nerubian.</Tag>
     <Tag enumID="48" type="" value="4" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="bfe072f4-74c0-4882-a2ba-3004bb769139" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="True" />
@@ -12679,8 +13161,9 @@
     <Tag enumID="47" type="" value="2" />
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="184" type="String">Whenever an enemy minion dies, summon a 1/1 Skeleton and give your other minions +1/+1.</Tag>
-    <Tag enumID="48" type="" value="7" />
+    <Tag enumID="48" type="" value="9" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="d61e598e-9add-497b-8982-e2d1faebabac" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="True" />
@@ -12711,7 +13194,7 @@
     <Tag enumID="202" type="" value="5" />
     <Tag enumID="185" type="String">Uncover Staff Piece</Tag>
     <Tag enumID="184" type="String">Add another piece to your Hero Power.</Tag>
-    <Tag enumID="48" type="" value="3" />
+    <Tag enumID="48" type="" value="2" />
     <Power definition="78e017fc-c652-4767-8128-b7a0290b3a4e" />
   </Entity>
   <Entity version="2" CardID="TB_KTRAF_10e">
@@ -12729,10 +13212,11 @@
     <Tag enumID="202" type="" value="4" />
     <Tag enumID="47" type="" value="5" />
     <Tag enumID="45" type="" value="6" />
-    <Tag enumID="184" type="String">At the beginning of your turn, Freeze a random enemy minion.</Tag>
+    <Tag enumID="184" type="String">At the start of your turn, Freeze a random enemy minion.</Tag>
     <Tag enumID="48" type="" value="5" />
     <Tag enumID="200" type="" value="24" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="a5d6a0f1-87f1-4633-a252-2057b85778ea" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="True" />
@@ -12746,6 +13230,7 @@
     <Tag enumID="184" type="String">Battlecry: Destroy a random enemy minion.</Tag>
     <Tag enumID="48" type="" value="8" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="218" type="" value="1" />
     <Power definition="9fb3dc4f-322a-41c4-9782-0157ca7a275c" />
   </Entity>
@@ -12758,6 +13243,7 @@
     <Tag enumID="184" type="String">Battlecry: Summon a fellow Horseman.</Tag>
     <Tag enumID="48" type="" value="4" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="218" type="" value="1" />
     <Power definition="cbaa3dc0-2d6d-4e2e-938d-bf111a9179a0" />
   </Entity>
@@ -12770,6 +13256,7 @@
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="48" type="" value="4" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <ReferencedTag name="Cant Be Damaged" enumID="240" type="Bool" value="1" />
     <Power definition="1f9f0803-962a-4f58-a40e-ac3bf3a97b11" />
   </Entity>
@@ -12782,6 +13269,7 @@
     <Tag enumID="45" type="" value="4" />
     <Tag enumID="48" type="" value="4" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="fbe91283-b471-4b9b-9950-4e3647725485" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="True" />
@@ -12804,6 +13292,7 @@
     <Tag enumID="45" type="" value="4" />
     <Tag enumID="48" type="" value="4" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="217" type="" value="1" />
     <Power definition="7692956c-b9b6-45cb-ba5a-f0e54e005f23" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="True" />
@@ -12817,6 +13306,7 @@
     <Tag enumID="47" type="" value="0" />
     <Tag enumID="48" type="" value="3" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="801eec22-73ab-4aec-b113-5ec5a69ab20c" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="True" />
@@ -12830,6 +13320,7 @@
     <Tag enumID="184" type="String">Has +1 Attack for each card in your opponent's hand.</Tag>
     <Tag enumID="48" type="" value="4" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Power definition="f5380a72-f20c-47a7-b70b-1c186c549493" />
   </Entity>
   <Entity version="2" CardID="TB_KTRAF_6">
@@ -12841,6 +13332,7 @@
     <Tag enumID="45" type="" value="7" />
     <Tag enumID="48" type="" value="5" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="5d582fc6-0565-46fb-bf81-e81c5ff634f7" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="True" />
@@ -12867,6 +13359,7 @@
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="48" type="" value="3" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="841bdc54-b696-47c2-84e5-312dc69efb54" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="True" />
@@ -12881,6 +13374,7 @@
     <Tag enumID="45" type="" value="3" />
     <Tag enumID="48" type="" value="8" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="218" type="" value="1" />
     <Power definition="30e4ea94-3c0c-4d93-bcf7-d447afe68bcc" />
   </Entity>
@@ -12900,7 +13394,7 @@
     <Tag enumID="183" type="" value="18" />
     <Tag enumID="202" type="" value="10" />
     <Tag enumID="48" type="" value="2" />
-    <Tag enumID="184" type="String">Add a random minion that costs (5) or less to your hand</Tag>
+    <Tag enumID="184" type="String">Add a random rare card to your hand. It costs (2) less.</Tag>
     <Tag enumID="185" type="String">Staff, First Piece</Tag>
     <Power definition="87ce8ad5-4b40-41f3-a123-76585208fa87" />
   </Entity>
@@ -12909,7 +13403,7 @@
     <Tag enumID="183" type="" value="18" />
     <Tag enumID="202" type="" value="10" />
     <Tag enumID="48" type="" value="2" />
-    <Tag enumID="184" type="String">Add a random minion to your hand. It costs (2) less.</Tag>
+    <Tag enumID="184" type="String">Add a random epic card to your hand. It costs (3) less.</Tag>
     <Tag enumID="185" type="String">Staff, Two Pieces</Tag>
     <Power definition="79f1f5e7-3966-4a9a-b787-3f08f92485fa" />
   </Entity>
@@ -12932,7 +13426,9 @@
     <Tag enumID="380" type="" value="39240" />
     <Power definition="33de4b47-f4ec-4726-aeac-3b017d5d7ef1" />
     <Power definition="1d1f8278-d226-4ce2-8221-6139cdf108e4" />
+    <Power definition="00000012-08d2-47c7-aa9d-9e919205eeb8" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
+    <TriggeredPowerHistoryInfo effectIndex="1" showInHistory="False" />
   </Entity>
   <Entity version="2" CardID="TB_KTRAF_H_2">
     <MasterPower>d0d78816-f589-4a52-8ff3-d9409ece55e3</MasterPower>
@@ -12947,12 +13443,20 @@
     <Power definition="f73225d0-50fe-44e9-9b7e-707972e239e7" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
   </Entity>
+  <Entity version="2" CardID="TB_LadyNazjar_PlayerEnch">
+    <Tag enumID="185" type="String">Transmute your minions</Tag>
+    <Tag enumID="183" type="" value="18" />
+    <Tag enumID="202" type="" value="6" />
+    <Tag enumID="344" type="String">Not player facing. No need to localize.</Tag>
+    <Tag enumID="32" type="" value="1" />
+    <Power definition="9c2d3d71-d03f-43ce-a71c-30ccba312ca2" />
+    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
+  </Entity>
   <Entity version="2" CardID="TB_LevelUp_001">
     <Tag enumID="183" type="" value="18" />
     <Tag enumID="202" type="" value="10" />
     <Tag enumID="185" type="String">Level Up!</Tag>
     <Tag enumID="184" type="String">Level up all the spells in your hand and deck.</Tag>
-    <Tag enumID="203" type="" value="6" />
     <Tag enumID="48" type="" value="2" />
     <Power definition="da6d04ac-96e7-42df-8c72-7df26dd4a711" />
   </Entity>
@@ -13484,45 +13988,13 @@
     <Power definition="1ba461d4-6472-41e9-a4c5-92dcafc945a9" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
   </Entity>
-  <Entity version="2" CardID="TB_SPT_ClearBoard">
-    <Tag enumID="185" type="String">Trial Clear Board</Tag>
-    <Tag enumID="183" type="" value="18" />
-    <Tag enumID="202" type="" value="5" />
-    <Power definition="8f48b4c3-a64e-49ac-97be-bc6325345eb2" />
-  </Entity>
-  <Entity version="2" CardID="TB_SPT_Damage">
-    <Tag enumID="185" type="String">Trial Damage Dealt</Tag>
-    <Tag enumID="183" type="" value="18" />
-    <Tag enumID="202" type="" value="4" />
-    <Tag enumID="47" type="" value="1" />
-    <Tag enumID="45" type="" value="1" />
-    <Tag enumID="184" type="String">Damage dealt to Stormwind.</Tag>
-    <Power definition="96e964b4-b450-461d-8031-fcc736ee4930" />
-    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
-  </Entity>
-  <Entity version="2" CardID="TB_SPT_HeroPowerUsed">
-    <Tag enumID="185" type="String">Trial Hero Power Used</Tag>
-    <Tag enumID="183" type="" value="18" />
-    <Tag enumID="202" type="" value="4" />
-    <Tag enumID="47" type="" value="1" />
-    <Tag enumID="45" type="" value="1" />
-  </Entity>
-  <Entity version="2" CardID="TB_SPT_Length">
-    <Tag enumID="185" type="String">Trial Length</Tag>
-    <Tag enumID="183" type="" value="18" />
-    <Tag enumID="202" type="" value="4" />
-    <Tag enumID="47" type="" value="1" />
-    <Tag enumID="45" type="" value="1" />
-    <Power definition="e065d6df-3560-4814-b399-48ff518919d9" />
-    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
-  </Entity>
   <Entity version="2" CardID="TB_SPT_Minion1">
     <Tag enumID="185" type="String">Shieldsman</Tag>
     <Tag enumID="183" type="" value="18" />
     <Tag enumID="202" type="" value="4" />
     <Tag enumID="47" type="" value="0" />
     <Tag enumID="45" type="" value="1" />
-    <Tag enumID="184" type="String">Taunt Battlecry: Add Stormwind's Attack to this minion's Health.</Tag>
+    <Tag enumID="184" type="String">Taunt Battlecry: Gain Health equal to Stormwind's Attack.</Tag>
     <Tag enumID="48" type="" value="2" />
     <Tag enumID="190" type="" value="1" />
     <Power definition="21fb5646-1584-4977-a09b-0c41619fc715" />
@@ -13541,18 +14013,17 @@
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
   </Entity>
   <Entity version="2" CardID="TB_SPT_Minion2">
-    <Tag enumID="185" type="String">Standard</Tag>
+    <Tag enumID="185" type="String">Battle Standard</Tag>
     <Tag enumID="183" type="" value="18" />
     <Tag enumID="202" type="" value="4" />
     <Tag enumID="47" type="" value="0" />
     <Tag enumID="45" type="" value="2" />
-    <Tag enumID="184" type="String">Can't attack. Adjacent units have +2 Attack.</Tag>
+    <Tag enumID="184" type="String">Adjacent minions have +2 Attack.</Tag>
     <Tag enumID="48" type="" value="2" />
     <Tag enumID="350" type="" value="1" />
     <Tag enumID="362" type="" value="1" />
     <Power definition="92988bb5-1b79-40c5-8384-91ec1c34cec2" />
     <Power definition="018cbd11-7c51-43e5-b72f-9a48ca6a76f4" />
-    <Power definition="99f39710-2f14-42a2-8e91-65e94a497fd9" />
   </Entity>
   <Entity version="2" CardID="TB_SPT_Minion2e">
     <Tag enumID="185" type="String">Emboldened</Tag>
@@ -13570,7 +14041,7 @@
     <Tag enumID="47" type="" value="1" />
     <Tag enumID="45" type="" value="1" />
     <Tag enumID="48" type="" value="3" />
-    <Tag enumID="184" type="String">Battlecry: Add Stormwind's Attack to this minion's Attack and Health.</Tag>
+    <Tag enumID="184" type="String">Battlecry: Gain Attack and Health equal to Stormwind's Attack</Tag>
     <Power definition="f4a38e44-4412-4d48-97b9-20fe120b4c1e" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
   </Entity>
@@ -13583,26 +14054,6 @@
     <Tag enumID="331" type="" value="0" />
     <Power definition="2bd23c77-0711-4965-895f-40fa940eeb2d" />
     <Power definition="79951cb3-752e-4b4e-b059-3035795439e2" />
-    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
-  </Entity>
-  <Entity version="2" CardID="TB_SPT_MinionKilled">
-    <Tag enumID="185" type="String">Trial Minions Killed</Tag>
-    <Tag enumID="183" type="" value="18" />
-    <Tag enumID="202" type="" value="4" />
-    <Tag enumID="47" type="" value="1" />
-    <Tag enumID="45" type="" value="1" />
-    <Tag enumID="184" type="String">Number of minions killed.</Tag>
-    <Power definition="e56573bb-9091-4c1d-bd80-aed02c033671" />
-    <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
-  </Entity>
-  <Entity version="2" CardID="TB_SPT_Minions">
-    <Tag enumID="185" type="String">Trial Minions Killed Tracker</Tag>
-    <Tag enumID="183" type="" value="18" />
-    <Tag enumID="202" type="" value="6" />
-    <Tag enumID="47" type="" value="1" />
-    <Tag enumID="45" type="" value="1" />
-    <Tag enumID="184" type="String">Length of game in turns.</Tag>
-    <Power definition="92c09ce1-04f6-43d6-aa96-4502bbc2629a" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
   </Entity>
   <Entity version="2" CardID="TB_Superfriends001">
@@ -13644,7 +14095,6 @@
   <Entity version="2" CardID="TB_YoggServant_Enchant">
     <Tag enumID="185" type="String">Yogg Servant Hero Enchant</Tag>
     <Tag enumID="183" type="" value="18" />
-    <Tag enumID="203" type="" value="6" />
     <Tag enumID="202" type="" value="6" />
     <Power definition="699bcfa3-1d46-4f74-a2e3-292ff88cbe5a" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -13654,7 +14104,6 @@
     <Tag enumID="185" type="String">Cash In</Tag>
     <Tag enumID="183" type="" value="18" />
     <Tag enumID="184" type="String">Destroy your weapon, gaining a random one.</Tag>
-    <Tag enumID="203" type="" value="6" />
     <Tag enumID="202" type="" value="10" />
     <Tag enumID="48" type="" value="2" />
     <Tag enumID="199" type="" value="7" />
@@ -13679,7 +14128,7 @@
   </Entity>
   <Entity version="2" CardID="LOEA01_01h">
     <MasterPower>4d5de7df-924a-4598-9f26-1a4957945052</MasterPower>
-    <Tag enumID="185" type="String">Heroic Phaerix</Tag>
+    <Tag enumID="185" type="String">Sun Raider Phaerix</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="330" type="" value="0" />
@@ -13794,7 +14243,7 @@
   </Entity>
   <Entity version="2" CardID="LOEA02_01h">
     <MasterPower>9e01d341-3021-4019-a834-a66fba0ea0a4</MasterPower>
-    <Tag enumID="185" type="String">Heroic Zinaar</Tag>
+    <Tag enumID="185" type="String">Zinaar</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="45" type="" value="30" />
@@ -13970,7 +14419,7 @@
   </Entity>
   <Entity version="2" CardID="LOEA04_01h">
     <MasterPower>db5cde4a-fafa-4d4f-9812-ee6a9b9c125d</MasterPower>
-    <Tag enumID="185" type="String">Heroic Escape</Tag>
+    <Tag enumID="185" type="String">Temple Escape</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="330" type="" value="0" />
@@ -14241,7 +14690,7 @@
   </Entity>
   <Entity version="2" CardID="LOEA05_01h">
     <MasterPower>d2c98022-1eab-488f-aa22-0f47e6aa99d9</MasterPower>
-    <Tag enumID="185" type="String">Heroic Scarvash</Tag>
+    <Tag enumID="185" type="String">Chieftain Scarvash</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="45" type="" value="30" />
@@ -14458,7 +14907,7 @@
     <TriggeredPowerHistoryInfo effectIndex="2" showInHistory="False" />
   </Entity>
   <Entity version="2" CardID="LOEA07_02h">
-    <Tag enumID="185" type="String">Heroic Mine Shaft</Tag>
+    <Tag enumID="185" type="String">Mine Shaft</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="45" type="" value="80" />
@@ -14644,7 +15093,7 @@
   </Entity>
   <Entity version="2" CardID="LOEA08_01h">
     <MasterPower>f619043c-9063-42e0-9217-c6ee25ca1530</MasterPower>
-    <Tag enumID="185" type="String">Heroic Archaedas</Tag>
+    <Tag enumID="185" type="String">Archaedas</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="45" type="" value="30" />
@@ -14706,7 +15155,7 @@
   </Entity>
   <Entity version="2" CardID="LOEA09_1H">
     <MasterPower>77f8b2a1-38ef-48e0-9dcb-c82aa48a94d8</MasterPower>
-    <Tag enumID="185" type="String">Heroic Slitherspear</Tag>
+    <Tag enumID="185" type="String">Lord Slitherspear</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="45" type="" value="30" />
@@ -15013,7 +15462,7 @@
   </Entity>
   <Entity version="2" CardID="LOEA10_1H">
     <MasterPower>ea84f40e-789f-4725-8be9-a6c5b7b45ffd</MasterPower>
-    <Tag enumID="185" type="String">Heroic Giantfin</Tag>
+    <Tag enumID="185" type="String">Giantfin</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="45" type="" value="30" />
@@ -15107,7 +15556,7 @@
   </Entity>
   <Entity version="2" CardID="LOEA12_1H">
     <MasterPower>beb171f3-4c23-4996-bdcc-074832a16259</MasterPower>
-    <Tag enumID="185" type="String">Heroic Naz'jar</Tag>
+    <Tag enumID="185" type="String">Lady Naz'jar</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="45" type="" value="30" />
@@ -15157,7 +15606,7 @@
   </Entity>
   <Entity version="2" CardID="LOEA13_1h">
     <MasterPower>f7dbd9d1-c41a-4e41-9192-e91c69c8b71a</MasterPower>
-    <Tag enumID="185" type="String">Heroic Skelesaurus</Tag>
+    <Tag enumID="185" type="String">Skelesaurus Hex</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="45" type="" value="30" />
@@ -15201,7 +15650,7 @@
   </Entity>
   <Entity version="2" CardID="LOEA14_1H">
     <MasterPower>08986aca-3ec7-44f7-8f90-d6308a4638f8</MasterPower>
-    <Tag enumID="185" type="String">Heroic Sentinel</Tag>
+    <Tag enumID="185" type="String">The Steel Sentinel</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="45" type="" value="30" />
@@ -15247,7 +15696,7 @@
   </Entity>
   <Entity version="2" CardID="LOEA15_1H">
     <MasterPower>57ebec97-6f68-4346-9501-866771a15894</MasterPower>
-    <Tag enumID="185" type="String">Heroic Rafaam</Tag>
+    <Tag enumID="185" type="String">Rafaam</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="45" type="" value="30" />
@@ -15461,6 +15910,7 @@
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="184" type="String">At the end of your turn, gain a wish.</Tag>
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="6a8f4963-63c1-4e82-b2e9-9b1700086478" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15474,6 +15924,7 @@
     <Tag enumID="45" type="" value="10" />
     <Tag enumID="114" type="" value="1" />
     <Tag enumID="184" type="String">At the end of your turn, gain a wish.</Tag>
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="5e11f014-10fb-4108-8501-6d42fcafcb90" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15487,6 +15938,7 @@
     <Tag enumID="47" type="" value="5" />
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="fffecac1-1dc6-48cd-bec2-5dbc49513410" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15500,12 +15952,13 @@
     <Tag enumID="45" type="" value="10" />
     <Tag enumID="184" type="String">Your other minions are Immune.</Tag>
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="362" type="" value="1" />
     <Power definition="4209c27f-8ccf-4757-b945-ecbc5786f8e5" />
   </Entity>
   <Entity version="2" CardID="LOEA16_1H">
     <MasterPower>58fb5cfb-c5fe-4b20-8688-537a33fdef2b</MasterPower>
-    <Tag enumID="185" type="String">Heroic Rafaam</Tag>
+    <Tag enumID="185" type="String">Rafaam</Tag>
     <Tag enumID="183" type="" value="20" />
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="45" type="" value="30" />
@@ -15579,6 +16032,7 @@
     <Tag enumID="47" type="" value="5" />
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="362" type="" value="1" />
     <Power definition="fa280295-65d9-421c-918f-ec829331f6f8" />
   </Entity>
@@ -15591,6 +16045,7 @@
     <Tag enumID="45" type="" value="10" />
     <Tag enumID="184" type="String">Enemy cards cost (2) more.</Tag>
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="362" type="" value="1" />
     <Power definition="79e93a55-a8f3-4413-aeab-1b986fd456c2" />
   </Entity>
@@ -15603,6 +16058,7 @@
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="47" type="" value="5" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="79567fca-12f2-49a7-9c39-a7315492e812" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15616,6 +16072,7 @@
     <Tag enumID="45" type="" value="10" />
     <Tag enumID="114" type="" value="1" />
     <Tag enumID="184" type="String">At the end of your turn, turn a random enemy minion into a 0/2 Statue.</Tag>
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="749fd91d-1360-4052-af3e-2015701f9771" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15629,6 +16086,7 @@
     <Tag enumID="47" type="" value="5" />
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="e8ccc001-9c2a-4671-b5d7-67e278344188" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15642,6 +16100,7 @@
     <Tag enumID="45" type="" value="10" />
     <Tag enumID="114" type="" value="1" />
     <Tag enumID="184" type="String">At the end of your turn, summon 1/1 Hungry Naga for each enemy minion.</Tag>
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="a7f41710-9989-4f54-8fb9-cc20ed2098a2" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15656,6 +16115,7 @@
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="114" type="" value="1" />
     <Tag enumID="200" type="" value="14" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="6fae9b0f-72ec-4e64-9151-4400dcb4bee5" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15670,6 +16130,7 @@
     <Tag enumID="114" type="" value="1" />
     <Tag enumID="200" type="" value="14" />
     <Tag enumID="184" type="String">At the end of your turn, draw 2 cards.</Tag>
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="191a9c3e-0961-4adf-b16d-9eb0b50f38f6" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15683,6 +16144,7 @@
     <Tag enumID="47" type="" value="5" />
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="b50272ed-1e03-4418-bdb7-24a9727275f4" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15696,6 +16158,7 @@
     <Tag enumID="45" type="" value="10" />
     <Tag enumID="114" type="" value="1" />
     <Tag enumID="184" type="String">At the end of your turn, replace all other minions with new ones of the same Cost.</Tag>
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="ee3d4c9d-4cbd-457a-b8a0-cacaec5f5a33" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15709,6 +16172,7 @@
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="47" type="" value="5" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="f4140fe2-f8b7-48b6-9b73-dd8414f5122d" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15722,6 +16186,7 @@
     <Tag enumID="45" type="" value="10" />
     <Tag enumID="114" type="" value="1" />
     <Tag enumID="184" type="String">At the end of your turn, put a random card in your hand. It costs (0).</Tag>
+    <Tag enumID="203" type="" value="5" />
     <Tag enumID="32" type="" value="1" />
     <Power definition="66d61d14-4c14-4273-be11-61921d76065c" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15735,6 +16200,7 @@
     <Tag enumID="47" type="" value="5" />
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="114" type="" value="1" />
+    <Tag enumID="203" type="" value="5" />
     <Power definition="5c2dfc91-5068-4c59-9266-1d4c36fa9aff" />
     <Power definition="99966545-9c5b-4c44-820e-5a8737290d5e" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -15748,6 +16214,7 @@
     <Tag enumID="45" type="" value="10" />
     <Tag enumID="114" type="" value="1" />
     <Tag enumID="184" type="String">This minion can only take 1 damage at a time.</Tag>
+    <Tag enumID="203" type="" value="5" />
     <Power definition="5e3aa2de-9cd8-445c-bb3b-f5d079f5a0a4" />
     <Power definition="31c2fc4d-67fe-4f38-ab2b-ea0e36358139" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -16380,7 +16847,8 @@
     <Tag enumID="47" type="" value="2" />
     <Tag enumID="45" type="" value="2" />
     <Tag enumID="321" type="" value="1" />
-    <Tag enumID="184" type="String">Battlecry: Discover a 1-Cost card.</Tag>
+    <Tag enumID="184" type="String">Battlecry: Discover a
+1-Cost card.</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="351" type="String">I'm offering you a bargain here!  This amazing vacuum cleaner for your soul!</Tag>
@@ -16454,7 +16922,8 @@
     <Tag enumID="48" type="" value="2" />
     <Tag enumID="47" type="" value="1" />
     <Tag enumID="45" type="" value="1" />
-    <Tag enumID="184" type="String">Battlecry: Discover a 3-Cost card.</Tag>
+    <Tag enumID="184" type="String">Battlecry: Discover a
+3-Cost card.</Tag>
     <Tag enumID="351" type="String">It's amazing what you can do with super glue!</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
@@ -16713,6 +17182,12 @@
     <EntourageCard cardID="00000011-9a14-4c69-8953-36e8518806d6" />
     <EntourageCard cardID="00000011-f0c8-4618-8d66-265dd2678b0a" />
     <EntourageCard cardID="00000011-43c5-4c9d-ada7-164a2537a8ed" />
+    <EntourageCard cardID="00000011-e66f-49c4-902f-9d8b21e1577a" />
+    <EntourageCard cardID="00000011-d356-4048-9818-e6b4da692b10" />
+    <EntourageCard cardID="00000011-f108-4934-a781-088ef67c684b" />
+    <EntourageCard cardID="00000011-3c2e-401d-88d4-49240a0c8d87" />
+    <EntourageCard cardID="00000011-f985-4a47-83c2-f97bea27ff9c" />
+    <EntourageCard cardID="00000011-1a09-42d6-8941-4add40b574f9" />
   </Entity>
   <Entity version="2" CardID="LOE_077">
     <Tag enumID="185" type="String">Brann Bronzebeard</Tag>
@@ -16727,7 +17202,6 @@
     <Tag enumID="184" type="String">Your Battlecries trigger twice.</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
-    <Tag enumID="325" type="String">Trigger a Deathrattle.</Tag>
     <Tag enumID="351" type="String">Contains 75% more fiber than his brother Magni!</Tag>
     <Tag enumID="342" type="String">Sam Nielson</Tag>
     <Tag enumID="364" type="String">Unlocked in Uldaman, in the League of Explorers adventure.</Tag>
@@ -17162,7 +17636,9 @@
     <Tag enumID="199" type="" value="5" />
     <Tag enumID="184" type="String">Hero Power Summon a 1/1 Silver Hand Murloc.</Tag>
     <Tag enumID="342" type="String">Andrew Hou</Tag>
-    <Power definition="b13aacef-c516-4ca9-bce8-b44fe5339234" />
+    <Power definition="b13aacef-c516-4ca9-bce8-b44fe5339234">
+      <PlayRequirement reqID="12" param="1" />
+    </Power>
   </Entity>
   <Entity version="2" CardID="OG_023">
     <MasterPower>8154ef6c-dc59-4a03-a061-05ba16e70750</MasterPower>
@@ -17278,7 +17754,7 @@
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="342" type="String">James Ryman</Tag>
-    <Tag enumID="351" type="String">Stop! It's Twlight Hammer time.</Tag>
+    <Tag enumID="351" type="String">Stop! It's Twilight Hammer time.</Tag>
     <Tag enumID="217" type="" value="1" />
     <Power definition="dc863f97-80df-4828-839f-082cb088aa2b" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -17329,6 +17805,7 @@
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="342" type="String">Jakub Kasber</Tag>
     <Tag enumID="351" type="String">If your hero doesn't attack, it's just "Silithid Loner".</Tag>
+    <Tag enumID="200" type="" value="20" />
     <Power definition="2ba03fdf-a3de-424e-9cc0-b68672cc0772" />
   </Entity>
   <Entity version="2" CardID="OG_042">
@@ -17465,7 +17942,7 @@
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="342" type="String">Efrem Palacios</Tag>
-    <Tag enumID="351" type="String">Y'shaarj had three sons: Mark, Theodore, and Chris.</Tag>
+    <Tag enumID="351" type="String">Y'Shaarj had three sons: Mark, Theodore, and Chris.</Tag>
     <Power definition="beaf7d7a-4aed-40d0-b383-4c6d23dc65c4">
       <PlayRequirement reqID="11" param="" />
       <PlayRequirement reqID="1" param="" />
@@ -17580,8 +18057,8 @@
     <Tag enumID="202" type="" value="6" />
     <Tag enumID="199" type="" value="7" />
     <Tag enumID="184" type="String">+1/+1.</Tag>
-    <Tag enumID="330" type="" value="0" />
-    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="330" type="" value="1" />
+    <Tag enumID="331" type="" value="1" />
     <Power definition="b503b3b3-ab76-44f0-9d8b-888c0c999074" />
   </Entity>
   <Entity version="2" CardID="OG_072">
@@ -17714,6 +18191,7 @@
     <Tag enumID="199" type="" value="7" />
     <Tag enumID="184" type="String">Give a friendly minion Stealth until your next turn.</Tag>
     <Tag enumID="342" type="String">Joe Wilson</Tag>
+    <ReferencedTag name="Stealth" enumID="191" type="Bool" value="1" />
     <Power definition="a27b6152-0651-4b1c-8228-89f89e7d444e">
       <PlayRequirement reqID="11" param="" />
       <PlayRequirement reqID="1" param="" />
@@ -18121,6 +18599,15 @@
     <Tag enumID="342" type="String">Dan Scott</Tag>
     <Tag enumID="351" type="String">SEE YA DARKNESS!</Tag>
     <Power definition="39f8c615-4dd4-4875-8941-4801eb61ea05" />
+    <EntourageCard cardID="00000011-f0c8-4618-8d66-265dd2678b0a" />
+    <EntourageCard cardID="00000011-314f-47e2-a096-f0522a7e67c7" />
+    <EntourageCard cardID="00000011-b1b7-4137-a76e-d8f43551b27e" />
+    <EntourageCard cardID="00000011-6671-4f8f-a9e6-764a8786d2d0" />
+    <EntourageCard cardID="00000011-a266-485e-848b-d3cd9a0b549c" />
+    <EntourageCard cardID="00000011-9a14-4c69-8953-36e8518806d6" />
+    <EntourageCard cardID="00000011-a196-472a-b617-3fc0eb5276b7" />
+    <EntourageCard cardID="00000011-43c5-4c9d-ada7-164a2537a8ed" />
+    <EntourageCard cardID="00000011-67e0-46cc-b0e5-ac354d3147ff" />
   </Entity>
   <Entity version="2" CardID="OG_118e">
     <Tag enumID="185" type="String">Renounce Darkness Deck Ench</Tag>
@@ -18517,6 +19004,7 @@
     <Tag enumID="342" type="String">James Ryman</Tag>
     <Tag enumID="351" type="String">Bile actually makes for surprisingly sturdy fins.</Tag>
     <Tag enumID="218" type="" value="1" />
+    <ReferencedTag name="Taunt" enumID="190" type="Bool" value="1" />
     <Power definition="72b5269e-bd56-4819-a9ea-eead5e093d9f" />
   </Entity>
   <Entity version="2" CardID="OG_156a">
@@ -18748,7 +19236,7 @@
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="342" type="String">Skan Srisuwan</Tag>
-    <Tag enumID="351" type="String"> They're just normal wisps, actually. The "Of the Old Gods" bit is just marketing.</Tag>
+    <Tag enumID="351" type="String">They're just normal wisps, actually. The "Of the Old Gods" bit is just marketing.</Tag>
     <Tag enumID="443" type="" value="1" />
     <Power definition="4767f044-f874-43dd-bc51-7a2c490eaf81" />
   </Entity>
@@ -19236,7 +19724,6 @@
   <Entity version="2" CardID="OG_249a">
     <Tag enumID="185" type="String">Slime</Tag>
     <Tag enumID="183" type="" value="21" />
-    <Tag enumID="203" type="" value="1" />
     <Tag enumID="202" type="" value="4" />
     <Tag enumID="48" type="" value="1" />
     <Tag enumID="47" type="" value="2" />
@@ -19257,6 +19744,7 @@
     <Tag enumID="342" type="String">Dan Scott</Tag>
     <Tag enumID="351" type="String">You don't want to be around after it has eaten an explosive trap.  You thought Sludge Belcher was bad...</Tag>
     <Tag enumID="218" type="" value="1" />
+    <ReferencedTag name="Secret" enumID="219" type="Bool" value="1" />
     <Power definition="6ee69ab1-6fcc-4089-bb6b-165beec68fb8" />
   </Entity>
   <Entity version="2" CardID="OG_254e">
@@ -19492,7 +19980,7 @@
     <Tag enumID="48" type="" value="9" />
     <Tag enumID="47" type="" value="4" />
     <Tag enumID="45" type="" value="4" />
-    <Tag enumID="184" type="String">Battlecry: Destroy a minion. Add its Attack and Health  to C'Thun's (wherever it is).</Tag>
+    <Tag enumID="184" type="String">Battlecry: Destroy a minion. Add its Attack and Health to_your C'Thun's (wherever it is).</Tag>
     <Tag enumID="199" type="" value="7" />
     <Tag enumID="424" type="" value="1" />
     <Tag enumID="342" type="String">Steve Prescott</Tag>
@@ -19606,7 +20094,7 @@
     <Tag enumID="48" type="" value="5" />
     <Tag enumID="47" type="" value="4" />
     <Tag enumID="45" type="" value="4" />
-    <Tag enumID="184" type="String">Battlecry: Choose a friendly minion. Add a 1/1 copy to your hand that costs (1).</Tag>
+    <Tag enumID="184" type="String">Battlecry: Choose a friendly minion. Add a 1/1 copy     to your hand that costs (1).</Tag>
     <Tag enumID="199" type="" value="7" />
     <Tag enumID="342" type="String">J. Meyers &amp; A. Bozonnet</Tag>
     <Tag enumID="351" type="String">I mean, it's not creepy if you ASK before you steal their shadow to make a small replica of them to keep on your shelf.</Tag>
@@ -19851,6 +20339,7 @@
     <Tag enumID="342" type="String">Phroi Gardner</Tag>
     <Tag enumID="351" type="String">Turns out divine shields are way cheaper if you buy in bulk.</Tag>
     <Tag enumID="32" type="" value="1" />
+    <ReferencedTag name="Divine Shield" enumID="194" type="Bool" value="1" />
     <Power definition="f0fc3456-507d-4aeb-8bdf-9d7ac0d4613c" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
   </Entity>
@@ -19866,6 +20355,7 @@
     <Tag enumID="184" type="String">Discover a minion. Give it +1/+1.</Tag>
     <Tag enumID="342" type="String">Zoltan Boros</Tag>
     <Tag enumID="351" type="String">Wait, how can you have a light in the dark?  If you turn on a light while it's dark, doesn't that mean it's no longer dark?</Tag>
+    <ReferencedTag name="Treasure" enumID="415" type="Bool" value="1" />
     <Power definition="91c23a05-5b10-469f-a130-f0cbbfc669e0" />
   </Entity>
   <Entity version="2" CardID="OG_311e">
@@ -20320,7 +20810,7 @@
     <Tag enumID="184" type="String">Battlecry: Give your C'Thun +2/+2 (wherever it is).</Tag>
     <Tag enumID="424" type="" value="1" />
     <Tag enumID="342" type="String">Jaemin Kim</Tag>
-    <Tag enumID="351" type="String">Just before he comes into play, there is an AWESOME training montage with C'thun.</Tag>
+    <Tag enumID="351" type="String">Just before he comes into play, there is an AWESOME training montage with C'Thun.</Tag>
     <Tag enumID="218" type="" value="1" />
     <Power definition="b70f36d2-1b52-4142-b9c2-d0bb0a2966aa" />
   </Entity>
@@ -20348,6 +20838,19 @@
     <Tag enumID="190" type="" value="1" />
     <Power definition="374a7d8c-d524-4aed-8697-89a00890ba6c" />
     <Power definition="9fbd627b-ae9a-414b-9630-bcb3ac6cdd12" />
+  </Entity>
+  <Entity version="2" CardID="TB_OG_027">
+    <Tag enumID="185" type="String">Evolve</Tag>
+    <Tag enumID="183" type="" value="21" />
+    <Tag enumID="321" type="" value="0" />
+    <Tag enumID="203" type="" value="3" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="48" type="" value="1" />
+    <Tag enumID="199" type="" value="8" />
+    <Tag enumID="184" type="String">Transform your minions into random minions that cost (1) more.</Tag>
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Power definition="b9ec6b09-d4fd-45c2-8392-553e43f3b9ed" />
   </Entity>
   <Entity version="2" CardID="EX1_062">
     <Tag enumID="185" type="String">Old Murk-Eye</Tag>
@@ -21677,12 +22180,10 @@
   <Entity version="2" CardID="XXX_099">
     <Tag enumID="185" type="String">AI Helper Buddy</Tag>
     <Tag enumID="183" type="" value="8" />
-    <Tag enumID="203" type="" value="0" />
     <Tag enumID="48" type="" value="0" />
     <Tag enumID="47" type="" value="1" />
     <Tag enumID="45" type="" value="1" />
     <Tag enumID="187" type="" value="0" />
-    <Tag enumID="199" type="" value="0" />
     <Tag enumID="114" type="" value="0" />
     <Tag enumID="202" type="" value="4" />
     <Tag enumID="184" type="String">Get the AI ready for testing.</Tag>
@@ -21701,7 +22202,7 @@
     <Tag enumID="47" type="" value="7" />
     <Tag enumID="45" type="" value="5" />
     <Tag enumID="114" type="" value="1" />
-    <Tag enumID="184" type="String">Battlecry: Cast each spell you've cast this game. (targets chosen randomly).</Tag>
+    <Tag enumID="184" type="String">Battlecry: Cast each spell you've cast this game (targets chosen randomly).</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="218" type="" value="1" />
@@ -21840,7 +22341,7 @@
     <Tag enumID="114" type="" value="1" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
-    <Tag enumID="184" type="String">Battlecry: Cast 30 random spells. (targets chosen randomly).</Tag>
+    <Tag enumID="184" type="String">Battlecry: Cast 30 random spells (targets chosen randomly).</Tag>
     <Tag enumID="218" type="" value="1" />
     <Power definition="4bc455a3-4229-45b7-a970-798ebb072ec4" />
   </Entity>
@@ -21862,6 +22363,28 @@
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Power definition="00000012-0033-43db-b2a7-d86665ddc276" />
+  </Entity>
+  <Entity version="2" CardID="XXX_112">
+    <Tag enumID="185" type="String">Fill Deck</Tag>
+    <Tag enumID="183" type="" value="8" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="203" type="" value="1" />
+    <Tag enumID="184" type="String">Fill target hero's deck with random cards.</Tag>
+    <Power definition="eb284b24-474f-43a6-99c7-f89b2cb96a6a">
+      <PlayRequirement reqID="11" param="" />
+      <PlayRequirement reqID="17" param="" />
+    </Power>
+  </Entity>
+  <Entity version="2" CardID="XXX_113">
+    <Tag enumID="185" type="String">Again</Tag>
+    <Tag enumID="183" type="" value="8" />
+    <Tag enumID="202" type="" value="5" />
+    <Tag enumID="330" type="" value="0" />
+    <Tag enumID="331" type="" value="0" />
+    <Tag enumID="203" type="" value="1" />
+    <Power definition="c23a481e-455f-4aff-8676-a16a5f56d97c" />
   </Entity>
   <Entity version="2" CardID="XXX_999_Crash">
     <Tag enumID="185" type="String">Crash the server</Tag>
@@ -22826,6 +23349,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1886" />
     <Tag enumID="367" type="" value="1" />
     <Power definition="2988cbae-66af-41b0-96ff-68ef80a08a52" />
     <Power definition="f51d8fad-ca96-40c6-9692-87733a357347" />
@@ -22838,6 +23362,7 @@
     <Tag enumID="45" type="" value="45" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="2133" />
     <Tag enumID="367" type="" value="1" />
     <Power definition="caa21f26-a539-4272-8975-b73c9ce6733a" />
     <Power definition="0b5d8b57-df4e-4c67-809a-36d51cd3692d" />
@@ -22908,6 +23433,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1888" />
     <Power definition="4c535d78-7017-4085-bef7-4b4652a81500" />
   </Entity>
   <Entity version="2" CardID="NAX11_01H">
@@ -22918,6 +23444,7 @@
     <Tag enumID="45" type="" value="45" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="2135" />
     <Power definition="cd083650-0539-4bf2-bd62-80d0f27e6854" />
   </Entity>
   <Entity version="2" CardID="NAX11_02">
@@ -22986,6 +23513,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1891" />
     <Power definition="9a1afb6e-f48a-40bd-ad2a-8bc632eef790" />
   </Entity>
   <Entity version="2" CardID="NAX12_01H">
@@ -22996,6 +23524,7 @@
     <Tag enumID="45" type="" value="45" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="2141" />
     <Power definition="22527e30-7dae-4fc9-af28-d83e23b2bb71" />
   </Entity>
   <Entity version="2" CardID="NAX12_02">
@@ -23101,6 +23630,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1897" />
     <Power definition="14ee5f0b-2705-4f3a-b9b1-2d87f4bc7dce" />
   </Entity>
   <Entity version="2" CardID="NAX13_01H">
@@ -23111,6 +23641,7 @@
     <Tag enumID="202" type="" value="3" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1897" />
     <Power definition="3eb64597-c780-49f8-a959-e9a3ad954cc2" />
     <Power definition="584e786f-beef-4908-a497-c14b694a93de" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -23184,6 +23715,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1905" />
     <Power definition="ca468a08-2f8d-4e99-ba4b-dcfb80d308f0" />
     <Power definition="ddafa577-3f6e-4ac5-a304-b7c45d1fc7f3" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -23196,6 +23728,7 @@
     <Tag enumID="45" type="" value="45" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1905" />
     <Power definition="def1a6e5-0037-44d3-a30d-4e504c2cbd72" />
     <Power definition="dd5e75a7-b952-481e-9654-e0d8701d820d" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -23247,6 +23780,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1901" />
     <Power definition="9ef20d68-173a-4d62-affb-f2ecea3bff6e" />
     <Power definition="085ec90e-5a06-497c-8c9a-39494f678d1f" />
     <Power definition="058c5637-3b2f-4120-832d-bfd4ada0afdf" />
@@ -23274,6 +23808,7 @@
     <Tag enumID="45" type="" value="45" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="2148" />
     <Power definition="cad5b94f-1803-4d39-90da-7059a1ee020e" />
     <Power definition="b6122e4b-7418-487f-9f7c-cffb947e25d0" />
     <Power definition="6fe6e469-7c64-4046-be10-9fb3904acf73" />
@@ -23412,6 +23947,7 @@
     <Tag enumID="45" type="" value="45" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="2103" />
     <Power definition="63b291b2-5223-4ccd-a0ae-7187a48b97f6">
       <PlayRequirement reqID="12" param="1" />
     </Power>
@@ -23443,6 +23979,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1831" />
     <Power definition="eba4ff15-726a-474c-8fa7-edce26efbc49">
       <PlayRequirement reqID="12" param="1" />
     </Power>
@@ -23489,6 +24026,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1840" />
     <Power definition="d80a8962-6dcd-42be-870b-deb89e3b46a2" />
   </Entity>
   <Entity version="2" CardID="NAX2_01H">
@@ -23499,6 +24037,7 @@
     <Tag enumID="45" type="" value="45" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="2105" />
     <Power definition="9b9656f6-e3ec-40bf-a47b-4bc095b0ef04" />
   </Entity>
   <Entity version="2" CardID="NAX2_03">
@@ -23565,6 +24104,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1867" />
     <Power definition="04bf41c0-b571-43f9-af15-6fb02aa49de1" />
   </Entity>
   <Entity version="2" CardID="NAX3_01H">
@@ -23575,6 +24115,7 @@
     <Tag enumID="45" type="" value="45" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="2107" />
     <Power definition="0b400f3f-d49d-4458-a430-9278cb228ec3" />
   </Entity>
   <Entity version="2" CardID="NAX3_02">
@@ -23625,6 +24166,7 @@
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="199" type="" value="4" />
+    <Tag enumID="380" type="" value="1849" />
     <Power definition="f05ca50f-c35a-4fd8-bbff-bc7a77957426" />
   </Entity>
   <Entity version="2" CardID="NAX4_01H">
@@ -23636,6 +24178,7 @@
     <Tag enumID="199" type="" value="4" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="2115" />
     <Power definition="546042cd-9e80-4aca-a9eb-dd9436a22be0" />
   </Entity>
   <Entity version="2" CardID="NAX4_03">
@@ -23700,6 +24243,7 @@
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="199" type="" value="9" />
+    <Tag enumID="380" type="" value="1854" />
     <Power definition="c28022ba-7ff6-48f3-95a0-877e222c1230" />
   </Entity>
   <Entity version="2" CardID="NAX5_01H">
@@ -23711,6 +24255,7 @@
     <Tag enumID="199" type="" value="9" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="2117" />
     <Power definition="67b849e2-80c4-43fe-9c42-ddbe3c12d0ef" />
   </Entity>
   <Entity version="2" CardID="NAX5_02">
@@ -23759,6 +24304,7 @@
     <Tag enumID="45" type="" value="75" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1862" />
     <Power definition="cf9abce8-ee7c-4244-ae00-f45ad99a89f2" />
   </Entity>
   <Entity version="2" CardID="NAX6_01H">
@@ -23769,6 +24315,7 @@
     <Tag enumID="45" type="" value="99" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="2119" />
     <Power definition="2130ac44-f776-4ec0-bb8e-9d2aa04c1c31" />
     <Power definition="aaae74a9-3d6d-4eed-ab5c-762a1fd30f9d" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -23851,6 +24398,7 @@
     <Tag enumID="45" type="" value="40" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1870" />
     <Power definition="b0acb534-ba78-4ccc-8d28-38916af20417" />
     <Power definition="98a3fe1b-b52a-45e3-8376-1e24f6407a23" />
     <Power definition="34e63d56-c25a-4d16-9244-84c9a4782ef6" />
@@ -23865,6 +24413,7 @@
     <Tag enumID="45" type="" value="55" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="2129" />
     <Power definition="b0f01399-fc54-4cc6-9bf2-327d0a2a4e01" />
     <Power definition="eb2f9849-0d71-4bba-83ae-70a4e5101b10" />
     <Power definition="159c0a6b-2eee-4710-9412-0795d98e854f" />
@@ -23953,6 +24502,7 @@
     <Tag enumID="45" type="" value="30" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1872" />
     <Power definition="91404e44-e303-476a-a303-80ee8385321f" />
   </Entity>
   <Entity version="2" CardID="NAX8_01H">
@@ -23963,6 +24513,7 @@
     <Tag enumID="45" type="" value="45" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="2121" />
     <Power definition="c67a1ebf-9cc9-4f82-8231-91dec9f3fef6" />
   </Entity>
   <Entity version="2" CardID="NAX8_02">
@@ -24080,6 +24631,7 @@
     <Tag enumID="45" type="" value="7" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1883" />
     <Power definition="2430845f-830b-484f-8388-3d110b28eb32" />
     <Power definition="874dd475-aee8-44cd-9dc3-8228f4a2a558" />
     <TriggeredPowerHistoryInfo effectIndex="0" showInHistory="False" />
@@ -24092,6 +24644,7 @@
     <Tag enumID="45" type="" value="14" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="380" type="" value="1883" />
     <Power definition="78bed5c2-292a-4d76-96b3-cba7d2a9b1fd" />
     <Power definition="1ed88d0c-51e6-4140-ad55-c5db6b954082" />
     <Power definition="f13c1b94-63c4-4f71-95dd-2fd414739c6d" />
@@ -24111,6 +24664,7 @@
     <Tag enumID="184" type="String">Your hero is Immune.</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="203" type="" value="5" />
     <ReferencedTag name="Cant Be Damaged" enumID="240" type="Bool" value="1" />
     <Power definition="7d78865b-7310-407c-99ac-150224436cfb" />
   </Entity>
@@ -24125,6 +24679,7 @@
     <Tag enumID="184" type="String">Your hero is Immune.</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="203" type="" value="5" />
     <ReferencedTag name="Cant Be Damaged" enumID="240" type="Bool" value="1" />
     <Power definition="9fe7609c-758b-40e0-b036-e2ba043f71fa" />
   </Entity>
@@ -24139,6 +24694,7 @@
     <Tag enumID="184" type="String">Your hero is Immune.</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="203" type="" value="5" />
     <ReferencedTag name="Cant Be Damaged" enumID="240" type="Bool" value="1" />
     <Power definition="54f39e20-54f8-402d-8cb8-0be7173e34a6" />
   </Entity>
@@ -24153,6 +24709,7 @@
     <Tag enumID="184" type="String">Your hero is Immune.</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="203" type="" value="5" />
     <ReferencedTag name="Cant Be Damaged" enumID="240" type="Bool" value="1" />
     <Power definition="0b9f2538-3010-4b24-9f0d-bb12c25911e4" />
   </Entity>
@@ -24167,6 +24724,7 @@
     <Tag enumID="184" type="String">Your hero is Immune.</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="203" type="" value="5" />
     <ReferencedTag name="Cant Be Damaged" enumID="240" type="Bool" value="1" />
     <Power definition="fbc359a7-9d50-4766-8f4f-a546b00ed760" />
   </Entity>
@@ -24181,6 +24739,7 @@
     <Tag enumID="184" type="String">Your hero is Immune.</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
+    <Tag enumID="203" type="" value="5" />
     <ReferencedTag name="Cant Be Damaged" enumID="240" type="Bool" value="1" />
     <Power definition="712114b6-cc29-4859-9ea2-90452624ca86" />
   </Entity>
@@ -25235,6 +25794,7 @@
     <ReferencedTag name="Taunt" enumID="190" type="Bool" value="1" />
     <Power definition="c0d2425f-0029-4c89-a753-ea5df09ba605">
       <PlayRequirement reqID="22" param="" />
+      <PlayRequirement reqID="1" param="" />
     </Power>
   </Entity>
   <Entity version="2" CardID="GVG_041a">
@@ -27355,7 +27915,9 @@
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="367" type="" value="1" />
-    <Power definition="79960d14-67a6-480a-b0bc-b21258f1ba3a" />
+    <Power definition="79960d14-67a6-480a-b0bc-b21258f1ba3a">
+      <PlayRequirement reqID="12" param="1" />
+    </Power>
   </Entity>
   <Entity version="2" CardID="BRMA01_3">
     <Tag enumID="185" type="String">Dark Iron Bouncer</Tag>
@@ -31261,6 +31823,7 @@
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="202" type="" value="5" />
     <Tag enumID="184" type="String">Deal $2 damage.</Tag>
+    <Tag enumID="199" type="" value="2" />
     <Power definition="a3b9d393-6576-4684-b83a-1c2e76a43984">
       <PlayRequirement reqID="11" param="" />
     </Power>
@@ -31273,6 +31836,7 @@
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="202" type="" value="5" />
     <Tag enumID="184" type="String">Summon two 1/1 Saplings.</Tag>
+    <Tag enumID="199" type="" value="2" />
     <Power definition="185ed6a5-cbef-4aed-ac67-dc5eec498294" />
   </Entity>
   <Entity version="2" CardID="AT_037t">
@@ -31691,7 +32255,7 @@
     <Tag enumID="202" type="" value="5" />
     <Tag enumID="48" type="" value="3" />
     <Tag enumID="199" type="" value="8" />
-    <Tag enumID="184" type="String">Deal $4-$5 damage to all minions. Overload: (5)</Tag>
+    <Tag enumID="184" type="String">Deal $4-$5 damage to all minions. Overload: (5),</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="351" type="String">I'm not a shaman or anything, but isn't Elemental Destruction the opposite of what they want to do?</Tag>
@@ -31710,7 +32274,7 @@
     <Tag enumID="47" type="" value="3" />
     <Tag enumID="45" type="" value="4" />
     <Tag enumID="199" type="" value="8" />
-    <Tag enumID="184" type="String">Overload: (1)</Tag>
+    <Tag enumID="184" type="String">Overload: (1).</Tag>
     <Tag enumID="200" type="" value="21" />
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
@@ -31728,7 +32292,7 @@
     <Tag enumID="202" type="" value="5" />
     <Tag enumID="48" type="" value="2" />
     <Tag enumID="199" type="" value="8" />
-    <Tag enumID="184" type="String">Draw 2 cards. Overload: (2)</Tag>
+    <Tag enumID="184" type="String">Draw 2 cards. Overload: (2).</Tag>
     <Tag enumID="330" type="" value="0" />
     <Tag enumID="331" type="" value="0" />
     <Tag enumID="351" type="String">MOMMMMMYYYYYYYYY!!!</Tag>
@@ -33682,7 +34246,7 @@
     <Power definition="818ea803-c8a0-409b-a04f-ba11e845a0cd" />
   </Entity>
   <Entity version="2" CardID="OG_044c">
-    <Tag enumID="185" type="String">Tiger Form</Tag>
+    <Tag enumID="185" type="String">Sabertooth Tiger</Tag>
     <Tag enumID="183" type="" value="15" />
     <Tag enumID="203" type="" value="1" />
     <Tag enumID="202" type="" value="4" />

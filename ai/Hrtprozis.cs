@@ -206,22 +206,32 @@
 
         public string heroIDtoName(string s)
         {
-            switch (s)
+            switch (s) //keep 1 extra of each for future proofing
             {
-                case "HERO_05": return "hunter";
-                case "HERO_05a": return "hunter";
-                case "HERO_09": return "priest";
-                case "HERO_06": return "druid";
-                case "HERO_07": return "warlock";
-                case "HERO_03": return "thief";
-                case "HERO_04": return "pala";
-                case "HERO_04a": return "pala";
                 case "HERO_01": return "warrior";
                 case "HERO_01a": return "warrior";
+                case "HERO_01b": return "warrior";
                 case "HERO_02": return "shaman";
+                case "HERO_02a": return "shaman";
+                case "HERO_02b": return "shaman";
+                case "HERO_03": return "thief";
+                case "HERO_03a": return "thief";
+                case "HERO_04": return "pala";
+                case "HERO_04a": return "pala";
+                case "HERO_04b": return "pala";
+                case "HERO_05": return "hunter";
+                case "HERO_05a": return "hunter";
+                case "HERO_05b": return "hunter";
+                case "HERO_06": return "druid";
+                case "HERO_06a": return "druid";
+                case "HERO_07": return "warlock";
+                case "HERO_07a": return "warlock";
                 case "HERO_08": return "mage";
                 case "HERO_08a": return "mage";
                 case "HERO_08b": return "mage";
+                case "HERO_08c": return "mage";
+                case "HERO_09": return "priest";
+                case "HERO_09a": return "priest";
                 case "EX1_323h": return "lordjaraxxus";
                 case "BRM_027h": return "ragnarosthefirelord";
                 case "XXX_040": return "hogger";
