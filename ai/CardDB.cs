@@ -5669,7 +5669,7 @@ namespace HREngine.Bots
                 if (instance == null)
                 {
                     instance = new CardDB();
-                    instance.enumCreator();// only call this to get latest cardids
+                    //instance.enumCreator();// only call this to get latest cardids
                     /*foreach (KeyValuePair<cardIDEnum, Card> kvp in instance.cardidToCardList)
                     {
                         Helpfunctions.Instance.logg(kvp.Value.name + " " + kvp.Value.Attack);
