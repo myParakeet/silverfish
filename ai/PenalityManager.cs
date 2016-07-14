@@ -59,6 +59,7 @@
 
         Dictionary<CardDB.cardName, int> strongInspireEffectMinions = new Dictionary<CardDB.cardName, int>();
         Dictionary<CardDB.cardName, int> summonMinionSpellsDatabase = new Dictionary<CardDB.cardName, int>(); // spells/hero powers that summon minions immediately
+        Dictionary<CardDB.cardName, int> alsoEquipsWeaponDB = new Dictionary<CardDB.cardName, int>(); //cards that aren't weapons but equip one immediately
 
 
         private static PenalityManager instance;
@@ -96,7 +97,7 @@
             setupTargetAbilitys();
             setupStrongInspireMinions();
             setupSummonMinionSpellsDatabase();
-
+            setupAlsoEquipsWeaponDB();
         }
 
         public void setCombos()
@@ -228,10 +229,10 @@
                 bool hasweapon = false;
                 foreach (Handmanager.Handcard c in p.owncards)
                 {
-                    if (c.card.type == CardDB.cardtype.WEAPON || c.card.name == CardDB.cardName.musterforbattle) hasweapon = true;
+                    if (c.card.type == CardDB.cardtype.WEAPON || alsoEquipsWeaponDB.ContainsKey(c.card.name)) hasweapon = true;
                 }
                 if (p.ownWeaponAttack == 1 && p.ownHeroName == HeroEnum.thief) hasweapon = true;
-                //if (hasweapon) retval = -p.ownWeaponAttack - 1; // so he doesnt "lose" the weapon in evaluation :D
+                if (hasweapon && target.name != CardDB.cardName.doomsayer) retval = -p.ownWeaponAttack - 1; // so he doesnt "lose" the weapon in evaluation :D
             }
             if (p.ownWeaponAttack == 1 && p.ownHeroName == HeroEnum.thief) retval += -1;
             if (p.ownHero.tempAttack > 0) retval += -5; //bonus to not waste rockbiter
@@ -250,6 +251,23 @@
                 if (totalAngr < target.Hp) return 500;
             }*/
             return retval;
+        }
+
+        // penalize overwriting current weapon for worse ones
+        public int getEquipWeaponPenalty(CardDB.Card card, Playfield p, bool lethal)
+        {
+            if (p.ownWeaponDurability < 1) return 0;
+            if (card.type != CardDB.cardtype.WEAPON && !alsoEquipsWeaponDB.ContainsKey(card.name)) return 0;
+            /*
+            if (card.type == CardDB.cardtype.WEAPON && card.Attack < p.ownWeaponAttack)
+            {
+                return 25 * ((p.ownWeaponAttack * p.ownWeaponDurability) - (2 * card.Attack)); //I think this case is already handled elsewhere
+            }*/
+            if (alsoEquipsWeaponDB.ContainsKey(card.name) && alsoEquipsWeaponDB[card.name] < p.ownWeaponAttack)
+            {
+                return 25 * ((p.ownWeaponAttack * p.ownWeaponDurability) - (2 * alsoEquipsWeaponDB[card.name]));
+            }
+            return 0;
         }
 
         public int getPlayCardPenality(Handmanager.Handcard hcard, Minion target, Playfield p, int choice, bool lethal)
@@ -284,6 +302,7 @@
             retval += getSpecialCardComboPenalties(hcard, target, p, lethal, choice);
             //if (lethal) Console.WriteLine(retval+ " " + name);
             retval += getRandomPenalty(card, p, target);
+            retval += getEquipWeaponPenalty(card, p, lethal);
 
             if (!lethal)
             {
@@ -4190,6 +4209,15 @@
             summonMinionSpellsDatabase.Add(CardDB.cardName.ballofspiders, 3);
             summonMinionSpellsDatabase.Add(CardDB.cardName.totemicslam, 1);
         }
-    }
 
+        private void setupAlsoEquipsWeaponDB()
+        {
+            alsoEquipsWeaponDB.Add(CardDB.cardName.arathiweaponsmith, 2);
+            alsoEquipsWeaponDB.Add(CardDB.cardName.blingtron3000, 3); //random weapon so be conservative
+            alsoEquipsWeaponDB.Add(CardDB.cardName.malkorok, 3); //random weapon so be conservative
+            alsoEquipsWeaponDB.Add(CardDB.cardName.musterforbattle, 1);
+            alsoEquipsWeaponDB.Add(CardDB.cardName.nzothsfirstmate, 1);
+            alsoEquipsWeaponDB.Add(CardDB.cardName.upgrade, 1); //if we don't have a weapon
+        }
+    }
 }
