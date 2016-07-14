@@ -4718,6 +4718,7 @@
 
             if (summonbigone >= 0)
             {
+                if (summonbigone >= ownm.Count) summonbigone = ownm.Count - 1; //todo - figure out how summonbigone is exceeding the minion count
                 ownm[summonbigone].handcard.card.sim_card.onTurnStartTrigger(this, ownm[summonbigone], ownturn);
             }
 
