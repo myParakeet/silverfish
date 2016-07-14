@@ -1379,6 +1379,8 @@ namespace HREngine.Bots
             HERO_08c,
             HERO_09,
             HERO_09a,
+            HRW02_1,
+            HRW02_1e,
             LOEA01_01,
             LOEA01_01h,
             LOEA01_02,
