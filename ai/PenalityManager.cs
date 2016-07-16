@@ -316,6 +316,7 @@
             retval += getPlaySecretPenalty(card, p);
             retval += getPlayCardSecretPenality(card, p);
 
+            retval += getPlayPenalty(name);
             retval += (int)card.pen_card.getPlayPenalty(p, hcard, target, choice, lethal);
             //Helpfunctions.Instance.ErrorLog("retval " + retval);
             return retval;
@@ -2771,6 +2772,16 @@
             return pen;
         }
 
+        private int getPlayPenalty(CardDB.cardName name)
+        {
+            switch (name)
+            {
+                case CardDB.cardName.dream:
+                    return 6;
+                default:
+                    return 0;
+            }
+        }
 
 
 
