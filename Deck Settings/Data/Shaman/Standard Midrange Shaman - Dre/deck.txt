@@ -11,7 +11,7 @@
 // [3] Tuskarr Totemic ×2 (AT_046)
 // [4] Flamewreathed Faceless x2 (OG_024)
 // [4] Azure Drake x2 (EX1_284)
-// [5] Thunder Bluff Valiant ×1 (AT_049)
+// [5] Thunder Bluff Valiant ×2 (AT_049)
 // [6] Fire Elemental x2 (CS2_042)
 // [6] Thing from Below ×2 (OG_028)
 // [8] Al'Akir the Windlord x1 (NEW1_010)
