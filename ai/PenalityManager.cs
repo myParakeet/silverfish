@@ -318,7 +318,7 @@
             retval += getPlaySecretPenalty(card, p);
             retval += getPlayCardSecretPenality(card, p);
 
-            retval += getPlayPenalty(name);
+            retval += getPlayPenalty(name, p, choice);
             retval += (int)card.pen_card.getPlayPenalty(p, hcard, target, choice, lethal);
             //Helpfunctions.Instance.ErrorLog("retval " + retval);
             return retval;
@@ -2774,12 +2774,14 @@
             return pen;
         }
 
-        private int getPlayPenalty(CardDB.cardName name)
+        private int getPlayPenalty(CardDB.cardName name, Playfield p, int choice)
         {
             switch (name)
             {
                 case CardDB.cardName.dream:
                     return 6;
+                case CardDB.cardName.reliquaryseeker:
+                    return (p.ownMinions.Count == 6) ? 0 : 5; 
                 default:
                     return 0;
             }
