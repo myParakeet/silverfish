@@ -2778,10 +2778,12 @@
         {
             switch (name)
             {
+                case CardDB.cardName.brannbronzebeard: //play brann before good battlecries
+                    return p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.battlecry && a.card.card.name != CardDB.cardName.flameimp) != null ? 500 : 0;
                 case CardDB.cardName.dream:
                     return 6;
                 case CardDB.cardName.reliquaryseeker:
-                    return (p.ownMinions.Count == 6) ? 0 : 5; 
+                    return (p.ownMinions.Count == 6) ? 0 : 5;
                 default:
                     return 0;
             }
