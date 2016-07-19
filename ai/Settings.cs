@@ -125,6 +125,7 @@ namespace HREngine.Bots
         public bool printlearnmode = true;
 
         private string ownClass = "";
+        private string enemyClass = "";
         private string deckName = "";
 
         private static readonly Settings instance = new Settings();
@@ -147,6 +148,7 @@ namespace HREngine.Bots
         public Behavior updateInstance()
         {
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
+            enemyClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.enemyHeroname);
             deckName = Hrtprozis.Instance.deckName;
             return readSettings();
         }
@@ -181,23 +183,46 @@ namespace HREngine.Bots
             string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
             string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
             string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
-
+            bool dynamicBehavior = false;
 
             // if we have a deckName then we have a real ownClass too, not the default "druid"
-            if (deckName != "" && System.IO.File.Exists(deckpath + "settings.txt"))
+            if (deckName != "" && System.IO.File.Exists(deckpath + "settings-" + enemyClass + ".txt"))
+            {
+                dynamicBehavior = true;
+                path = deckpath;
+                Helpfunctions.Instance.ErrorLog("read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "settings-" + enemyClass + ".txt...");
+            }
+            else if (deckName != "" && System.IO.File.Exists(deckpath + "settings.txt"))
             {
                 path = deckpath;
                 Helpfunctions.Instance.ErrorLog("read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "settings.txt...");
+            }
+            else if (deckName != "" && System.IO.File.Exists(classpath + "settings-" + enemyClass + ".txt"))
+            {
+                dynamicBehavior = true;
+                path = classpath;
+                Helpfunctions.Instance.ErrorLog("read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "settings-" + enemyClass + ".txt...");
             }
             else if (deckName != "" && System.IO.File.Exists(classpath + "settings.txt"))
             {
                 path = classpath;
                 Helpfunctions.Instance.ErrorLog("read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "settings.txt...");
             }
+            else if (deckName != "" && System.IO.File.Exists(datapath + "settings-" + enemyClass + ".txt"))
+            {
+                dynamicBehavior = true;
+                path = datapath;
+                Helpfunctions.Instance.ErrorLog("read Data" + System.IO.Path.DirectorySeparatorChar + "settings-" + enemyClass + ".txt...");
+            }
             else if (deckName != "" && System.IO.File.Exists(datapath + "settings.txt"))
             {
                 path = datapath;
                 Helpfunctions.Instance.ErrorLog("read Data" + System.IO.Path.DirectorySeparatorChar + "settings.txt...");
+            }
+            else if (System.IO.File.Exists(path + "settings-" + enemyClass + ".txt"))
+            {
+                dynamicBehavior = true;
+                Helpfunctions.Instance.ErrorLog("read base settings-" + enemyClass + ".txt...");
             }
             else if (System.IO.File.Exists(path + "settings.txt"))
             {
@@ -209,14 +234,29 @@ namespace HREngine.Bots
                 return setDefaultSettings();
             }
 
-            try
+            if (dynamicBehavior)
             {
-                lines = System.IO.File.ReadAllLines(path + "settings.txt");
+                try
+                {
+                    lines = System.IO.File.ReadAllLines(path + "settings-" + enemyClass + ".txt");
+                }
+                catch
+                {
+                    Helpfunctions.Instance.ErrorLog("settings-" + enemyClass + ".txt read error. Continuing without user-defined rules.");
+                    return setDefaultSettings();
+                }
             }
-            catch
+            else
             {
-                Helpfunctions.Instance.ErrorLog("settings.txt read error. Continuing without user-defined rules.");
-                return setDefaultSettings();
+                try
+                {
+                    lines = System.IO.File.ReadAllLines(path + "settings.txt");
+                }
+                catch
+                {
+                    Helpfunctions.Instance.ErrorLog("settings.txt read error. Continuing without user-defined rules.");
+                    return setDefaultSettings();
+                }
             }
 
             Behavior returnbehav = new BehaviorControl();

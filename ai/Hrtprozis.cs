@@ -191,6 +191,11 @@
             this.heroname = this.heroNametoEnum(heron);
         }
 
+        public void setEnemyHeroName(string heron)
+        {
+            this.enemyHeroname = this.heroNametoEnum(heron);
+        }
+
         public void setOwnPlayer(int player)
         {
             this.ownPlayerController = player;
