@@ -1173,7 +1173,6 @@
 
             foreach (Minion mnn in p.ownMinions)
             {
-
                 if (mnn.handcard.card.race == TAG_RACE.MECHANICAL) hasMech = true;
 
                 if (mnn.silenced) continue;
@@ -2313,7 +2312,7 @@
 
             if (name == CardDB.cardName.frothingberserker)
             {
-                if (p.cardsPlayedThisTurn >= 1) return  5;
+                if (p.cardsPlayedThisTurn >= 1 || p.playactions.Find(a => a.actionType == actionEnum.attackWithHero || a.actionType == actionEnum.attackWithMinion) != null) return 15;
             }
 
             if (name == CardDB.cardName.handofprotection)
@@ -2779,7 +2778,7 @@
             switch (name)
             {
                 case CardDB.cardName.brannbronzebeard: //play brann before good battlecries
-                    return p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.battlecry && a.card.card.name != CardDB.cardName.flameimp) != null ? 500 : 0;
+                    return p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.battlecry && a.card.card.name != CardDB.cardName.flameimp) != null ? 20 : 0;
                 case CardDB.cardName.dream:
                     return 6;
                 case CardDB.cardName.reliquaryseeker:
