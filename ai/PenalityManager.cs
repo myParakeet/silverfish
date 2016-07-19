@@ -1292,6 +1292,14 @@
                  return pen;
              }
 
+            if (card.name == CardDB.cardName.deadlyshot)
+            {
+                foreach (Minion mm in p.enemyMinions)
+                {
+                    if (!(mm.Angr > 4 && mm.Hp > 4 || mm.Angr > 6)) pen += 10;
+                }
+            }
+
             if (p.enemyMinions.Count == 1 && (card.name == CardDB.cardName.deadlyshot
                 || card.name == CardDB.cardName.flamecannon
                 || card.name == CardDB.cardName.bomblobber))
