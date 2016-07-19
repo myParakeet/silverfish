@@ -8,10 +8,13 @@
 
         public int thread = 0;
 
-        private List<Playfield> posmoves = new List<Playfield>(7000);
-        //public int maxwide = 20;
-        Movegenerator movegen = Movegenerator.Instance;
+        private List<Playfield> posmoves = new List<Playfield>(500); //initializing 500 should be plenty even for extreme settings
+
         public int maxwide = 20;
+
+        public Behavior botBase = null;
+
+        private Movegenerator movegen = Movegenerator.Instance;
 
         private PenalityManager penmanager = PenalityManager.Instance;
 
@@ -29,6 +32,7 @@
 
         public void simulateEnemysTurn(Playfield rootfield, bool simulateTwoTurns, bool playaround, bool print, int pprob, int pprob2)
         {
+            if (botBase == null) botBase = Ai.Instance.botBase;
 
             bool havedonesomething = true;
             posmoves.Clear();
@@ -64,10 +68,10 @@
             //playing aoe-effects if activated (and we didnt play loatheb)
             if (playaround && rootfield.anzOwnLoatheb == 0)
             {
-                float oldval = Ai.Instance.botBase.getPlayfieldValueEnemy(posmoves[0]);
+                float oldval = botBase.getPlayfieldValueEnemy(posmoves[0]);
                 posmoves[0].value = int.MinValue;
                 enemMana = posmoves[0].EnemyCardPlaying(rootfield.enemyHeroName, enemMana, rootfield.enemyAnzCards, pprob, pprob2);
-                float newval = Ai.Instance.botBase.getPlayfieldValueEnemy(posmoves[0]);
+                float newval = botBase.getPlayfieldValueEnemy(posmoves[0]);
                 posmoves[0].value = int.MinValue;
                 posmoves[0].enemyAnzCards--;
                 posmoves[0].triggerCardsChanged(false);
@@ -208,9 +212,9 @@
 
                     p.endEnemyTurn();
                     //p.guessingHeroHP = rootfield.guessingHeroHP;
-                    if (Ai.Instance.botBase.getPlayfieldValueEnemy(p) < bestoldval) // want the best enemy-play-> worst for us
+                    if (botBase.getPlayfieldValueEnemy(p) < bestoldval) // want the best enemy-play-> worst for us
                     {
-                        bestoldval = Ai.Instance.botBase.getPlayfieldValueEnemy(p);
+                        bestoldval = botBase.getPlayfieldValueEnemy(p);
                         bestold = p;
                     }
                     posmoves.Remove(p);
@@ -222,6 +226,8 @@
                 {
                     posmoves.Add(bestold);
                 }
+
+                cuttingPosibilitiesET();
 
                 deep++;
                 if (boardcount >= maxwide) break;
@@ -244,7 +250,7 @@
             {
                 p = posmoves[i];
                 //p.guessingHeroHP = rootfield.guessingHeroHP;
-                float val = Ai.Instance.botBase.getPlayfieldValueEnemy(p);
+                float val = botBase.getPlayfieldValueEnemy(p);
                 if (bestval > val)// we search the worst value
                 {
                     bestplay = p;
@@ -267,8 +273,28 @@
                 bestplay.prepareNextTurn(true);
                 rootfield.value = Settings.Instance.firstweight * bestval + Settings.Instance.secondweight * Ai.Instance.nextTurnSimulator[this.thread].doallmoves(bestplay, false, print);
             }
+        }
 
+        public void cuttingPosibilitiesET()
+        {
+            Dictionary<Int64, Playfield> tempDict = new Dictionary<Int64, Playfield>(); //todo sepefeets - consider whether playfield.GetHashCode() should be int64 or if this should be int
+            Playfield p = null;
+            int max = posmoves.Count;
+            for (int i = 0; i < max; i++)
+            {
+                p = posmoves[i];
+                Int64 hash = p.GetHashCode();
+                if (!tempDict.ContainsKey(hash)) tempDict.Add(hash, p);
 
+            }
+            posmoves.Clear();
+            foreach (KeyValuePair<Int64, Playfield> d in tempDict)
+            {
+                posmoves.Add(d.Value);
+            }
+            tempDict.Clear();
+
+            //Helpfunctions.Instance.logg(max + " enemy boards cut to " + this.posmoves.Count); //lots of spam just for debugging
         }
 
         CardDB.Card flame = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_614t);

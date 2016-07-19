@@ -28,18 +28,17 @@
         public float bestmoveValue = 0;
         public Playfield bestboard = new Playfield();
 
-        public Behavior botBase = null;
+        private Behavior botBase = null;
+
+        private Movegenerator movegen = Movegenerator.Instance;
+
         private int calculated = 0;
 
         private bool simulateSecondTurn = false;
         private bool playaround = false;
         private int playaroundprob = 50;
         private int playaroundprob2 = 80;
-
-        Movegenerator movegen = Movegenerator.Instance;
-
-        PenalityManager pen = PenalityManager.Instance;
-
+        
         public MiniSimulator()
         {
         }
