@@ -1859,7 +1859,7 @@
 
             if (p.ownMaxMana == 2 || (p.mana == 2 && p.ownMaxMana == 1)) //todo sepefeets - does coin raise ownMaxMana?
             {
-                if (card.name == CardDB.cardName.nerubianegg) return -15;
+                if (card.name == CardDB.cardName.nerubianegg) return -2;
                 if (card.name == CardDB.cardName.wildgrowth) return -150; //bonus for turn 1 coin+growth or turn 2 growth but not innervate+growth
             }
 
