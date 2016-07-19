@@ -6066,7 +6066,7 @@
                         this.enemyDeckSize--;
                         if (this.enemyAnzCards >= 10)
                         {
-                            this.evaluatePenality -= 50;
+                            this.evaluatePenality = (this.enemycarddraw >= 0) ? 10 : 25;
                             //return;
                         }
                         else
