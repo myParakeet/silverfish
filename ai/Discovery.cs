@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace HREngine.Bots
 {
 
-    public class Discovery
+    public sealed class Discovery
     {
         class discoveryitem
         {
@@ -28,25 +28,23 @@ namespace HREngine.Bots
 
         private List<discoveryitem> discoverylist = new List<discoveryitem>();
 
-        private static Discovery instance;
+        private static readonly Discovery instance = new Discovery();
 
+        static Discovery() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        
         public static Discovery Instance
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new Discovery();
-                }
                 return instance;
             }
         }
 
         public void updateInstance()
         {
-            instance = new Discovery();
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             deckName = Hrtprozis.Instance.deckName;
+            readCombos();
         }
 
         private Discovery()

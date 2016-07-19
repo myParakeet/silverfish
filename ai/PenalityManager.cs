@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class PenalityManager
+    public sealed class PenalityManager
     {
         //todo acolyteofpain
         //todo better aoe-penality
@@ -62,13 +62,15 @@
         Dictionary<CardDB.cardName, int> alsoEquipsWeaponDB = new Dictionary<CardDB.cardName, int>(); //cards that aren't weapons but equip one immediately
 
 
-        private static PenalityManager instance;
+        private static readonly PenalityManager instance = new PenalityManager();
+
+        static PenalityManager() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
 
         public static PenalityManager Instance
         {
             get
             {
-                return instance ?? (instance = new PenalityManager());
+                return instance;
             }
         }
 

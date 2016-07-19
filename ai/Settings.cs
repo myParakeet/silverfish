@@ -3,7 +3,7 @@
 
 namespace HREngine.Bots
 {
-    internal class Settings
+    internal sealed class Settings
     {
 
         public Behavior setSettings()
@@ -77,11 +77,6 @@ namespace HREngine.Bots
             if (this.writeToSingleFile) Helpfunctions.Instance.ErrorLog("write log to single file");
         }
 
-        private Settings()
-        {
-            this.writeToSingleFile = false;
-        }
-
 
         public int maxwide = 3000;
         public int twotsamount = 0;
@@ -131,17 +126,24 @@ namespace HREngine.Bots
 
         private string ownClass = "";
         private string deckName = "";
+
+        private static readonly Settings instance = new Settings();
         
-        private static Settings instance;
+        static Settings() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+
+        private Settings()
+        {
+            this.writeToSingleFile = false;
+        }
 
         public static Settings Instance
         {
             get
             {
-                return instance ?? (instance = new Settings());
+                return instance;
             }
         }
-
+        
         public Behavior updateInstance()
         {
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);

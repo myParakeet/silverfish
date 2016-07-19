@@ -27,7 +27,7 @@ namespace HREngine.Bots
             }
         }
 
-        public static  string SettingsPath
+        public static string SettingsPath
         {
             get{
                 string temp = AssemblyDirectory + System.IO.Path.DirectorySeparatorChar + "Common" + System.IO.Path.DirectorySeparatorChar;
@@ -55,7 +55,7 @@ namespace HREngine.Bots
         }
     }
 
-    public class Silverfish
+    public sealed class Silverfish
     {
         public string versionnumber = "122.4SE";
         private bool singleLog = false;
@@ -141,15 +141,16 @@ namespace HREngine.Bots
         //LOE stuff###############################################################################################################
         List<CardDB.cardIDEnum> choiceCards = new List<CardDB.cardIDEnum>(); // here we save all available tracking/discover cards ordered from left to right
         public List<int> choiceCardsEntitys = new List<int>(); //list of entitys same order as choiceCards
-        
 
-        private static Silverfish instance;
+        private static readonly Silverfish instance = new Silverfish();
+
+        static Silverfish() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
 
         public static Silverfish Instance
         {
             get
             {
-                return instance ?? (instance = new Silverfish());
+                return instance;
             }
         }
 

@@ -1208,7 +1208,7 @@ namespace HREngine.Bots
 
     }
 
-    public class Silverfish
+    public sealed class Silverfish
     {
         public string versionnumber = "122.4SE";
         private bool singleLog = false;
@@ -1297,14 +1297,16 @@ namespace HREngine.Bots
         public List<int> choiceCardsEntitys = new List<int>(); //list of entitys same order as choiceCards
         
         private static HSRangerLib.GameState latestGameState;
+        
+        private static readonly Silverfish instance = new Silverfish();
 
-        private static Silverfish instance;
+        static Silverfish() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
 
         public static Silverfish Instance
         {
             get
             {
-                return instance ?? (instance = new Silverfish());
+                return instance;
             }
         }
 
@@ -2410,7 +2412,7 @@ namespace HREngine.Bots
 
     }
 
-    public class Helpfunctions
+    public sealed class Helpfunctions
     {
 
         public static List<T> TakeList<T>(IEnumerable<T> source, int limit)
@@ -2431,19 +2433,20 @@ namespace HREngine.Bots
 
         public bool runningbot = false;
 
-        private static Helpfunctions instance;
+        private static readonly Helpfunctions instance = new Helpfunctions();
+
+        static Helpfunctions() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
 
         public static Helpfunctions Instance
         {
             get
             {
-                return instance ?? (instance = new Helpfunctions());
+                return instance;
             }
         }
 
         private Helpfunctions()
         {
-
             //System.IO.File.WriteAllText(Settings.Instance.logpath + Settings.Instance.logfile, "");
         }
 

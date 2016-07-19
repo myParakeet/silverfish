@@ -5664,7 +5664,7 @@ namespace HREngine.Bots
 
         private static CardDB instance;
 
-        public static CardDB Instance
+        public static CardDB Instance //todo clean up this singleton too
         {
             get
             {

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class Handmanager
+    public sealed class Handmanager
     {
 
         public class Handcard
@@ -60,23 +60,23 @@
         Helpfunctions help;
         CardDB cdb = CardDB.Instance;
 
-        private static Handmanager instance;
+        private static readonly Handmanager instance = new Handmanager();
+
+        static Handmanager() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
 
         public static Handmanager Instance
         {
             get
             {
-                return instance ?? (instance = new Handmanager());
+                return instance;
             }
         }
-
-
 
         private Handmanager()
         {
             this.help = Helpfunctions.Instance;
-
         }
+
 
         public void clearAll()
         {

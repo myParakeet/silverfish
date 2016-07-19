@@ -11,7 +11,7 @@ namespace HREngine.Bots
     ///     The helpfunctions.
     /// </summary>
 
-    public class Helpfunctions
+    public sealed class Helpfunctions
     {
         /// <summary>The logger for this type.</summary>
         private static readonly ILog Log = Logger.GetLoggerInstanceForType();
@@ -34,11 +34,16 @@ namespace HREngine.Bots
 
         public bool runningbot = false;
 
-        private static Helpfunctions instance;
+        private static readonly Helpfunctions instance = new Helpfunctions();
+
+        static Helpfunctions() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
 
         public static Helpfunctions Instance
         {
-            get { return instance ?? (instance = new Helpfunctions()); }
+            get
+            {
+                return instance;
+            }
         }
 
         private Helpfunctions()

@@ -7,18 +7,18 @@
     {
         PenalityManager pen = PenalityManager.Instance;
 
-        private static Movegenerator instance;
+        private static readonly Movegenerator instance = new Movegenerator();
+
+        static Movegenerator() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+
+        private Movegenerator() { }
 
         public static Movegenerator Instance
         {
             get
             {
-                return instance ?? (instance = new Movegenerator());
+                return instance;
             }
-        }
-
-        private Movegenerator()
-        {
         }
 
 

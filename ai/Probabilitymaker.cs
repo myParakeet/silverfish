@@ -306,7 +306,7 @@
 
     }
 
-    public class Probabilitymaker
+    public sealed class Probabilitymaker
     {
         public bool hasDeck = false;
 
@@ -333,18 +333,18 @@
         public bool feugenDead = false;
         public bool stalaggDead = false;
 
-        private static Probabilitymaker instance;
+        private static readonly Probabilitymaker instance = new Probabilitymaker();
+
+        static Probabilitymaker() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+
+        private Probabilitymaker() { }
+
         public static Probabilitymaker Instance
         {
             get
             {
-                return instance ?? (instance = new Probabilitymaker());
+                return instance;
             }
-        }
-
-        private Probabilitymaker()
-        {
-
         }
 
         public void setOwnCards(List<CardDB.cardIDEnum> list)

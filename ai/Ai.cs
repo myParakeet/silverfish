@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class Ai
+    public sealed class Ai
     {
 
         private int maxdeep = 12;
@@ -53,13 +53,15 @@
         public int bestTrackingStatus = 0;//0=optimal, 1= suboptimal 2=random
 
 
-        private static Ai instance;
+        private static readonly Ai instance = new Ai();
+
+        static Ai() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
 
         public static Ai Instance
         {
             get
             {
-                return instance ?? (instance = new Ai());
+                return instance;
             }
         }
 

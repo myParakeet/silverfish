@@ -5,7 +5,7 @@
     using System.IO;
 
 
-    public class ComboBreaker
+    public sealed class ComboBreaker
     {
 
         enum combotype
@@ -18,7 +18,6 @@
         private Dictionary<CardDB.cardIDEnum, int> playByValue = new Dictionary<CardDB.cardIDEnum, int>();
 
         private List<combo> combos = new List<combo>();
-        private static ComboBreaker instance;
 
         Handmanager hm = Handmanager.Instance;
         Hrtprozis hp = Hrtprozis.Instance;
@@ -364,19 +363,27 @@
 
         }
 
+        private static readonly ComboBreaker instance = new ComboBreaker();
+
+        static ComboBreaker() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+
         public static ComboBreaker Instance
         {
             get
             {
-                return instance ?? (instance = new ComboBreaker());
+                return instance;
             }
         }
 
         public void updateInstance()
         {
-            instance = new ComboBreaker();
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             deckName = Hrtprozis.Instance.deckName;
+            readCombos();
+            if (attackFaceHP != -1)
+            {
+                hp.setAttackFaceHP(attackFaceHP);
+            }
             //Helpfunctions.Instance.ErrorLog("ComboBreaker Deck: " + deckName + " , Class: " + ownClass);
         }
 
@@ -405,12 +412,12 @@
                 path = deckpath;
                 Helpfunctions.Instance.ErrorLog("read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "_combo.txt...");
             }
-            else if (deckName != "" && System.IO.File.Exists(classpath + "_mulligan.txt"))
+            else if (deckName != "" && System.IO.File.Exists(classpath + "_combo.txt"))
             {
                 path = classpath;
                 Helpfunctions.Instance.ErrorLog("read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "_combo.txt...");
             }
-            else if (deckName != "" && System.IO.File.Exists(datapath + "_mulligan.txt"))
+            else if (deckName != "" && System.IO.File.Exists(datapath + "_combo.txt"))
             {
                 path = datapath;
                 Helpfunctions.Instance.ErrorLog("read Data" + System.IO.Path.DirectorySeparatorChar + "_combo.txt...");

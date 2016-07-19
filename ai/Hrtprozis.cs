@@ -20,7 +20,7 @@
         hogger
     }
 
-    public class Hrtprozis
+    public sealed class Hrtprozis
     {
         public string deckName = "";
 
@@ -117,29 +117,26 @@
 
         private int ownPlayerController = 0;
 
-        private static Hrtprozis instance;
+        private static readonly Hrtprozis instance = new Hrtprozis();
+
+        static Hrtprozis() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+
+        private Hrtprozis() { }
 
         public static Hrtprozis Instance
         {
             get
             {
-                return instance ?? (instance = new Hrtprozis());
+                return instance;
             }
         }
 
 
 
-        private Hrtprozis()
-        {
-        }
-
         public void setAttackFaceHP(int hp)
         {
             this.attackFaceHp = hp;
         }
-
-
-
 
         public void clearAll()
         {

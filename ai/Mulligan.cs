@@ -75,7 +75,7 @@ namespace HREngine.Bots
 
      */
 
-    public class Mulligan
+    public sealed class Mulligan
     {
         public class CardIDEntity
         {
@@ -163,27 +163,25 @@ namespace HREngine.Bots
 
         private string ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
         private string deckName = Hrtprozis.Instance.deckName;
-        
 
-        private static Mulligan instance;
+
+        private static readonly Mulligan instance = new Mulligan();
+
+        static Mulligan() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
 
         public static Mulligan Instance
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new Mulligan();
-                }
                 return instance;
             }
         }
 
         public void updateInstance()
         {
-            instance = new Mulligan();
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             deckName = Hrtprozis.Instance.deckName;
+            readMulligan();
         }
 
         private Mulligan()
@@ -195,6 +193,8 @@ namespace HREngine.Bots
         {
             string[] lines = new string[0] { };
             this.cardlist.Clear();
+            this.holdDB.Clear();
+            this.concedelist.Clear();
             
             string path = Settings.Instance.path;
             string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
