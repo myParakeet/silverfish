@@ -195,13 +195,19 @@ namespace HREngine.Bots
 
             // reload settings
             HeroEnum heroname = Hrtprozis.Instance.heroNametoEnum(ownName);
-            if (deckChanged || heroname != Hrtprozis.Instance.heroname)
+            HeroEnum enemyHeroname = Hrtprozis.Instance.heroNametoEnum(enemName);
+            if (deckChanged || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
             {
                 if (heroname != Hrtprozis.Instance.heroname)
                 {
                     Helpfunctions.Instance.ErrorLog("New Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(heroname) + "\", Old Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname) + "\"");
                 }
+                if (enemyHeroname != Hrtprozis.Instance.enemyHeroname)
+                {
+                    Helpfunctions.Instance.ErrorLog("New Enemy Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(enemyHeroname) + "\", Old Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.enemyHeroname) + "\"");
+                }
                 Hrtprozis.Instance.setHeroName(ownName);
+                Hrtprozis.Instance.setEnemyHeroName(enemName);
                 ComboBreaker.Instance.updateInstance();
                 Discovery.Instance.updateInstance();
                 Mulligan.Instance.updateInstance();
@@ -211,7 +217,7 @@ namespace HREngine.Bots
 
                 //reload external process settings too
                 Helpfunctions.Instance.resetBuffer();
-                Helpfunctions.Instance.writeToBuffer(Hrtprozis.Instance.deckName + ";" + ownName + ";");
+                Helpfunctions.Instance.writeToBuffer(Hrtprozis.Instance.deckName + ";" + ownName + ";" + enemName + ";");
                 Helpfunctions.Instance.writeBufferToDeckFile();
 
             if (Mulligan.Instance.hasmulliganrules(ownName, enemName))
