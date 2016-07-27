@@ -37,20 +37,20 @@
         Handmanager hm = Handmanager.Instance;
         Helpfunctions help = Helpfunctions.Instance;
 
-        public Action bestmove = null;
-        public float bestmoveValue = 0;
+        public Action bestmove;
+        public float bestmoveValue;
         public Playfield nextMoveGuess = new Playfield();
         public Playfield oldMoveGuess = new Playfield();//used for queque actions
-        public Behavior botBase = null;
+        public Behavior botBase;
 
         public List<Action> bestActions = new List<Action>();
 
-        public bool secondturnsim = false;
+        public bool secondturnsim;
         //public int secondTurnAmount = 256;
         public bool playaround = false;
 
         public int bestTracking = -1;
-        public int bestTrackingStatus = 0;//0=optimal, 1= suboptimal 2=random
+        public int bestTrackingStatus;//0=optimal, 1= suboptimal 2=random
 
 
         private static readonly Ai instance = new Ai();
@@ -689,7 +689,7 @@
             foreach (Action bestmovee in this.bestActions)
             {
 
-                if (bestmovee != null && bestmove.actionType != actionEnum.endturn)  // save the guessed move, so we doesnt need to recalc!
+                if (bestmovee != null && bestmovee.actionType != actionEnum.endturn)  // save the guessed move, so we doesnt need to recalc!
                 {
                     //bestmovee.print();
                     tempbestboard.doAction(bestmovee);

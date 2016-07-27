@@ -12,7 +12,7 @@
 
         public int maxwide = 20;
 
-        public Behavior botBase = null;
+        public Behavior botBase;
 
         private Movegenerator movegen = Movegenerator.Instance;
 

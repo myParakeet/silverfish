@@ -16,16 +16,16 @@
         private bool useCutingTargets = true;
         private bool useComparison = true;
 
-        public bool doEnemySecondTurn = false;
+        public bool doEnemySecondTurn;
 
         List<Playfield> posmoves = new List<Playfield>(7000);
 
-        public Action bestmove = null;
-        public float bestmoveValue = 0;
+        public Action bestmove;
+        public float bestmoveValue;
         public Playfield bestboard = new Playfield();
 
-        public Behavior botBase = null;
-        private int calculated = 0;
+        public Behavior botBase;
+        private int calculated;
 
         private bool simulateSecondTurn = false;
 
@@ -257,9 +257,9 @@
                     p.hashcode = hash;
                     bool found = false;
                     //foreach (Playfield pp in temp)
-                    for (int j = 0; j < temp.Count; j++)
+                    foreach (Playfield t in temp)
                     {
-                        pp = temp[j];
+                        pp = t;
                         if (pp.hashcode == p.hashcode)
                         {
                             if (pp.isEqualf(p))

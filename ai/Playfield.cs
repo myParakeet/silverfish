@@ -40,8 +40,8 @@
         //TODO: graveyard change (list <card,owner>)
         //Todo: vanish clear all auras/buffs (NEW1_004)
 
-        public bool logging = false;
-        public bool complete = false;
+        public bool logging;
+        public bool complete;
 
         //dont have to be copied! (server doesnt copy)
         public List<Handmanager.Handcard> myDeck ;
@@ -50,269 +50,269 @@
         public List<CardDB.cardIDEnum> EnemySecretsIDList ;
         //------------
 
-        public int nextEntity = 70;
+        public int nextEntity;
 
-        public triggerCounter tempTrigger = new triggerCounter();
+        public triggerCounter tempTrigger;
 
         //Entity=PLAYER tag=HEROPOWER_ACTIVATIONS_THIS_TURN
         //Entity=PLAYER tag=NUM_TIMES_HERO_POWER_USED_THIS_GAME
 
         //aura minions##########################
         //todo reduce buffing vars
-        public int anzOwnRaidleader = 0;
-        public int anzEnemyRaidleader = 0;
-        public int anzOwnStormwindChamps = 0;
-        public int anzEnemyStormwindChamps = 0;
-        public int anzOwnWarhorseTrainer = 0;
-        public int anzEnemyWarhorseTrainer = 0;
-        public int anzOwnTundrarhino = 0;
-        public int anzEnemyTundrarhino = 0;
-        public int anzOwnTimberWolfs = 0;
-        public int anzEnemyTimberWolfs = 0;
-        public int anzMurlocWarleader = 0;
-        public int anzAcidmaw = 0;
-        public int anzGrimscaleOracle = 0;
-        public int anzOwnShadowfiends = 0;
-        public int anzEnemyShadowfiends = 0;
-        public int anzOwnAuchenaiSoulpriest = 0;
-        public int anzEnemyAuchenaiSoulpriest = 0;
-        public int anzOwnSorcerersApprentice = 0;
-        public int anzOwnsorcerersapprenticeStarted = 0;
-        public int anzEnemysorcerersapprentice = 0;
-        public int anzEnemysorcerersapprenticeStarted = 0;
-        public int anzOwnSouthseacaptain = 0;
-        public int anzEnemySouthseacaptain = 0;
-        public int anzOwnMalGanis = 0;
-        public int anzEnemyMalGanis = 0;
-        public int anzOwnPiratesStarted = 0;
-        public int anzOwnMurlocStarted = 0;
-        public int anzOwnChromaggus = 0;
-        public int anzEnemyChromaggus = 0;
-        public int anzOwnBolfRamshield = 0;
-        public int anzEnemyBolfRamshield = 0;
-        public int anzOwnHorsemen = 0;
-        public int anzEnemyHorsemen = 0;
+        public int anzOwnRaidleader;
+        public int anzEnemyRaidleader;
+        public int anzOwnStormwindChamps;
+        public int anzEnemyStormwindChamps;
+        public int anzOwnWarhorseTrainer;
+        public int anzEnemyWarhorseTrainer;
+        public int anzOwnTundrarhino;
+        public int anzEnemyTundrarhino;
+        public int anzOwnTimberWolfs;
+        public int anzEnemyTimberWolfs;
+        public int anzMurlocWarleader;
+        public int anzAcidmaw;
+        public int anzGrimscaleOracle;
+        public int anzOwnShadowfiends;
+        public int anzEnemyShadowfiends;
+        public int anzOwnAuchenaiSoulpriest;
+        public int anzEnemyAuchenaiSoulpriest;
+        public int anzOwnSorcerersApprentice;
+        public int anzOwnsorcerersapprenticeStarted;
+        public int anzEnemysorcerersapprentice;
+        public int anzEnemysorcerersapprenticeStarted;
+        public int anzOwnSouthseacaptain;
+        public int anzEnemySouthseacaptain;
+        public int anzOwnMalGanis;
+        public int anzEnemyMalGanis;
+        public int anzOwnPiratesStarted;
+        public int anzOwnMurlocStarted;
+        public int anzOwnChromaggus;
+        public int anzEnemyChromaggus;
+        public int anzOwnBolfRamshield;
+        public int anzEnemyBolfRamshield;
+        public int anzOwnHorsemen;
+        public int anzEnemyHorsemen;
         //new ones TGT##########################
 
-        public int anzOwnSaboteur = 0;
-        public int anzEnemySaboteur = 0;
-        public int anzOwnFencingCoach = 0;
-        public int anzEnemyFencingCoach = 0;
+        public int anzOwnSaboteur;
+        public int anzEnemySaboteur;
+        public int anzOwnFencingCoach;
+        public int anzEnemyFencingCoach;
         
-        public int ownHeroPowerExtraDamage = 0;
-        public int enemyHeroPowerExtraDamage = 0;
-        public int ownHeroPowerAllowedQuantity = 1;
-        public int enemyHeroPowerAllowedQuantity = 1;
-        public int anzUsedOwnHeroPower = 0;
+        public int ownHeroPowerExtraDamage;
+        public int enemyHeroPowerExtraDamage;
+        public int ownHeroPowerAllowedQuantity;
+        public int enemyHeroPowerAllowedQuantity;
+        public int anzUsedOwnHeroPower;
 
-        public int anzOwnGarrisonCommander = 0;//also used for ColdarraDrake
-        public int anzEnemyGarrisonCommander = 0;//also used for ColdarraDrake
-        public int anzOwnFallenHeros = 0;
-        public int anzEnemyFallenHeros = 0;
-        public int anzOwnFizzlebang=0;
-        public int anzEnemyFizzlebang=0;
-        public int anzOwnBuccaneer = 0;
-        public int anzEnemyBuccaneer = 0;
-        public int anzOwnAviana = 0;
-        public int anzEnemyAviana = 0;
-        public int anzOwnMaidenOfTheLake = 0;
-        public int anzEnemyMaidenOfTheLake = 0;
+        public int anzOwnGarrisonCommander;//also used for ColdarraDrake
+        public int anzEnemyGarrisonCommander;//also used for ColdarraDrake
+        public int anzOwnFallenHeros;
+        public int anzEnemyFallenHeros;
+        public int anzOwnFizzlebang;
+        public int anzEnemyFizzlebang;
+        public int anzOwnBuccaneer;
+        public int anzEnemyBuccaneer;
+        public int anzOwnAviana;
+        public int anzEnemyAviana;
+        public int anzOwnMaidenOfTheLake;
+        public int anzEnemyMaidenOfTheLake;
 
-        public int anzOwnWarsongCommanders = 0;
-        public int anzEnemyWarsongCommanders = 0;
+        public int anzOwnWarsongCommanders;
+        public int anzEnemyWarsongCommanders;
 
         //new ones LOE##########################
 
-        public int anzOwnBranns = 0;
-        public int anzEnemyBranns = 0;
-        public int anzOwnFandralStaghelm = 0;
+        public int anzOwnBranns;
+        public int anzEnemyBranns;
+        public int anzOwnFandralStaghelm;
 
         //##########################
 
-        public int anzOwnMechwarper = 0;
-        public int anzOwnMechwarperStarted = 0;
-        public int anzEnemyMechwarper = 0;
-        public int anzEnemyMechwarperStarted = 0;
+        public int anzOwnMechwarper;
+        public int anzOwnMechwarperStarted;
+        public int anzEnemyMechwarper;
+        public int anzEnemyMechwarperStarted;
 
-        public int anzOgOwnCThun = 0;
-        public int anzOgOwnCThunHpBonus = 0;
-        public int anzOgOwnCThunAngrBonus = 0;
-        public int anzOgOwnCThunTaunt = 0;
+        public int anzOgOwnCThun;
+        public int anzOgOwnCThunHpBonus;
+        public int anzOgOwnCThunAngrBonus;
+        public int anzOgOwnCThunTaunt;
 
-        public int anzBlackwaterPirate = 0;
-        public int blackwaterpirateStarted = 0;
-        public int choGall = 0;
-        public int embracetheshadow = 0;
+        public int anzBlackwaterPirate;
+        public int blackwaterpirateStarted;
+        public int choGall;
+        public int embracetheshadow;
 
-        public int anzEnemyTaunt = 0;
-        public int anzOwnTaunt = 0;
-        public int ownMinionsDiedTurn = 0;
-        public int enemyMinionsDiedTurn = 0;
+        public int anzEnemyTaunt;
+        public int anzOwnTaunt;
+        public int ownMinionsDiedTurn;
+        public int enemyMinionsDiedTurn;
 
-        public bool feugenDead = false;
-        public bool stalaggDead = false;
+        public bool feugenDead;
+        public bool stalaggDead;
 
-        public bool anzOwnMillhouseManastorm = false;
-        public bool anzEnemyMillhouseManastorm = false;
+        public bool anzOwnMillhouseManastorm;
+        public bool anzEnemyMillhouseManastorm;
 
-        public bool weHaveSteamwheedleSniper = false;
-        public bool enemyHaveSteamwheedleSniper = false;
+        public bool weHaveSteamwheedleSniper;
+        public bool enemyHaveSteamwheedleSniper;
 
-        public bool needGraveyard = false;
+        public bool needGraveyard;
 
 
-        public int doublepriest = 0;
-        public int enemydoublepriest = 0;
-        public int ownMistcaller = 0;
+        public int doublepriest;
+        public int enemydoublepriest;
+        public int ownMistcaller;
 
-        public int lockandload = 0;
-        public int anzOwnDragonConsort = 0;
-        public int anzEnemyDragonConsort = 0;
+        public int lockandload;
+        public int anzOwnDragonConsort;
+        public int anzEnemyDragonConsort;
 
-        public int ownBaronRivendare = 0;
-        public int enemyBaronRivendare = 0;
+        public int ownBaronRivendare;
+        public int enemyBaronRivendare;
         //#########################################
         //new variables LOE
-        public int selectedChoice = -1;
-        public int anzOwnNagaSeaWitch = 0;
-        public int anzEnemyNagaSeaWitch = 0;
-        public int anzOwnAnimatedArmor = 0;
-        public int anzEnemyAnimatedArmor = 0;
-        public int anzEnemyCursed = 0;
+        public int selectedChoice;
+        public int anzOwnNagaSeaWitch;
+        public int anzEnemyNagaSeaWitch;
+        public int anzOwnAnimatedArmor;
+        public int anzEnemyAnimatedArmor;
+        public int anzEnemyCursed;
         //############################
 
-        public int tempanzOwnCards = 0; // for Goblin Sapper
-        public int tempanzEnemyCards = 0;// for Goblin Sapper
+        public int tempanzOwnCards; // for Goblin Sapper
+        public int tempanzEnemyCards;// for Goblin Sapper
 
-        public bool isOwnTurn = true; // its your turn?
-        public int turnCounter = 0;
-        public bool sEnemTurn = false;//should the enemy turn be simulated?
+        public bool isOwnTurn; // its your turn?
+        public int turnCounter;
+        public bool sEnemTurn;//should the enemy turn be simulated?
 
-        public bool attacked = false;
-        public int attackFaceHP = 15;
+        public bool attacked;
+        public int attackFaceHP;
 
-        public int evaluatePenality = 0;
-        public int ownController = 0;
+        public int evaluatePenality;
+        public int ownController;
 
         //public int ownHeroEntity = -1;
         //public int enemyHeroEntity = -1;
 
-        public int hashcode = 0;
-        public float value = Int32.MinValue;
+        public int hashcode;
+        public float value;
         //public int guessingHeroHP = 30;
 
-        public int mana = 0;
-        public int manaTurnEnd = 0;
-        public int numEnemySecretsTurnEnd = 0;
+        public int mana;
+        public int manaTurnEnd;
+        public int numEnemySecretsTurnEnd;
 
 
 
-        public List<CardDB.cardIDEnum> ownSecretsIDList = new List<CardDB.cardIDEnum>();
-        public List<SecretItem> enemySecretList = new List<SecretItem>();
+        public List<CardDB.cardIDEnum> ownSecretsIDList;
+        public List<SecretItem> enemySecretList;
 
-        public int enemySecretCount = 0;
+        public int enemySecretCount;
 
         public Minion ownHero;
         public Minion enemyHero;
-        public HeroEnum ownHeroName = HeroEnum.None;
-        public HeroEnum enemyHeroName = HeroEnum.None;
-        public TAG_CLASS ownHeroStartClass = TAG_CLASS.INVALID;
-        public TAG_CLASS enemyHeroStartClass = TAG_CLASS.INVALID;
+        public HeroEnum ownHeroName;
+        public HeroEnum enemyHeroName;
+        public TAG_CLASS ownHeroStartClass;
+        public TAG_CLASS enemyHeroStartClass;
 
-        public CardDB.cardName ownWeaponName = CardDB.cardName.unknown;
-        public CardDB.Card ownWeaponCard = new CardDB.Card();
-        public int ownWeaponAttack = 0;
-        public int ownWeaponDurability = 0;
+        public CardDB.cardName ownWeaponName;
+        public CardDB.Card ownWeaponCard;
+        public int ownWeaponAttack;
+        public int ownWeaponDurability;
 
-        public CardDB.cardName enemyWeaponName = CardDB.cardName.unknown;
-        public CardDB.Card enemyWeaponCard = new CardDB.Card();
-        public int enemyWeaponAttack = 0;
-        public int enemyWeaponDurability = 0;
+        public CardDB.cardName enemyWeaponName;
+        public CardDB.Card enemyWeaponCard;
+        public int enemyWeaponAttack;
+        public int enemyWeaponDurability;
 
-        public List<Minion> ownMinions = new List<Minion>();
-        public List<Minion> enemyMinions = new List<Minion>();
-        public List<GraveYardItem> diedMinions = null;
-        public int anzMinionsDiedThisTurn = 0;
+        public List<Minion> ownMinions;
+        public List<Minion> enemyMinions;
+        public List<GraveYardItem> diedMinions;
+        public int anzMinionsDiedThisTurn;
 
-        public int numPlayerMinionsAtTurnStart = 0;
-        public int loathebLastTurn = 0;  // only checked for turn 2 bonus
+        public int numPlayerMinionsAtTurnStart;
+        public int loathebLastTurn;  // only checked for turn 2 bonus
 
-        public List<Handmanager.Handcard> owncards = new List<Handmanager.Handcard>();
-        public int owncarddraw = 0;
+        public List<Handmanager.Handcard> owncards;
+        public int owncarddraw;
 
-        public List<Action> playactions = new List<Action>();
+        public List<Action> playactions;
 
-        public int enemycarddraw = 0;
-        public int enemyAnzCards = 0;
+        public int enemycarddraw;
+        public int enemyAnzCards;
 
-        public int spellpower = 0;
-        public int enemyspellpower = 0;
-        public int wehaveCounterspell = 0;
+        public int spellpower;
+        public int enemyspellpower;
+        public int wehaveCounterspell;
 
-        public bool playedKirinTorMage = false;
-        public bool playedPreparation = false;
+        public bool playedKirinTorMage;
+        public bool playedPreparation;
 
-        public int anzOwnLoatheb = 0;
-        public int anzEnemyLoatheb = 0;
+        public int anzOwnLoatheb;
+        public int anzEnemyLoatheb;
 
-        public int anzPintSizedSummoner = 0;
-        public int anzManaWraith = 0;
-        public int anzVentureCoMercenary = 0;
-        public int anzSummoningPortal = 0;
-        public int myCardsCostLess = 0;
-        public int allSpellCostLess = 0;
-        public int anzNerubarWeblord = 0;
+        public int anzPintSizedSummoner;
+        public int anzManaWraith;
+        public int anzVentureCoMercenary;
+        public int anzSummoningPortal;
+        public int myCardsCostLess;
+        public int allSpellCostLess;
+        public int anzNerubarWeblord;
 
-        public bool startedWithDamagedMinions = false; // needed for manacalculation of the spell "Crush"
+        public bool startedWithDamagedMinions; // needed for manacalculation of the spell "Crush"
 
-        public int ownWeaponAttackStarted = 0;
-        public int ownMobsCountStarted = 0;
-        public int ownCardsCountStarted = 0;
-        public int enemyCardsCountStarted = 0;
-        public int ownHeroHpStarted = 30;
-        public int enemyHeroHpStarted = 30;
+        public int ownWeaponAttackStarted;
+        public int ownMobsCountStarted;
+        public int ownCardsCountStarted;
+        public int enemyCardsCountStarted;
+        public int ownHeroHpStarted;
+        public int enemyHeroHpStarted;
 
-        public int mobsPlayedThisTurn = 0;
+        public int mobsPlayedThisTurn;
 
         
-        public int optionsPlayedThisTurn = 0;
-        public int cardsPlayedThisTurn = 0;
-        public int owedRecall = 0; //=overload
-        public int currentRecall = 0;
-        public int enemyRecall = 0;
-        public int enemyCurrentRecall = 0;//only needed for enemys turn sim.
+        public int optionsPlayedThisTurn;
+        public int cardsPlayedThisTurn;
+        public int owedRecall; //=overload
+        public int currentRecall;
+        public int enemyRecall;
+        public int enemyCurrentRecall;//only needed for enemys turn sim.
 
-        public int enemyOptionsDoneThisTurn = 0;
+        public int enemyOptionsDoneThisTurn;
 
-        public int ownMaxMana = 0;
-        public int enemyMaxMana = 0;
+        public int ownMaxMana;
+        public int enemyMaxMana;
 
-        public int lostDamage = 0;
-        public int lostHeal = 0;
-        public int lostWeaponDamage = 0;
+        public int lostDamage;
+        public int lostHeal;
+        public int lostWeaponDamage;
 
-        public int ownDeckSize = 30;
-        public int enemyDeckSize = 30;
-        public int ownHeroFatigue = 0;
-        public int enemyHeroFatigue = 0;
+        public int ownDeckSize;
+        public int enemyDeckSize;
+        public int ownHeroFatigue;
+        public int enemyHeroFatigue;
 
-        public int heroPowerActivationsThisTurn = 0;//new----------
-        public int lockAndLoads = 0;//new------------
+        public int heroPowerActivationsThisTurn;//new----------
+        public int lockAndLoads;//new------------
 
-        public bool ownAbilityReady = false;
+        public bool ownAbilityReady;
         public Handmanager.Handcard ownHeroAblility;
-        public int ownHeroPowerUses = 0;//new----------
+        public int ownHeroPowerUses;//new----------
 
-        public bool enemyAbilityReady = false;
+        public bool enemyAbilityReady;
         public Handmanager.Handcard enemyHeroAblility;
-        public int enemyHeroPowerUses = 0;//new----------
+        public int enemyHeroPowerUses;//new----------
 
         // just for saving which minion to revive with secrets (=the first one that died);
-        public CardDB.cardIDEnum revivingOwnMinion = CardDB.cardIDEnum.None;
-        public CardDB.cardIDEnum revivingEnemyMinion = CardDB.cardIDEnum.None;
-        public CardDB.cardIDEnum OwnLastDiedMinion = CardDB.cardIDEnum.None;
+        public CardDB.cardIDEnum revivingOwnMinion;
+        public CardDB.cardIDEnum revivingEnemyMinion;
+        public CardDB.cardIDEnum OwnLastDiedMinion;
 
-        public int shadowmadnessed = 0; //minions has switched controllers this turn.
+        public int shadowmadnessed; //minions has switched controllers this turn.
 
 
         //Helpfunctions help = Helpfunctions.Instance;
@@ -338,6 +338,69 @@
 
         public Playfield()
         {
+            shadowmadnessed = 0;
+            OwnLastDiedMinion = CardDB.cardIDEnum.None;
+            revivingEnemyMinion = CardDB.cardIDEnum.None;
+            revivingOwnMinion = CardDB.cardIDEnum.None;
+            enemyDeckSize = 30;
+            ownDeckSize = 30;
+            enemyHeroHpStarted = 30;
+            ownHeroHpStarted = 30;
+            enemyCardsCountStarted = 0;
+            ownCardsCountStarted = 0;
+            ownMobsCountStarted = 0;
+            ownWeaponAttackStarted = 0;
+            startedWithDamagedMinions = false;
+            allSpellCostLess = 0;
+            myCardsCostLess = 0;
+            wehaveCounterspell = 0;
+            playactions = new List<Action>();
+            owncards = new List<Handmanager.Handcard>();
+            enemyMinions = new List<Minion>();
+            ownMinions = new List<Minion>();
+            enemyWeaponCard = new CardDB.Card();
+            enemyWeaponName = CardDB.cardName.unknown;
+            ownWeaponCard = new CardDB.Card();
+            ownWeaponName = CardDB.cardName.unknown;
+            enemyHeroStartClass = TAG_CLASS.INVALID;
+            ownHeroStartClass = TAG_CLASS.INVALID;
+            enemyHeroName = HeroEnum.None;
+            ownHeroName = HeroEnum.None;
+            enemySecretList = new List<SecretItem>();
+            ownSecretsIDList = new List<CardDB.cardIDEnum>();
+            value = Int32.MinValue;
+            hashcode = 0;
+            attackFaceHP = 15;
+            isOwnTurn = true;
+            selectedChoice = -1;
+            lockandload = 0;
+            ownMistcaller = 0;
+            enemyMinionsDiedTurn = 0;
+            ownMinionsDiedTurn = 0;
+            anzOwnTaunt = 0;
+            anzEnemyTaunt = 0;
+            embracetheshadow = 0;
+            choGall = 0;
+            blackwaterpirateStarted = 0;
+            anzBlackwaterPirate = 0;
+            anzOgOwnCThun = 0;
+            anzUsedOwnHeroPower = 0;
+            enemyHeroPowerAllowedQuantity = 1;
+            ownHeroPowerAllowedQuantity = 1;
+            enemyHeroPowerExtraDamage = 0;
+            ownHeroPowerExtraDamage = 0;
+            anzEnemyHorsemen = 0;
+            anzOwnHorsemen = 0;
+            anzEnemyBolfRamshield = 0;
+            anzOwnBolfRamshield = 0;
+            anzEnemyChromaggus = 0;
+            anzOwnChromaggus = 0;
+            anzOwnMurlocStarted = 0;
+            anzOwnPiratesStarted = 0;
+            anzEnemysorcerersapprenticeStarted = 0;
+            anzOwnsorcerersapprenticeStarted = 0;
+            nextEntity = 70;
+            logging = false;
             this.nextEntity = 1000;
             //this.simulateEnemyTurn = Ai.Instance.simulateEnemyTurn;
             this.ownController = Hrtprozis.Instance.getOwnController();
@@ -724,6 +787,69 @@
 
         public Playfield(Playfield p)
         {
+            shadowmadnessed = 0;
+            OwnLastDiedMinion = CardDB.cardIDEnum.None;
+            revivingEnemyMinion = CardDB.cardIDEnum.None;
+            revivingOwnMinion = CardDB.cardIDEnum.None;
+            enemyDeckSize = 30;
+            ownDeckSize = 30;
+            enemyHeroHpStarted = 30;
+            ownHeroHpStarted = 30;
+            enemyCardsCountStarted = 0;
+            ownCardsCountStarted = 0;
+            ownMobsCountStarted = 0;
+            ownWeaponAttackStarted = 0;
+            startedWithDamagedMinions = false;
+            allSpellCostLess = 0;
+            myCardsCostLess = 0;
+            wehaveCounterspell = 0;
+            playactions = new List<Action>();
+            owncards = new List<Handmanager.Handcard>();
+            enemyMinions = new List<Minion>();
+            ownMinions = new List<Minion>();
+            enemyWeaponCard = new CardDB.Card();
+            enemyWeaponName = CardDB.cardName.unknown;
+            ownWeaponCard = new CardDB.Card();
+            ownWeaponName = CardDB.cardName.unknown;
+            enemyHeroStartClass = TAG_CLASS.INVALID;
+            ownHeroStartClass = TAG_CLASS.INVALID;
+            enemyHeroName = HeroEnum.None;
+            ownHeroName = HeroEnum.None;
+            enemySecretList = new List<SecretItem>();
+            ownSecretsIDList = new List<CardDB.cardIDEnum>();
+            value = Int32.MinValue;
+            hashcode = 0;
+            attackFaceHP = 15;
+            isOwnTurn = true;
+            selectedChoice = -1;
+            lockandload = 0;
+            ownMistcaller = 0;
+            enemyMinionsDiedTurn = 0;
+            ownMinionsDiedTurn = 0;
+            anzOwnTaunt = 0;
+            anzEnemyTaunt = 0;
+            embracetheshadow = 0;
+            choGall = 0;
+            blackwaterpirateStarted = 0;
+            anzBlackwaterPirate = 0;
+            anzOgOwnCThun = 0;
+            anzUsedOwnHeroPower = 0;
+            enemyHeroPowerAllowedQuantity = 1;
+            ownHeroPowerAllowedQuantity = 1;
+            enemyHeroPowerExtraDamage = 0;
+            ownHeroPowerExtraDamage = 0;
+            anzEnemyHorsemen = 0;
+            anzOwnHorsemen = 0;
+            anzEnemyBolfRamshield = 0;
+            anzOwnBolfRamshield = 0;
+            anzEnemyChromaggus = 0;
+            anzOwnChromaggus = 0;
+            anzOwnMurlocStarted = 0;
+            anzOwnPiratesStarted = 0;
+            anzEnemysorcerersapprenticeStarted = 0;
+            anzOwnsorcerersapprenticeStarted = 0;
+            nextEntity = 70;
+            logging = false;
             this.nextEntity = p.nextEntity;
 
             this.isOwnTurn = p.isOwnTurn;
@@ -993,7 +1119,7 @@
             // swap minions
             Swap(ref ownMinions, ref enemyMinions);
 
-            if(diedMinions!=null) diedMinions.Clear();
+            diedMinions?.Clear();
             Swap(ref owncards, ref EnemyCards);
 
             Swap(ref spellpower, ref enemyspellpower);
@@ -1374,6 +1500,7 @@
             return true;
         }
 
+        //todo sepefeets - we probably shouldn't override, move to new function like HB
         public override int GetHashCode()
         {
             int retval = 0;
@@ -1657,16 +1784,16 @@
                 }
                 foreach (Minion mnn in temp.ToArray())
                 {
-                    if (mnn.entityID == target.entityID)
+                    if (target != null && mnn.entityID == target.entityID)
                     {
                         mnn.cantLowerHPbelowONE = dontkill;
-                        this.minionGetDamageOrHeal(mnn, damage1);
+                        this.minionGetDamageOrHeal(mnn, damage);
                         mnn.cantLowerHPbelowONE = false;
                     }
                     else
                     {
                         mnn.cantLowerHPbelowONE = dontkill;
-                        this.minionGetDamageOrHeal(mnn, damage);
+                        this.minionGetDamageOrHeal(mnn, damage1);
                         mnn.cantLowerHPbelowONE = false;
                     }
                 }
@@ -2583,7 +2710,7 @@
             this.complete = false;
 
             this.value = int.MinValue;
-            if (this.diedMinions != null) this.diedMinions.Clear();//contains only the minions that died in this turn!
+            this.diedMinions?.Clear();//contains only the minions that died in this turn!
         }
 
         public void endEnemyTurn() //
@@ -3210,8 +3337,7 @@
         public void enemyplaysACard(CardDB.Card c, Minion target, int position, int choice, int penality)
         {
 
-            Handmanager.Handcard hc = new Handmanager.Handcard(c);
-            hc.entity = this.getNextEntity();
+            Handmanager.Handcard hc = new Handmanager.Handcard(c) {entity = this.getNextEntity()};
             //Helpfunctions.Instance.logg("play crd " + c.name + " entitiy# " + cardEntity + " mana " + hc.getManaCost(this) + " trgt " + target);
             if (logging) Helpfunctions.Instance.logg("enemy play crd " + c.name + " trgt " + target);
 
@@ -4191,13 +4317,13 @@
                 {
                     if (m.silenced) continue;
 
-                    if (own && m.name == CardDB.cardName.illidanstormrage)
+                    if (m.name == CardDB.cardName.illidanstormrage)
                     {
                         illidan++;
                         continue;
                     }
 
-                    if (own && m.name == CardDB.cardName.violetteacher)
+                    if (m.name == CardDB.cardName.violetteacher)
                     {
                         if (hc.card.type == CardDB.cardtype.SPELL)
                         {
@@ -4205,7 +4331,7 @@
                         }
                         continue;
                     }
-                    if (own && m.name == CardDB.cardName.hobgoblin)
+                    if (m.name == CardDB.cardName.hobgoblin)
                     {
                         if (hc.card.type == CardDB.cardtype.MOB && hc.card.Attack == 1 )
                         {
@@ -4215,7 +4341,7 @@
                         continue;
                     }
 
-                    if (own && m.name == CardDB.cardName.summoningstone)
+                    if (m.name == CardDB.cardName.summoningstone)
                     {
                         summonstones++;
                         summoningStone = m;
@@ -4227,7 +4353,7 @@
 
                 for (int i = 0; i < summonstones; i++)
                 {
-                    summoningStone.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
+                    summoningStone?.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
                 }
 
                 foreach (Minion m in this.enemyMinions)
@@ -4279,12 +4405,12 @@
                 foreach (Minion m in this.enemyMinions)
                 {
                     if (m.silenced) continue;
-                    if (!own && m.name == CardDB.cardName.illidanstormrage)
+                    if (m.name == CardDB.cardName.illidanstormrage)
                     {
                         illidan++;
                         continue;
                     }
-                    if (!own && m.name == CardDB.cardName.violetteacher)
+                    if (m.name == CardDB.cardName.violetteacher)
                     {
                         if (hc.card.type == CardDB.cardtype.SPELL)
                         {
@@ -4292,7 +4418,7 @@
                         }
                         continue;
                     }
-                    if (!own && m.name == CardDB.cardName.hobgoblin)
+                    if (m.name == CardDB.cardName.hobgoblin)
                     {
                         if (hc.card.type == CardDB.cardtype.MOB && hc.card.Attack == 1)
                         {
@@ -4302,7 +4428,7 @@
                         continue;
                     }
 
-                    if (!own && m.name == CardDB.cardName.summoningstone)
+                    if (m.name == CardDB.cardName.summoningstone)
                     {
                         summonstones++;
                         summoningStone = m;
@@ -4315,7 +4441,7 @@
 
                 for (int i = 0; i < summonstones; i++)
                 {
-                    summoningStone.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
+                    summoningStone?.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
                 }
 
                 foreach (Minion m in this.ownMinions)
@@ -6448,9 +6574,8 @@
             temp.Sort((a, b) => { int tmp = a.Hp.CompareTo(b.Hp); return tmp == 0 ? a.Angr - b.Angr : tmp; });
 
             int border = 1;
-            for (int pos = 0; pos < temp.Count; pos++)
+            foreach (Minion m in temp)
             {
-                Minion m = temp[pos];
                 if (m.divineshild)
                 {
                     m.divineshild = false;
@@ -6733,7 +6858,7 @@
                 }
 
             }
-            if (a.actionType == actionEnum.attackWithMinion)
+            if (a.actionType == actionEnum.attackWithMinion && a.target != null)
             {
                 string name = "" + a.own.name;
                 if (a.target.isHero)
@@ -6748,7 +6873,7 @@
 
             }
 
-            if (a.actionType == actionEnum.attackWithHero)
+            if (a.actionType == actionEnum.attackWithHero && a.target != null)
             {
                 if (a.target.isHero)
                 {
@@ -7016,7 +7141,7 @@
             if (includeEnemyHero && ownPlay && damage < this.enemyHero.Hp - 15) return this.enemyHero;  // worst-case for us: no minions damaged
 
             // no minions found = all ours live or all enemies die (so just return the first one, highest/lowest atk)
-            return (firstAlive == null ? targetHero : firstAlive);
+            return (firstAlive ?? targetHero);
         }
 
 

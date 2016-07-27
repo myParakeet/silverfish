@@ -9,7 +9,7 @@ namespace HREngine.Bots
         class discoveryitem
         {
             public CardDB.cardIDEnum cardid = CardDB.cardIDEnum.None;
-            public int bonus = 0;
+            public int bonus;
             public string ownclass = "";
             public string enemyclass = "";
 
@@ -54,7 +54,7 @@ namespace HREngine.Bots
 
         private void readCombos()
         {
-            string[] lines = new string[0] { };
+            string[] lines = new string[] { };
             this.discoverylist.Clear();
 
             string path = Settings.Instance.path;

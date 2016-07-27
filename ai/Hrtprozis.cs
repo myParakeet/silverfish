@@ -24,33 +24,33 @@
     {
         public string deckName = "";
 
-        public int enemyCursedCardsinHand = 0;
-        public int ownFenciCoaches=0;
-        public int ownSaboteur=0;
-        public int enemySaboteur=0;
+        public int enemyCursedCardsinHand;
+        public int ownFenciCoaches;
+        public int ownSaboteur;
+        public int enemySaboteur;
 
         public int attackFaceHp = 15;
-        public int ownHeroFatigue = 0;
+        public int ownHeroFatigue;
         public int ownDeckSize = 30;
         public int enemyDeckSize = 30;
-        public int enemyHeroFatigue = 0;
+        public int enemyHeroFatigue;
 
         public int ownHeroEntity = -1;
         public int enemyHeroEntitiy = -1;
         public DateTime roundstart = DateTime.Now;
-        public int currentMana = 0;
+        public int currentMana;
 
         public int heroHp = 30, enemyHp = 30;
-        public int heroAtk = 0, enemyAtk = 0;
-        public int heroDefence = 0, enemyDefence = 0;
-        public bool ownheroisread = false;
-        public int ownHeroNumAttacksThisTurn = 0;
-        public bool ownHeroWindfury = false;
-        public bool herofrozen = false;
-        public bool enemyfrozen = false;
+        public int heroAtk, enemyAtk;
+        public int heroDefence, enemyDefence;
+        public bool ownheroisread;
+        public int ownHeroNumAttacksThisTurn;
+        public bool ownHeroWindfury;
+        public bool herofrozen;
+        public bool enemyfrozen;
 
         public List<CardDB.cardIDEnum> ownSecretList = new List<CardDB.cardIDEnum>();
-        public int enemySecretCount = 0;
+        public int enemySecretCount;
         public Dictionary<CardDB.cardIDEnum, int> startDeck = new Dictionary<CardDB.cardIDEnum, int>();
         public Dictionary<CardDB.cardIDEnum, int> turnDeck = new Dictionary<CardDB.cardIDEnum, int>();
 
@@ -58,38 +58,38 @@
 
         public HeroEnum heroname = HeroEnum.druid, enemyHeroname = HeroEnum.druid;
         public CardDB.Card heroAbility;
-        public bool ownAbilityisReady = false;
+        public bool ownAbilityisReady;
         public CardDB.Card enemyAbility;
-        public int numOptionsPlayedThisTurn = 0;
-        public int numMinionsPlayedThisTurn = 0;
+        public int numOptionsPlayedThisTurn;
+        public int numMinionsPlayedThisTurn;
 
-        public int heroPowerUsesThisTurn = 0;
-        public int ownHeroPowerUsesThisGame = 0;
-        public int enemyHeroPowerUsesThisGame = 0;
-        public int lockAndLoads = 0;
+        public int heroPowerUsesThisTurn;
+        public int ownHeroPowerUsesThisGame;
+        public int enemyHeroPowerUsesThisGame;
+        public int lockAndLoads;
 
-        public int numberMinionsDiedThisTurn = 0;
+        public int numberMinionsDiedThisTurn;
         
 
-        public int cardsPlayedThisTurn = 0;
-        public int owedRecall = 0;
-        public int ownCurrentRecall = 0;
+        public int cardsPlayedThisTurn;
+        public int owedRecall;
+        public int ownCurrentRecall;
         public int enemyRecall;
 
-        public int ownMaxMana = 0;
-        public int enemyMaxMana = 0;
+        public int ownMaxMana;
+        public int enemyMaxMana;
 
-        public int enemyWeaponDurability = 0;
-        public int enemyWeaponAttack = 0;
+        public int enemyWeaponDurability;
+        public int enemyWeaponAttack;
         public CardDB.cardName enemyHeroWeapon = CardDB.cardName.unknown;
 
-        public int heroWeaponDurability = 0;
-        public int heroWeaponAttack = 0;
+        public int heroWeaponDurability;
+        public int heroWeaponAttack;
         public CardDB.cardName ownHeroWeapon = CardDB.cardName.unknown;
 
-        public bool heroImmuneToDamageWhileAttacking = false;
-        public bool heroImmune = false;
-        public bool enemyHeroImmune = false;
+        public bool heroImmuneToDamageWhileAttacking;
+        public bool heroImmune;
+        public bool enemyHeroImmune;
 
 
         public List<Minion> ownMinions = new List<Minion>();
@@ -97,25 +97,25 @@
         public Minion ownHero = new Minion();
         public Minion enemyHero = new Minion();
 
-        public int anzOgOwnCThunHpBonus = 0;
-        public int anzOgOwnCThunAngrBonus = 0;
-        public int anzOgOwnCThunTaunt = 0;
+        public int anzOgOwnCThunHpBonus;
+        public int anzOgOwnCThunAngrBonus;
+        public int anzOgOwnCThunTaunt;
 
-        public int ownDragonConsort = 0;
-        public int enemyDragonConsort = 0;
-        public int ownLoatheb = 0;
-        public int enemyLoatheb = 0;
-        public int ownMillhouse=0;
-        public int enemyMillhouse = 0;
-        public int ownKirinTorEffect = 0;
-        public int ownPreparation = 0;
+        public int ownDragonConsort;
+        public int enemyDragonConsort;
+        public int ownLoatheb;
+        public int enemyLoatheb;
+        public int ownMillhouse;
+        public int enemyMillhouse;
+        public int ownKirinTorEffect;
+        public int ownPreparation;
 
         Helpfunctions help = Helpfunctions.Instance;
         //Imagecomparer icom = Imagecomparer.Instance;
         //HrtNumbers hrtnumbers = HrtNumbers.Instance;
         CardDB cdb = CardDB.Instance;
 
-        private int ownPlayerController = 0;
+        private int ownPlayerController;
 
         private static readonly Hrtprozis instance = new Hrtprozis();
 

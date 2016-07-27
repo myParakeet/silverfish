@@ -79,30 +79,29 @@ namespace HREngine.Bots
     {
         public class CardIDEntity
         {
-            public CardDB.cardIDEnum id = CardDB.cardIDEnum.None;
-            public string idstring = "";
-            public int entity = 0;
+            public CardDB.cardIDEnum id;
+            public string idstring;
+            public int entity;
             public CardIDEntity(string idstring, int entt)
             {
-                this.id = CardDB.Instance.cardIdstringToEnum(idstring);
+                id = CardDB.Instance.cardIdstringToEnum(idstring);
                 this.idstring = idstring;
-                this.entity = entt;
+                entity = entt;
             }
         }
 
         class mulliitem
         {
-            public bool holdrule = false;
+            public bool holdrule;
             public string cardid = "";
-            public string enemyclass = "";
-            public string ownclass = "";
-            public int count = 0;
-            public string[] requiresCard = null;
-            public int manarule = -1;
-            public string rulestring = "";
-            public int coinrule = 0; //0 = for both, 1 = if you are first, 2 if you are second
+            public string enemyclass;
+            public string ownclass;
+            public int count;
+            public string[] requiresCard;
+            public int manarule;
+            public int coinrule; //0 = for both, 1 = if you are first, 2 if you are second
             
-            public mulliitem(string all, bool hrule, string id, string own, string enemy, int number, string[] req = null, int coinr = 0, int mrule = -1)
+            public mulliitem(bool hrule, string id, string own, string enemy, int number, string[] req = null, int coinr = 0, int mrule = -1)
             {
                 if (own == "none") own = "all";
                 if (own != "all") own = Hrtprozis.Instance.heroNametoEnum(own).ToString();
@@ -110,15 +109,14 @@ namespace HREngine.Bots
                 if (enemy != "all") enemy = Hrtprozis.Instance.heroNametoEnum(enemy).ToString();
 
 
-                this.holdrule = hrule;
-                this.cardid = id;
-                this.ownclass = own;
-                this.enemyclass = enemy;
-                this.count = number;
-                this.requiresCard = req;
-                this.manarule = mrule;
-                this.rulestring = all;
-                this.coinrule = coinr;
+                holdrule = hrule;
+                cardid = id;
+                ownclass = own;
+                enemyclass = enemy;
+                count = number;
+                requiresCard = req;
+                manarule = mrule;
+                coinrule = coinr;
 
                 //warn about invalid data even though we accepted it (parts of reqs may be usable)
                 if (id != "#MANARULE" && CardDB.Instance.cardIdstringToEnum(id) == CardDB.cardIDEnum.None)
@@ -159,7 +157,7 @@ namespace HREngine.Bots
         private Dictionary<string, int> holdDB = new Dictionary<string, int>(4);
         List<mulliitem> cardlist = new List<mulliitem>(50);
         List<concedeItem> concedelist = new List<concedeItem>();
-        public bool loserLoserLoser = false;
+        public bool loserLoserLoser;
 
         private string ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
         private string deckName = Hrtprozis.Instance.deckName;
@@ -191,10 +189,10 @@ namespace HREngine.Bots
 
         private void readMulligan()
         {
-            string[] lines = new string[0] { };
-            this.cardlist.Clear();
-            this.holdDB.Clear();
-            this.concedelist.Clear();
+            string[] lines = new string[] { };
+            cardlist.Clear();
+            holdDB.Clear();
+            concedelist.Clear();
             
             string path = Settings.Instance.path;
             string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
@@ -255,7 +253,7 @@ namespace HREngine.Bots
                 }
                 else if (entry1 == "loser")
                 {
-                    this.loserLoserLoser = true;
+                    loserLoserLoser = true;
                     continue;
                 }
                 else if (entry1 == "concede:")
@@ -314,17 +312,17 @@ namespace HREngine.Bots
                 {
                     if ((card.Split(':')).Length == 3)
                     {
-                        this.cardlist.Add(new mulliitem(line, holdrule, card.Split(':')[0], ownclass, enemyclass, Convert.ToInt32(card.Split(':')[1]), card.Split(':')[2].Split('/'), coinrule, -1));
+                        cardlist.Add(new mulliitem(holdrule, card.Split(':')[0], ownclass, enemyclass, Convert.ToInt32(card.Split(':')[1]), card.Split(':')[2].Split('/'), coinrule, -1));
                     }
                     else
                     {
-                        this.cardlist.Add(new mulliitem(line, holdrule, card.Split(':')[0], ownclass, enemyclass, Convert.ToInt32(card.Split(':')[1]), null, coinrule, -1));
+                        cardlist.Add(new mulliitem(holdrule, card.Split(':')[0], ownclass, enemyclass, Convert.ToInt32(card.Split(':')[1]), null, coinrule, -1));
                     }
 
                 }
                 else
                 {
-                    this.cardlist.Add(new mulliitem(line, holdrule, card, ownclass, enemyclass, 2, null, coinrule, -1));
+                    cardlist.Add(new mulliitem(holdrule, card, ownclass, enemyclass, 2, null, coinrule, -1));
                 }
 
                 if (line.Split(';').Length >= 6)
@@ -334,7 +332,7 @@ namespace HREngine.Bots
                     int manarule = Convert.ToInt32(mr);
                     if (manarule <= 0) return;
                     //Console.WriteLine("[Mulligan] found MANA rule: " + mr);
-                    this.cardlist.Add(new mulliitem(line, holdrule, "#MANARULE", ownclass, enemyclass, 2, null, coinrule, manarule));
+                    cardlist.Add(new mulliitem(holdrule, "#MANARULE", ownclass, enemyclass, 2, null, coinrule, manarule));
                 }
 
             }
@@ -365,17 +363,17 @@ namespace HREngine.Bots
                         int manarule = Convert.ToInt32(reqs);
                         if (manarule <= 0) return;
                         //Console.WriteLine("[Mulligan] found MANA rule: " + reqs);
-                        this.cardlist.Add(new mulliitem(line, holdrule, "#MANARULE", ownclass, enemyclass, 2, null, coinrule, manarule));
+                        cardlist.Add(new mulliitem(holdrule, "#MANARULE", ownclass, enemyclass, 2, null, coinrule, manarule));
                     }
                     else
                     {
                         if (line.Split(';')[3].Contains(":"))
                         {
-                            this.cardlist.Add(new mulliitem(line, holdrule, card, ownclass, enemyclass, Convert.ToInt32(line.Split(';')[3].Split(':')[1]), line.Split(';')[4].Replace(':', '+').Split('/'), coinrule, -1));
+                            cardlist.Add(new mulliitem(holdrule, card, ownclass, enemyclass, Convert.ToInt32(line.Split(';')[3].Split(':')[1]), line.Split(';')[4].Replace(':', '+').Split('/'), coinrule, -1));
                         }
                         else
                         {
-                            this.cardlist.Add(new mulliitem(line, holdrule, card, ownclass, enemyclass, 2, line.Split(';')[3].Replace(':', '+').Split('/'), coinrule, -1));
+                            cardlist.Add(new mulliitem(holdrule, card, ownclass, enemyclass, 2, line.Split(';')[3].Replace(':', '+').Split('/'), coinrule, -1));
                         }
                     }
                 }
@@ -383,11 +381,11 @@ namespace HREngine.Bots
                 {
                     if (line.Split(';')[3].Contains(":"))
                     {
-                        this.cardlist.Add(new mulliitem(line, holdrule, card, ownclass, enemyclass, Convert.ToInt32(line.Split(';')[3].Split(':')[1]), null, coinrule, -1));
+                        cardlist.Add(new mulliitem(holdrule, card, ownclass, enemyclass, Convert.ToInt32(line.Split(';')[3].Split(':')[1]), null, coinrule, -1));
                     }
                     else
                     {
-                        this.cardlist.Add(new mulliitem(line, holdrule, card, ownclass, enemyclass, 2, null, coinrule, -1));
+                        cardlist.Add(new mulliitem(holdrule, card, ownclass, enemyclass, 2, null, coinrule, -1));
                     }
                 }
             }
@@ -399,9 +397,9 @@ namespace HREngine.Bots
 
         public bool hasmulliganrules(string ownclass, string enemclass)
         {
-            if (this.cardlist.Count == 0) return false;
+            if (cardlist.Count == 0) return false;
             bool hasARule = false;
-            foreach (mulliitem mi in this.cardlist)
+            foreach (mulliitem mi in cardlist)
             {
                 if ((mi.enemyclass == "all" || mi.enemyclass == enemclass) && (mi.ownclass == "all" || mi.ownclass == ownclass)) hasARule = true;
             }
@@ -411,9 +409,9 @@ namespace HREngine.Bots
         public bool hasHoldListRule(string ownclass, string enemclass)
         {
             bool hasARule = false;
-            foreach (mulliitem mi in this.cardlist)
+            foreach (mulliitem mi in cardlist)
             {
-                if (mi.holdrule = true && (mi.enemyclass == "all" || mi.enemyclass == enemclass) && (mi.ownclass == "all" || mi.ownclass == ownclass)) hasARule = true;
+                if (mi.holdrule && (mi.enemyclass == "all" || mi.enemyclass == enemclass) && (mi.ownclass == "all" || mi.ownclass == ownclass)) hasARule = true;
             }
             return hasARule;
         }
@@ -431,7 +429,7 @@ namespace HREngine.Bots
             }
 
             List<int> discarditems = new List<int>();
-            this.holdDB.Clear();
+            holdDB.Clear();
             Dictionary<string, int> mullCards = new Dictionary<string, int>(5);
 
             foreach (CardIDEntity c in cards) //count duplicates for req #
@@ -449,14 +447,14 @@ namespace HREngine.Bots
             foreach (CardIDEntity c in cards)
             {
                 setHoldCount(c.idstring, 0); //default hold 0 = discard
-                foreach (mulliitem mi in this.cardlist)
+                foreach (mulliitem mi in cardlist)
                 {
                     if (hascoin && mi.coinrule == 1) continue;
                     if (!hascoin && mi.coinrule == 2) continue;
 
                     if (mi.cardid == "#MANARULE" && (mi.enemyclass == "all" || mi.enemyclass == enemclass) && (mi.ownclass == "all" || mi.ownclass == ownclass))
                     {
-                        if (mi.holdrule == true)
+                        if (mi.holdrule)
                         {
                             if (CardDB.Instance.getCardDataFromID(c.id).cost <= mi.manarule)
                             {
@@ -484,7 +482,7 @@ namespace HREngine.Bots
                     {
                         if (mi.requiresCard == null)
                         {
-                            if (mi.holdrule == true)
+                            if (mi.holdrule)
                             {
                                 Helpfunctions.Instance.ErrorLog("[Mulligan] HOLD: " + mi.cardid + " x" + mi.count);
                                 setHoldCount(mi.cardid, mi.count);
@@ -622,7 +620,7 @@ namespace HREngine.Bots
 
         public void setAutoConcede(bool mode)
         {
-            this.loserLoserLoser = mode;
+            loserLoserLoser = mode;
         }
 
         public bool shouldConcede(HeroEnum ownhero, HeroEnum enemHero)
@@ -638,7 +636,7 @@ namespace HREngine.Bots
 
         public void runDebugTest()
         {
-            string[] lines = new string[0] { };
+            string[] lines = new string[] { };
             try
             {
                 string path = Settings.Instance.path;
@@ -652,15 +650,15 @@ namespace HREngine.Bots
             foreach (string line in lines)
             {
                 string ln = line.Trim();
-                List<Mulligan.CardIDEntity> cards = new List<Mulligan.CardIDEntity>();
+                List<CardIDEntity> cards = new List<CardIDEntity>();
 
                 for (int i = 0; i < ln.Split(';')[0].Split(',').Length; i++)
                 {
                     string card = ln.Split(';')[0].Split(',')[i];
                     Helpfunctions.Instance.ErrorLog("[Mulligan] hand contains card: " + card);
-                    cards.Add(new Mulligan.CardIDEntity(card, i));
+                    cards.Add(new CardIDEntity(card, i));
                 }
-                Mulligan.Instance.whatShouldIMulligan(cards, ln.Split(';')[1], ln.Split(';')[2], (ln.Split(';')[3] == "coin"));
+                Instance.whatShouldIMulligan(cards, ln.Split(';')[1], ln.Split(';')[2], (ln.Split(';')[3] == "coin"));
                 continue;
             }
         }

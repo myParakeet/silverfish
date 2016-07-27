@@ -17,14 +17,14 @@
 
 
         Dictionary<CardDB.cardName, int> DamageAllDatabase = new Dictionary<CardDB.cardName, int>();
-        Dictionary<CardDB.cardName, int> DamageHeroDatabase = new Dictionary<CardDB.cardName, int>();
+        Dictionary<CardDB.cardName, int> DamageHeroDatabase = new Dictionary<CardDB.cardName, int>(); //not used
         Dictionary<CardDB.cardName, int> DamageRandomDatabase = new Dictionary<CardDB.cardName, int>();
         Dictionary<CardDB.cardName, int> DamageAllEnemysDatabase = new Dictionary<CardDB.cardName, int>();
 
         Dictionary<CardDB.cardName, int> enrageDatabase = new Dictionary<CardDB.cardName, int>();
         Dictionary<CardDB.cardName, int> silenceDatabase = new Dictionary<CardDB.cardName, int>();
 
-        Dictionary<CardDB.cardName, int> heroAttackBuffDatabase = new Dictionary<CardDB.cardName, int>();
+        Dictionary<CardDB.cardName, int> heroAttackBuffDatabase = new Dictionary<CardDB.cardName, int>(); //not used
         Dictionary<CardDB.cardName, int> attackBuffDatabase = new Dictionary<CardDB.cardName, int>();
         Dictionary<CardDB.cardName, int> healthBuffDatabase = new Dictionary<CardDB.cardName, int>();
         Dictionary<CardDB.cardName, int> tauntBuffDatabase = new Dictionary<CardDB.cardName, int>();
@@ -39,12 +39,12 @@
         Dictionary<CardDB.cardName, int> destroyDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> buffingMinionsDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> buffing1TurnDatabase = new Dictionary<CardDB.cardName, int>();
-        Dictionary<CardDB.cardName, int> heroDamagingAoeDatabase = new Dictionary<CardDB.cardName, int>();
+        Dictionary<CardDB.cardName, int> heroDamagingAoeDatabase = new Dictionary<CardDB.cardName, int>(); //not used
         public Dictionary<CardDB.cardName, int> randomEffects = new Dictionary<CardDB.cardName, int>();
 
         Dictionary<CardDB.cardName, int> silenceTargets = new Dictionary<CardDB.cardName, int>();
 
-        Dictionary<CardDB.cardName, int> returnHandDatabase = new Dictionary<CardDB.cardName, int>();
+        Dictionary<CardDB.cardName, int> returnHandDatabase = new Dictionary<CardDB.cardName, int>(); //not used
 
         Dictionary<CardDB.cardName, int> priorityDatabase = new Dictionary<CardDB.cardName, int>(); //minions we want to keep around
 
@@ -875,8 +875,8 @@
 
         private int getHealPenality(CardDB.cardName name, Minion target, Playfield p, int choice, bool lethal)
         {
-            ///Todo healpenality for aoe heal
-            ///todo auchenai soulpriest
+            //Todo healpenality for aoe heal
+            //todo auchenai soulpriest
             if (p.anzOwnAuchenaiSoulpriest >= 1) return 0;
             if (name == CardDB.cardName.ancientoflore && choice != 2) return 0;
             int pen = 0;

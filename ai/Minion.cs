@@ -6,9 +6,9 @@
     public class miniEnch
     {
         public CardDB.cardIDEnum CARDID = CardDB.cardIDEnum.None;
-        public int creator = 0; // the minion
-        public int controllerOfCreator = 0; // own or enemys buff?
-        public int copyDeathrattle = 0;
+        public int creator; // the minion
+        public int controllerOfCreator; // own or enemys buff?
+        public int copyDeathrattle;
 
         public miniEnch(CardDB.cardIDEnum id, int crtr, int controler)
         {
@@ -30,79 +30,79 @@
     public class Minion
     {
         //dont silence----------------------------
-        public int anzGotDmg = 0;
-        public int gotDmgRaw = 0;
-        public int GotDmgValue = 0;
-        public bool gotInspire = false;
-        public bool isHero = false;
+        public int anzGotDmg;
+        public int gotDmgRaw;
+        public int GotDmgValue;
+        public bool gotInspire;
+        public bool isHero;
         public bool own;
         public int pID = 0;
 
         public CardDB.cardName name = CardDB.cardName.unknown;
         public TAG_CLASS cardClass = TAG_CLASS.INVALID;
-        public int synergy = 0;
+        public int synergy;
         public Handmanager.Handcard handcard;
         public int entityID = -1;
         //public int id = -1;//delete this
-        public int zonepos = 0;
+        public int zonepos;
         public CardDB.Card deathrattle2;
 
-        public bool playedThisTurn = false;
-        public int numAttacksThisTurn = 0;
-        public bool immuneWhileAttacking = false;
+        public bool playedThisTurn;
+        public int numAttacksThisTurn;
+        public bool immuneWhileAttacking;
 
-        public bool allreadyAttacked = false;
+        public bool allreadyAttacked;
 
         //---------------------------------------
-        public bool shadowmadnessed = false;//´can be silenced :D
-        public bool canAttackNormal = false;
+        public bool shadowmadnessed;//´can be silenced :D
+        public bool canAttackNormal;
 
-        public bool destroyOnOwnTurnStart = false; // depends on own!
-        public bool destroyOnEnemyTurnStart = false; // depends on own!
-        public bool destroyOnOwnTurnEnd = false; // depends on own!
-        public bool destroyOnEnemyTurnEnd = false; // depends on own!
+        public bool destroyOnOwnTurnStart; // depends on own!
+        public bool destroyOnEnemyTurnStart; // depends on own!
+        public bool destroyOnOwnTurnEnd; // depends on own!
+        public bool destroyOnEnemyTurnEnd; // depends on own!
 
-        public bool concedal = false;
-        public int ancestralspirit = 0;
-        public int souloftheforest = 0;
-        public int explorershat = 0;
-        public int infest = 0;
+        public bool concedal;
+        public int ancestralspirit;
+        public int souloftheforest;
+        public int explorershat;
+        public int infest;
 
-        public int ownBlessingOfWisdom = 0;
-        public int enemyBlessingOfWisdom = 0;
-        public int ownPowerWordGlory = 0;
-        public int enemyPowerWordGlory = 0;
-        public int spellpower = 0;
+        public int ownBlessingOfWisdom;
+        public int enemyBlessingOfWisdom;
+        public int ownPowerWordGlory;
+        public int enemyPowerWordGlory;
+        public int spellpower;
 
-        public bool cantBeTargetedBySpellsOrHeroPowers = false;
+        public bool cantBeTargetedBySpellsOrHeroPowers;
 
-        public int Hp = 0;
-        public int maxHp = 0;
-        public int armor = 0;
+        public int Hp;
+        public int maxHp;
+        public int armor;
 
-        public int Angr = 0;
-        public int AdjacentAngr = 0;
-        public int tempAttack = 0;
+        public int Angr;
+        public int AdjacentAngr;
+        public int tempAttack;
 
-        public bool Ready = false;
+        public bool Ready;
 
-        public bool taunt = false;
-        public bool wounded = false;//hp red?
+        public bool taunt;
+        public bool wounded;//hp red?
 
-        public bool divineshild = false;
-        public bool windfury = false;
-        public bool frozen = false;
-        public bool stealth = false;
-        public bool immune = false;
-        public bool exhausted = false;
+        public bool divineshild;
+        public bool windfury;
+        public bool frozen;
+        public bool stealth;
+        public bool immune;
+        public bool exhausted;
 
-        public int charge = 0;
-        public bool poisonous = false;
-        public bool cantLowerHPbelowONE = false;
+        public int charge;
+        public bool poisonous;
+        public bool cantLowerHPbelowONE;
 
-        public bool silenced = false;
+        public bool silenced;
         public bool extraParam = false;
-        public int extraParam2 = 0;
+        public int extraParam2;
 
         public List<int> deathrattles = new List<int>();//we might have to use this for unearthed raptor
 

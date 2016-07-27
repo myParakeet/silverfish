@@ -26,7 +26,7 @@ namespace HREngine.Bots
                     }
                 }
             }
-            if (sum < 9999)
+            if (sum < 9999 && c != null)
             {
                 p.callKid(c.card, p.ownMinions.Count, true);
                 p.removeCard(c);

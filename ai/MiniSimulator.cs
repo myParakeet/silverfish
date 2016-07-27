@@ -15,27 +15,27 @@
         private bool useComparison = true;
 
 
-        private bool printNormalstuff = false;
+        private bool printNormalstuff;
 
-        public int boardindexToSimulate = 0;
+        public int boardindexToSimulate;
         List<Playfield> posmoves = new List<Playfield>(7000);
         List<Playfield> twoturnfields = new List<Playfield>(500);
 
         List<List<Playfield>> threadresults = new List<List<Playfield>>(64);
         private int dirtyTwoTurnSim = 256;
 
-        public Action bestmove = null;
-        public float bestmoveValue = 0;
+        public Action bestmove;
+        public float bestmoveValue;
         public Playfield bestboard = new Playfield();
 
-        private Behavior botBase = null;
+        private Behavior botBase;
 
         private Movegenerator movegen = Movegenerator.Instance;
 
-        private int calculated = 0;
+        private int calculated;
 
         private bool simulateSecondTurn = false;
-        private bool playaround = false;
+        private bool playaround;
         private int playaroundprob = 50;
         private int playaroundprob2 = 80;
         

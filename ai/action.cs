@@ -32,7 +32,7 @@ namespace HREngine.Bots
         public Minion own;
         public Minion target;
         public int druidchoice; // 1 left card, 2 right card
-        public int tracking=0; // 1= leftmost card
+        public int tracking; // 1= leftmost card
         public int penalty;
 
         public Action(actionEnum type, Handmanager.Handcard hc, Minion ownCardEntity, int place, Minion target, int pen, int choice, int track = 0)
@@ -93,11 +93,10 @@ namespace HREngine.Bots
 
                 this.card = null;
 
-                Minion m = new Minion { entityID = targetEnt };
+                Minion m = new Minion {entityID = targetEnt};
                 this.target = m;
 
-                Minion o = new Minion();
-                o.entityID = ownEnt;
+                Minion o = new Minion {entityID = ownEnt};
                 this.own = o;
             }
 
@@ -193,11 +192,11 @@ namespace HREngine.Bots
 
                     help.writeToBuffer(playaction + discover);
                 }
-                if (this.actionType == actionEnum.attackWithMinion)
+                if (this.actionType == actionEnum.attackWithMinion && this.target != null)
                 {
                     help.writeToBuffer("attack " + this.own.entityID + " enemy " + this.target.entityID + discover);
                 }
-                if (this.actionType == actionEnum.attackWithHero)
+                if (this.actionType == actionEnum.attackWithHero && this.target != null)
                 {
                     help.writeToBuffer("heroattack " + this.target.entityID + discover);
                 }
@@ -242,7 +241,7 @@ namespace HREngine.Bots
             }
 
 
-            if (this.actionType == actionEnum.playcard)
+            if (this.actionType == actionEnum.playcard && this.card != null)
             {
                 string playaction = "play ";
                 playaction += cardname;
@@ -256,11 +255,11 @@ namespace HREngine.Bots
 
                 help.logg(playaction + discover);
             }
-            if (this.actionType == actionEnum.attackWithMinion)
+            if (this.actionType == actionEnum.attackWithMinion && this.target != null && this.own != null)
             {
                 help.logg("attacker: " + cardname + " id " + this.own.entityID + ", enemy: " + targetname + " id " + this.target.entityID + discover);
             }
-            if (this.actionType == actionEnum.attackWithHero)
+            if (this.actionType == actionEnum.attackWithHero && this.target != null)
             {
                 help.logg("attack with hero, enemy: " + targetname + " id " + this.target.entityID + discover);
             }

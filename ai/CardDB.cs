@@ -4006,65 +4006,65 @@ namespace HREngine.Bots
             //public string CardID = "";
             public cardName name = cardName.unknown;
             public TAG_RACE race = TAG_RACE.INVALID;
-            public int rarity = 0;
-            public int cost = 0;
-            public int Class = 0;
+            public int rarity;
+            public int cost;
+            public int Class;
             public cardtype type = CardDB.cardtype.NONE;
             //public string description = "";
 
-            public int Attack = 0;
-            public int Health = 0;
-            public int Durability = 0;//for weapons
-            public bool target = false;
+            public int Attack;
+            public int Health;
+            public int Durability;//for weapons
+            public bool target;
             //public string targettext = "";
-            public bool tank = false;
-            public bool Silence = false;
-            public bool choice = false;
-            public bool windfury = false;
-            public bool poisionous = false;
-            public bool deathrattle = false;
-            public bool battlecry = false;
-            public bool oneTurnEffect = false;
-            public bool Enrage = false;
-            public bool Aura = false;
-            public bool Elite = false;
-            public bool Combo = false;
-            public int overload = 0;
-            public bool Recall = false;
-            public int recallValue = 0;
-            public bool immuneWhileAttacking = false;
-            public bool immuneToSpellpowerg = false;
-            public bool Stealth = false;
-            public bool Freeze = false;
-            public bool AdjacentBuff = false;
-            public bool Shield = false;
-            public bool Charge = false;
-            public bool Secret = false;
-            public bool Morph = false;
-            public bool Spellpower = false;
-            public bool GrantCharge = false;
-            public bool HealTarget = false;
-            public bool Inspire = false;
+            public bool tank;
+            public bool Silence;
+            public bool choice;
+            public bool windfury;
+            public bool poisionous;
+            public bool deathrattle;
+            public bool battlecry;
+            public bool oneTurnEffect;
+            public bool Enrage;
+            public bool Aura;
+            public bool Elite;
+            public bool Combo;
+            public int overload;
+            public bool Recall;
+            public int recallValue;
+            public bool immuneWhileAttacking;
+            public bool immuneToSpellpowerg;
+            public bool Stealth;
+            public bool Freeze;
+            public bool AdjacentBuff;
+            public bool Shield;
+            public bool Charge;
+            public bool Secret;
+            public bool Morph;
+            public bool Spellpower;
+            public bool GrantCharge;
+            public bool HealTarget;
+            public bool Inspire;
             //playRequirements, reqID= siehe PlayErrors->ErrorType
-            public int needEmptyPlacesForPlaying = 0;
-            public int needWithMinAttackValueOf = 0;
-            public int needWithMaxAttackValueOf = 0;
-            public int needRaceForPlaying = 0;
-            public int needMinNumberOfEnemy = 0;
-            public int needMinTotalMinions = 0;
-            public int needMinOwnMinions = 0;
-            public int needMinionsCapIfAvailable = 0;
+            public int needEmptyPlacesForPlaying;
+            public int needWithMinAttackValueOf;
+            public int needWithMaxAttackValueOf;
+            public int needRaceForPlaying;
+            public int needMinNumberOfEnemy;
+            public int needMinTotalMinions;
+            public int needMinOwnMinions;
+            public int needMinionsCapIfAvailable;
 
 
             //additional data
-            public bool isToken = false;
-            public int isCarddraw = 0;
-            public bool damagesTarget = false;
-            public bool damagesTargetWithSpecial = false;
-            public int targetPriority = 0;
-            public bool isSpecialMinion = false;
+            public bool isToken;
+            public int isCarddraw;
+            public bool damagesTarget;
+            public bool damagesTargetWithSpecial;
+            public int targetPriority;
+            public bool isSpecialMinion;
 
-            public int spellpowervalue = 0;
+            public int spellpowervalue;
             public cardIDEnum cardIDenum = cardIDEnum.None;
             public List<ErrorType2> playrequires;
             public List<cardtrigers> trigers;
@@ -5651,7 +5651,7 @@ namespace HREngine.Bots
         Dictionary<cardIDEnum, Card> cardidToCardList = new Dictionary<cardIDEnum, Card>();
         List<string> allCardIDS = new List<string>();
         public Card unknownCard;
-        public bool installedWrong = false;
+        public bool installedWrong;
 
         public Card teacherminion;
         public Card illidanminion;
@@ -5720,9 +5720,13 @@ namespace HREngine.Bots
             this.cardidToCardList.Clear();
             Card c = new Card();
             //placeholdercard
-            Card plchldr = new Card { name = cardName.unknown, cost = 1000 };
-            plchldr.sim_card = new SimTemplate();
-            plchldr.pen_card = new PenTemplate();
+            Card plchldr = new Card
+            {
+                name = cardName.unknown,
+                cost = 1000,
+                sim_card = new SimTemplate(),
+                pen_card = new PenTemplate()
+            };
             this.namelist.Add("unknown");
             this.cardlist.Add(plchldr);
             this.unknownCard = cardlist[0];

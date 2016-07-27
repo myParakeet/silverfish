@@ -31,21 +31,21 @@
         class combo
         {
             public combotype type = combotype.combo;
-            public int neededMana = 0;
+            public int neededMana;
             public Dictionary<CardDB.cardIDEnum, int> combocards = new Dictionary<CardDB.cardIDEnum, int>();
             public Dictionary<CardDB.cardIDEnum, int> cardspen = new Dictionary<CardDB.cardIDEnum, int>();
             public Dictionary<CardDB.cardIDEnum, int> combocardsTurn0Mobs = new Dictionary<CardDB.cardIDEnum, int>();
             public Dictionary<CardDB.cardIDEnum, int> combocardsTurn0All = new Dictionary<CardDB.cardIDEnum, int>();
             public Dictionary<CardDB.cardIDEnum, int> combocardsTurn1 = new Dictionary<CardDB.cardIDEnum, int>();
             public int penality = 0;
-            public int combolength = 0;
-            public int combot0len = 0;
-            public int combot1len = 0;
-            public int combot0lenAll = 0;
-            public bool twoTurnCombo = false;
-            public int bonusForPlaying = 0;
-            public int bonusForPlayingT0 = 0;
-            public int bonusForPlayingT1 = 0;
+            public int combolength;
+            public int combot0len;
+            public int combot1len;
+            public int combot0lenAll;
+            public bool twoTurnCombo;
+            public int bonusForPlaying;
+            public int bonusForPlayingT0;
+            public int bonusForPlayingT1;
             public CardDB.cardName requiredWeapon = CardDB.cardName.unknown;
             public HeroEnum oHero = HeroEnum.None;
 

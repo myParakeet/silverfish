@@ -17,9 +17,9 @@ namespace HREngine.Bots
 
             for (int i = 0; i < times; i++)
             {
-                for (int j = 0; j < temp.Count; j++)
+                foreach (Minion mnn in temp)
                 {
-                    p.minionGetDamageOrHeal(temp[j], 1);
+                    p.minionGetDamageOrHeal(mnn, 1);
                     i++;
                     if (i >= times) break;
                 }

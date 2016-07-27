@@ -15,13 +15,15 @@ namespace HREngine.Bots
         //    heldenfähigkeit/\nruft einen rekruten der silbernen hand (1/1) herbei.
         public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
-            List<CardDB.cardIDEnum> availa = new List<CardDB.cardIDEnum>();
-            availa.Add(CardDB.cardIDEnum.CS2_052);
-            availa.Add(CardDB.cardIDEnum.CS2_051);
-            availa.Add(CardDB.cardIDEnum.NEW1_009);
-            availa.Add(CardDB.cardIDEnum.CS2_050);
+            List<CardDB.cardIDEnum> availa = new List<CardDB.cardIDEnum>
+            {
+                CardDB.cardIDEnum.CS2_052,
+                CardDB.cardIDEnum.CS2_051,
+                CardDB.cardIDEnum.NEW1_009,
+                CardDB.cardIDEnum.CS2_050
+            };
 
-                foreach (Minion m in (ownplay) ? p.ownMinions : p.enemyMinions)
+            foreach (Minion m in (ownplay) ? p.ownMinions : p.enemyMinions)
                 {
                     if (availa.Contains(m.handcard.card.cardIDenum))
                     {

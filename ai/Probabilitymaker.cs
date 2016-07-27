@@ -19,7 +19,7 @@
 
     public class SecretItem
     {
-        public bool triggered = false;
+        public bool triggered;
 
         public bool canbeTriggeredWithAttackingHero = true;
         public bool canbeTriggeredWithAttackingMinion = true;
@@ -59,7 +59,7 @@
         public bool canBe_Trial = true;
         public bool canBe_Dart = true;//hunter
 
-        public int entityId = 0;
+        public int entityId;
 
         public SecretItem()
         {
@@ -320,18 +320,18 @@
 
         public List<SecretItem> enemySecrets = new List<SecretItem>();
 
-        public int ownGraveYardCommonAttack = 0;
+        public int ownGraveYardCommonAttack;
         public int ownGraveYardCommonHP = 0;
-        public int ownGraveYardCommonTaunt = 0;
+        public int ownGraveYardCommonTaunt;
 
-        public int enemyGraveYardCommonAttack = 0;
-        public int enemyGraveYardCommonHP = 0;
-        public int enemyGraveYardCommonTaunt = 0;
+        public int enemyGraveYardCommonAttack;
+        public int enemyGraveYardCommonHP;
+        public int enemyGraveYardCommonTaunt;
 
-        public int anzMinionSinGrave = 0;
+        public int anzMinionSinGrave;
 
-        public bool feugenDead = false;
-        public bool stalaggDead = false;
+        public bool feugenDead;
+        public bool stalaggDead;
 
         private static readonly Probabilitymaker instance = new Probabilitymaker();
 

@@ -577,7 +577,7 @@
             }
 
             // use ability
-            /// TODO check if ready after manaup
+            // TODO check if ready after manaup
             if (p.ownAbilityReady && p.ownHeroAblility.card.canplayCard(p, 2))
             {
                 int abilityPenality = 0;

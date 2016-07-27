@@ -7,12 +7,12 @@
 
         public class Handcard
         {
-            public int position = 0;
+            public int position;
             public int entity = -1;
             public int manacost = 1000;
-            public int addattack = 0;
-            public int addHp = 0;
-            public bool isChoiceTemp = false;
+            public int addattack;
+            public int addHp;
+            public bool isChoiceTemp;
             public CardDB.Card card;
 
             public Handcard()
@@ -51,11 +51,11 @@
 
         public List<Handcard> handcardchoices = new List<Handcard>();
 
-        public int anzcards = 0;
+        public int anzcards;
 
-        public int enemyAnzCards = 0;
+        public int enemyAnzCards;
 
-        private int ownPlayerController = 0;
+        private int ownPlayerController;
 
         Helpfunctions help;
         CardDB cdb = CardDB.Instance;
@@ -115,18 +115,22 @@
             foreach (CardDB.cardIDEnum cid in crdchcs)
             {
                 CardDB.Card cardc = CardDB.Instance.getCardDataFromID(cid);
-                Handcard nehc = new Handcard(cardc);
-                nehc.entity = 54321;
-                nehc.manacost = cardc.cost;
+                Handcard nehc = new Handcard(cardc)
+                {
+                    entity = 54321,
+                    manacost = cardc.cost
+                };
                 this.handcardchoices.Add(nehc);
                 Helpfunctions.Instance.ErrorLog("choices " + cardc.name);
             }
             CardDB.Card tempcard = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.CS2_029);//=fireball, just to make sure its not a mob (movegen will ignore mobs if own minions >= 7)
             tempcard.name = CardDB.cardName.placeholdercard;
-            Handcard newhc = new Handcard(tempcard);
-            newhc.entity = 54321;
-            newhc.isChoiceTemp=true;
-            newhc.manacost = 0;
+            Handcard newhc = new Handcard(tempcard)
+            {
+                entity = 54321,
+                isChoiceTemp = true,
+                manacost = 0
+            };
             this.handCards.Add(newhc);
         }
 
