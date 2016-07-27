@@ -431,9 +431,11 @@ namespace HREngine.Bots
             List<int> discarditems = new List<int>();
             holdDB.Clear();
             Dictionary<string, int> mullCards = new Dictionary<string, int>(5);
+            string mullstring = "";
 
-            foreach (CardIDEntity c in cards) //count duplicates for req #
+            for (int i = 0; i < cards.Count; i++)
             {
+                CardIDEntity c = cards[i];
                 if (mullCards.ContainsKey(c.idstring))
                 {
                     mullCards[c.idstring]++;
@@ -442,7 +444,15 @@ namespace HREngine.Bots
                 {
                     mullCards.Add(c.idstring, 1);
                 }
+                mullstring += c.idstring;
+                if (i + 1 < cards.Count) mullstring += ",";
             }
+
+            mullstring += ";" + ownclass + ";" + enemclass + ";";
+            mullstring += (hascoin) ? "coin" : "nocoin";
+
+            Helpfunctions.Instance.logg("[Mulligan] mulltest string: " + mullstring);
+            
 
             foreach (CardIDEntity c in cards)
             {
