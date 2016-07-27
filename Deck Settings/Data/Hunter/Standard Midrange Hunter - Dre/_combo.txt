@@ -1,6 +1,6 @@
 // This File: _combo.txt
 //    Author: Dre
-//   Version: 0.5 (26-Jul-2016)
+//   Version: 0.6 (27-Jul-2016)
 // Deck Name: Standard Midrange Hunter
 //      Hero: Hunter
 // Deck Type: Midrange (Control)
@@ -45,10 +45,10 @@ cardvalue:OG_216,-11
 cardvalue:NEW1_041,-1
 
 // Cardvalue Eaglehorn Bow (EX1_536)	
-cardvalue:EX1_536,-1
+cardvalue:EX1_536,-2
 
 // Cardvalue Steady Shot (DS1h_292) 
-cardvalue:DS1h_292,2
+cardvalue:DS1h_292,4
 
 // Cardvalue Astral Communion (AT_043) 
 cardvalue:AT_043,500
