@@ -21,13 +21,6 @@ namespace HREngine.Bots
         public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int pos = own.zonepos;
-            if (p.isServer)
-            {
-                //TODO
-                p.callKid(kid6, pos, own.own, true);
-                return;
-            }
-
 //            List<CardDB.Card> avail = new List<CardDB.Card>();
 //            avail.Add(kid);
 //            avail.Add(kid2);
@@ -41,9 +34,5 @@ namespace HREngine.Bots
 //            p.callKid(avail[random], pos, own.own, true);
             p.callKid(kid6, pos, own.own, true);
         }
-
-
     }
-
-
 }

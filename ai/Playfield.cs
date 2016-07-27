@@ -43,10 +43,6 @@
         public bool logging = false;
         public bool complete = false;
 
-        public bool isServer = false;
-        public static Random randomGeneratorInstance = new Random();//speedup thanxs to xytrix
-        public Random randomGenerator = null;  // local reference to prevent changing all code locations
-
         //dont have to be copied! (server doesnt copy)
         public List<Handmanager.Handcard> myDeck ;
         public List<Handmanager.Handcard> enemyDeck ;
@@ -343,7 +339,6 @@
         public Playfield()
         {
             this.nextEntity = 1000;
-            this.randomGenerator = randomGeneratorInstance;
             //this.simulateEnemyTurn = Ai.Instance.simulateEnemyTurn;
             this.ownController = Hrtprozis.Instance.getOwnController();
 
@@ -729,9 +724,7 @@
 
         public Playfield(Playfield p)
         {
-            this.isServer = p.isServer;
             this.nextEntity = p.nextEntity;
-            this.randomGenerator = randomGeneratorInstance;
 
             this.isOwnTurn = p.isOwnTurn;
             this.turnCounter = p.turnCounter;
@@ -2367,10 +2360,6 @@
         //old one, will be replaced soon
         public void endTurn(bool simulateTwoTurns, bool playaround, bool print = false, int pprob = 0, int pprob2 = 0)
         {
-            bool doServerstuff = this.isServer;
-
-            if (!doServerstuff)
-            {
                 this.value = int.MinValue;
                 if (!this.enemyHero.immune && this.turnCounter == 0)
                 {
@@ -2446,17 +2435,12 @@
                     }
 
                 }
-
-
-            }
             //this.turnCounter++;
             //penalty for destroying combo
 
-            if (!doServerstuff)
-            {
+
                 this.evaluatePenality += ComboBreaker.Instance.checkIfComboWasPlayed(this.playactions, this.ownWeaponName, this.ownHeroName);
                 if (this.complete) return;
-            }
 
 
 
@@ -2464,12 +2448,6 @@
             this.isOwnTurn = !this.isOwnTurn;
             this.triggerStartTurn(this.isOwnTurn);
             this.optionsPlayedThisTurn = 0;
-            if (doServerstuff)
-            {
-                this.isOwnTurn = !this.isOwnTurn;
-            }
-            if (!doServerstuff)
-            {
                 if (!this.isOwnTurn) simulateTraps();
 
                 if (!sEnemTurn && !this.isOwnTurn) // it was at the biginning our turn -> now its enems
@@ -2495,8 +2473,6 @@
                     }
                     this.complete = true;*/
                 }
-            }
-
         }
 
         //prepares the turn for the next player
@@ -3373,42 +3349,26 @@
 
                     if (this.ownWeaponName == CardDB.cardName.powermace && this.ownMinions.Count>=1)
                     {
-                        if (this.isServer)
+                        int sum = 1000;
+                        Minion t = null;
+
+                        foreach (Minion m in ownMinions)
                         {
-                            List<Minion> temp = new List<Minion>();
-                            foreach (Minion m in ownMinions)
+                            if ((TAG_RACE)m.handcard.card.race == TAG_RACE.MECHANICAL)
                             {
-                                if ((TAG_RACE)m.handcard.card.race == TAG_RACE.MECHANICAL)
+                                int s = m.maxHp + m.Angr;
+                                if (s < sum)
                                 {
-                                    temp.Add(m);
+                                    t = m;
+                                    sum = s;
                                 }
                             }
-                            Minion choosen = this.getRandomMinionOfThatList(temp);
-                            if (choosen != null) this.minionGetBuffed(choosen, 2, 2);
+
                         }
-                        else
+
+                        if (t != null && sum < 999)
                         {
-                            int sum = 1000;
-                            Minion t = null;
-
-                            foreach (Minion m in ownMinions)
-                            {
-                                if ((TAG_RACE)m.handcard.card.race == TAG_RACE.MECHANICAL)
-                                {
-                                    int s = m.maxHp + m.Angr;
-                                    if (s < sum)
-                                    {
-                                        t = m;
-                                        sum = s;
-                                    }
-                                }
-
-                            }
-
-                            if (t != null && sum < 999)
-                            {
-                                this.minionGetBuffed(t, 2, 2);
-                            }
+                            this.minionGetBuffed(t, 2, 2);
                         }
                     }
 
@@ -3464,42 +3424,26 @@
 
                     if (this.ownWeaponName == CardDB.cardName.powermace && this.enemyMinions.Count >= 1)
                     {
-                        if (this.isServer)
+                        int sum = 1000;
+                        Minion t = null;
+
+                        foreach (Minion m in enemyMinions)
                         {
-                            List<Minion> temp = new List<Minion>();
-                            foreach (Minion m in enemyMinions)
+                            if ((TAG_RACE)m.handcard.card.race == TAG_RACE.MECHANICAL)
                             {
-                                if ((TAG_RACE)m.handcard.card.race == TAG_RACE.MECHANICAL)
+                                int s = m.maxHp + m.Angr;
+                                if (s < sum)
                                 {
-                                    temp.Add(m);
+                                    t = m;
+                                    sum = s;
                                 }
                             }
-                            Minion choosen = this.getRandomMinionOfThatList(temp);
-                            if (choosen != null) this.minionGetBuffed(choosen, 2, 2);
+
                         }
-                        else
+
+                        if (t != null && sum < 999)
                         {
-                            int sum = 1000;
-                            Minion t = null;
-
-                            foreach (Minion m in enemyMinions)
-                            {
-                                if ((TAG_RACE)m.handcard.card.race == TAG_RACE.MECHANICAL)
-                                {
-                                    int s = m.maxHp + m.Angr;
-                                    if (s < sum)
-                                    {
-                                        t = m;
-                                        sum = s;
-                                    }
-                                }
-
-                            }
-
-                            if (t != null && sum < 999)
-                            {
-                                this.minionGetBuffed(t, 2, 2);
-                            }
+                            this.minionGetBuffed(t, 2, 2);
                         }
                     }
 
@@ -4225,15 +4169,7 @@
             {
                 for (int i = 0; i < this.lockAndLoads; i++)
                 {
-                    if (this.isServer)
-                    {
-                        //TODO (draw a hunter card)
                         this.drawACard(CardDB.cardIDEnum.None, own, true);
-                    }
-                    else
-                    {
-                        this.drawACard(CardDB.cardIDEnum.None, own, true);
-                    }
                 }
             }
 
@@ -4517,20 +4453,7 @@
                     this.minionGetBuffed(m, 1, 1);
                     this.lowerWeaponDurability(1, false);
                 }
-
-                if (this.isServer && m.handcard.card.race == TAG_RACE.PET)
-                {
-                    foreach (Handmanager.Handcard hc in this.EnemyCards)
-                    {
-                        if (hc.card.cardIDenum == CardDB.cardIDEnum.AT_041)
-                        {
-                            if (hc.manacost >= 1) hc.manacost--;
-                        }
-                    }
-
-                }
             }
-
         }
 
         public void triggerAMinionWasSummoned(Minion mnn)
@@ -4657,27 +4580,6 @@
             }
             else
             {
-                if (this.isServer)
-                {
-                    int at073 = 0;
-                    foreach (CardDB.cardIDEnum cie in this.EnemySecretsIDList)
-                    {
-                        if (cie == CardDB.cardIDEnum.AT_073)
-                        {
-                            at073++;
-                        }
-                    }
-                    if (at073 >= 1)
-                    {
-                        foreach (Minion m in this.enemyMinions)
-                        {
-                            this.minionGetBuffed(m, at073, at073);
-                        }
-                        this.EnemySecretsIDList.RemoveAll(x => x == CardDB.cardIDEnum.AT_073);
-                    }
-                }
-                else
-                {
                     int triggered = 0;
                     foreach (SecretItem si in this.enemySecretList)
                     {
@@ -4692,7 +4594,6 @@
                             }
                         }
                     }
-                }
             }
             List<Minion> ownm = (ownturn) ? this.ownMinions : this.enemyMinions;
             int summonbigone = -1;
@@ -6095,87 +5996,26 @@
                 //return;
             }
 
-            if (this.isServer)
+            //simulated draw:
+            if (own)
             {
-                //we are a server, we know what we draw! :D
-
-                for (int i = 0; i < draw; i++)
+                if (s == CardDB.cardIDEnum.None)
                 {
+                    CardDB.Card plchldr = CardDB.Instance.unknownCard;
 
-                    if (own)
+                    for (int i = 0; i < draw; i++)
                     {
-
-                        if (s == CardDB.cardIDEnum.None && !no_pen) // draw a card random card from deck :D
-                        {
-                            if (i == 0)
-                            {
-                                drawFirstCardFromDeck(own, reduceManaToZero);
-                            }
-                            else
-                            {
-                                drawFirstCardFromDeck(own);
-                            }
-                        }
-                        else
-                        {
-                            CardDB.Card c = CardDB.Instance.getCardDataFromID(s);
-                            int manac = Math.Max(0, c.cost - this.anzOwnShadowfiends);
-                            if (i == 0 && reduceManaToZero) manac = 0;
-                            Handmanager.Handcard hc = new Handmanager.Handcard { card = c, position = this.owncards.Count + 1, manacost = manac, entity = this.getNextEntity() };
-                            this.owncards.Add(hc);
-                        }
-
-                    }
-                    else
-                    {
-                        //ENEMY DRAWS A CARD
-                        if (s == CardDB.cardIDEnum.None && !no_pen) // draw a card random card from deck :D
-                        {
-                            if (i == 0)
-                            {
-                                drawFirstCardFromDeck(own, reduceManaToZero);
-                            }
-                            else 
-                            {
-                                drawFirstCardFromDeck(own);
-                            }
-                           
-                        }
-                        else
-                        {
-                            CardDB.Card c = CardDB.Instance.getCardDataFromID(s);
-                            int manac = Math.Max(0, c.cost - this.anzEnemyShadowfiends);
-                            Handmanager.Handcard hc = new Handmanager.Handcard { card = c, position = this.EnemyCards.Count + 1, manacost = manac, entity = this.getNextEntity() };
-                            this.EnemyCards.Add(hc);
-                        }
-                    }
-                }
-
-
-            }
-            else
-            {
-                //simulated draw:
-                if (own)
-                {
-                    if (s == CardDB.cardIDEnum.None)
-                    {
-                        CardDB.Card plchldr =  CardDB.Instance.unknownCard;
-                       
-                        for (int i = 0; i < draw; i++)
-                        {
-                            Handmanager.Handcard hc = new Handmanager.Handcard { card = plchldr, position = this.owncards.Count + 1, manacost = 1000, entity = this.getNextEntity() };
-                            if (i == 0 && reduceManaToZero) hc.manacost = 0;
-                            this.owncards.Add(hc);
-                        }
-                    }
-                    else
-                    {
-                        CardDB.Card c = CardDB.Instance.getCardDataFromID(s);
-                        int manac = Math.Max(0, c.cost - this.anzOwnShadowfiends);
-                        Handmanager.Handcard hc = new Handmanager.Handcard { card = c, position = this.owncards.Count + 1, manacost = manac, entity = this.getNextEntity() };
+                        Handmanager.Handcard hc = new Handmanager.Handcard { card = plchldr, position = this.owncards.Count + 1, manacost = 1000, entity = this.getNextEntity() };
+                        if (i == 0 && reduceManaToZero) hc.manacost = 0;
                         this.owncards.Add(hc);
                     }
+                }
+                else
+                {
+                    CardDB.Card c = CardDB.Instance.getCardDataFromID(s);
+                    int manac = Math.Max(0, c.cost - this.anzOwnShadowfiends);
+                    Handmanager.Handcard hc = new Handmanager.Handcard { card = c, position = this.owncards.Count + 1, manacost = manac, entity = this.getNextEntity() };
+                    this.owncards.Add(hc);
                 }
             }
 
@@ -6306,27 +6146,9 @@
             }
             else
             {
-                if (this.isServer)
-                {
-                    CardDB.Card c = m.handcard.card;
-                    Handmanager.Handcard hc = new Handmanager.Handcard { card = c, position = this.owncards.Count + 1, entity = m.entityID, manacost = c.cost + manachange };
-                    if (this.EnemyCards.Count < 10)
-                    {
-                        this.EnemyCards.Add(hc);
-                        this.triggerCardsChanged(false);
-                    }
-                    else
-                    {
-                        this.drawACard(CardDB.cardIDEnum.None, false);
-                    }
-                    this.tempTrigger.enemyMininsChanged = true;
-                    return;
-                }
-
                 this.drawACard(CardDB.cardIDEnum.None, false);
                 this.tempTrigger.enemyMininsChanged = true;
             }
-
         }
 
         public void minionTransform(Minion m, CardDB.Card c)
@@ -7112,165 +6934,6 @@
 
 
             return mini;
-        }
-
-        //can return null
-        public Minion getRandomMinionFromSide_SERVER(bool own, bool includeHero)
-        {
-            List<Minion> temp = new List<Minion>();
-
-            foreach(Minion m in  (own) ? this.ownMinions : this.enemyMinions)
-            {
-                if (m.Hp >= 1) temp.Add(m);
-            }
-
-            if (includeHero) temp.Add((own) ? this.ownHero : this.enemyHero);
-
-            if (temp.Count == 0) return null;
-
-            return temp[this.randomGenerator.Next(0, temp.Count)];
-        }
-
-        public Minion getRandomCharExcept_SERVER(Minion thisNot, bool includeHero)
-        {
-            List<Minion> temp = new List<Minion>();
-
-            foreach (Minion m in this.ownMinions)
-            {
-                if (m == thisNot) continue;
-                if (m.Hp >= 1) temp.Add(m);
-            }
-
-            foreach (Minion m in this.enemyMinions)
-            {
-                if (m == thisNot) continue;
-                if (m.Hp >= 1) temp.Add(m);
-            }
-
-            if (includeHero) temp.Add(this.ownHero);
-            if (includeHero) temp.Add(this.enemyHero);
-
-            if (temp.Count == 0) return null;
-
-            return temp[this.randomGenerator.Next(0, temp.Count)];
-        }
-
-        public Minion getRandomCharOfASideExcept_SERVER(Minion thisNot, bool own, bool includeHero)
-        {
-            List<Minion> temp = new List<Minion>();
-
-            foreach (Minion m in ((own) ? this.ownMinions : this.enemyMinions))
-            {
-                if (m == thisNot) continue;
-                if (m.Hp >= 1) temp.Add(m);
-            }
-
-            if (includeHero && own) temp.Add(this.ownHero);
-            if (includeHero && !own) temp.Add(this.enemyHero);
-
-            if (temp.Count == 0) return null;
-
-            return temp[this.randomGenerator.Next(0, temp.Count)];
-        }
-
-
-        public int getRandomNumber_SERVER(int minInclude, int maxInclude)
-        {
-            return this.randomGenerator.Next(minInclude, maxInclude + 1);
-
-        }
-
-        public void discardRandomCard_SERVER(bool own)
-        {
-            if (!this.isServer) return;
-            if (own)
-            {
-                if(this.owncards.Count >=1)
-                {
-                    int start = this.getRandomNumber_SERVER(0, this.owncards.Count-1);
-                    this.owncards.RemoveRange(start, 1);
-                    this.triggerCardsChanged(true);
-                }
-            }
-            else
-            {
-                if (this.EnemyCards.Count >= 1)
-                {
-                    int start = this.getRandomNumber_SERVER(0, this.EnemyCards.Count - 1);
-                    this.EnemyCards.RemoveRange(start, 1);
-                    this.triggerCardsChanged(false);
-                }
-            }
-        }
-
-        public List<CardDB.cardIDEnum> copyRandomCardFromDeck_SERVER(bool own)
-        {
-            List<Handmanager.Handcard> tempdeck = (own) ? this.myDeck : this.enemyDeck ;
-            List<CardDB.cardIDEnum> choosen = new List<CardDB.cardIDEnum>();
-            if(tempdeck.Count == 0) return choosen;
-            int r1 = this.randomGenerator.Next(0, tempdeck.Count);
-            choosen.Add(tempdeck[r1].card.cardIDenum);
-            if(tempdeck.Count == 1) return choosen;
-            int r2 = this.randomGenerator.Next(0, tempdeck.Count - 1);
-            if (r2 >= r1) r2++;
-            choosen.Add(tempdeck[r2].card.cardIDenum);
-            return choosen;
-        }
-
-        public CardDB.cardIDEnum getRandomSparePart_SERVER()
-        {
-            int random = this.getRandomNumber_SERVER(1, 7);
-            if (random == 1) return CardDB.cardIDEnum.PART_001;
-            if (random == 2) return CardDB.cardIDEnum.PART_002;
-            if (random == 3) return CardDB.cardIDEnum.PART_003;
-            if (random == 4) return CardDB.cardIDEnum.PART_004;
-            if (random == 5) return CardDB.cardIDEnum.PART_005;
-            if (random == 6) return CardDB.cardIDEnum.PART_006;
-            return CardDB.cardIDEnum.PART_007;
-        }
-
-        public void removeCard_SERVER(Handmanager.Handcard hcc, bool own)
-        {
-            //todo test this and remove toarray()
-            //this.owncards.RemoveAll(x => x.entity == hcc.entity);
-            if (own)
-            {
-                int i = 1;
-                foreach (Handmanager.Handcard hc in this.owncards.ToArray())
-                {
-                    if (hc.entity == hcc.entity)
-                    {
-                        this.owncards.Remove(hc);
-                        continue;
-                    }
-                    this.owncards[i - 1].position = i;
-                    //hc.position = i;
-                    i++;
-                }
-            }
-            else
-            {
-                int i = 1;
-                foreach (Handmanager.Handcard hc in this.EnemyCards.ToArray())
-                {
-                    if (hc.entity == hcc.entity)
-                    {
-                        this.EnemyCards.Remove(hc);
-                        continue;
-                    }
-                    this.EnemyCards[i - 1].position = i;
-                    //hc.position = i;
-                    i++;
-                }
-            }
-
-        }
-
-        public Minion getRandomMinionOfThatList(List<Minion> liste)
-        {
-            if (liste.Count == 0) return null;
-            int random = this.getRandomNumber_SERVER(0, liste.Count - 1);
-            return liste[random];
         }
 
         public void discardACard(bool own, bool all = false)

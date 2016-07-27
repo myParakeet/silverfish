@@ -16,14 +16,7 @@ namespace HREngine.Bots
             {
 
                 int pos = (wasOwnCard) ? p.ownMinions.Count : p.enemyMinions.Count;
-
-                if (p.isServer)
-                {
-                    //TODO
-                    p.callKid(kid0, pos, wasOwnCard, true);
-                    return;
-                }
-
+                
                 //summon a wisp ( its a 1/1)
                 p.callKid(kid0, pos, wasOwnCard, true);
 

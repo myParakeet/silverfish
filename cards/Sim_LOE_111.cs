@@ -14,13 +14,7 @@ namespace HREngine.Bots
         {
             int dmg = (ownplay) ? p.getSpellDamageDamage(3) : p.getEnemySpellDamageDamage(3);
             p.allMinionsGetDamage(dmg);
-
-            if (p.isServer)
-            {
-                //TODO
-                return;
-            }
-
+            
             if (ownplay)
             {
                 p.enemyDeckSize++;
@@ -31,9 +25,5 @@ namespace HREngine.Bots
                 p.ownDeckSize++;
             }
         }
-
-
-       
-
     }
 }

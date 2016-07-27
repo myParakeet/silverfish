@@ -14,19 +14,8 @@ namespace HREngine.Bots
         public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
             p.equipWeapon(w, ownplay);
-
-            if (p.isServer)
-            {
-                //TODO
-                p.lowerWeaponDurability(-1, ownplay);//-1 = raise dura :D
-                return;
-            }
-
+            
             p.lowerWeaponDurability(-1, ownplay);//-1 = raise dura :D
         }
-
-
-       
-
     }
 }

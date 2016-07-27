@@ -13,18 +13,8 @@ namespace HREngine.Bots
         {
             if (triggerEffectMinion.own == wasOwnCard && c.type == CardDB.cardtype.SPELL && target!=null && target.entityID == triggerEffectMinion.entityID)
             {
-                if (p.isServer)
-                {
-                    Minion choosen = p.getRandomMinionFromSide_SERVER(!triggerEffectMinion.own, true);
-                    if (choosen != null) p.minionGetDamageOrHeal(choosen, 3);
-                    return;
-                }
-
                 p.doDmgToRandomEnemyCLIENT2(3, true, triggerEffectMinion.own);
             }
         }
-
-       
-
     }
 }

@@ -10,15 +10,8 @@ namespace HREngine.Bots
 
         public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
-            if (p.isServer)
-            {
-                p.drawACard(CardDB.cardIDEnum.LOEA16_4, own.own, true);
-                return;
-            }
             //TODO add a choice card with all 3 artifacts?
             p.drawACard(CardDB.cardIDEnum.LOEA16_4, own.own, true);
         }
-
 	}
-
 }

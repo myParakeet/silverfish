@@ -12,14 +12,6 @@ namespace HREngine.Bots
 
         public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
-            if (p.isServer)
-            {
-                p.callKid(kid, p.ownMinions.Count, true);   
-                p.callKid(kid, p.enemyMinions.Count, false);
-                return;
-            }
-
-
             if (Probabilitymaker.Instance.hasDeck)
             {
                 //todo: summon a minion from your deck!
@@ -31,7 +23,5 @@ namespace HREngine.Bots
             }
             p.callKid(kid, p.enemyMinions.Count, false);
         }
-
 	}
-
 }

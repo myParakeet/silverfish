@@ -9,14 +9,6 @@ namespace HREngine.Bots
         //Deathrattle: Give a random friendly minion +3/+3
         public override void onDeathrattle(Playfield p, Minion m)
         {
-
-            if (p.isServer)
-            {
-                Minion tempS = p.getRandomMinionFromSide_SERVER(m.own, false);
-                if(tempS!=null)p.minionGetBuffed(tempS, 3, 3);
-                return;
-            }
-
             List<Minion> temp = new List<Minion>();
 
             if (m.own)

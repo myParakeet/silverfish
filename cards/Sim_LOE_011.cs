@@ -11,12 +11,6 @@ namespace HREngine.Bots
 
         public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
-            if (p.isServer)
-            {
-                //TODO
-                return;
-            }
-
             if (own.own)
             {
                 if (Probabilitymaker.Instance.hasDeck)
@@ -33,8 +27,5 @@ namespace HREngine.Bots
                 p.minionGetDamageOrHeal(p.enemyHero, p.enemyHero.Hp - p.enemyHero.maxHp, true);//fully heal
             }
         }
-
-       
-
     }
 }

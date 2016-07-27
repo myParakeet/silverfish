@@ -23,13 +23,6 @@ namespace HREngine.Bots
                     p.enemyDeckSize++;
                 }
             }
-            if (p.isServer)
-            {
-                //TODO
-            }
         }
-
-
     }
-
 }

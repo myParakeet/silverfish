@@ -10,19 +10,6 @@ namespace HREngine.Bots
 
         public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
-            if (p.isServer)
-            {
-                if (own.own)
-                {
-                    p.ownDeckSize++;
-                }
-                else
-                {
-                    p.enemyDeckSize++;
-                }
-                return;
-            }
-
             if (own.own)
             {
                 p.ownDeckSize++;
@@ -31,9 +18,6 @@ namespace HREngine.Bots
             {
                 p.enemyDeckSize++;
             }
-            
         }
-
 	}
-
 }

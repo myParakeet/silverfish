@@ -15,43 +15,6 @@ namespace HREngine.Bots
         //    heldenfähigkeit/\nruft einen rekruten der silbernen hand (1/1) herbei.
         public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
-            if (p.isServer)
-            {
-                int posi2 = (ownplay) ? p.ownMinions.Count : p.enemyMinions.Count;
-
-                List<CardDB.Card> avail = new List<CardDB.Card>();
-                avail.Add(kid); avail.Add(kid2); avail.Add(kid3heal); avail.Add(kid4taunt);
-
-                foreach (Minion m in (ownplay) ? p.ownMinions : p.enemyMinions)
-                {
-                    if (m.handcard.card.cardIDenum == CardDB.cardIDEnum.CS2_052)
-                    {
-                        avail.Remove(kid2);
-                        continue;
-                    }
-                    if (m.handcard.card.cardIDenum == CardDB.cardIDEnum.CS2_051)
-                    {
-                        avail.Remove(kid4taunt);
-                        continue;
-                    }
-                    if (m.handcard.card.cardIDenum == CardDB.cardIDEnum.NEW1_009)
-                    {
-                        avail.Remove(kid3heal);
-                        continue;
-                    }
-                    if (m.handcard.card.cardIDenum == CardDB.cardIDEnum.CS2_050)
-                    {
-                        avail.Remove(kid);
-                        continue;
-                    }
-                }
-
-                if (avail.Count == 0) return;
-                int random = p.randomGenerator.Next(0, avail.Count);
-                p.callKid( avail[random], posi2, ownplay);
-                return;
-            }
-
             List<CardDB.cardIDEnum> availa = new List<CardDB.cardIDEnum>();
             availa.Add(CardDB.cardIDEnum.CS2_052);
             availa.Add(CardDB.cardIDEnum.CS2_051);

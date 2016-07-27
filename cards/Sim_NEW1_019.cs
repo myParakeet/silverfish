@@ -13,17 +13,6 @@ namespace HREngine.Bots
         {
             if (triggerEffectMinion.entityID != summonedMinion.entityID && triggerEffectMinion.own == summonedMinion.own)
             {
-                if (p.isServer)
-                {
-                    Minion choosen = p.getRandomMinionFromSide_SERVER(!triggerEffectMinion.own, true);
-                    if (choosen != null)
-                    {
-                        p.minionGetDamageOrHeal(choosen, 1);
-                        triggerEffectMinion.stealth = false;
-                    }
-                    return;
-                }
-
                 List<Minion> temp = (triggerEffectMinion.own) ? p.enemyMinions : p.ownMinions;
 
                 if (temp.Count >= 1)
@@ -64,7 +53,5 @@ namespace HREngine.Bots
                 triggerEffectMinion.stealth = false;
             }
         }
-
     }
-
 }

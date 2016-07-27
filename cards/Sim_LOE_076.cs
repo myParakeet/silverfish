@@ -14,41 +14,6 @@ namespace HREngine.Bots
 
         public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
-            if (p.isServer)
-            {
-                //TODO
-                if (own.own)
-                {
-                    if (p.ownHeroAblility.card.name != CardDB.cardName.steadyshot)
-                    {
-                        p.ownHeroAblility = new Handmanager.Handcard(hp);
-                        p.ownAbilityReady = true;
-                    }
-                    else
-                    {
-                        p.ownHeroAblility = new Handmanager.Handcard(hp2);
-                        p.ownAbilityReady = true;
-                    }
-                }
-                else
-                {
-                    if (p.enemyHeroAblility.card.name != CardDB.cardName.steadyshot)
-                    {
-                        p.enemyHeroAblility = new Handmanager.Handcard(hp);
-                        p.enemyAbilityReady = true;
-                    }
-                    else
-                    {
-                        p.enemyHeroAblility = new Handmanager.Handcard(hp2);
-                        p.enemyAbilityReady = true;
-                    }
-
-                }
-
-                if (own.own == p.isOwnTurn) p.heroPowerActivationsThisTurn = 0;
-                return;
-            }
-
             if (own.own)
             {
                 if(p.ownHeroAblility.card.name != CardDB.cardName.steadyshot)
@@ -79,7 +44,5 @@ namespace HREngine.Bots
 
             if (own.own == p.isOwnTurn) p.heroPowerActivationsThisTurn = 0;
         }
-
 	}
-
 }

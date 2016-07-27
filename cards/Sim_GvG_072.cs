@@ -11,26 +11,15 @@ namespace HREngine.Bots
 
         public override void onAHeroGotHealedTrigger(Playfield p, Minion triggerEffectMinion, bool ownerOfHeroGotHealed)
         {
-            if (p.isServer)
+            Minion t = p.searchRandomMinion((triggerEffectMinion.own) ? p.enemyMinions : p.ownMinions, Playfield.searchmode.searchHighestHP);
+            if (t != null)
             {
-                
-                Minion choosen = p.getRandomMinionFromSide_SERVER(!triggerEffectMinion.own, true);
-                if (choosen != null) p.minionGetDamageOrHeal(choosen, 1);
+                p.minionGetDamageOrHeal(t, 1);
             }
             else
             {
-                Minion t = p.searchRandomMinion((triggerEffectMinion.own) ? p.enemyMinions : p.ownMinions, Playfield.searchmode.searchHighestHP);
-                if (t != null)
-                {
-                    p.minionGetDamageOrHeal(t, 1);
-                }
-                else
-                {
-                    p.minionGetDamageOrHeal((triggerEffectMinion.own) ? p.enemyHero : p.ownHero, 1);
-                }
+                p.minionGetDamageOrHeal((triggerEffectMinion.own) ? p.enemyHero : p.ownHero, 1);
             }
         }
-
     }
-
 }

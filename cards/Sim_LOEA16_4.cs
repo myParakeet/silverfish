@@ -10,19 +10,6 @@ namespace HREngine.Bots
 
         public override void onCardPlay(Playfield p, bool ownplay, Minion target, int choice)
         {
-
-            if (p.isServer)
-            {
-                int timesS = (ownplay) ? p.getSpellDamageDamage(10) : p.getEnemySpellDamageDamage(10);
-                for (int iS = 0; iS < timesS; iS++)
-                {
-                    Minion poortarget = p.getRandomMinionFromSide_SERVER(!ownplay, true);
-                    if (poortarget != null) p.minionGetDamageOrHeal(poortarget, 1);
-                }
-                return;
-            }
-
-
             List<Minion> targets = (ownplay) ? new List<Minion>(p.enemyMinions) : new List<Minion>(p.ownMinions);
             int times = (ownplay) ? p.getSpellDamageDamage(10) : p.getEnemySpellDamageDamage(10);
 
@@ -46,7 +33,5 @@ namespace HREngine.Bots
                 i++;
             }
         }
-
-
     }
 }
