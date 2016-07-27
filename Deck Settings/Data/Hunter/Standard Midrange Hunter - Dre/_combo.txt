@@ -1,9 +1,12 @@
 // This File: _combo.txt
 //    Author: Dre
-//   Version: 0.3 (24-Jul-2016)
+//   Version: 0.5 (26-Jul-2016)
 // Deck Name: Standard Midrange Hunter
 //      Hero: Hunter
 // Deck Type: Midrange (Control)
+
+// [Nudge] [1] Fiery Bat (OG_179) > [2] King's Elekk (AT_058)
+OG_179,0;nxttrn;AT_058,0;mana:1;bonusfirst:2;bonussecond:0;hero:hunter
 
 // [Nudge] [0] The Coin (GAME_005) + [6] Savannah Highmane (EX1_534)
 GAME_005,1;EX1_534,0;mana:5;bonus:50;hero:hunter
@@ -46,3 +49,7 @@ cardvalue:EX1_536,-1
 
 // Cardvalue Steady Shot (DS1h_292) 
 cardvalue:DS1h_292,2
+
+// Cardvalue Astral Communion (AT_043) 
+cardvalue:AT_043,500
+
