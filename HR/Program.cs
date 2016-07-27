@@ -2420,25 +2420,6 @@ namespace HREngine.Bots
 
     public sealed class Helpfunctions
     {
-
-        public static List<T> TakeList<T>(IEnumerable<T> source, int limit)
-        {
-            List<T> retlist = new List<T>();
-            int i = 0;
-
-            foreach (T item in source)
-            {
-                retlist.Add(item);
-                i++;
-
-                if (i >= limit) break;
-            }
-            return retlist;
-        }
-
-
-        public bool runningbot = false;
-
         private static readonly Helpfunctions instance = new Helpfunctions();
 
         static Helpfunctions() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
@@ -2466,12 +2447,10 @@ namespace HREngine.Bots
         public void createNewLoggfile()
         {
             filecreated = false;
-            
         }
 
         public void logg(string s)
         {
-
             if (!filecreated)
             {
                 System.IO.File.WriteAllText(Settings.Instance.logpath + Settings.Instance.logfile, "");
@@ -2585,9 +2564,7 @@ namespace HREngine.Bots
                 }
             }
             this.sendbuffer = "";
-
         }
-   
     }
 
 
