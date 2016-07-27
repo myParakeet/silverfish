@@ -2451,20 +2451,12 @@ namespace HREngine.Bots
 
         public void logg(string s)
         {
-            if (!filecreated)
-            {
-                System.IO.File.WriteAllText(Settings.Instance.logpath + Settings.Instance.logfile, "");
-                filecreated = true;
-            }
             //if (!writelogg) return;
-            try
+
+            using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + Settings.Instance.logfile))
             {
-                using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + Settings.Instance.logfile))
-                {
-                    sw.WriteLine(s);
-                }
+                sw.WriteLine(s);
             }
-            catch { }
         }
 
         public DateTime UnixTimeStampToDateTime(int unixTimeStamp)
@@ -2475,25 +2467,14 @@ namespace HREngine.Bots
             return dtDateTime;
         }
 
-        private bool createdLogging = true;
-
         public void ErrorLog(string s)
         {
             if (!writelogg) return;
-            if (createdLogging)
-            {
-                createdLogging = false;
-                System.IO.File.WriteAllText(Settings.Instance.logpath + "Logging.txt", "");
-            }
 
-            try
+            using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + "Logging.txt"))
             {
-                using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + "Logging.txt"))
-                {
-                    sw.WriteLine("#ConsoleLog: "+ s);
-                }
+                sw.WriteLine("#ConsoleLog: " + s);
             }
-            catch { }
         }
 
         string sendbuffer = "";
