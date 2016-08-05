@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Net;
 
 namespace HREngine.Bots
 {
@@ -24,9 +25,26 @@ namespace HREngine.Bots
         static void Main(string[] args)
         { 
             Bot b = new Bot();
-            bool readed = false;
-            while(!readed)
+            bool network = Settings.Instance.useNetwork;
+
+            while (true)
             {
+                System.Threading.Thread.Sleep(10);
+                if (network)
+                {
+                    KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
+                    if (msg.Value == "") continue;
+                    switch (msg.Key)
+                    {
+                        case "crrntbrd.txt":
+                            b.doData(msg.Value);
+                            break;
+                        case "curdeck.txt":
+                            b.doDeckData(msg.Value);
+                            break;
+                    }
+                    continue;
+                }
                 try
                 {
                     string data = System.IO.File.ReadAllText("crrntbrd.txt");
@@ -61,10 +79,7 @@ namespace HREngine.Bots
                 {
 
                 }
-                System.Threading.Thread.Sleep(10);
             }
-
-            Console.ReadLine();
         }
     }
 
@@ -140,18 +155,20 @@ namespace HREngine.Bots
                 Settings.Instance.updateInstance();
             }
         }
-
+        
         public void testing(int start)
         {
-            for (int i = start; i < 900; i++)
+            for (int i = start; i < sizeof(CardDB.cardIDEnum); i++)
             {
                 Handmanager.Instance.anzcards = 1;
                 Handmanager.Instance.handCards.Clear();
-                Handmanager.Handcard hc = new Handmanager.Handcard();
-                hc.manacost = 1;
-                hc.position = 1;
-                hc.entity = 122;
-                hc.card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)i);
+                Handmanager.Handcard hc = new Handmanager.Handcard
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 122,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum) i)
+                };
                 Handmanager.Instance.handCards.Add(hc);
                 Helpfunctions.Instance.ErrorLog("test " + i + " " + hc.card.name + " " + hc.card.cardIDenum);
                 if (hc.card.sim_card == null)
@@ -164,13 +181,12 @@ namespace HREngine.Bots
                 }
             }
         }
-
     }
 
     public sealed class Silverfish
     {
         public string versionnumber = "122.5SE";
-        private bool singleLog = false;
+        private bool singleLog;
 
         Settings sttngs = Settings.Instance;
 
@@ -225,6 +241,7 @@ namespace HREngine.Bots
             PenalityManager.Instance.setCombos();
             Mulligan.Instance.runDebugTest();
             Discovery d = Discovery.Instance; // read the discover list
+            if (Settings.Instance.useNetwork) FishNet.Instance.startServer();
         }
 
         public void setnewLoggFile()
@@ -252,11 +269,24 @@ namespace HREngine.Bots
             string boardnumm = "-1";
             int trackingchoice = 0;
             int trackingstate = 0;
+            bool network = Settings.Instance.useNetwork;
+
             while (readed)
             {
                 try
                 {
-                    string data = System.IO.File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
+                    string data = "";
+                    System.Threading.Thread.Sleep(10);
+                    if (network)
+                    {
+                        KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
+                        if (msg.Key != "actionstodo.txt") continue;
+                        data = msg.Value;
+                    }
+                    else
+                    {
+                        data = System.IO.File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
+                    }
                     if (data != "" && data != "<EoF>" && data.EndsWith("<EoF>"))
                     {
                         data = data.Replace("<EoF>", "");
@@ -326,7 +356,6 @@ namespace HREngine.Bots
             }
 
             Ai.Instance.setBestMoves(aclist, value, trackingchoice, trackingstate);
-
         }
 
         public static int getLastAffected(int entityid)
@@ -338,8 +367,6 @@ namespace HREngine.Bots
         {
             return 0;
         }
-
-
     }
 
     public sealed class Helpfunctions
@@ -400,6 +427,7 @@ namespace HREngine.Bots
             //HREngine.API.Utilities.HRLog.Write(s);
             Console.WriteLine(s);
         }
+        
 
         string sendbuffer = "";
         public void resetBuffer()
@@ -409,7 +437,12 @@ namespace HREngine.Bots
 
         public void writeToBuffer(string data)
         {
-            this.sendbuffer += "\r\n" + data;
+            this.sendbuffer += data + "\r\n";
+        }
+
+        public void writeBufferToNetwork(string msgtype)
+        {
+            FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendbuffer);
         }
 
         public void writeBufferToFile()
@@ -420,7 +453,8 @@ namespace HREngine.Bots
             {
                 try
                 {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
+                    if (Settings.Instance.useNetwork) writeBufferToNetwork("crrntbrd.txt");
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -439,7 +473,8 @@ namespace HREngine.Bots
             {
                 try
                 {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
+                    if (Settings.Instance.useNetwork) writeBufferToNetwork("curdeck.txt");
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -459,7 +494,8 @@ namespace HREngine.Bots
             {
                 try
                 {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
+                    if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch

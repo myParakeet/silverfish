@@ -1343,6 +1343,7 @@ namespace HREngine.Bots
             PenalityManager.Instance.setCombos();
             Mulligan m = Mulligan.Instance; // read the mulligan list
             Discovery d = Discovery.Instance; // read the discover list
+            if (Settings.Instance.useNetwork) FishNet.Instance.startClient();
         }
 
         public void setnewLoggFile()
@@ -2319,8 +2320,11 @@ namespace HREngine.Bots
             {
                 Ai.Instance.currentCalculatedBoard = dtimes;
                 Helpfunctions.Instance.resetBuffer();
-                Helpfunctions.Instance.writeBufferToActionFile();
-                Helpfunctions.Instance.resetBuffer();
+                if (!Settings.Instance.useNetwork)
+                {
+                    Helpfunctions.Instance.writeBufferToActionFile();
+                    Helpfunctions.Instance.resetBuffer();
+                }
 
                 Helpfunctions.Instance.writeToBuffer(completeBoardString);
                 Helpfunctions.Instance.writeBufferToFile();
@@ -2337,17 +2341,43 @@ namespace HREngine.Bots
             this.waitingForSilver = true;
             int trackingchoice = 0;
             int trackingstate = 0;
+            bool network = Settings.Instance.useNetwork;
+
             while (readed)
             {
                 try
                 {
-                    string data = System.IO.File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
+                    string data = "";
+                    System.Threading.Thread.Sleep(10);
+                    if (network)
+                    {
+                        KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
+                        if (msg.Key != "actionstodo.txt")
+                        {
+                            Helpfunctions.Instance.ErrorLog($"[Program] Ignoring Message: {msg.Key}");
+                            continue;
+                        }
+                        Helpfunctions.Instance.ErrorLog($"[Program] Message Type: {msg.Key}");
+                        data = msg.Value;
+                    }
+                    else
+                    {
+                        data = System.IO.File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
+                    }
+                    if (data == "") Helpfunctions.Instance.ErrorLog($"[Program] Message Data: empty");
+                    if (data == "<EoF>" && data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: <EoF>");
+                    if (!data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: missing <EoF>");
+
                     if (data != "" && data != "<EoF>" && data.EndsWith("<EoF>"))
                     {
+                        Helpfunctions.Instance.ErrorLog($"[Program] Message Data:\r\n{data}");
                         data = data.Replace("<EoF>", "");
                         //Helpfunctions.Instance.ErrorLog(data);
-                        Helpfunctions.Instance.resetBuffer();
-                        Helpfunctions.Instance.writeBufferToActionFile();
+                        if (!network)
+                        {
+                            Helpfunctions.Instance.resetBuffer();
+                            Helpfunctions.Instance.writeBufferToActionFile();
+                        }
                         alist.AddRange(data.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
                         string board = alist[0];
                         if (board.StartsWith("board "))
@@ -2384,7 +2414,6 @@ namespace HREngine.Bots
                     }
                     else
                     {
-                        System.Threading.Thread.Sleep(10);
                         if (passiveWaiting)
                         {
                             return false;
@@ -2396,7 +2425,6 @@ namespace HREngine.Bots
                 {
                     System.Threading.Thread.Sleep(10);
                 }
-
             }
             this.waitingForSilver = false;
             Helpfunctions.Instance.logg("received " + boardnumm + " actions to do: (currtime = " + DateTime.Now.ToString("HH:mm:ss.ffff") + ")");
@@ -2485,7 +2513,12 @@ namespace HREngine.Bots
 
         public void writeToBuffer(string data)
         {
-            this.sendbuffer += "\r\n" + data;
+            this.sendbuffer += data + "\r\n";
+        }
+
+        public void writeBufferToNetwork(string msgtype)
+        {
+            FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendbuffer);
         }
 
         public void writeBufferToFile()
@@ -2497,7 +2530,8 @@ namespace HREngine.Bots
             {
                 try
                 {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
+                    if (Settings.Instance.useNetwork) writeBufferToNetwork("crrntbrd.txt");
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -2516,7 +2550,8 @@ namespace HREngine.Bots
             {
                 try
                 {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
+                    if (Settings.Instance.useNetwork) writeBufferToNetwork("curdeck.txt");
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -2536,7 +2571,8 @@ namespace HREngine.Bots
             {
                 try
                 {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
+                    if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch

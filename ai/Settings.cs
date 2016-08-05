@@ -42,7 +42,11 @@ namespace HREngine.Bots
             this.useExternalProcess = false; // use silver.exe for calculations a lot faster than turning it off (true = recomended)
             this.passiveWaiting = false; // process will wait passive for silver.exe to finish
 
-            this.speedy = false; // process will wait passive for silver.exe to finish
+            this.speedy = false; // send multiple actions together to HR
+
+            this.useNetwork = true; // use networking to communicate with silver.exe instead of a file
+            this.netAddress = "127.0.0.1"; // address where the bot is running
+            this.tcpPort = 14804; // TCP port to connect on
 
             //###########################################################
 
@@ -79,18 +83,22 @@ namespace HREngine.Bots
 
 
         public int maxwide = 3000;
-        public int twotsamount = 0;
+        public int twotsamount;
 
-        public bool useExternalProcess = false;
-        public bool passiveWaiting = false;
-        public bool speedy = false;
+        public bool useExternalProcess;
+        public bool passiveWaiting;
+        public bool speedy;
+
+        public bool useNetwork = true;
+        public string netAddress = "127.0.0.1";
+        public int tcpPort = 14804;
 
         public int alpha = 50;
         public float firstweight = 0.5f;
         public float secondweight = 0.5f;
 
         public int numberOfThreads = Environment.ProcessorCount;//32;//
-        public bool useSecretsPlayArround = false;
+        public bool useSecretsPlayArround;
 
         public bool simulatePlacement = true;
 
@@ -106,7 +114,7 @@ namespace HREngine.Bots
         public int nextTurnMaxWide = 20;
         public int nextTurnTotalBoards = 50;
 
-        public bool playarround = false;
+        public bool playarround;
         public int playaroundprob = 50;
         public int playaroundprob2 = 80;
 
@@ -117,9 +125,9 @@ namespace HREngine.Bots
         public string logfile = "Logg.txt";
 
         public bool concede = false;
-        public bool enemyConcede = false;
+        public bool enemyConcede;
         public int enemyConcedeValue = -900;
-        public bool writeToSingleFile = false;
+        public bool writeToSingleFile;
 
         public bool learnmode = false;
         public bool printlearnmode = true;
