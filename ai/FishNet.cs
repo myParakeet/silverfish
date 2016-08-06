@@ -52,10 +52,21 @@ namespace HREngine.Bots
         private void handleConnectionAsync(IAsyncResult result)
         {
             TcpClient newclient = listener.EndAcceptTcpClient(result);
+            listener.BeginAcceptTcpClient(handleConnectionAsync, listener); // keep listening for connections in case it goes down
             if (!isConnected(newclient.Client)) return;
 
+            client?.Close();
             client = newclient; //new connections replace old, only 1 is intended
             Helpfunctions.Instance.ErrorLog($"[Network] New connection from {getIp(client.Client)}");
+        }
+
+        public void checkConnection()
+        {
+            if (client != null && !isConnected(client.Client))
+            {
+                client?.Close();
+                client = null;
+            }
         }
 
         public Task startClient(CancellationToken cancellationToken = default(CancellationToken))
@@ -72,10 +83,11 @@ namespace HREngine.Bots
                     client = new TcpClient();
                     client.Connect(Settings.Instance.netAddress, Settings.Instance.tcpPort);
                     
-                    while (client.Connected)
+                    while (isConnected(client.Client))
                     {
                         await Task.Delay(100, cancellationToken);
                     }
+                    client.Close();
                 }
                 catch (SocketException)
                 {
@@ -90,8 +102,21 @@ namespace HREngine.Bots
             }
         }
 
+        public bool isConnected(Socket socket)
+        {
+            try
+            {
+                return !(socket.Poll(1, SelectMode.SelectRead) && socket.Available == 0);
+            }
+            catch (SocketException)
+            {
+                Helpfunctions.Instance.ErrorLog($"[Network] Connection Terminated: {getIp(socket)}:{getPort(socket)}");
+                return false;
+            }
+        }
+
         // test if client is still connected
-        public static bool isConnected(Socket client)
+        /*public static bool isConnected(Socket client)
         {
             bool blockState = client.Blocking;
 
@@ -112,78 +137,68 @@ namespace HREngine.Bots
             {
                 client.Blocking = blockState;
             }
-        }
+        }*/
 
         private string getIp(Socket s)
         {
             IPEndPoint remoteIpEndPoint = s.RemoteEndPoint as IPEndPoint;
             return remoteIpEndPoint?.ToString();
         }
-        
+
+        private string getPort(Socket s)
+        {
+            IPEndPoint remoteIpEndPoint = s.RemoteEndPoint as IPEndPoint;
+            return remoteIpEndPoint?.Port.ToString();
+        }
+
         public void sendMessage(string msg)
         {
             try
             {
                 NetworkStream stream = client.GetStream();
-                StreamWriter s = new StreamWriter(stream);
+                StreamWriter sw = new StreamWriter(stream);
 
-                s.WriteLine(msg);
-                s.WriteLine("");
-                s.Flush();
+                sw.WriteLine(msg);
+                sw.WriteLine("");
+                sw.Flush();
                 Helpfunctions.Instance.ErrorLog($"[Network] Send Message: {msg}");
             }
             catch (Exception e)
             {
-                Helpfunctions.Instance.ErrorLog($"[Network] Send Message exception: {e}");
+                Helpfunctions.Instance.ErrorLog($"[Network] Send Message Error: {e}");
             }
         }
         
         public KeyValuePair<string, string> readMessage()
         {
-            if (client == null || !client.Connected) return new KeyValuePair<string, string>("","");
-            KeyValuePair<string, string> msg = readLines(client.GetStream());
-            Helpfunctions.Instance.ErrorLog($"[Network] Message: {msg.Key}\r\n{msg.Value}");
-
-            switch (msg.Key)
-            {
-                case "crrntbrd.txt":
-                    break;
-                case "curdeck.txt":
-                    break;
-                case "actionstodo.txt":
-                    break;
-                default:
-                    Helpfunctions.Instance.ErrorLog($"[Network] Unknown Message Type");
-                    break;
-            }
-            return msg;
-        }
-
-
-        private static KeyValuePair<string, string> readLines(Stream source)
-        {
             string header = "";
             string lines = "";
+            if (client == null || !isConnected(client.Client)) return new KeyValuePair<string, string> (header, lines);
 
             try
             {
-                StreamReader reader = new StreamReader(source);
-                    header = reader.ReadLine();
-                    string line = reader.ReadLine();
-                    while (!string.IsNullOrEmpty(line))
-                    {
-                        lines += "\r\n" + line;
-                        line = reader.ReadLine();
-                        //Helpfunctions.Instance.ErrorLog($"[Network] Read line: {line}");
-                    }
+                StreamReader sr = new StreamReader(client.GetStream());
+                header = sr.ReadLine();
+                string line = sr.ReadLine();
+                while (!string.IsNullOrEmpty(line))
+                {
+                    lines += "\r\n" + line;
+                    line = sr.ReadLine();
+                    //Helpfunctions.Instance.ErrorLog($"[Network] Read Line: {line}");
+                }
             }
             catch (Exception e)
             {
-                Helpfunctions.Instance.ErrorLog($"[Network] Read Message exception: {e}");
+                client.Close();
+                client = null;
+                Helpfunctions.Instance.ErrorLog($"[Network] Read Message Error: {e.Message}");
             }
+
+            Helpfunctions.Instance.ErrorLog($"[Network] Message: {header}\r\n{lines}");
+            
             return new KeyValuePair<string, string> (header, lines);
         }
-
+        
         private static byte[] compressStream(Stream input)
         {
             using (MemoryStream compressStream = new MemoryStream())

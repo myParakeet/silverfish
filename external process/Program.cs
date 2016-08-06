@@ -32,6 +32,7 @@ namespace HREngine.Bots
                 System.Threading.Thread.Sleep(10);
                 if (network)
                 {
+                    FishNet.Instance.checkConnection();
                     KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
                     if (msg.Value == "") continue;
                     switch (msg.Key)
