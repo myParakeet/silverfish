@@ -379,7 +379,10 @@
         {
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             deckName = Hrtprozis.Instance.deckName;
+            lock (instance)
+            {
             readCombos();
+            }
             if (attackFaceHP != -1)
             {
                 hp.setAttackFaceHP(attackFaceHP);

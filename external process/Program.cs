@@ -145,14 +145,17 @@ namespace HREngine.Bots
             HeroEnum heroname = Hrtprozis.Instance.heroNametoEnum(ownname);
             HeroEnum enemyHeroname = Hrtprozis.Instance.heroNametoEnum(enemyname);
 
-            if (Hrtprozis.Instance.deckName != deckname || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
+            if (Hrtprozis.Instance.deckName != deckname || heroname != Hrtprozis.Instance.heroname)
             {
                 Hrtprozis.Instance.setDeckName(deckname);
                 Hrtprozis.Instance.setHeroName(ownname);
-                Hrtprozis.Instance.setEnemyHeroName(enemyname);
                 ComboBreaker.Instance.updateInstance();
                 Discovery.Instance.updateInstance();
                 Mulligan.Instance.updateInstance();
+            }
+            if (Hrtprozis.Instance.deckName != deckname || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
+            {
+                Hrtprozis.Instance.setEnemyHeroName(enemyname);
                 Settings.Instance.updateInstance();
             }
         }

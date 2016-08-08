@@ -179,7 +179,10 @@ namespace HREngine.Bots
         {
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             deckName = Hrtprozis.Instance.deckName;
-            readMulligan();
+            lock (instance)
+            {
+                readMulligan();
+            }
         }
 
         private Mulligan()
@@ -595,7 +598,7 @@ namespace HREngine.Bots
                         break;
                 }
             }
-            Helpfunctions.Instance.ErrorLog("[Mulligan] final discards:" + discards);
+            Helpfunctions.Instance.logg("[Mulligan] final discards:" + discards);
 
             return discarditems;
 

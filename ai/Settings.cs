@@ -158,7 +158,10 @@ namespace HREngine.Bots
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             enemyClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.enemyHeroname);
             deckName = Hrtprozis.Instance.deckName;
-            return readSettings();
+            lock(instance)
+            {
+                return readSettings();
+            }
         }
 
         public void setWeights(int alpha)

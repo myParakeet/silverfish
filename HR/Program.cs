@@ -167,7 +167,7 @@ namespace HREngine.Bots
         /// </param>
         public override void OnGameMulligan(GameMulliganEventArgs e)
         {
-            if (e.handled)
+            if (e.handled || e.card_list.Count == 0) // if count==0 then HR is conceding
             {
                 return;
             }
@@ -196,29 +196,35 @@ namespace HREngine.Bots
             // reload settings
             HeroEnum heroname = Hrtprozis.Instance.heroNametoEnum(ownName);
             HeroEnum enemyHeroname = Hrtprozis.Instance.heroNametoEnum(enemName);
-            if (deckChanged || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
+            if (deckChanged || heroname != Hrtprozis.Instance.heroname)
             {
                 if (heroname != Hrtprozis.Instance.heroname)
                 {
                     Helpfunctions.Instance.ErrorLog("New Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(heroname) + "\", Old Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname) + "\"");
                 }
+                Hrtprozis.Instance.setHeroName(ownName);
+                ComboBreaker.Instance.updateInstance();
+                Discovery.Instance.updateInstance();
+                Mulligan.Instance.updateInstance();
+                deckChanged = false;
+            }
+            if (deckChanged || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
+            {
+                Hrtprozis.Instance.setEnemyHeroName(enemName);
                 if (enemyHeroname != Hrtprozis.Instance.enemyHeroname)
                 {
                     Helpfunctions.Instance.ErrorLog("New Enemy Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(enemyHeroname) + "\", Old Class: \"" + Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.enemyHeroname) + "\"");
                 }
-                Hrtprozis.Instance.setHeroName(ownName);
-                Hrtprozis.Instance.setEnemyHeroName(enemName);
-                ComboBreaker.Instance.updateInstance();
-                Discovery.Instance.updateInstance();
-                Mulligan.Instance.updateInstance();
-                behave = Settings.Instance.updateInstance();
-                deckChanged = false;
-            }
 
-                //reload external process settings too
-                Helpfunctions.Instance.resetBuffer();
-                Helpfunctions.Instance.writeToBuffer(Hrtprozis.Instance.deckName + ";" + ownName + ";" + enemName + ";");
-                Helpfunctions.Instance.writeBufferToDeckFile();
+                behave = Settings.Instance.updateInstance();
+            }
+            
+            sf.setnewLoggFile();
+
+            //reload external process settings too
+            Helpfunctions.Instance.resetBuffer();
+            Helpfunctions.Instance.writeToBuffer(Hrtprozis.Instance.deckName + ";" + ownName + ";" + enemName + ";");
+            Helpfunctions.Instance.writeBufferToDeckFile();
 
             if (Mulligan.Instance.hasmulliganrules(ownName, enemName))
             {
@@ -271,7 +277,6 @@ namespace HREngine.Bots
             }
 
 
-            sf.setnewLoggFile();
 
             if (Mulligan.Instance.loserLoserLoser)
             {

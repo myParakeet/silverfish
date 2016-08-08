@@ -44,7 +44,10 @@ namespace HREngine.Bots
         {
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             deckName = Hrtprozis.Instance.deckName;
-            readCombos();
+            lock (instance)
+            {
+                readCombos();
+            }
         }
 
         private Discovery()
