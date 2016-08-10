@@ -127,7 +127,7 @@ namespace HREngine.Bots
         public bool concede = false;
         public bool enemyConcede;
         public int enemyConcedeValue = -900;
-        public bool writeToSingleFile;
+        public bool writeToSingleFile = false;
 
         public bool learnmode = false;
         public bool printlearnmode = true;
@@ -135,15 +135,11 @@ namespace HREngine.Bots
         private string ownClass = "";
         private string enemyClass = "";
         private string deckName = "";
+        private string cleanPath = "";
 
         private static readonly Settings instance = new Settings();
         
         static Settings() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
-
-        private Settings()
-        {
-            this.writeToSingleFile = false;
-        }
 
         public static Settings Instance
         {
@@ -151,6 +147,11 @@ namespace HREngine.Bots
             {
                 return instance;
             }
+        }
+
+        private Settings()
+        {
+            
         }
         
         public Behavior updateInstance()
@@ -162,6 +163,11 @@ namespace HREngine.Bots
             {
                 return readSettings();
             }
+        }
+
+        public void loggCleanPath()
+        {
+            Helpfunctions.Instance.logg(cleanPath);
         }
 
         public void setWeights(int alpha)
@@ -191,69 +197,78 @@ namespace HREngine.Bots
             string[] lines = new string[] { };
 
             string path = this.path;
+            string cleanpath = "Silverfish" + System.IO.Path.DirectorySeparatorChar;
             string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string cleandatapath = cleanpath + "Data" + System.IO.Path.DirectorySeparatorChar;
             string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string cleanclasspath = cleandatapath + ownClass + System.IO.Path.DirectorySeparatorChar;
             string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
-            bool dynamicBehavior = false;
+            string cleandeckpath = cleanclasspath + deckName + System.IO.Path.DirectorySeparatorChar;
+            string enemyfilestring = "settings-" + enemyClass + ".txt";
+            const string filestring = "settings.txt";
+            bool enemysettings = false;
 
             // if we have a deckName then we have a real ownClass too, not the default "druid"
-            if (deckName != "" && System.IO.File.Exists(deckpath + "settings-" + enemyClass + ".txt"))
+            if (deckName != "" && System.IO.File.Exists(deckpath + enemyfilestring))
             {
-                dynamicBehavior = true;
+                enemysettings = true;
                 path = deckpath;
-                Helpfunctions.Instance.ErrorLog("read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "settings-" + enemyClass + ".txt...");
+                cleanPath = cleandeckpath + enemyfilestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(deckpath + "settings.txt"))
+            else if (deckName != "" && System.IO.File.Exists(deckpath + filestring))
             {
                 path = deckpath;
-                Helpfunctions.Instance.ErrorLog("read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "settings.txt...");
+                cleanPath = cleandeckpath + filestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(classpath + "settings-" + enemyClass + ".txt"))
+            else if (deckName != "" && System.IO.File.Exists(classpath + enemyfilestring))
             {
-                dynamicBehavior = true;
+                enemysettings = true;
                 path = classpath;
-                Helpfunctions.Instance.ErrorLog("read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "settings-" + enemyClass + ".txt...");
+                cleanPath = cleanclasspath + enemyfilestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(classpath + "settings.txt"))
+            else if (deckName != "" && System.IO.File.Exists(classpath + filestring))
             {
                 path = classpath;
-                Helpfunctions.Instance.ErrorLog("read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "settings.txt...");
+                cleanPath = cleanclasspath + filestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(datapath + "settings-" + enemyClass + ".txt"))
+            else if (deckName != "" && System.IO.File.Exists(datapath + enemyfilestring))
             {
-                dynamicBehavior = true;
+                enemysettings = true;
                 path = datapath;
-                Helpfunctions.Instance.ErrorLog("read Data" + System.IO.Path.DirectorySeparatorChar + "settings-" + enemyClass + ".txt...");
+                cleanPath = cleandatapath + enemyfilestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(datapath + "settings.txt"))
+            else if (deckName != "" && System.IO.File.Exists(datapath + filestring))
             {
                 path = datapath;
-                Helpfunctions.Instance.ErrorLog("read Data" + System.IO.Path.DirectorySeparatorChar + "settings.txt...");
+                cleanPath = cleandatapath + filestring;
             }
-            else if (System.IO.File.Exists(path + "settings-" + enemyClass + ".txt"))
+            else if (System.IO.File.Exists(path + enemyfilestring))
             {
-                dynamicBehavior = true;
-                Helpfunctions.Instance.ErrorLog("read base settings-" + enemyClass + ".txt...");
+                enemysettings = true;
+                cleanPath = cleanpath + enemyfilestring;
             }
-            else if (System.IO.File.Exists(path + "settings.txt"))
+            else if (System.IO.File.Exists(path + filestring))
             {
-                Helpfunctions.Instance.ErrorLog("read base settings.txt...");
+                cleanPath = cleanpath + filestring;
             }
             else
             {
-                Helpfunctions.Instance.ErrorLog("can't find settings.txt, using default settings.");
+                Helpfunctions.Instance.logg("[Settings] cant find base settings.txt, using default settings");
                 return setDefaultSettings();
             }
+            Helpfunctions.Instance.ErrorLog("[Settings] read " + cleanPath);
 
-            if (dynamicBehavior)
+
+            const string readerror = " read error. Continuing without user-defined rules.";
+            if (enemysettings)
             {
                 try
                 {
-                    lines = System.IO.File.ReadAllLines(path + "settings-" + enemyClass + ".txt");
+                    lines = System.IO.File.ReadAllLines(path + enemyfilestring);
                 }
                 catch
                 {
-                    Helpfunctions.Instance.ErrorLog("settings-" + enemyClass + ".txt read error. Continuing without user-defined rules.");
+                    Helpfunctions.Instance.ErrorLog(enemyfilestring + readerror);
                     return setDefaultSettings();
                 }
             }
@@ -261,11 +276,11 @@ namespace HREngine.Bots
             {
                 try
                 {
-                    lines = System.IO.File.ReadAllLines(path + "settings.txt");
+                    lines = System.IO.File.ReadAllLines(path + filestring);
                 }
                 catch
                 {
-                    Helpfunctions.Instance.ErrorLog("settings.txt read error. Continuing without user-defined rules.");
+                    Helpfunctions.Instance.logg(filestring + readerror);
                     return setDefaultSettings();
                 }
             }
@@ -281,6 +296,7 @@ namespace HREngine.Bots
                 if (s.Contains(",")) s = s.Split(',')[0];
                 if (s == "" || s == " ") continue;
                 s = s.ToLower();
+                const string ignoring = "[Settings] ignoring the setting ";
 
                 string searchword = "maxwide=";
                 if (s.StartsWith(searchword))
@@ -292,7 +308,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -306,7 +322,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -320,7 +336,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -334,7 +350,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -348,7 +364,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -362,7 +378,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -376,7 +392,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -390,7 +406,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -404,7 +420,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -418,7 +434,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
                
@@ -432,7 +448,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -446,7 +462,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -460,7 +476,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -474,7 +490,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -488,7 +504,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -502,7 +518,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
                  searchword = "useexternalprocess=";
@@ -515,7 +531,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
                  searchword = "passivewaiting=";
@@ -528,7 +544,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -552,7 +568,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -566,7 +582,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 
@@ -580,7 +596,7 @@ namespace HREngine.Bots
                     }
                     catch
                     {
-                        Helpfunctions.Instance.ErrorLog("ignoring the setting " + searchword);
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
 

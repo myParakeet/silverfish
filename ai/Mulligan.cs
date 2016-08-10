@@ -161,6 +161,7 @@ namespace HREngine.Bots
 
         private string ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
         private string deckName = Hrtprozis.Instance.deckName;
+        private string cleanPath = "";
 
 
         private static readonly Mulligan instance = new Mulligan();
@@ -175,6 +176,11 @@ namespace HREngine.Bots
             }
         }
 
+        private Mulligan()
+        {
+            readMulligan();
+        }
+
         public void updateInstance()
         {
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
@@ -185,9 +191,9 @@ namespace HREngine.Bots
             }
         }
 
-        private Mulligan()
+        public void loggCleanPath()
         {
-            readMulligan();
+            Helpfunctions.Instance.logg(cleanPath);
         }
 
         private void readMulligan()
@@ -198,37 +204,43 @@ namespace HREngine.Bots
             concedelist.Clear();
             
             string path = Settings.Instance.path;
+            string cleanpath = "Silverfish" + System.IO.Path.DirectorySeparatorChar;
             string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string cleandatapath = cleanpath + "Data" + System.IO.Path.DirectorySeparatorChar;
             string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string cleanclasspath = cleandatapath + ownClass + System.IO.Path.DirectorySeparatorChar;
             string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
+            string cleandeckpath = cleanclasspath + deckName + System.IO.Path.DirectorySeparatorChar;
+            const string filestring = "_mulligan.txt";
 
 
-            // if we have a deckName then we have a real ownClass too, not the default "druid"
-            if (deckName != "" && System.IO.File.Exists(deckpath + "_mulligan.txt"))
+            if (deckName != "" && System.IO.File.Exists(deckpath + filestring))
             {
                 path = deckpath;
-                Helpfunctions.Instance.ErrorLog("[Mulligan] read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "_mulligan.txt...");
+                cleanPath = cleandeckpath + filestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(classpath + "_mulligan.txt"))
+            else if (deckName != "" && System.IO.File.Exists(classpath + filestring))
             {
                 path = classpath;
-                Helpfunctions.Instance.ErrorLog("[Mulligan] read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "_mulligan.txt...");
+                cleanPath = cleanclasspath + filestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(datapath + "_mulligan.txt"))
+            else if (deckName != "" && System.IO.File.Exists(datapath + filestring))
             {
                 path = datapath;
-                Helpfunctions.Instance.ErrorLog("[Mulligan] read Data" + System.IO.Path.DirectorySeparatorChar + "_mulligan.txt...");
+                cleanPath = cleandatapath + filestring;
             }
-            else if (System.IO.File.Exists(path + "_mulligan.txt"))
+            else if (System.IO.File.Exists(path + filestring))
             {
-                Helpfunctions.Instance.ErrorLog("[Mulligan] read base _mulligan.txt...");
+                cleanPath = cleanpath + filestring;
             }
             else
             {
-                Helpfunctions.Instance.ErrorLog("[Mulligan] cant find _mulligan.txt (if you didn't create your own mulligan file, ignore this message)");
+                Helpfunctions.Instance.ErrorLog("[Mulligan] cant find base _mulligan.txt, consider creating one");
                 return;
             }
-
+            Helpfunctions.Instance.ErrorLog("[Mulligan] read " + cleanPath);
+            
+            
             try
             {
                 lines = System.IO.File.ReadAllLines(path + "_mulligan.txt");
@@ -657,7 +669,7 @@ namespace HREngine.Bots
             }
             catch
             {
-                Helpfunctions.Instance.ErrorLog("[Mulligan] cant find mulltest.txt");
+                Helpfunctions.Instance.ErrorLog("[Mulligan] cant find mulltest.txt (only for debugging mulligans)");
                 return;
             }
             foreach (string line in lines)

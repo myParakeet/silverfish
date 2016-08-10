@@ -179,12 +179,10 @@ namespace HREngine.Bots
 
             if (Settings.Instance.learnmode)
             {
-
                 e.handled = false;
                 return;
             }
-
-
+            
 
             var list = e.card_list;
 
@@ -220,6 +218,11 @@ namespace HREngine.Bots
             }
             
             sf.setnewLoggFile();
+            Settings.Instance.loggCleanPath();
+            Mulligan.Instance.loggCleanPath();
+            Discovery.Instance.loggCleanPath();
+            ComboBreaker.Instance.loggCleanPath();
+
 
             //reload external process settings too
             Helpfunctions.Instance.resetBuffer();
@@ -2506,7 +2509,7 @@ namespace HREngine.Bots
 
             using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + "Logging.txt"))
             {
-                sw.WriteLine("#ConsoleLog: " + s);
+                sw.WriteLine(DateTime.Now.ToString("HH:mm:ss: ") + s);
             }
         }
 
@@ -2578,6 +2581,24 @@ namespace HREngine.Bots
                 {
                     if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
                     else System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
+                    writed = false;
+                }
+                catch
+                {
+                    writed = true;
+                }
+            }
+            this.sendbuffer = "";
+        }
+
+        public void writeBufferToCardDB()
+        {
+            bool writed = true;
+            while (writed)
+            {
+                try
+                {
+                    System.IO.File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
                     writed = false;
                 }
                 catch
