@@ -23,7 +23,8 @@ namespace HREngine.Bots
     class Program
     {
         static void Main(string[] args)
-        { 
+        {
+            System.AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
             Bot b = new Bot();
             bool network = Settings.Instance.useNetwork;
 
@@ -81,6 +82,20 @@ namespace HREngine.Bots
 
                 }
             }
+        }
+
+        static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
+        {
+            using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
+            {
+                sw.WriteLine(e.ExceptionObject.ToString());
+            }
+            Console.WriteLine(e.ExceptionObject.ToString());
+            Console.WriteLine("Please report this crash including the CrashLog in your Silverfish\\SilverLogs folder");
+            Console.WriteLine("If no CrashLog exists then please post a screenshot instead");
+            Console.WriteLine("Press Enter to exit");
+            Console.ReadLine();
+            Environment.Exit(1);
         }
     }
 
