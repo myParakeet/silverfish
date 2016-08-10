@@ -508,9 +508,25 @@ namespace HREngine.Bots
                 }
             }
             this.sendbuffer = "";
-
         }
-   
+
+        public void writeBufferToCardDB()
+        {
+            bool writed = true;
+            while (writed)
+            {
+                try
+                {
+                    System.IO.File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
+                    writed = false;
+                }
+                catch
+                {
+                    writed = true;
+                }
+            }
+            this.sendbuffer = "";
+        }
     }
 
 

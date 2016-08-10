@@ -1381,6 +1381,236 @@ namespace HREngine.Bots
             HERO_09a,
             HRW02_1,
             HRW02_1e,
+            KARA_00_01,
+            KARA_00_01H,
+            KARA_00_02,
+            KARA_00_02H,
+            KARA_00_02a,
+            KARA_00_03,
+            KARA_00_03H,
+            KARA_00_03c,
+            KARA_00_04,
+            KARA_00_04H,
+            KARA_00_05,
+            KARA_00_05e,
+            KARA_00_06,
+            KARA_00_06e,
+            KARA_00_07,
+            KARA_00_08,
+            KARA_00_09,
+            KARA_00_10,
+            KARA_00_11,
+            KARA_04_01,
+            KARA_04_01h,
+            KARA_04_01heroic,
+            KARA_04_02hp,
+            KARA_04_05,
+            KARA_04_05h,
+            KARA_05_01b,
+            KARA_05_01e,
+            KARA_05_01h,
+            KARA_05_01hheroic,
+            KARA_05_01hp,
+            KARA_05_01hpheroic,
+            KARA_05_02,
+            KARA_05_02heroic,
+            KARA_06_01,
+            KARA_06_01e,
+            KARA_06_01heroic,
+            KARA_06_02,
+            KARA_06_02heroic,
+            KARA_06_03hp,
+            KARA_06_03hpheroic,
+            KARA_07_01,
+            KARA_07_01heroic,
+            KARA_07_02,
+            KARA_07_02e,
+            KARA_07_03,
+            KARA_07_03heroic,
+            KARA_07_05,
+            KARA_07_05heroic,
+            KARA_07_06,
+            KARA_07_06heroic,
+            KARA_07_07,
+            KARA_07_07heroic,
+            KARA_07_08,
+            KARA_07_08heroic,
+            KARA_08_01,
+            KARA_08_01H,
+            KARA_08_02,
+            KARA_08_02H,
+            KARA_08_02e,
+            KARA_08_02eH,
+            KARA_08_03,
+            KARA_08_03H,
+            KARA_08_03e,
+            KARA_08_04,
+            KARA_08_04e,
+            KARA_08_05,
+            KARA_08_05H,
+            KARA_08_06,
+            KARA_08_06e2,
+            KARA_08_08,
+            KARA_08_08e2,
+            KARA_09_01,
+            KARA_09_01heroic,
+            KARA_09_02,
+            KARA_09_03,
+            KARA_09_03a,
+            KARA_09_03a_heroic,
+            KARA_09_03heroic,
+            KARA_09_04,
+            KARA_09_05,
+            KARA_09_05heroic,
+            KARA_09_06,
+            KARA_09_06heroic,
+            KARA_09_07,
+            KARA_09_07heroic,
+            KARA_09_08,
+            KARA_09_08_heroic,
+            KARA_11_01,
+            KARA_11_01heroic,
+            KARA_11_02,
+            KARA_12_01,
+            KARA_12_01H,
+            KARA_12_02,
+            KARA_12_02H,
+            KARA_12_03,
+            KARA_12_03H,
+            KARA_13_01,
+            KARA_13_01H,
+            KARA_13_02,
+            KARA_13_02H,
+            KARA_13_03,
+            KARA_13_03H,
+            KARA_13_06,
+            KARA_13_06H,
+            KARA_13_11,
+            KARA_13_11e,
+            KARA_13_12,
+            KARA_13_12H,
+            KARA_13_13,
+            KARA_13_13H,
+            KARA_13_15,
+            KARA_13_16,
+            KARA_13_17,
+            KARA_13_19,
+            KARA_13_19e,
+            KARA_13_20,
+            KARA_13_22,
+            KARA_13_23,
+            KARA_13_26,
+            KAR_003a,
+            KAR_003b,
+            KAR_004,
+            KAR_004a,
+            KAR_005,
+            KAR_005a,
+            KAR_006,
+            KAR_009,
+            KAR_010,
+            KAR_010a,
+            KAR_011,
+            KAR_013,
+            KAR_021,
+            KAR_025,
+            KAR_025a,
+            KAR_025b,
+            KAR_025c,
+            KAR_026,
+            KAR_026t,
+            KAR_028,
+            KAR_029,
+            KAR_030,
+            KAR_030a,
+            KAR_033,
+            KAR_035,
+            KAR_036,
+            KAR_036e,
+            KAR_037,
+            KAR_037t,
+            KAR_041,
+            KAR_044,
+            KAR_044a,
+            KAR_057,
+            KAR_061,
+            KAR_062,
+            KAR_063,
+            KAR_065,
+            KAR_069,
+            KAR_070,
+            KAR_073,
+            KAR_075,
+            KAR_076,
+            KAR_077,
+            KAR_077e,
+            KAR_089,
+            KAR_091,
+            KAR_092,
+            KAR_094,
+            KAR_094a,
+            KAR_095,
+            KAR_095e,
+            KAR_096,
+            KAR_097,
+            KAR_097t,
+            KAR_114,
+            KAR_114e,
+            KAR_204,
+            KAR_205,
+            KAR_300,
+            KAR_702,
+            KAR_702e,
+            KAR_710,
+            KAR_710m,
+            KAR_711,
+            KAR_712,
+            KAR_A01_01,
+            KAR_A01_01H,
+            KAR_A01_02,
+            KAR_A01_02H,
+            KAR_A01_02e,
+            KAR_A02_01,
+            KAR_A02_01H,
+            KAR_A02_02,
+            KAR_A02_02H,
+            KAR_A02_03,
+            KAR_A02_03H,
+            KAR_A02_04,
+            KAR_A02_04H,
+            KAR_A02_05,
+            KAR_A02_05H,
+            KAR_A02_06,
+            KAR_A02_06H,
+            KAR_A02_06He,
+            KAR_A02_06e2,
+            KAR_A02_09,
+            KAR_A02_09H,
+            KAR_A02_09e,
+            KAR_A02_09eH,
+            KAR_A02_10,
+            KAR_A02_11,
+            KAR_A02_12,
+            KAR_A02_12H,
+            KAR_A02_13,
+            KAR_A02_13H,
+            KAR_A10_01,
+            KAR_A10_02,
+            KAR_A10_03,
+            KAR_A10_04,
+            KAR_A10_05,
+            KAR_A10_06,
+            KAR_A10_07,
+            KAR_A10_08,
+            KAR_A10_09,
+            KAR_A10_10,
+            KAR_A10_22,
+            KAR_A10_22H,
+            KAR_A10_33,
+            KAR_a10_Boss1,
+            KAR_a10_Boss1H,
+            KAR_a10_Boss2,
+            KAR_a10_Boss2H,
             LOEA01_01,
             LOEA01_01h,
             LOEA01_02,
@@ -2181,8 +2411,14 @@ namespace HREngine.Bots
             TB_KTRAF_HP_RAF5,
             TB_KTRAF_H_1,
             TB_KTRAF_H_2,
+            TB_KaraPortal_001,
+            TB_KaraPortal_002,
+            TB_KaraPortal_003,
+            TB_KaraPortals_003,
             TB_LadyNazjar_PlayerEnch,
             TB_LevelUp_001,
+            TB_MP_01e,
+            TB_MP_02e,
             TB_MechWar_Boss1,
             TB_MechWar_Boss1_HeroPower,
             TB_MechWar_Boss2,
@@ -2190,6 +2426,7 @@ namespace HREngine.Bots
             TB_MechWar_CommonCards,
             TB_MechWar_Minion1,
             TB_Mini_1e,
+            TB_Murgstone_001,
             TB_OG_027,
             TB_PickYourFate,
             TB_PickYourFate7Ench,
@@ -7218,7 +7455,245 @@ namespace HREngine.Bots
                 case cardIDEnum.HERO_08c: return new Sim_HERO_08();
                 case cardIDEnum.HERO_09: return new Sim_HERO_09();
                 case cardIDEnum.HERO_09a: return new Sim_HERO_09();
-
+                /*
+                case cardIDEnum.KARA_00_01: return new Sim_KARA_00_01();
+                case cardIDEnum.KARA_00_01H: return new Sim_KARA_00_01H();
+                case cardIDEnum.KARA_00_02: return new Sim_KARA_00_02();
+                case cardIDEnum.KARA_00_02H: return new Sim_KARA_00_02H();
+                case cardIDEnum.KARA_00_02a: return new Sim_KARA_00_02a();
+                case cardIDEnum.KARA_00_03: return new Sim_KARA_00_03();
+                case cardIDEnum.KARA_00_03H: return new Sim_KARA_00_03H();
+                case cardIDEnum.KARA_00_03c: return new Sim_KARA_00_03c();
+                case cardIDEnum.KARA_00_04: return new Sim_KARA_00_04();
+                case cardIDEnum.KARA_00_04H: return new Sim_KARA_00_04H();
+                case cardIDEnum.KARA_00_05: return new Sim_KARA_00_05();
+                case cardIDEnum.KARA_00_05e: return new Sim_KARA_00_05e();
+                case cardIDEnum.KARA_00_06: return new Sim_KARA_00_06();
+                case cardIDEnum.KARA_00_06e: return new Sim_KARA_00_06e();
+                case cardIDEnum.KARA_00_07: return new Sim_KARA_00_07();
+                case cardIDEnum.KARA_00_08: return new Sim_KARA_00_08();
+                case cardIDEnum.KARA_00_09: return new Sim_KARA_00_09();
+                case cardIDEnum.KARA_00_10: return new Sim_KARA_00_10();
+                case cardIDEnum.KARA_00_11: return new Sim_KARA_00_11();
+                case cardIDEnum.KARA_04_01: return new Sim_KARA_04_01();
+                case cardIDEnum.KARA_04_01h: return new Sim_KARA_04_01h();
+                case cardIDEnum.KARA_04_01heroic: return new Sim_KARA_04_01heroic();
+                case cardIDEnum.KARA_04_02hp: return new Sim_KARA_04_02hp();
+                case cardIDEnum.KARA_04_05: return new Sim_KARA_04_05();
+                case cardIDEnum.KARA_04_05h: return new Sim_KARA_04_05h();
+                case cardIDEnum.KARA_05_01b: return new Sim_KARA_05_01b();
+                case cardIDEnum.KARA_05_01e: return new Sim_KARA_05_01e();
+                case cardIDEnum.KARA_05_01h: return new Sim_KARA_05_01h();
+                case cardIDEnum.KARA_05_01hheroic: return new Sim_KARA_05_01hheroic();
+                case cardIDEnum.KARA_05_01hp: return new Sim_KARA_05_01hp();
+                case cardIDEnum.KARA_05_01hpheroic: return new Sim_KARA_05_01hpheroic();
+                case cardIDEnum.KARA_05_02: return new Sim_KARA_05_02();
+                case cardIDEnum.KARA_05_02heroic: return new Sim_KARA_05_02heroic();
+                case cardIDEnum.KARA_06_01: return new Sim_KARA_06_01();
+                case cardIDEnum.KARA_06_01e: return new Sim_KARA_06_01e();
+                case cardIDEnum.KARA_06_01heroic: return new Sim_KARA_06_01heroic();
+                case cardIDEnum.KARA_06_02: return new Sim_KARA_06_02();
+                case cardIDEnum.KARA_06_02heroic: return new Sim_KARA_06_02heroic();
+                case cardIDEnum.KARA_06_03hp: return new Sim_KARA_06_03hp();
+                case cardIDEnum.KARA_06_03hpheroic: return new Sim_KARA_06_03hpheroic();
+                case cardIDEnum.KARA_07_01: return new Sim_KARA_07_01();
+                case cardIDEnum.KARA_07_01heroic: return new Sim_KARA_07_01heroic();
+                case cardIDEnum.KARA_07_02: return new Sim_KARA_07_02();
+                case cardIDEnum.KARA_07_02e: return new Sim_KARA_07_02e();
+                case cardIDEnum.KARA_07_03: return new Sim_KARA_07_03();
+                case cardIDEnum.KARA_07_03heroic: return new Sim_KARA_07_03heroic();
+                case cardIDEnum.KARA_07_05: return new Sim_KARA_07_05();
+                case cardIDEnum.KARA_07_05heroic: return new Sim_KARA_07_05heroic();
+                case cardIDEnum.KARA_07_06: return new Sim_KARA_07_06();
+                case cardIDEnum.KARA_07_06heroic: return new Sim_KARA_07_06heroic();
+                case cardIDEnum.KARA_07_07: return new Sim_KARA_07_07();
+                case cardIDEnum.KARA_07_07heroic: return new Sim_KARA_07_07heroic();
+                case cardIDEnum.KARA_07_08: return new Sim_KARA_07_08();
+                case cardIDEnum.KARA_07_08heroic: return new Sim_KARA_07_08heroic();
+                case cardIDEnum.KARA_08_01: return new Sim_KARA_08_01();
+                case cardIDEnum.KARA_08_01H: return new Sim_KARA_08_01H();
+                case cardIDEnum.KARA_08_02: return new Sim_KARA_08_02();
+                case cardIDEnum.KARA_08_02H: return new Sim_KARA_08_02H();
+                case cardIDEnum.KARA_08_02e: return new Sim_KARA_08_02e();
+                case cardIDEnum.KARA_08_02eH: return new Sim_KARA_08_02eH();
+                case cardIDEnum.KARA_08_03: return new Sim_KARA_08_03();
+                case cardIDEnum.KARA_08_03H: return new Sim_KARA_08_03H();
+                case cardIDEnum.KARA_08_03e: return new Sim_KARA_08_03e();
+                case cardIDEnum.KARA_08_04: return new Sim_KARA_08_04();
+                case cardIDEnum.KARA_08_04e: return new Sim_KARA_08_04e();
+                case cardIDEnum.KARA_08_05: return new Sim_KARA_08_05();
+                case cardIDEnum.KARA_08_05H: return new Sim_KARA_08_05H();
+                case cardIDEnum.KARA_08_06: return new Sim_KARA_08_06();
+                case cardIDEnum.KARA_08_06e2: return new Sim_KARA_08_06e2();
+                case cardIDEnum.KARA_08_08: return new Sim_KARA_08_08();
+                case cardIDEnum.KARA_08_08e2: return new Sim_KARA_08_08e2();
+                case cardIDEnum.KARA_09_01: return new Sim_KARA_09_01();
+                case cardIDEnum.KARA_09_01heroic: return new Sim_KARA_09_01heroic();
+                case cardIDEnum.KARA_09_02: return new Sim_KARA_09_02();
+                case cardIDEnum.KARA_09_03: return new Sim_KARA_09_03();
+                case cardIDEnum.KARA_09_03a: return new Sim_KARA_09_03a();
+                case cardIDEnum.KARA_09_03a_heroic: return new Sim_KARA_09_03a_heroic();
+                case cardIDEnum.KARA_09_03heroic: return new Sim_KARA_09_03heroic();
+                case cardIDEnum.KARA_09_04: return new Sim_KARA_09_04();
+                case cardIDEnum.KARA_09_05: return new Sim_KARA_09_05();
+                case cardIDEnum.KARA_09_05heroic: return new Sim_KARA_09_05heroic();
+                case cardIDEnum.KARA_09_06: return new Sim_KARA_09_06();
+                case cardIDEnum.KARA_09_06heroic: return new Sim_KARA_09_06heroic();
+                case cardIDEnum.KARA_09_07: return new Sim_KARA_09_07();
+                case cardIDEnum.KARA_09_07heroic: return new Sim_KARA_09_07heroic();
+                case cardIDEnum.KARA_09_08: return new Sim_KARA_09_08();
+                case cardIDEnum.KARA_09_08_heroic: return new Sim_KARA_09_08_heroic();
+                case cardIDEnum.KARA_11_01: return new Sim_KARA_11_01();
+                case cardIDEnum.KARA_11_01heroic: return new Sim_KARA_11_01heroic();
+                case cardIDEnum.KARA_11_02: return new Sim_KARA_11_02();
+                case cardIDEnum.KARA_12_01: return new Sim_KARA_12_01();
+                case cardIDEnum.KARA_12_01H: return new Sim_KARA_12_01H();
+                case cardIDEnum.KARA_12_02: return new Sim_KARA_12_02();
+                case cardIDEnum.KARA_12_02H: return new Sim_KARA_12_02H();
+                case cardIDEnum.KARA_12_03: return new Sim_KARA_12_03();
+                case cardIDEnum.KARA_12_03H: return new Sim_KARA_12_03H();
+                case cardIDEnum.KARA_13_01: return new Sim_KARA_13_01();
+                case cardIDEnum.KARA_13_01H: return new Sim_KARA_13_01H();
+                case cardIDEnum.KARA_13_02: return new Sim_KARA_13_02();
+                case cardIDEnum.KARA_13_02H: return new Sim_KARA_13_02H();
+                case cardIDEnum.KARA_13_03: return new Sim_KARA_13_03();
+                case cardIDEnum.KARA_13_03H: return new Sim_KARA_13_03H();
+                case cardIDEnum.KARA_13_06: return new Sim_KARA_13_06();
+                case cardIDEnum.KARA_13_06H: return new Sim_KARA_13_06H();
+                case cardIDEnum.KARA_13_11: return new Sim_KARA_13_11();
+                case cardIDEnum.KARA_13_11e: return new Sim_KARA_13_11e();
+                case cardIDEnum.KARA_13_12: return new Sim_KARA_13_12();
+                case cardIDEnum.KARA_13_12H: return new Sim_KARA_13_12H();
+                case cardIDEnum.KARA_13_13: return new Sim_KARA_13_13();
+                case cardIDEnum.KARA_13_13H: return new Sim_KARA_13_13H();
+                case cardIDEnum.KARA_13_15: return new Sim_KARA_13_15();
+                case cardIDEnum.KARA_13_15: return new Sim_KARA_13_15();
+                case cardIDEnum.KARA_13_16: return new Sim_KARA_13_16();
+                case cardIDEnum.KARA_13_16: return new Sim_KARA_13_16();
+                case cardIDEnum.KARA_13_17: return new Sim_KARA_13_17();
+                case cardIDEnum.KARA_13_17: return new Sim_KARA_13_17();
+                case cardIDEnum.KARA_13_19: return new Sim_KARA_13_19();
+                case cardIDEnum.KARA_13_19: return new Sim_KARA_13_19();
+                case cardIDEnum.KARA_13_19e: return new Sim_KARA_13_19e();
+                case cardIDEnum.KARA_13_20: return new Sim_KARA_13_20();
+                case cardIDEnum.KARA_13_20: return new Sim_KARA_13_20();
+                case cardIDEnum.KARA_13_22: return new Sim_KARA_13_22();
+                case cardIDEnum.KARA_13_22: return new Sim_KARA_13_22();
+                case cardIDEnum.KARA_13_23: return new Sim_KARA_13_23();
+                case cardIDEnum.KARA_13_23: return new Sim_KARA_13_23();
+                case cardIDEnum.KARA_13_26: return new Sim_KARA_13_26();
+                case cardIDEnum.KAR_003a: return new Sim_KAR_003a();
+                case cardIDEnum.KAR_003b: return new Sim_KAR_003b();
+                case cardIDEnum.KAR_004: return new Sim_KAR_004();
+                case cardIDEnum.KAR_004a: return new Sim_KAR_004a();
+                case cardIDEnum.KAR_005: return new Sim_KAR_005();
+                case cardIDEnum.KAR_005a: return new Sim_KAR_005a();
+                case cardIDEnum.KAR_006: return new Sim_KAR_006();
+                case cardIDEnum.KAR_009: return new Sim_KAR_009();
+                case cardIDEnum.KAR_010: return new Sim_KAR_010();
+                case cardIDEnum.KAR_010a: return new Sim_KAR_010a();
+                case cardIDEnum.KAR_011: return new Sim_KAR_011();
+                case cardIDEnum.KAR_013: return new Sim_KAR_013();
+                case cardIDEnum.KAR_021: return new Sim_KAR_021();
+                case cardIDEnum.KAR_025: return new Sim_KAR_025();
+                case cardIDEnum.KAR_025a: return new Sim_KAR_025a();
+                case cardIDEnum.KAR_025b: return new Sim_KAR_025b();
+                case cardIDEnum.KAR_025c: return new Sim_KAR_025c();
+                case cardIDEnum.KAR_026: return new Sim_KAR_026();
+                case cardIDEnum.KAR_026t: return new Sim_KAR_026t();
+                case cardIDEnum.KAR_028: return new Sim_KAR_028();
+                case cardIDEnum.KAR_029: return new Sim_KAR_029();
+                case cardIDEnum.KAR_030: return new Sim_KAR_030();
+                case cardIDEnum.KAR_030a: return new Sim_KAR_030a();
+                case cardIDEnum.KAR_033: return new Sim_KAR_033();
+                case cardIDEnum.KAR_035: return new Sim_KAR_035();
+                case cardIDEnum.KAR_036: return new Sim_KAR_036();
+                case cardIDEnum.KAR_036e: return new Sim_KAR_036e();
+                case cardIDEnum.KAR_037: return new Sim_KAR_037();
+                case cardIDEnum.KAR_037t: return new Sim_KAR_037t();
+                case cardIDEnum.KAR_041: return new Sim_KAR_041();
+                case cardIDEnum.KAR_044: return new Sim_KAR_044();
+                case cardIDEnum.KAR_044a: return new Sim_KAR_044a();
+                case cardIDEnum.KAR_057: return new Sim_KAR_057();
+                case cardIDEnum.KAR_061: return new Sim_KAR_061();
+                case cardIDEnum.KAR_062: return new Sim_KAR_062();
+                case cardIDEnum.KAR_063: return new Sim_KAR_063();
+                case cardIDEnum.KAR_065: return new Sim_KAR_065();
+                case cardIDEnum.KAR_069: return new Sim_KAR_069();
+                case cardIDEnum.KAR_070: return new Sim_KAR_070();
+                case cardIDEnum.KAR_073: return new Sim_KAR_073();
+                case cardIDEnum.KAR_075: return new Sim_KAR_075();
+                case cardIDEnum.KAR_076: return new Sim_KAR_076();
+                case cardIDEnum.KAR_077: return new Sim_KAR_077();
+                case cardIDEnum.KAR_077e: return new Sim_KAR_077e();
+                case cardIDEnum.KAR_089: return new Sim_KAR_089();
+                case cardIDEnum.KAR_091: return new Sim_KAR_091();
+                case cardIDEnum.KAR_092: return new Sim_KAR_092();
+                case cardIDEnum.KAR_094: return new Sim_KAR_094();
+                case cardIDEnum.KAR_094a: return new Sim_KAR_094a();
+                case cardIDEnum.KAR_095: return new Sim_KAR_095();
+                case cardIDEnum.KAR_095e: return new Sim_KAR_095e();
+                case cardIDEnum.KAR_096: return new Sim_KAR_096();
+                case cardIDEnum.KAR_097: return new Sim_KAR_097();
+                case cardIDEnum.KAR_097t: return new Sim_KAR_097t();
+                case cardIDEnum.KAR_114: return new Sim_KAR_114();
+                case cardIDEnum.KAR_114e: return new Sim_KAR_114e();
+                case cardIDEnum.KAR_204: return new Sim_KAR_204();
+                case cardIDEnum.KAR_205: return new Sim_KAR_205();
+                case cardIDEnum.KAR_300: return new Sim_KAR_300();
+                case cardIDEnum.KAR_702: return new Sim_KAR_702();
+                case cardIDEnum.KAR_702e: return new Sim_KAR_702e();
+                case cardIDEnum.KAR_710: return new Sim_KAR_710();
+                case cardIDEnum.KAR_710m: return new Sim_KAR_710m();
+                case cardIDEnum.KAR_711: return new Sim_KAR_711();
+                case cardIDEnum.KAR_712: return new Sim_KAR_712();
+                case cardIDEnum.KAR_A01_01: return new Sim_KAR_A01_01();
+                case cardIDEnum.KAR_A01_01H: return new Sim_KAR_A01_01H();
+                case cardIDEnum.KAR_A01_02: return new Sim_KAR_A01_02();
+                case cardIDEnum.KAR_A01_02H: return new Sim_KAR_A01_02H();
+                case cardIDEnum.KAR_A01_02e: return new Sim_KAR_A01_02e();
+                case cardIDEnum.KAR_A02_01: return new Sim_KAR_A02_01();
+                case cardIDEnum.KAR_A02_01H: return new Sim_KAR_A02_01H();
+                case cardIDEnum.KAR_A02_02: return new Sim_KAR_A02_02();
+                case cardIDEnum.KAR_A02_02H: return new Sim_KAR_A02_02H();
+                case cardIDEnum.KAR_A02_03: return new Sim_KAR_A02_03();
+                case cardIDEnum.KAR_A02_03H: return new Sim_KAR_A02_03H();
+                case cardIDEnum.KAR_A02_04: return new Sim_KAR_A02_04();
+                case cardIDEnum.KAR_A02_04H: return new Sim_KAR_A02_04H();
+                case cardIDEnum.KAR_A02_05: return new Sim_KAR_A02_05();
+                case cardIDEnum.KAR_A02_05H: return new Sim_KAR_A02_05H();
+                case cardIDEnum.KAR_A02_06: return new Sim_KAR_A02_06();
+                case cardIDEnum.KAR_A02_06H: return new Sim_KAR_A02_06H();
+                case cardIDEnum.KAR_A02_06He: return new Sim_KAR_A02_06He();
+                case cardIDEnum.KAR_A02_06e2: return new Sim_KAR_A02_06e2();
+                case cardIDEnum.KAR_A02_09: return new Sim_KAR_A02_09();
+                case cardIDEnum.KAR_A02_09H: return new Sim_KAR_A02_09H();
+                case cardIDEnum.KAR_A02_09e: return new Sim_KAR_A02_09e();
+                case cardIDEnum.KAR_A02_09eH: return new Sim_KAR_A02_09eH();
+                case cardIDEnum.KAR_A02_10: return new Sim_KAR_A02_10();
+                case cardIDEnum.KAR_A02_11: return new Sim_KAR_A02_11();
+                case cardIDEnum.KAR_A02_12: return new Sim_KAR_A02_12();
+                case cardIDEnum.KAR_A02_12H: return new Sim_KAR_A02_12H();
+                case cardIDEnum.KAR_A02_13: return new Sim_KAR_A02_13();
+                case cardIDEnum.KAR_A02_13H: return new Sim_KAR_A02_13H();
+                case cardIDEnum.KAR_A10_01: return new Sim_KAR_A10_01();
+                case cardIDEnum.KAR_A10_02: return new Sim_KAR_A10_02();
+                case cardIDEnum.KAR_A10_03: return new Sim_KAR_A10_03();
+                case cardIDEnum.KAR_A10_04: return new Sim_KAR_A10_04();
+                case cardIDEnum.KAR_A10_05: return new Sim_KAR_A10_05();
+                case cardIDEnum.KAR_A10_06: return new Sim_KAR_A10_06();
+                case cardIDEnum.KAR_A10_07: return new Sim_KAR_A10_07();
+                case cardIDEnum.KAR_A10_08: return new Sim_KAR_A10_08();
+                case cardIDEnum.KAR_A10_09: return new Sim_KAR_A10_09();
+                case cardIDEnum.KAR_A10_10: return new Sim_KAR_A10_10();
+                case cardIDEnum.KAR_A10_22: return new Sim_KAR_A10_22();
+                case cardIDEnum.KAR_A10_22H: return new Sim_KAR_A10_22H();
+                case cardIDEnum.KAR_A10_33: return new Sim_KAR_A10_33();
+                case cardIDEnum.KAR_a10_Boss1: return new Sim_KAR_a10_Boss1();
+                case cardIDEnum.KAR_a10_Boss1H: return new Sim_KAR_a10_Boss1H();
+                case cardIDEnum.KAR_a10_Boss2: return new Sim_KAR_a10_Boss2();
+                case cardIDEnum.KAR_a10_Boss2H: return new Sim_KAR_a10_Boss2H();
+                */
                 case cardIDEnum.LOEA10_3: return new Sim_LOEA10_3();
                 case cardIDEnum.LOEA16_3: return new Sim_LOEA16_3();
                 case cardIDEnum.LOEA16_4: return new Sim_LOEA16_4();
@@ -8514,28 +8989,29 @@ namespace HREngine.Bots
             return new PenTemplate();
         }
 
+        //call this if carddb.txt was changed to generate new stuff
         private void enumCreator()
         {
-            //call this, if carddb.txt was changed, to get latest public enum cardIDEnum
-            Helpfunctions.Instance.logg("public enum cardIDEnum");
-            Helpfunctions.Instance.logg("{");
-            Helpfunctions.Instance.logg("None,");
+            // cardIDEnum creator:
+            Helpfunctions.Instance.writeToBuffer("public enum cardIDEnum");
+            Helpfunctions.Instance.writeToBuffer("{");
+            Helpfunctions.Instance.writeToBuffer("None,");
             foreach (string cardid in this.allCardIDS)
             {
-                Helpfunctions.Instance.logg(cardid + ",");
+                Helpfunctions.Instance.writeToBuffer(cardid + ",");
             }
-            Helpfunctions.Instance.logg("}");
+            Helpfunctions.Instance.writeToBuffer("}");
 
 
-
-            Helpfunctions.Instance.logg("public cardIDEnum cardIdstringToEnum(string s)");
-            Helpfunctions.Instance.logg("{");
+            // cardIdstringToEnum creator:
+            /*Helpfunctions.Instance.writeToBuffer("public cardIDEnum cardIdstringToEnum(string s)");
+            Helpfunctions.Instance.writeToBuffer("{");
             foreach (string cardid in this.allCardIDS)
             {
-                Helpfunctions.Instance.logg("if(s==\"" + cardid + "\") return CardDB.cardIDEnum." + cardid + ";");
+                Helpfunctions.Instance.writeToBuffer("if(s==\"" + cardid + "\") return CardDB.cardIDEnum." + cardid + ";");
             }
-            Helpfunctions.Instance.logg("return CardDB.cardIDEnum.None;");
-            Helpfunctions.Instance.logg("}");
+            Helpfunctions.Instance.writeToBuffer("return CardDB.cardIDEnum.None;");
+            Helpfunctions.Instance.writeToBuffer("}");
 
             List<string> namelist = new List<string>();
 
@@ -8543,37 +9019,45 @@ namespace HREngine.Bots
             {
                 if (namelist.Contains(cardid)) continue;
                 namelist.Add(cardid);
-            }
+            }*/
 
 
-            Helpfunctions.Instance.logg("public enum cardName");
-            Helpfunctions.Instance.logg("{");
+            // cardName creator:
+            Helpfunctions.Instance.writeToBuffer("public enum cardName");
+            Helpfunctions.Instance.writeToBuffer("{");
             foreach (string cardid in namelist)
             {
-                Helpfunctions.Instance.logg(cardid + ",");
+                Helpfunctions.Instance.writeToBuffer(cardid + ",");
             }
-            Helpfunctions.Instance.logg("}");
+            Helpfunctions.Instance.writeToBuffer("}");
 
-            Helpfunctions.Instance.logg("public cardName cardNamestringToEnum(string s)");
-            Helpfunctions.Instance.logg("{");
+
+            // cardNamestringToEnum creator:
+            /*Helpfunctions.Instance.writeToBuffer("public cardName cardNamestringToEnum(string s)");
+            Helpfunctions.Instance.writeToBuffer("{");
             foreach (string cardid in namelist)
             {
-                Helpfunctions.Instance.logg("if(s==\"" + cardid + "\") return CardDB.cardName." + cardid + ";");
+                Helpfunctions.Instance.writeToBuffer("if(s==\"" + cardid + "\") return CardDB.cardName." + cardid + ";");
             }
-            Helpfunctions.Instance.logg("return CardDB.cardName.unknown;");
-            Helpfunctions.Instance.logg("}");
+            Helpfunctions.Instance.writeToBuffer("return CardDB.cardName.unknown;");
+            Helpfunctions.Instance.writeToBuffer("}");*/
 
-            // simcard creator:
 
-            Helpfunctions.Instance.logg("public SimTemplate getSimCard(cardIDEnum id)");
-            Helpfunctions.Instance.logg("{");
+            // getSimCard creator:
+            Helpfunctions.Instance.writeToBuffer("public SimTemplate getSimCard(cardIDEnum id)");
+            Helpfunctions.Instance.writeToBuffer("{");
+            Helpfunctions.Instance.writeToBuffer("switch (id)");
+            Helpfunctions.Instance.writeToBuffer("{");
             foreach (string cardid in this.allCardIDS)
             {
-                Helpfunctions.Instance.logg("if(id == CardDB.cardIDEnum." + cardid + ") return new Sim_" + cardid + "();");
+                Helpfunctions.Instance.writeToBuffer("case cardIDEnum." + cardid + ": return new Sim_" + cardid + "();");
             }
-            Helpfunctions.Instance.logg("return new SimTemplate();");
-            Helpfunctions.Instance.logg("}");
+            Helpfunctions.Instance.writeToBuffer("return new SimTemplate();");
+            Helpfunctions.Instance.writeToBuffer("}");
+            Helpfunctions.Instance.writeToBuffer("}");
 
+
+            Helpfunctions.Instance.writeBufferToCardDB();
         }
 
         private void setAdditionalData()
