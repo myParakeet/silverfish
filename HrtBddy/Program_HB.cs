@@ -57,7 +57,7 @@ namespace HREngine.Bots
 
     public sealed class Silverfish
     {
-        public string versionnumber = "122.6SE";
+        public string versionnumber = "122.5SE";
         private bool singleLog = false;
         private string botbehave = "rush";
         public bool waitingForSilver = false;
@@ -480,7 +480,7 @@ namespace HREngine.Bots
             bool herofrozen = (ownhero.GetTag(GAME_TAG.FROZEN) == 0) ? false : true;
             int heroNumAttacksThisTurn = ownhero.GetTag(GAME_TAG.NUM_ATTACKS_THIS_TURN);
             bool heroHasWindfury = (ownhero.GetTag(GAME_TAG.WINDFURY) == 0) ? false : true;
-            bool heroImmune = (ownhero.GetTag(GAME_TAG.IMMUNE) == 0) ? false : true;
+            bool heroImmune = (ownhero.GetTag(GAME_TAG.CANT_BE_DAMAGED) == 0) ? false : true;
 
             //Helpfunctions.Instance.ErrorLog(ownhero.GetName() + " ready params ex: " + exausted + " " + heroAtk + " " + numberofattacks + " " + herofrozen);
 
@@ -514,7 +514,7 @@ namespace HREngine.Bots
             int enemyHp = enemyhero.GetTag(GAME_TAG.HEALTH) - enemyhero.GetTag(GAME_TAG.DAMAGE);
             int enemyDefence = enemyhero.GetTag(GAME_TAG.ARMOR);
             bool enemyfrozen = (enemyhero.GetTag(GAME_TAG.FROZEN) == 0) ? false : true;
-            bool enemyHeroImmune = (enemyhero.GetTag(GAME_TAG.IMMUNE) == 0) ? false : true;
+            bool enemyHeroImmune = (enemyhero.GetTag(GAME_TAG.CANT_BE_DAMAGED) == 0) ? false : true;
 
             this.enemyHeroWeapon = "";
             this.enemyWeaponAttack = 0;
