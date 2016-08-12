@@ -1118,11 +1118,8 @@
 
             // swap minions
             Swap(ref ownMinions, ref enemyMinions);
-            
-			if(diedMinions!=null){
-				diedMinions.Clear();
-			}
-            
+
+            diedMinions?.Clear();
             Swap(ref owncards, ref EnemyCards);
 
             Swap(ref spellpower, ref enemyspellpower);
@@ -2713,10 +2710,7 @@
             this.complete = false;
 
             this.value = int.MinValue;
-			if(this.diedMinions!=null){
-				this.diedMinions.Clear();//contains only the minions that died in this turn!
-			}
-            
+            this.diedMinions?.Clear();//contains only the minions that died in this turn!
         }
 
         public void endEnemyTurn() //
@@ -4359,7 +4353,7 @@
 
                 for (int i = 0; i < summonstones; i++)
                 {
-                    summoningStone.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
+                    summoningStone?.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
                 }
 
                 foreach (Minion m in this.enemyMinions)
@@ -4447,7 +4441,7 @@
 
                 for (int i = 0; i < summonstones; i++)
                 {
-                    summoningStone.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
+                    summoningStone?.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
                 }
 
                 foreach (Minion m in this.ownMinions)
@@ -7147,7 +7141,7 @@
             if (includeEnemyHero && ownPlay && damage < this.enemyHero.Hp - 15) return this.enemyHero;  // worst-case for us: no minions damaged
 
             // no minions found = all ours live or all enemies die (so just return the first one, highest/lowest atk)
-            return (firstAlive == null ? targetHero: firstAlive);
+            return (firstAlive ?? targetHero);
         }
 
 
