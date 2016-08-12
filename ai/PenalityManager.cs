@@ -1070,7 +1070,7 @@
                 Minion m = target;
                 carddraw = 0;
                 if (m != null && m.Hp <= 1 + p.spellpower) carddraw = 1;
-                if (carddraw == 0) return 20; // todo sepefeets - factor in spell dmg 
+                if (carddraw == 0) return 20;
             }
 
             if (name == CardDB.cardName.tinkertowntechnician)

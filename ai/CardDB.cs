@@ -5340,7 +5340,6 @@ namespace HREngine.Bots
 
             public int calculateManaCost(Playfield p)//calculates the mana from orginal mana, needed for back-to hand effects and new draw
             {
-                //todo sepefeets - add thing from below
                 int retval = this.cost;
                 int offset = 0;
 
@@ -5597,7 +5596,7 @@ namespace HREngine.Bots
                         retval = retval + offset - p.enemyAnzCards;
                         break;
                     case CardDB.cardName.moltengiant:
-                        retval = retval + offset - p.ownHero.maxHp + p.ownHero.Hp; //todo sepefeets - is there a variable for hero max hp instead of assuming 30?
+                        retval = retval + offset - p.ownHero.maxHp + p.ownHero.Hp;
                         break;
                     case CardDB.cardName.crush:
                         // cost 4 less if we have a dmged minion
