@@ -7586,8 +7586,8 @@ namespace HREngine.Bots
                 case cardIDEnum.KAR_004: return new Sim_KAR_004();
                 case cardIDEnum.KAR_004a: return new Sim_KAR_004a();
                 case cardIDEnum.KAR_005: return new Sim_KAR_005();
-                case cardIDEnum.KAR_005a: return new Sim_KAR_005a();
-                case cardIDEnum.KAR_006: return new Sim_KAR_006();
+                case cardIDEnum.KAR_005a: return new Sim_KAR_005a();*/
+                case cardIDEnum.KAR_006: return new Sim_KAR_006();/*
                 case cardIDEnum.KAR_009: return new Sim_KAR_009();
                 case cardIDEnum.KAR_010: return new Sim_KAR_010();
                 case cardIDEnum.KAR_010a: return new Sim_KAR_010a();
@@ -7597,23 +7597,23 @@ namespace HREngine.Bots
                 case cardIDEnum.KAR_025: return new Sim_KAR_025();
                 case cardIDEnum.KAR_025a: return new Sim_KAR_025a();
                 case cardIDEnum.KAR_025b: return new Sim_KAR_025b();
-                case cardIDEnum.KAR_025c: return new Sim_KAR_025c();
+                case cardIDEnum.KAR_025c: return new Sim_KAR_025c();*/
                 case cardIDEnum.KAR_026: return new Sim_KAR_026();
-                case cardIDEnum.KAR_026t: return new Sim_KAR_026t();
+                case cardIDEnum.KAR_026t: return new Sim_KAR_026t();/*
                 case cardIDEnum.KAR_028: return new Sim_KAR_028();
-                case cardIDEnum.KAR_029: return new Sim_KAR_029();
+                case cardIDEnum.KAR_029: return new Sim_KAR_029();*/
                 case cardIDEnum.KAR_030: return new Sim_KAR_030();
-                case cardIDEnum.KAR_030a: return new Sim_KAR_030a();
+                case cardIDEnum.KAR_030a: return new Sim_KAR_030a();/*
                 case cardIDEnum.KAR_033: return new Sim_KAR_033();
-                case cardIDEnum.KAR_035: return new Sim_KAR_035();
-                case cardIDEnum.KAR_036: return new Sim_KAR_036();
+                case cardIDEnum.KAR_035: return new Sim_KAR_035();*/
+                case cardIDEnum.KAR_036: return new Sim_KAR_036();/*
                 case cardIDEnum.KAR_036e: return new Sim_KAR_036e();
                 case cardIDEnum.KAR_037: return new Sim_KAR_037();
                 case cardIDEnum.KAR_037t: return new Sim_KAR_037t();
-                case cardIDEnum.KAR_041: return new Sim_KAR_041();
+                case cardIDEnum.KAR_041: return new Sim_KAR_041();*/
                 case cardIDEnum.KAR_044: return new Sim_KAR_044();
                 case cardIDEnum.KAR_044a: return new Sim_KAR_044a();
-                case cardIDEnum.KAR_057: return new Sim_KAR_057();
+                case cardIDEnum.KAR_057: return new Sim_KAR_057();/*
                 case cardIDEnum.KAR_061: return new Sim_KAR_061();
                 case cardIDEnum.KAR_062: return new Sim_KAR_062();
                 case cardIDEnum.KAR_063: return new Sim_KAR_063();
@@ -7621,15 +7621,15 @@ namespace HREngine.Bots
                 case cardIDEnum.KAR_069: return new Sim_KAR_069();
                 case cardIDEnum.KAR_070: return new Sim_KAR_070();
                 case cardIDEnum.KAR_073: return new Sim_KAR_073();
-                case cardIDEnum.KAR_075: return new Sim_KAR_075();
-                case cardIDEnum.KAR_076: return new Sim_KAR_076();
+                case cardIDEnum.KAR_075: return new Sim_KAR_075();*/
+                case cardIDEnum.KAR_076: return new Sim_KAR_076();/*
                 case cardIDEnum.KAR_077: return new Sim_KAR_077();
                 case cardIDEnum.KAR_077e: return new Sim_KAR_077e();
                 case cardIDEnum.KAR_089: return new Sim_KAR_089();
                 case cardIDEnum.KAR_091: return new Sim_KAR_091();
-                case cardIDEnum.KAR_092: return new Sim_KAR_092();
+                case cardIDEnum.KAR_092: return new Sim_KAR_092();*/
                 case cardIDEnum.KAR_094: return new Sim_KAR_094();
-                case cardIDEnum.KAR_094a: return new Sim_KAR_094a();
+                case cardIDEnum.KAR_094a: return new Sim_KAR_094a();/*
                 case cardIDEnum.KAR_095: return new Sim_KAR_095();
                 case cardIDEnum.KAR_095e: return new Sim_KAR_095e();
                 case cardIDEnum.KAR_096: return new Sim_KAR_096();
@@ -7637,13 +7637,13 @@ namespace HREngine.Bots
                 case cardIDEnum.KAR_097t: return new Sim_KAR_097t();
                 case cardIDEnum.KAR_114: return new Sim_KAR_114();
                 case cardIDEnum.KAR_114e: return new Sim_KAR_114e();
-                case cardIDEnum.KAR_204: return new Sim_KAR_204();
+                case cardIDEnum.KAR_204: return new Sim_KAR_204();*/
                 case cardIDEnum.KAR_205: return new Sim_KAR_205();
-                case cardIDEnum.KAR_300: return new Sim_KAR_300();
+                case cardIDEnum.KAR_300: return new Sim_KAR_300();/*
                 case cardIDEnum.KAR_702: return new Sim_KAR_702();
-                case cardIDEnum.KAR_702e: return new Sim_KAR_702e();
+                case cardIDEnum.KAR_702e: return new Sim_KAR_702e();*/
                 case cardIDEnum.KAR_710: return new Sim_KAR_710();
-                case cardIDEnum.KAR_710m: return new Sim_KAR_710m();
+                case cardIDEnum.KAR_710m: return new Sim_KAR_710m();/*
                 case cardIDEnum.KAR_711: return new Sim_KAR_711();
                 case cardIDEnum.KAR_712: return new Sim_KAR_712();
                 case cardIDEnum.KAR_A01_01: return new Sim_KAR_A01_01();
