@@ -78,6 +78,7 @@ namespace HREngine.Bots
         {
             while (true)
             {
+                Helpfunctions.Instance.ErrorLog($"[Network] Connecting to {Settings.Instance.netAddress}:{Settings.Instance.tcpPort}");
                 try
                 {
                     client = new TcpClient();

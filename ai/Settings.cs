@@ -15,8 +15,10 @@ namespace HREngine.Bots
         {
             // play with these settings###################################
             this.enfacehp = 15;  // hp of enemy when your hero is allowed to attack the enemy face with his weapon
+
             this.maxwide = 3000;   // numer of boards which are taken to the next deep-lvl
             this.twotsamount = 0;          // number of boards where the next turn is simulated
+
             this.simEnemySecondTurn = true; // if he simulates the next players-turn, he also simulates the enemys respons
 
             this.playarround = false;  //play around some enemys aoe-spells?
@@ -44,9 +46,11 @@ namespace HREngine.Bots
 
             this.speedy = false; // send multiple actions together to HR
 
-            this.useNetwork = true; // use networking to communicate with silver.exe instead of a file
+            this.useNetwork = false; // use networking to communicate with silver.exe instead of a file
             this.netAddress = "127.0.0.1"; // address where the bot is running
             this.tcpPort = 14804; // TCP port to connect on
+
+            this.logBuffer = 0; // max log messages to buffer before writing to disk
 
             //###########################################################
 
@@ -82,55 +86,59 @@ namespace HREngine.Bots
         }
 
 
+        public int enfacehp = 15;
+
         public int maxwide = 3000;
         public int twotsamount;
-
-        public bool useExternalProcess;
-        public bool passiveWaiting;
-        public bool speedy;
-
-        public bool useNetwork = true;
-        public string netAddress = "127.0.0.1";
-        public int tcpPort = 14804;
-
-        public int alpha = 50;
-        public float firstweight = 0.5f;
-        public float secondweight = 0.5f;
-
-        public int numberOfThreads = Environment.ProcessorCount;//32;//
-        public bool useSecretsPlayArround;
-
-        public bool simulatePlacement = true;
-
+        public int secondTurnAmount = 256;
+        
         public bool simulateEnemysTurn = true;
+        public bool simEnemySecondTurn = true; //todo sepefeets - wasn't this dead code too?
+
+        public bool playarround;
+        public int playaroundprob = 50;
+        public int playaroundprob2 = 80; //todo - and this
+
         public int enemyTurnMaxWide = 20;
         public int enemyTurnMaxWideSecondTime = 200;
-
-        public int secondTurnAmount = 256;
-        public bool simEnemySecondTurn = true;
         public int enemySecondTurnMaxWide = 20;
 
         public int nextTurnDeep = 6;
         public int nextTurnMaxWide = 20;
         public int nextTurnTotalBoards = 50;
 
-        public bool playarround;
-        public int playaroundprob = 50;
-        public int playaroundprob2 = 80;
+        public bool useSecretsPlayArround;
 
-        public int enfacehp = 15;
+        public int alpha = 50;
+        public float firstweight = 0.5f;
+        public float secondweight = 0.5f;
+
+        public bool simulatePlacement = true;
+
+        public bool useExternalProcess;
+        public bool passiveWaiting; //todo sepefeets - dead code
+        public bool speedy;
+
+        public bool concede = false;
+        public bool enemyConcede;
+        public int enemyConcedeValue = -900;
+
+        public bool useNetwork = false;
+        public string netAddress = "127.0.0.1";
+        public int tcpPort = 14804;
+
+        public int logBuffer = 0;
 
         public string path = "";
         public string logpath = "";
         public string logfile = "Logg.txt";
 
-        public bool concede = false;
-        public bool enemyConcede;
-        public int enemyConcedeValue = -900;
         public bool writeToSingleFile = false;
 
         public bool learnmode = false;
         public bool printlearnmode = true;
+
+        public int numberOfThreads = Environment.ProcessorCount;//32;//
 
         private string ownClass = "";
         private string enemyClass = "";
@@ -138,7 +146,7 @@ namespace HREngine.Bots
         private string cleanPath = "";
 
         private static readonly Settings instance = new Settings();
-        
+
         static Settings() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
 
         public static Settings Instance
@@ -508,7 +516,7 @@ namespace HREngine.Bots
                     }
                 }
 
-                 searchword = "simulateplacement=";
+                searchword = "simulateplacement=";
                 if (s.StartsWith(searchword))
                 {
                     string a = s.Replace(searchword, "");
@@ -521,7 +529,8 @@ namespace HREngine.Bots
                         Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
-                 searchword = "useexternalprocess=";
+
+                searchword = "useexternalprocess=";
                 if (s.StartsWith(searchword))
                 {
                     string a = s.Replace(searchword, "");
@@ -534,7 +543,8 @@ namespace HREngine.Bots
                         Helpfunctions.Instance.ErrorLog(ignoring + searchword);
                     }
                 }
-                 searchword = "passivewaiting=";
+
+                searchword = "passivewaiting=";
                 if (s.StartsWith(searchword))
                 {
                     string a = s.Replace(searchword, "");
@@ -600,7 +610,63 @@ namespace HREngine.Bots
                     }
                 }
 
-                
+                searchword = "usenetwork=";
+                if (s.StartsWith(searchword))
+                {
+                    string a = s.Replace(searchword, "");
+                    try
+                    {
+                        this.useNetwork = Convert.ToBoolean(a);
+                    }
+                    catch
+                    {
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
+                    }
+                }
+
+                searchword = "netaddress=";
+                if (s.StartsWith(searchword))
+                {
+                    string a = s.Replace(searchword, "");
+                    try
+                    {
+                        this.netAddress = a;
+                    }
+                    catch
+                    {
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
+                    }
+                }
+
+                searchword = "tcpport=";
+                if (s.StartsWith(searchword))
+                {
+                    string a = s.Replace(searchword, "");
+                    try
+                    {
+                        this.tcpPort = Convert.ToInt32(a);
+                    }
+                    catch
+                    {
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
+                    }
+                }
+
+                searchword = "logbuffer=";
+                if (s.StartsWith(searchword))
+                {
+                    string a = s.Replace(searchword, "");
+                    try
+                    {
+                        this.logBuffer = Convert.ToInt32(a);
+                    }
+                    catch
+                    {
+                        Helpfunctions.Instance.ErrorLog(ignoring + searchword);
+                    }
+                }
+
+
 
             }
             //foreach ended----------

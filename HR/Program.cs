@@ -5,6 +5,8 @@ using System.IO;
 using HSRangerLib;
 
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace HREngine.Bots
 {
@@ -1351,11 +1353,14 @@ namespace HREngine.Bots
             PenalityManager.Instance.setCombos();
             Mulligan m = Mulligan.Instance; // read the mulligan list
             Discovery d = Discovery.Instance; // read the discover list
+            Settings.Instance.readSettings();
             if (Settings.Instance.useNetwork) FishNet.Instance.startClient();
+            Helpfunctions.Instance.startFlushingLogBuffers();
         }
 
         public void setnewLoggFile()
         {
+            Helpfunctions.Instance.flushLogg(); // flush the buffer before creating a new log
             if (!singleLog)
             {
                 sttngs.setLoggFile("SilverLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt");
@@ -2485,13 +2490,25 @@ namespace HREngine.Bots
             filecreated = false;
         }
 
+        private List<string> loggBuffer = new List<string>(Settings.Instance.logBuffer + 1);
         public void logg(string s)
         {
-            //if (!writelogg) return;
+            loggBuffer.Add(s);
 
-            using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + Settings.Instance.logfile))
+            if (loggBuffer.Count > Settings.Instance.logBuffer) flushLogg();
+        }
+
+        public void flushLogg()
+        {
+            if (loggBuffer.Count == 0) return;
+            try
             {
-                sw.WriteLine(s);
+                File.AppendAllLines(Settings.Instance.logpath + Settings.Instance.logfile, loggBuffer);
+                loggBuffer.Clear();
+            }
+            catch
+            {
+
             }
         }
 
@@ -2503,15 +2520,44 @@ namespace HREngine.Bots
             return dtDateTime;
         }
 
+        private List<string> errorLogBuffer = new List<string>(Settings.Instance.logBuffer + 1);
         public void ErrorLog(string s)
         {
             if (!writelogg) return;
+            errorLogBuffer.Add(DateTime.Now.ToString("HH:mm:ss: ") + s);
 
-            using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + "Logging.txt"))
+            if (errorLogBuffer.Count > Settings.Instance.logBuffer) flushErrorLog();
+        }
+
+        public void flushErrorLog()
+        {
+            if (errorLogBuffer.Count == 0) return;
+            try
             {
-                sw.WriteLine(DateTime.Now.ToString("HH:mm:ss: ") + s);
+                File.AppendAllLines(Settings.Instance.logpath + "Logging.txt", errorLogBuffer);
+                errorLogBuffer.Clear();
+            }
+            catch
+            {
+
             }
         }
+
+        public Task startFlushingLogBuffers(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return Task.Run(() => Instance.flushLogBuffersAsync(cancellationToken), cancellationToken);
+        }
+
+        public async Task flushLogBuffersAsync(CancellationToken cancellationToken)
+        {
+            while (true)
+            {
+                Instance.flushLogg();
+                Instance.flushErrorLog();
+                await Task.Delay(1000, cancellationToken);
+            }
+        }
+
 
         string sendbuffer = "";
         public void resetBuffer()

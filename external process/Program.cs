@@ -260,6 +260,7 @@ namespace HREngine.Bots
             PenalityManager.Instance.setCombos();
             Mulligan.Instance.runDebugTest();
             Discovery d = Discovery.Instance; // read the discover list
+            Settings.Instance.readSettings();
             if (Settings.Instance.useNetwork) FishNet.Instance.startServer();
         }
 
