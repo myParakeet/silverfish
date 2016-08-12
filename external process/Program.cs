@@ -109,9 +109,7 @@ namespace HREngine.Bots
         public Bot()
         {
             starttime = DateTime.Now;
-            Settings set = Settings.Instance;
             this.sf = Silverfish.Instance;
-            set.setSettings();
             sf.setnewLoggFile();
 
             bool teststuff = true;
@@ -253,14 +251,15 @@ namespace HREngine.Bots
                 {
                     Helpfunctions.Instance.createNewLoggfile();
                 }
-                    catch
+                catch
                 {
-                    }
+                    
+                }
             }
             PenalityManager.Instance.setCombos();
             Mulligan.Instance.runDebugTest();
             Discovery d = Discovery.Instance; // read the discover list
-            Settings.Instance.readSettings();
+            Settings.Instance.setSettings();
             if (Settings.Instance.useNetwork) FishNet.Instance.startServer();
         }
 

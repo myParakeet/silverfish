@@ -76,9 +76,9 @@ namespace HREngine.Bots
 
         public async Task startClientAsync(CancellationToken cancellationToken)
         {
+            Helpfunctions.Instance.ErrorLog($"[Network] Connecting to {Settings.Instance.netAddress}:{Settings.Instance.tcpPort}");
             while (true)
             {
-                Helpfunctions.Instance.ErrorLog($"[Network] Connecting to {Settings.Instance.netAddress}:{Settings.Instance.tcpPort}");
                 try
                 {
                     client = new TcpClient();
@@ -162,7 +162,7 @@ namespace HREngine.Bots
                 sw.WriteLine(msg);
                 sw.WriteLine("");
                 sw.Flush();
-                Helpfunctions.Instance.ErrorLog($"[Network] Send Message: {msg}");
+                //Helpfunctions.Instance.ErrorLog($"[Network] Send Message: {msg}");
             }
             catch (Exception e)
             {
@@ -195,7 +195,7 @@ namespace HREngine.Bots
                 Helpfunctions.Instance.ErrorLog($"[Network] Read Message Error: {e.Message}");
             }
 
-            Helpfunctions.Instance.ErrorLog($"[Network] Message: {header}\r\n{lines}");
+            //Helpfunctions.Instance.ErrorLog($"[Network] Message: {header}\r\n{lines}");
             
             return new KeyValuePair<string, string> (header, lines);
         }

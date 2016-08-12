@@ -73,7 +73,7 @@ namespace HREngine.Bots
         DateTime starttime = DateTime.Now;
         Silverfish sf;
 
-        Behavior behave = new BehaviorControl();
+        public Behavior behave = new BehaviorControl();
 
         //stuff for attack queueing :D
         public int numExecsReceived = 0;
@@ -100,7 +100,7 @@ namespace HREngine.Bots
 
             Settings set = Settings.Instance;
             this.sf = Silverfish.Instance;
-            behave = set.setSettings();
+            behave = set.behave;
             sf.setnewLoggFile();
             CardDB cdb = CardDB.Instance;
             if (cdb.installedWrong)
@@ -1329,10 +1329,10 @@ namespace HREngine.Bots
         private Silverfish()
         {
             this.singleLog = Settings.Instance.writeToSingleFile;
-            Helpfunctions.Instance.logg("init Silverfish");
-            Helpfunctions.Instance.ErrorLog("init Silverfish");
             string path = SilverFishBotPath.AssemblyDirectory + "SilverLogs" + System.IO.Path.DirectorySeparatorChar;
             System.IO.Directory.CreateDirectory(path);
+            Helpfunctions.Instance.logg("init Silverfish");
+            Helpfunctions.Instance.ErrorLog("init Silverfish");
             Helpfunctions.Instance.ErrorLog("setlogpath to:" + path);
             sttngs.setFilePath(SilverFishBotPath.AssemblyDirectory);
 
@@ -1353,7 +1353,7 @@ namespace HREngine.Bots
             PenalityManager.Instance.setCombos();
             Mulligan m = Mulligan.Instance; // read the mulligan list
             Discovery d = Discovery.Instance; // read the discover list
-            Settings.Instance.readSettings();
+            Settings.Instance.setSettings();
             if (Settings.Instance.useNetwork) FishNet.Instance.startClient();
             Helpfunctions.Instance.startFlushingLogBuffers();
         }
@@ -2377,13 +2377,13 @@ namespace HREngine.Bots
                     {
                         data = System.IO.File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
                     }
-                    if (data == "") Helpfunctions.Instance.ErrorLog($"[Program] Message Data: empty");
-                    if (data == "<EoF>" && data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: <EoF>");
-                    if (!data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: missing <EoF>");
+                    //if (data == "") Helpfunctions.Instance.ErrorLog($"[Program] Message Data: empty");
+                    //if (data == "<EoF>" && data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: <EoF>");
+                    //if (!data.EndsWith("<EoF>")) Helpfunctions.Instance.ErrorLog($"[Program] Message Data: missing <EoF>");
 
                     if (data != "" && data != "<EoF>" && data.EndsWith("<EoF>"))
                     {
-                        Helpfunctions.Instance.ErrorLog($"[Program] Message Data:\r\n{data}");
+                        //Helpfunctions.Instance.ErrorLog($"[Program] Message Data:\r\n{data}");
                         data = data.Replace("<EoF>", "");
                         //Helpfunctions.Instance.ErrorLog(data);
                         if (!network)

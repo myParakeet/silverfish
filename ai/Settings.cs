@@ -39,7 +39,7 @@ namespace HREngine.Bots
             this.alpha = 50; // weight of the second turn in calculation (0<= alpha <= 100)
 
             this.simulatePlacement = false;  // set this true, and ai will simulate all placements, whether you have a alpha/flametongue/argus
-            //use this only with useExternalProcess = true !!!!
+            this.behave = new BehaviorControl(); //select the behavior of the ai: control, rush, face (new) or mana (very experimental, dont use that :D)
 
             this.useExternalProcess = false; // use silver.exe for calculations a lot faster than turning it off (true = recomended)
             this.passiveWaiting = false; // process will wait passive for silver.exe to finish
@@ -56,7 +56,7 @@ namespace HREngine.Bots
 
             applySettings();
 
-            return new BehaviorControl();
+            return behave;
         }
 
         public void applySettings()
@@ -144,6 +144,8 @@ namespace HREngine.Bots
         private string enemyClass = "";
         private string deckName = "";
         private string cleanPath = "";
+
+        public Behavior behave = new BehaviorControl();
 
         private static readonly Settings instance = new Settings();
 
@@ -292,8 +294,6 @@ namespace HREngine.Bots
                     return setDefaultSettings();
                 }
             }
-
-            Behavior returnbehav = new BehaviorControl();
 
             foreach (string ss in lines)
             {
@@ -562,10 +562,10 @@ namespace HREngine.Bots
                 if (s.StartsWith(searchword))
                 {
                     string a = s.Replace(searchword, "");
-                    if (a.StartsWith("control")) returnbehav = new BehaviorControl();
-                    if (a.StartsWith("rush")) returnbehav = new BehaviorRush();
-                    if (a.StartsWith("mana")) returnbehav = new BehaviorMana();
-                    if (a.StartsWith("face")) returnbehav = new BehaviorFace();
+                    if (a.StartsWith("control")) behave = new BehaviorControl();
+                    if (a.StartsWith("rush")) behave = new BehaviorRush();
+                    if (a.StartsWith("mana")) behave = new BehaviorMana();
+                    if (a.StartsWith("face")) behave = new BehaviorFace();
                 }
 
                 searchword = "concedeonbadboard=";
@@ -674,7 +674,7 @@ namespace HREngine.Bots
             applySettings();
 
 
-            return returnbehav;
+            return behave;
         }
 
     }
