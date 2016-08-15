@@ -25,6 +25,7 @@ namespace HREngine.Bots
 
         private string ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
         private string deckName = Hrtprozis.Instance.deckName;
+        private string cleanPath = "";
 
         private List<discoveryitem> discoverylist = new List<discoveryitem>();
 
@@ -40,16 +41,24 @@ namespace HREngine.Bots
             }
         }
 
+        private Discovery()
+        {
+            readCombos();
+        }
+
         public void updateInstance()
         {
             ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
             deckName = Hrtprozis.Instance.deckName;
-            readCombos();
+            lock (instance)
+            {
+                readCombos();
+            }
         }
 
-        private Discovery()
+        public void loggCleanPath()
         {
-            readCombos();
+            Helpfunctions.Instance.logg(cleanPath);
         }
 
         private void readCombos()
@@ -58,36 +67,43 @@ namespace HREngine.Bots
             this.discoverylist.Clear();
 
             string path = Settings.Instance.path;
+            string cleanpath = "Silverfish" + System.IO.Path.DirectorySeparatorChar;
             string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string cleandatapath = cleanpath + "Data" + System.IO.Path.DirectorySeparatorChar;
             string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string cleanclasspath = cleandatapath + ownClass + System.IO.Path.DirectorySeparatorChar;
             string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
+            string cleandeckpath = cleanclasspath + deckName + System.IO.Path.DirectorySeparatorChar;
+            const string filestring = "_discovery.txt";
 
 
-            if (deckName != "" && System.IO.File.Exists(deckpath + "_discovery.txt"))
+            if (deckName != "" && System.IO.File.Exists(deckpath + filestring))
             {
                 path = deckpath;
-                Helpfunctions.Instance.ErrorLog("read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "_discovery.txt...");
+                cleanPath = cleandeckpath + filestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(classpath + "_discovery.txt"))
+            else if (deckName != "" && System.IO.File.Exists(classpath + filestring))
             {
                 path = classpath;
-                Helpfunctions.Instance.ErrorLog("read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "_discovery.txt...");
+                cleanPath = cleanclasspath + filestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(datapath + "_discovery.txt"))
+            else if (deckName != "" && System.IO.File.Exists(datapath + filestring))
             {
                 path = datapath;
-                Helpfunctions.Instance.ErrorLog("read Data" + System.IO.Path.DirectorySeparatorChar + "_discovery.txt...");
+                cleanPath = cleandatapath + filestring;
             }
-            else if (System.IO.File.Exists(path + "_discovery.txt"))
+            else if (System.IO.File.Exists(path + filestring))
             {
-                Helpfunctions.Instance.ErrorLog("read base _discovery.txt...");
+                cleanPath = cleanpath + filestring;
             }
             else
             {
-                Helpfunctions.Instance.ErrorLog("can't find _discovery.txt (if you didn't create your own discovery file, ignore this message)");
+                Helpfunctions.Instance.ErrorLog("[Discovery] cant find base _discovery.txt, consider creating one");
                 return;
             }
+            Helpfunctions.Instance.ErrorLog("[Discovery] read " + cleanPath);
 
+            
             try
             {
                 lines = System.IO.File.ReadAllLines(path + "_discovery.txt");

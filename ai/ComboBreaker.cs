@@ -26,6 +26,7 @@
 
         private string ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
         private string deckName = Hrtprozis.Instance.deckName;
+        private string cleanPath = "";
 
 
         class combo
@@ -375,18 +376,6 @@
             }
         }
 
-        public void updateInstance()
-        {
-            ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
-            deckName = Hrtprozis.Instance.deckName;
-            readCombos();
-            if (attackFaceHP != -1)
-            {
-                hp.setAttackFaceHP(attackFaceHP);
-            }
-            //Helpfunctions.Instance.ErrorLog("ComboBreaker Deck: " + deckName + " , Class: " + ownClass);
-        }
-
         private ComboBreaker()
         {
             readCombos();
@@ -396,45 +385,72 @@
             }
         }
 
+        public void updateInstance()
+        {
+            ownClass = Hrtprozis.Instance.heroEnumtoCommonName(Hrtprozis.Instance.heroname);
+            deckName = Hrtprozis.Instance.deckName;
+            lock (instance)
+            {
+            readCombos();
+            }
+            if (attackFaceHP != -1)
+            {
+                hp.setAttackFaceHP(attackFaceHP);
+            }
+            //Helpfunctions.Instance.ErrorLog("ComboBreaker Deck: " + deckName + " , Class: " + ownClass);
+        }
+
+        public void loggCleanPath()
+        {
+            Helpfunctions.Instance.logg(cleanPath);
+        }
+
         private void readCombos()
         {
             string[] lines = new string[0] { };
             combos.Clear();
 
             string path = Settings.Instance.path;
+            string cleanpath = "Silverfish" + System.IO.Path.DirectorySeparatorChar;
             string datapath = path + "Data" + System.IO.Path.DirectorySeparatorChar;
+            string cleandatapath = cleanpath + "Data" + System.IO.Path.DirectorySeparatorChar;
             string classpath = datapath + ownClass + System.IO.Path.DirectorySeparatorChar;
+            string cleanclasspath = cleandatapath + ownClass + System.IO.Path.DirectorySeparatorChar;
             string deckpath = classpath + deckName + System.IO.Path.DirectorySeparatorChar;
+            string cleandeckpath = cleanclasspath + deckName + System.IO.Path.DirectorySeparatorChar;
+            const string filestring = "_combo.txt";
 
-            
-            if (deckName != "" && System.IO.File.Exists(deckpath + "_combo.txt"))
+
+            if (deckName != "" && System.IO.File.Exists(deckpath + filestring))
             {
                 path = deckpath;
-                Helpfunctions.Instance.ErrorLog("read deck " + deckName + System.IO.Path.DirectorySeparatorChar + "_combo.txt...");
+                cleanPath = cleandeckpath + filestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(classpath + "_combo.txt"))
+            else if (deckName != "" && System.IO.File.Exists(classpath + filestring))
             {
                 path = classpath;
-                Helpfunctions.Instance.ErrorLog("read class " + ownClass + System.IO.Path.DirectorySeparatorChar + "_combo.txt...");
+                cleanPath = cleanclasspath + filestring;
             }
-            else if (deckName != "" && System.IO.File.Exists(datapath + "_combo.txt"))
+            else if (deckName != "" && System.IO.File.Exists(datapath + filestring))
             {
                 path = datapath;
-                Helpfunctions.Instance.ErrorLog("read Data" + System.IO.Path.DirectorySeparatorChar + "_combo.txt...");
+                cleanPath = cleandatapath + filestring;
             }
-            else if (System.IO.File.Exists(path + "_combo.txt"))
+            else if (System.IO.File.Exists(path + filestring))
             {
-                Helpfunctions.Instance.ErrorLog("read base _combo.txt...");
+                cleanPath = cleanpath + filestring;
             }
             else
             {
-                Helpfunctions.Instance.ErrorLog("can't find _combo.txt (if you didn't create your own combo file, ignore this message)");
+                Helpfunctions.Instance.ErrorLog("[Combo] cant find base _combo.txt, consider creating one");
                 return;
             }
+            Helpfunctions.Instance.ErrorLog("[Combo] read " + cleanPath);
+
 
             try
             {
-                lines = System.IO.File.ReadAllLines(path + "_combo.txt");
+                lines = System.IO.File.ReadAllLines(path + filestring);
             }
             catch
             {

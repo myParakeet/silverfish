@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Net;
 
 namespace HREngine.Bots
 {
@@ -22,11 +23,30 @@ namespace HREngine.Bots
     class Program
     {
         static void Main(string[] args)
-        { 
+        {
+            System.AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
             Bot b = new Bot();
-            bool readed = false;
-            while(!readed)
+            bool network = Settings.Instance.useNetwork;
+
+            while (true)
             {
+                System.Threading.Thread.Sleep(10);
+                if (network)
+                {
+                    FishNet.Instance.checkConnection();
+                    KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
+                    if (msg.Value == "") continue;
+                    switch (msg.Key)
+                    {
+                        case "crrntbrd.txt":
+                            b.doData(msg.Value);
+                            break;
+                        case "curdeck.txt":
+                            b.doDeckData(msg.Value);
+                            break;
+                    }
+                    continue;
+                }
                 try
                 {
                     string data = System.IO.File.ReadAllText("crrntbrd.txt");
@@ -61,10 +81,21 @@ namespace HREngine.Bots
                 {
 
                 }
-                System.Threading.Thread.Sleep(10);
             }
+        }
 
+        static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
+        {
+            using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
+            {
+                sw.WriteLine(e.ExceptionObject.ToString());
+            }
+            Console.WriteLine(e.ExceptionObject.ToString());
+            Console.WriteLine("Please report this crash including the CrashLog in your Silverfish\\SilverLogs folder");
+            Console.WriteLine("If no CrashLog exists then please post a screenshot instead");
+            Console.WriteLine("Press Enter to exit");
             Console.ReadLine();
+            Environment.Exit(1);
         }
     }
 
@@ -78,9 +109,7 @@ namespace HREngine.Bots
         public Bot()
         {
             starttime = DateTime.Now;
-            Settings set = Settings.Instance;
             this.sf = Silverfish.Instance;
-            set.setSettings();
             sf.setnewLoggFile();
 
             bool teststuff = true;
@@ -129,29 +158,34 @@ namespace HREngine.Bots
             HeroEnum heroname = Hrtprozis.Instance.heroNametoEnum(ownname);
             HeroEnum enemyHeroname = Hrtprozis.Instance.heroNametoEnum(enemyname);
 
-            if (Hrtprozis.Instance.deckName != deckname || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
+            if (Hrtprozis.Instance.deckName != deckname || heroname != Hrtprozis.Instance.heroname)
             {
                 Hrtprozis.Instance.setDeckName(deckname);
                 Hrtprozis.Instance.setHeroName(ownname);
-                Hrtprozis.Instance.setEnemyHeroName(enemyname);
                 ComboBreaker.Instance.updateInstance();
                 Discovery.Instance.updateInstance();
                 Mulligan.Instance.updateInstance();
+            }
+            if (Hrtprozis.Instance.deckName != deckname || heroname != Hrtprozis.Instance.heroname || enemyHeroname != Hrtprozis.Instance.enemyHeroname)
+            {
+                Hrtprozis.Instance.setEnemyHeroName(enemyname);
                 Settings.Instance.updateInstance();
             }
         }
-
+        
         public void testing(int start)
         {
-            for (int i = start; i < 900; i++)
+            for (int i = start; i < sizeof(CardDB.cardIDEnum); i++)
             {
                 Handmanager.Instance.anzcards = 1;
                 Handmanager.Instance.handCards.Clear();
-                Handmanager.Handcard hc = new Handmanager.Handcard();
-                hc.manacost = 1;
-                hc.position = 1;
-                hc.entity = 122;
-                hc.card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)i);
+                Handmanager.Handcard hc = new Handmanager.Handcard
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 122,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum) i)
+                };
                 Handmanager.Instance.handCards.Add(hc);
                 Helpfunctions.Instance.ErrorLog("test " + i + " " + hc.card.name + " " + hc.card.cardIDenum);
                 if (hc.card.sim_card == null)
@@ -164,13 +198,12 @@ namespace HREngine.Bots
                 }
             }
         }
-
     }
 
     public sealed class Silverfish
     {
-        public string versionnumber = "122.5SE";
-        private bool singleLog = false;
+        public string versionnumber = "123.0SE";
+        private bool singleLog;
 
         Settings sttngs = Settings.Instance;
 
@@ -218,13 +251,16 @@ namespace HREngine.Bots
                 {
                     Helpfunctions.Instance.createNewLoggfile();
                 }
-                    catch
+                catch
                 {
-                    }
+                    
+                }
             }
             PenalityManager.Instance.setCombos();
             Mulligan.Instance.runDebugTest();
             Discovery d = Discovery.Instance; // read the discover list
+            Settings.Instance.setSettings();
+            if (Settings.Instance.useNetwork) FishNet.Instance.startServer();
         }
 
         public void setnewLoggFile()
@@ -252,11 +288,24 @@ namespace HREngine.Bots
             string boardnumm = "-1";
             int trackingchoice = 0;
             int trackingstate = 0;
+            bool network = Settings.Instance.useNetwork;
+
             while (readed)
             {
                 try
                 {
-                    string data = System.IO.File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
+                    string data = "";
+                    System.Threading.Thread.Sleep(10);
+                    if (network)
+                    {
+                        KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
+                        if (msg.Key != "actionstodo.txt") continue;
+                        data = msg.Value;
+                    }
+                    else
+                    {
+                        data = System.IO.File.ReadAllText(Settings.Instance.path + "actionstodo.txt");
+                    }
                     if (data != "" && data != "<EoF>" && data.EndsWith("<EoF>"))
                     {
                         data = data.Replace("<EoF>", "");
@@ -326,7 +375,6 @@ namespace HREngine.Bots
             }
 
             Ai.Instance.setBestMoves(aclist, value, trackingchoice, trackingstate);
-
         }
 
         public static int getLastAffected(int entityid)
@@ -338,8 +386,6 @@ namespace HREngine.Bots
         {
             return 0;
         }
-
-
     }
 
     public sealed class Helpfunctions
@@ -400,6 +446,7 @@ namespace HREngine.Bots
             //HREngine.API.Utilities.HRLog.Write(s);
             Console.WriteLine(s);
         }
+        
 
         string sendbuffer = "";
         public void resetBuffer()
@@ -409,7 +456,12 @@ namespace HREngine.Bots
 
         public void writeToBuffer(string data)
         {
-            this.sendbuffer += "\r\n" + data;
+            this.sendbuffer += data + "\r\n";
+        }
+
+        public void writeBufferToNetwork(string msgtype)
+        {
+            FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendbuffer);
         }
 
         public void writeBufferToFile()
@@ -420,7 +472,8 @@ namespace HREngine.Bots
             {
                 try
                 {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
+                    if (Settings.Instance.useNetwork) writeBufferToNetwork("crrntbrd.txt");
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "crrntbrd.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -439,7 +492,8 @@ namespace HREngine.Bots
             {
                 try
                 {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
+                    if (Settings.Instance.useNetwork) writeBufferToNetwork("curdeck.txt");
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "curdeck.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -459,7 +513,8 @@ namespace HREngine.Bots
             {
                 try
                 {
-                    System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
+                    if (Settings.Instance.useNetwork) writeBufferToNetwork("actionstodo.txt");
+                    else System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
                     writed = false;
                 }
                 catch
@@ -468,9 +523,25 @@ namespace HREngine.Bots
                 }
             }
             this.sendbuffer = "";
-
         }
-   
+
+        public void writeBufferToCardDB()
+        {
+            bool writed = true;
+            while (writed)
+            {
+                try
+                {
+                    System.IO.File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
+                    writed = false;
+                }
+                catch
+                {
+                    writed = true;
+                }
+            }
+            this.sendbuffer = "";
+        }
     }
 
 
