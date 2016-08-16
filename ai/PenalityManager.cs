@@ -2971,6 +2971,7 @@
             DamageAllEnemysDatabase.Add(CardDB.cardName.poisoncloud, 1);//todo 1 or 2
             DamageAllEnemysDatabase.Add(CardDB.cardName.cthun, 1);
             DamageAllEnemysDatabase.Add(CardDB.cardName.twilightflamecaller, 1);
+            DamageAllEnemysDatabase.Add(CardDB.cardName.maelstromportal, 1);
 
             DamageHeroDatabase.Add(CardDB.cardName.curseofrafaam, 2);
             DamageHeroDatabase.Add(CardDB.cardName.headcrack, 2);
@@ -3082,7 +3083,8 @@
             DamageTargetDatabase.Add(CardDB.cardName.onthehunt, 1);
             DamageTargetDatabase.Add(CardDB.cardName.shadowstrike, 5);
             DamageTargetDatabase.Add(CardDB.cardName.stormcrack, 4);
-            
+            DamageTargetDatabase.Add(CardDB.cardName.firelandsportal, 5);
+
 
             DamageTargetSpecialDatabase.Add(CardDB.cardName.bash, 3); //+3 armor
             DamageTargetSpecialDatabase.Add(CardDB.cardName.crueltaskmaster, 1); // gives 2 attack
@@ -3161,6 +3163,9 @@
             priorityDatabase.Add(CardDB.cardName.warsongcommander, 2);
             priorityDatabase.Add(CardDB.cardName.wilfredfizzlebang, 1);
             priorityDatabase.Add(CardDB.cardName.ragnaroslightlord, 5);
+            priorityDatabase.Add(CardDB.cardName.cloakedhuntress, 5);
+            priorityDatabase.Add(CardDB.cardName.moroes, 10);
+            priorityDatabase.Add(CardDB.cardName.priestofthefeast, 3);
         }
 
         private void setupAttackBuff()
@@ -3634,6 +3639,12 @@
             specialMinions.Add(CardDB.cardName.xarilpoisonedmind, 0);
             specialMinions.Add(CardDB.cardName.ysera, 0);
             specialMinions.Add(CardDB.cardName.yshaarjrageunbound, 0);
+            
+            specialMinions.Add(CardDB.cardName.arcaneanomaly, 0);
+            specialMinions.Add(CardDB.cardName.cloakedhuntress, 0);
+            specialMinions.Add(CardDB.cardName.deadlyfork, 0);
+            specialMinions.Add(CardDB.cardName.moroes, 0);
+            specialMinions.Add(CardDB.cardName.priestofthefeast, 0);
         }
 
         private void setupBuffingMinions()
@@ -3823,6 +3834,9 @@
             priorityTargets.Add(CardDB.cardName.twilightsummoner, 10);
             priorityTargets.Add(CardDB.cardName.yshaarjrageunbound, 10);
 
+            priorityTargets.Add(CardDB.cardName.cloakedhuntress, 10);
+            priorityTargets.Add(CardDB.cardName.moroes, 5);
+            priorityTargets.Add(CardDB.cardName.priestofthefeast, 10);
         }
 
         private void setupLethalHelpMinions()
@@ -4149,6 +4163,9 @@
             this.randomEffects.Add(CardDB.cardName.eydisdarkbane, 1); //random 3 dmg when you target her with spell
             this.randomEffects.Add(CardDB.cardName.malkorok, 1); //equip random weapon
             this.randomEffects.Add(CardDB.cardName.sylvanaswindrunner, 1); //steal random enemy deathrattle
+
+            randomEffects.Add(CardDB.cardName.firelandsportal, 1);
+            randomEffects.Add(CardDB.cardName.maelstromportal, 1);
         }
 
         private void setupTargetAbilitys()

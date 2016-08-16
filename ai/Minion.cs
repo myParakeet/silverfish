@@ -292,6 +292,7 @@
             {
                 if (this.own)
                 {
+                    if (p.ownVioletIllusionist > 0 && dmg > 0 && p.isOwnTurn) return;
                     if (p.ownWeaponCard.name == CardDB.cardName.cursedblade) dmg += dmg;
                     if (p.anzOwnAnimatedArmor > 0 && dmg > 0) dmg = 1;
                     if (p.anzOwnBolfRamshield > 0 && dmg > 0)
@@ -314,6 +315,7 @@
                 }
                 else
                 {
+                    if (p.enemyVioletIllusionist > 0 && dmg > 0 && !p.isOwnTurn) return;
                     if (p.anzEnemyAnimatedArmor > 0 && dmg > 0) dmg = 1;
                     if (p.enemyWeaponCard.name == CardDB.cardName.cursedblade) dmg += dmg;
                     if (p.anzEnemyBolfRamshield > 0 && dmg > 0)

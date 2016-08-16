@@ -4388,6 +4388,7 @@ namespace HREngine.Bots
             REQ_TARGET_IF_AVAILABLE_AND_MINIMUM_FRIENDLY_MINIONS,//56
             REQ_TARGET_WITH_BATTLECRY,//57
             REQ_TARGET_WITH_DEATHRATTLE,//58
+            REQ_TARGET_IF_AVAILABLE_AND_MINIMUM_FRIENDLY_SECRETS,//59
             REQ_DRAG_TO_PLAY
         }
 
@@ -4444,6 +4445,7 @@ namespace HREngine.Bots
             public int needMinTotalMinions;
             public int needMinOwnMinions;
             public int needMinionsCapIfAvailable;
+            public int needControlaSecret = 0;
 
 
             //additional data
@@ -4496,6 +4498,7 @@ namespace HREngine.Bots
                 this.name = c.name;
                 this.needEmptyPlacesForPlaying = c.needEmptyPlacesForPlaying;
                 this.needMinionsCapIfAvailable = c.needMinionsCapIfAvailable;
+                this.needControlaSecret = c.needControlaSecret;
                 this.needMinNumberOfEnemy = c.needMinNumberOfEnemy;
                 this.needMinTotalMinions = c.needMinTotalMinions;
                 this.needMinOwnMinions = c.needMinOwnMinions;
@@ -4687,6 +4690,9 @@ namespace HREngine.Bots
                         case ErrorType2.REQ_TARGET_IF_AVAILABLE_AND_MINIMUM_FRIENDLY_MINIONS:
                             int tmp = (own) ? p.ownMinions.Count : p.enemyMinions.Count;
                             if (tmp >= needMinOwnMinions) targetAll = true;
+                            continue;
+                        case ErrorType2.REQ_TARGET_IF_AVAILABLE_AND_MINIMUM_FRIENDLY_SECRETS:
+                            if (p.ownSecretsIDList.Count >= needControlaSecret) targetAll = true;
                             continue;
                         //default:
                     }
@@ -5573,6 +5579,9 @@ namespace HREngine.Bots
                     case CardDB.cardName.frostgiant:
                         retval = retval + offset - p.anzUsedOwnHeroPower;
                         break;
+                    case CardDB.cardName.arcanegiant:
+                        retval = retval + offset - p.ownSpellsPlayedThisGame;
+                        break;
                     case CardDB.cardName.golemagg:
                         retval = retval + offset - p.ownHero.maxHp + p.ownHero.Hp;
                         break;
@@ -5611,10 +5620,10 @@ namespace HREngine.Bots
                         retval = retval + offset;
                         break;
                 }
-
-                if (this.Secret && p.playedKirinTorMage)
+                
+                if (this.Secret)
                 {
-                    retval = 0;
+                    if (p.anzOwnCloakedHuntress > 0 || p.playedKirinTorMage) retval = 0;
                 }
 
                 retval = Math.Max(0, retval);
@@ -5722,6 +5731,9 @@ namespace HREngine.Bots
                     case CardDB.cardName.frostgiant:
                         retval = retval + offset - p.ownHeroPowerUses;
                         break;
+                    case CardDB.cardName.arcanegiant:
+                        retval = retval + offset - p.ownSpellsPlayedThisGame;
+                        break;
                     case CardDB.cardName.skycapnkragg:
                         int pirates = 0;
                         foreach (Minion m in p.ownMinions)
@@ -5788,12 +5800,12 @@ namespace HREngine.Bots
                         retval = retval + offset;
                         break;
                 }
-                
-                if (this.Secret && p.playedKirinTorMage)
+
+                if (this.Secret)
                 {
-                    retval = 0;
+                    if (p.anzOwnCloakedHuntress > 0 || p.playedKirinTorMage) retval = 0;
                 }
-                
+
                 retval = Math.Max(0, retval);
 
                 return retval;
@@ -5888,7 +5900,9 @@ namespace HREngine.Bots
                     case CardDB.cardName.frostgiant:
                         retval = retval + offset + p.ownHeroPowerUses;
                         break;
-
+                    case CardDB.cardName.arcanegiant:
+                        retval = retval + offset - p.ownSpellsPlayedThisGame;
+                        break;
                     case CardDB.cardName.skycapnkragg:
                         int pirates = 0;
                         foreach (Minion m in p.ownMinions)
@@ -5934,7 +5948,7 @@ namespace HREngine.Bots
                         break;
                 }
 
-                if (this.Secret && p.playedKirinTorMage)
+                if (this.Secret && (p.anzOwnCloakedHuntress > 0 || p.playedKirinTorMage))
                 {
                     retval = this.cost;
                 }
@@ -6061,11 +6075,8 @@ namespace HREngine.Bots
                 {
                     instance = new CardDB();
                     //instance.enumCreator();// only call this to get latest cardids
-                    /*foreach (KeyValuePair<cardIDEnum, Card> kvp in instance.cardidToCardList)
-                    {
-                        Helpfunctions.Instance.logg(kvp.Value.name + " " + kvp.Value.Attack);
-                    }*/
-                    // have to do it 2 times (or the kids inside the simcards will not have a simcard :D
+
+                    // have to do it 2 times or the kids inside the simcards will not have a simcard :D
                     foreach (Card c in instance.cardlist)
                     {
                         c.sim_card = instance.getSimCard(c.cardIDenum);
@@ -6079,7 +6090,7 @@ namespace HREngine.Bots
 
         private CardDB()
         {
-            string[] lines = new string[0] { };
+            string[] lines = new string[] { };
             try
             {
                 string path = Settings.Instance.path;
@@ -6605,74 +6616,62 @@ namespace HREngine.Bots
                     if (ti == 1) c.HealTarget = true;
                     continue;
                 }
+
                 if (s.Contains("<PlayRequirement"))
                 {
-                    //if (!s.Contains("param=\"\"")) Console.WriteLine(s);
-
                     string temp = s.Split(new string[] { "reqID=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
                     temp = temp.Split('\"')[0];
-                    ErrorType2 et2 = (ErrorType2)Convert.ToInt32(temp);
-                    c.playrequires.Add(et2);
-                }
+                    int reqID = Convert.ToInt32(temp);
+                    c.playrequires.Add((ErrorType2)reqID);
 
-
-                if (s.Contains("<PlayRequirement reqID=\"12\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needEmptyPlacesForPlaying = Convert.ToInt32(temp);
-                    continue;
+                    int param = 0;
+                    temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    try
+                    {
+                        if (char.IsDigit(temp, 0))
+                        {
+                            temp = temp.Split('\"')[0];
+                            param = Convert.ToInt32(temp);
+                        }
+                    }
+                    catch
+                    {
+                        param = 0;
+                    }
+                    if (param > 0)
+                    {
+                        switch (reqID)
+                        {
+                            case 8:
+                                c.needWithMaxAttackValueOf = param;
+                                continue;
+                            case 10:
+                                c.needRaceForPlaying = param;
+                                continue;
+                            case 12:
+                                c.needEmptyPlacesForPlaying = param;
+                                continue;
+                            case 19:
+                                c.needMinionsCapIfAvailable = param;
+                                continue;
+                            case 23:
+                                c.needMinNumberOfEnemy = param;
+                                continue;
+                            case 41:
+                                c.needWithMinAttackValueOf = param;
+                                continue;
+                            case 45:
+                                c.needMinTotalMinions = param;
+                                continue;
+                            case 56:
+                                c.needMinOwnMinions = param;
+                                continue;
+                            case 59:
+                                c.needControlaSecret = param;
+                                continue;
+                        }
+                    }
                 }
-                if (s.Contains("PlayRequirement reqID=\"41\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needWithMinAttackValueOf = Convert.ToInt32(temp);
-                    continue;
-                }
-                if (s.Contains("PlayRequirement reqID=\"8\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needWithMaxAttackValueOf = Convert.ToInt32(temp);
-                    continue;
-                }
-                if (s.Contains("PlayRequirement reqID=\"10\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needRaceForPlaying = Convert.ToInt32(temp);
-                    continue;
-                }
-                if (s.Contains("PlayRequirement reqID=\"23\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needMinNumberOfEnemy = Convert.ToInt32(temp);
-                    continue;
-                }
-                if (s.Contains("PlayRequirement reqID=\"45\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needMinTotalMinions = Convert.ToInt32(temp);
-                    continue;
-                }
-                if (s.Contains("PlayRequirement reqID=\"56\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needMinOwnMinions = Convert.ToInt32(temp);
-                    continue;
-                }
-                if (s.Contains("PlayRequirement reqID=\"19\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needMinionsCapIfAvailable = Convert.ToInt32(temp);
-                    continue;
-                }
-
 
 
                 if (s.Contains("<Tag name="))

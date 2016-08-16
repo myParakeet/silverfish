@@ -139,6 +139,10 @@
         public int anzOgOwnCThunAngrBonus;
         public int anzOgOwnCThunTaunt;
 
+        public int ownVioletIllusionist;
+        public int enemyVioletIllusionist;
+        public int anzOwnCloakedHuntress;
+
         public int anzBlackwaterPirate;
         public int blackwaterpirateStarted;
         public int choGall;
@@ -313,6 +317,7 @@
         public CardDB.cardIDEnum OwnLastDiedMinion;
 
         public int shadowmadnessed; //minions has switched controllers this turn.
+        public int ownSpellsPlayedThisGame; //todo sepefeets - finish this in hrtprozis for yogg/arcanegolem and check cthun stuff too
 
 
         //Helpfunctions help = Helpfunctions.Instance;
@@ -420,6 +425,10 @@
             this.anzOgOwnCThunAngrBonus = Hrtprozis.Instance.anzOgOwnCThunAngrBonus;
             this.anzOgOwnCThunHpBonus = Hrtprozis.Instance.anzOgOwnCThunHpBonus;
             this.anzOgOwnCThunTaunt = Hrtprozis.Instance.anzOgOwnCThunTaunt;
+
+            this.ownVioletIllusionist = 0;
+            this.enemyVioletIllusionist = 0;
+            this.anzOwnCloakedHuntress = 0;
 
             this.attackFaceHP = Hrtprozis.Instance.attackFaceHp;
 
@@ -594,7 +603,9 @@
                     if (i > 0) this.ownMinions[i - 1].cantBeTargetedBySpellsOrHeroPowers = true;
                     if (i < anz - 1) this.ownMinions[i + 1].cantBeTargetedBySpellsOrHeroPowers = true;
                 }
-                if (m.name == CardDB.cardName.faeriedragon || m.name == CardDB.cardName.laughingsister || m.name == CardDB.cardName.spectralknight || m.name == CardDB.cardName.arcanenullifierx21 || m.name == CardDB.cardName.soggoththeslitherer) m.cantBeTargetedBySpellsOrHeroPowers = true;
+                if (m.name == CardDB.cardName.faeriedragon || m.name == CardDB.cardName.laughingsister ||
+                    m.name == CardDB.cardName.spectralknight || m.name == CardDB.cardName.arcanenullifierx21 ||
+                    m.name == CardDB.cardName.soggoththeslitherer) m.cantBeTargetedBySpellsOrHeroPowers = true;
 
                 if (m.name == CardDB.cardName.pintsizedsummoner)
                 {
@@ -675,6 +686,16 @@
                     this.weHaveSteamwheedleSniper = true;
                 }
 
+
+                switch (m.name)
+                {
+                    case CardDB.cardName.cloakedhuntress:
+                        this.anzOwnCloakedHuntress++;
+                        continue;
+                    case CardDB.cardName.violetillusionist:
+                        this.ownVioletIllusionist++;
+                        continue;
+                }
             }
 
             foreach (Handmanager.Handcard hc in this.owncards)
@@ -767,6 +788,15 @@
                 if (m.name == CardDB.cardName.steamwheedlesniper && this.enemyHeroName == HeroEnum.hunter)
                 {
                     this.enemyHaveSteamwheedleSniper = true;
+                }
+
+
+
+                switch (m.name)
+                {
+                    case CardDB.cardName.violetillusionist:
+                        this.enemyVioletIllusionist++;
+                        continue;
                 }
             }
             if (this.enemySecretCount >= 1) this.needGraveyard = true;
@@ -1045,6 +1075,11 @@
             this.tempanzOwnCards = this.owncards.Count;
             this.tempanzEnemyCards = this.enemyAnzCards;
 
+            this.ownSpellsPlayedThisGame = p.ownSpellsPlayedThisGame;
+
+            this.ownVioletIllusionist = p.ownVioletIllusionist;
+            this.enemyVioletIllusionist = p.enemyVioletIllusionist;
+            this.anzOwnCloakedHuntress = p.anzOwnCloakedHuntress;
         }
 
         public void swapAll()
@@ -2276,6 +2311,7 @@
         {
             //todo rework this
             // DONT KILL ENEMY HERO (cause its only guessing)
+            int pos;
             foreach (CardDB.cardIDEnum secretID in this.ownSecretsIDList)
             {
                 //hunter secrets############
@@ -2476,6 +2512,14 @@
                         minionGetBuffed(m, 3, 2);
                         break;
                     }
+                }
+
+                switch (secretID)
+                {
+                    case CardDB.cardIDEnum.KAR_004: //cattrick
+                        pos = this.ownMinions.Count;
+                        callKid(CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_017), pos, true, false);
+                        continue;
                 }
             }
 
@@ -3148,31 +3192,26 @@
         public void attackWithWeapon(Minion hero, Minion target, int penality)
         {
             bool own = hero.own;
+            CardDB.Card weapon = own ? this.ownWeaponCard : this.enemyWeaponCard;
             this.attacked = true;
             this.evaluatePenality += penality;
             hero.numAttacksThisTurn++;
 
             //hero will end his readyness
             hero.updateReadyness();
+            if (weapon.name == CardDB.cardName.foolsbane && !hero.frozen) hero.Ready = true;
 
             //heal whether truesilverchampion equipped
-            if (own)
+            switch (weapon.name)
             {
-                if (this.ownWeaponName == CardDB.cardName.truesilverchampion)
-                {
-                    int heal = this.getMinionHeal(2);//minionheal because it's ignoring spellpower
+                case CardDB.cardName.truesilverchampion:
+                    int heal = own ? this.getMinionHeal(2) : this.getEnemyMinionHeal(2);
                     this.minionGetDamageOrHeal(hero, -heal);
                     doDmgTriggers();
-                }
-            }
-            else
-            {
-                if (this.enemyWeaponName == CardDB.cardName.truesilverchampion)
-                {
-                    int heal = this.getEnemyMinionHeal(2);
-                    this.minionGetDamageOrHeal(hero, -heal);
-                    doDmgTriggers();
-                }
+                    break;
+                case CardDB.cardName.foolsbane:
+                    if (!hero.frozen) hero.Ready = true;
+                    break;
             }
 
             if (logging) Helpfunctions.Instance.logg("attck with weapon trgt: " + target.entityID);
@@ -3262,6 +3301,7 @@
             if (c.type == CardDB.cardtype.SPELL)
             {
                 this.playedPreparation = false;
+                this.ownSpellsPlayedThisGame++;
             }
             if (c.race == TAG_RACE.DRAGON) //dragon
             {
@@ -4368,6 +4408,12 @@
                     }
                 }
 
+                if (this.ownWeaponCard.name == CardDB.cardName.atiesh)
+                {
+                    this.callKid(this.getRandomCardForManaMinion(hc.manacost), this.ownMinions.Count, own);
+                    this.lowerWeaponDurability(1, own);
+                }
+
                 for (int i = 0; i < violetteacher; i++)
                 {
                     int pos = this.ownMinions.Count;
@@ -4454,6 +4500,12 @@
                     {
                         m.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, m, target, choice);
                     }
+                }
+
+                if (this.enemyWeaponCard.name == CardDB.cardName.atiesh)
+                {
+                    this.callKid(this.getRandomCardForManaMinion(hc.manacost), this.enemyMinions.Count, own);
+                    this.lowerWeaponDurability(1, own);
                 }
                 for (int i = 0; i < violetteacher; i++)
                 {
@@ -5191,11 +5243,11 @@
         public int secretTrigger_SpellIsPlayed(Minion target, bool isSpell)
         {
             int triggered = 0;
-            if (this.isOwnTurn && isSpell && this.enemySecretCount >= 1) //actual secrets need a spell played!
+            int retval = 0;
+            if (this.isOwnTurn && isSpell && this.enemySecretCount > 0) //actual secrets need a spell played!
             {
                 foreach (SecretItem si in this.enemySecretList)
                 {
-
                     if (si.canBe_counterspell)
                     {
                         triggered++;
@@ -5215,33 +5267,30 @@
                 }
 
 
-
                 foreach (SecretItem si in this.enemySecretList)
                 {
+                    if (si.canBe_cattrick)
+                    {
+                        triggered++;
+                        foreach (SecretItem sii in this.enemySecretList)
+                        {
+                            sii.canBe_cattrick = false;
+                        }
+                        CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_004).sim_card.onSecretPlay(this, false, 0);
+                        doDmgTriggers();
+                    }
 
                     if (si.canBe_spellbender && target != null && !target.isHero)
                     {
                         triggered++;
-                        int retval = 0;
                         CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.tt_010).sim_card.onSecretPlay(this, false, null, target, out retval);
                         si.usedTrigger_SpellIsPlayed(true);
                         foreach (SecretItem sii in this.enemySecretList)
                         {
                             sii.canBe_spellbender = false;
                         }
-
-                        if (turnCounter == 0)
-                        {
-                            this.evaluatePenality -= triggered * 50;
-                        }
-                        return retval;// the new target
                     }
-
-
-
-
                 }
-
             }
 
             if (turnCounter == 0)
@@ -5249,8 +5298,7 @@
                 this.evaluatePenality -= triggered * 50;
             }
 
-            return 0;
-
+            return retval;
         }
 
         public void secretTrigger_MinionDied(bool own)
