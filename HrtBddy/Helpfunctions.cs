@@ -109,6 +109,11 @@ namespace HREngine.Bots
             this.sendbuffer += "\r\n" + data;
         }
 
+        public void writeBufferToNetwork(string msgtype)
+        {
+            FishNet.Instance.sendMessage(msgtype + "\r\n" + this.sendbuffer);
+        }
+
         public void writeBufferToFile()
         {
             bool writed = true;
@@ -157,6 +162,24 @@ namespace HREngine.Bots
                 try
                 {
                     System.IO.File.WriteAllText(Settings.Instance.path + "actionstodo.txt", this.sendbuffer);
+                    writed = false;
+                }
+                catch
+                {
+                    writed = true;
+                }
+            }
+            this.sendbuffer = "";
+        }
+
+        public void writeBufferToCardDB()
+        {
+            bool writed = true;
+            while (writed)
+            {
+                try
+                {
+                    System.IO.File.WriteAllText(Settings.Instance.path + "newCardDB.cs", this.sendbuffer);
                     writed = false;
                 }
                 catch
