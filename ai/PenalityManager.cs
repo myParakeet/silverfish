@@ -1516,6 +1516,8 @@
             if (!this.destroyDatabase.ContainsKey(name) || lethal) return 0;
             int pen = 0;
             if (target == null) return 0;
+            if (name == CardDB.cardName.shatter && !target.frozen) return 500; //todo sepefeets - remove after CardDB.getTargetsForCard() updated/merged?
+
             if (target.own && !target.isHero)
             {
                 // dont destroy owns ;_; (except mins with deathrattle effects)
