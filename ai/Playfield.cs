@@ -318,6 +318,7 @@
 
         public int shadowmadnessed; //minions has switched controllers this turn.
         public int ownSpellsPlayedThisGame; //todo sepefeets - finish this in hrtprozis for yogg/arcanegolem and check cthun stuff too
+        //todo sepefeets - a lot of these vars could be triggers in sims? only invisible things need to be tracked
 
 
         //Helpfunctions help = Helpfunctions.Instance;

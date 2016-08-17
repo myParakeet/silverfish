@@ -39,7 +39,6 @@
         Dictionary<CardDB.cardName, int> destroyDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> buffingMinionsDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> buffing1TurnDatabase = new Dictionary<CardDB.cardName, int>();
-        Dictionary<CardDB.cardName, int> heroDamagingAoeDatabase = new Dictionary<CardDB.cardName, int>(); //not used
         public Dictionary<CardDB.cardName, int> randomEffects = new Dictionary<CardDB.cardName, int>();
 
         Dictionary<CardDB.cardName, int> silenceTargets = new Dictionary<CardDB.cardName, int>();
@@ -91,7 +90,6 @@
             setupDestroyOwnCards();
             setupSpecialMins();
             setupEnemyTargetPriority();
-            setupHeroDamagingAOE();
             setupBuffingMinions();
             setupRandomCards();
             setupLethalHelpMinions();
@@ -1945,7 +1943,7 @@
             int pen = 0;
             if (name == CardDB.cardName.houndmaster)
             {
-                if (target == null) return 50;
+                if (target == null || !target.Ready) return 50;
             }
 
             if ((card.name == CardDB.cardName.biggamehunter) && (target == null || target.own))
@@ -3209,6 +3207,7 @@
             attackBuffDatabase.Add(CardDB.cardName.mutatinginjection, 4);
             attackBuffDatabase.Add(CardDB.cardName.powerwordtentacles, 2);
             attackBuffDatabase.Add(CardDB.cardName.primalfusion, 1);
+            attackBuffDatabase.Add(CardDB.cardName.silvermoonportal, 2);
         }
 
         private void setupHealthBuff()
@@ -3239,6 +3238,7 @@
             healthBuffDatabase.Add(CardDB.cardName.mutatinginjection, 4);
             healthBuffDatabase.Add(CardDB.cardName.powerwordtentacles, 6);
             healthBuffDatabase.Add(CardDB.cardName.primalfusion, 1);
+            healthBuffDatabase.Add(CardDB.cardName.silvermoonportal, 2);
 
             tauntBuffDatabase.Add(CardDB.cardName.markofnature, 1);
             tauntBuffDatabase.Add(CardDB.cardName.markofthewild, 1);
@@ -3370,6 +3370,8 @@
             this.destroyDatabase.Add(CardDB.cardName.bladeofcthun, 0);
             this.destroyDatabase.Add(CardDB.cardName.shadowwordhorror, 0);
             this.destroyDatabase.Add(CardDB.cardName.shatter, 0);
+            
+            this.destroyDatabase.Add(CardDB.cardName.moatlurker, 0);
 
 
             this.backToHandDatabase.Add(CardDB.cardName.sap, 0);
@@ -3395,11 +3397,6 @@
             returnHandDatabase.Add(CardDB.cardName.timerewinder, 0);
             returnHandDatabase.Add(CardDB.cardName.recycle, 0);
             returnHandDatabase.Add(CardDB.cardName.bloodthistletoxin, 0);
-        }
-
-        private void setupHeroDamagingAOE()
-        {
-            this.heroDamagingAoeDatabase.Add(CardDB.cardName.unknown, 0);
         }
 
         private void setupSpecialMins()
@@ -3645,6 +3642,9 @@
             specialMinions.Add(CardDB.cardName.deadlyfork, 0);
             specialMinions.Add(CardDB.cardName.moroes, 0);
             specialMinions.Add(CardDB.cardName.priestofthefeast, 0);
+            specialMinions.Add(CardDB.cardName.kindlygrandmother, 0);
+            specialMinions.Add(CardDB.cardName.wickedwitchdoctor, 0);
+            specialMinions.Add(CardDB.cardName.moatlurker, 0);
         }
 
         private void setupBuffingMinions()
@@ -3672,10 +3672,6 @@
             buffingMinionsDatabase.Add(CardDB.cardName.malganis, 0);
             buffingMinionsDatabase.Add(CardDB.cardName.warsongcommander, 0);
 
-            buffing1TurnDatabase.Add(CardDB.cardName.abusivesergeant, 0);
-            buffing1TurnDatabase.Add(CardDB.cardName.darkirondwarf, 0);
-            buffing1TurnDatabase.Add(CardDB.cardName.rockbiterweapon, 0);
-
             buffingMinionsDatabase.Add(CardDB.cardName.metaltoothleaper, 0);
             buffingMinionsDatabase.Add(CardDB.cardName.quartermaster, 0);
             buffingMinionsDatabase.Add(CardDB.cardName.screwjankclunker, 0);
@@ -3688,6 +3684,10 @@
             buffingMinionsDatabase.Add(CardDB.cardName.bloodsailcultist, 5);
 
 
+
+            buffing1TurnDatabase.Add(CardDB.cardName.abusivesergeant, 0);
+            buffing1TurnDatabase.Add(CardDB.cardName.darkirondwarf, 0);
+            buffing1TurnDatabase.Add(CardDB.cardName.rockbiterweapon, 0);
         }
 
         private void setupEnemyTargetPriority()
@@ -3837,6 +3837,7 @@
             priorityTargets.Add(CardDB.cardName.cloakedhuntress, 10);
             priorityTargets.Add(CardDB.cardName.moroes, 5);
             priorityTargets.Add(CardDB.cardName.priestofthefeast, 10);
+            priorityTargets.Add(CardDB.cardName.wickedwitchdoctor, 5);
         }
 
         private void setupLethalHelpMinions()
@@ -4166,6 +4167,20 @@
 
             randomEffects.Add(CardDB.cardName.firelandsportal, 1);
             randomEffects.Add(CardDB.cardName.maelstromportal, 1);
+            randomEffects.Add(CardDB.cardName.ivoryknight, 1);
+            randomEffects.Add(CardDB.cardName.silvermoonportal, 1);
+            randomEffects.Add(CardDB.cardName.onyxbishop, 1);
+            randomEffects.Add(CardDB.cardName.swashburglar, 1);
+            randomEffects.Add(CardDB.cardName.wickedwitchdoctor, 1);
+            randomEffects.Add(CardDB.cardName.barnes, 1);
+            randomEffects.Add(CardDB.cardName.babblingbook, 1);
+            randomEffects.Add(CardDB.cardName.zoobot, 1);
+            randomEffects.Add(CardDB.cardName.menageriemagician, 1);
+            randomEffects.Add(CardDB.cardName.thecurator, 1);
+            randomEffects.Add(CardDB.cardName.malchezaarsimp, 1);
+            randomEffects.Add(CardDB.cardName.ironforgeportal, 1);
+            randomEffects.Add(CardDB.cardName.netherspitehistorian, 1);
+            randomEffects.Add(CardDB.cardName.atiesh, 1);
         }
 
         private void setupTargetAbilitys()
@@ -4201,6 +4216,8 @@
             discoverCards.Add(CardDB.cardName.archthiefrafaam, 1);
             discoverCards.Add(CardDB.cardName.alightinthedarkness, 1);
             discoverCards.Add(CardDB.cardName.journeybelow, 1);
+            discoverCards.Add(CardDB.cardName.ivoryknight, 1);
+            discoverCards.Add(CardDB.cardName.netherspitehistorian, 1);
         }
 
 
@@ -4251,6 +4268,13 @@
             summonMinionSpellsDatabase.Add(CardDB.cardName.livingroots, 2); //choice
             summonMinionSpellsDatabase.Add(CardDB.cardName.ballofspiders, 3);
             summonMinionSpellsDatabase.Add(CardDB.cardName.totemicslam, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.firelandsportal, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.maelstromportal, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.protecttheking, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.silvermoonportal, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.karakazham, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.moongladeportal, 1);
+            summonMinionSpellsDatabase.Add(CardDB.cardName.ironforgeportal, 1);
         }
 
         private void setupAlsoEquipsWeaponDB()
@@ -4261,6 +4285,7 @@
             alsoEquipsWeaponDB.Add(CardDB.cardName.musterforbattle, 1);
             alsoEquipsWeaponDB.Add(CardDB.cardName.nzothsfirstmate, 1);
             alsoEquipsWeaponDB.Add(CardDB.cardName.upgrade, 1); //if we don't have a weapon
+            alsoEquipsWeaponDB.Add(CardDB.cardName.medivhtheguardian, 1);
         }
     }
 }
