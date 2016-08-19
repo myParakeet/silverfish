@@ -127,10 +127,10 @@ namespace HREngine.Bots
                 }
                 catch
                 {
-                    Helpfunctions.Instance.ErrorLog("discoverymaker cant read: " + line);
+                    Helpfunctions.Instance.ErrorLog("[Discovery] cant read line: " + line);
                 }
             }
-            Helpfunctions.Instance.ErrorLog(discoverylist.Count + " discovery rules found");
+            Helpfunctions.Instance.ErrorLog("[Discovery] " + discoverylist.Count + " rules found");
         }
 
         public int getBonusValue(CardDB.cardIDEnum cardid, string ownclass, string enemyclass)

@@ -507,8 +507,8 @@
                     }
                 }
             }
-            if (combos.Count > 0) Helpfunctions.Instance.ErrorLog(combos.Count + " combo rules found");
-            if (playByValue.Count > 0) Helpfunctions.Instance.ErrorLog(playByValue.Count + " card value rules found");
+            if (combos.Count > 0) Helpfunctions.Instance.ErrorLog("[Combo] " + combos.Count + " combo rules found");
+            if (playByValue.Count > 0) Helpfunctions.Instance.ErrorLog("[Combo] " + playByValue.Count + " card value rules found");
         }
 
         public int getPenalityForDestroyingCombo(CardDB.Card crd, Playfield p)
