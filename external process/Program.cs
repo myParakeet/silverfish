@@ -91,6 +91,8 @@ namespace HREngine.Bots
                 sw.WriteLine(e.ExceptionObject.ToString());
             }
             Console.WriteLine(e.ExceptionObject.ToString());
+            Console.WriteLine("");
+            Console.WriteLine("");
             Console.WriteLine("Please report this crash including the CrashLog in your Silverfish\\SilverLogs folder");
             Console.WriteLine("If no CrashLog exists then please post a screenshot instead");
             Console.WriteLine("Press Enter to exit");
