@@ -123,6 +123,12 @@ namespace HREngine.Bots
                 Playfield p = new Playfield();
                 Ai.Instance.autoTester(printstuff);
             }
+
+            if (System.IO.File.Exists(SilverFishBotPath.AssemblyDirectory + "crashtest.txt"))
+            {
+                testing(1);
+            }
+
             Helpfunctions.Instance.ErrorLog("wait for board...");
         }
 
@@ -177,18 +183,85 @@ namespace HREngine.Bots
         
         public void testing(int start)
         {
-            for (int i = start; i < sizeof(CardDB.cardIDEnum); i++)
+            int cardenumcount = Enum.GetNames(typeof(CardDB.cardIDEnum)).Length;
+            Random rand = new Random();
+            int randcard = 1;
+
+            for (int i = start; i < cardenumcount; i++)
             {
                 Handmanager.Instance.anzcards = 1;
                 Handmanager.Instance.handCards.Clear();
-                Handmanager.Handcard hc = new Handmanager.Handcard
+
+                Handmanager.Handcard hc = new Handmanager.Handcard //the current card to test
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 121,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)i)
+                };
+                Handmanager.Instance.handCards.Add(hc);
+                
+                randcard = rand.Next(1, cardenumcount);
+                Handmanager.Handcard hc2 = new Handmanager.Handcard //extra random card to test
                 {
                     manacost = 1,
                     position = 1,
                     entity = 122,
-                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum) i)
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)randcard)
                 };
-                Handmanager.Instance.handCards.Add(hc);
+                Handmanager.Instance.handCards.Add(hc2);
+
+                randcard = rand.Next(1, cardenumcount);
+                Handmanager.Handcard hc3 = new Handmanager.Handcard //extra random card to test
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 123,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)randcard)
+                };
+                Handmanager.Instance.handCards.Add(hc3);
+
+                randcard = rand.Next(1, cardenumcount);
+                Handmanager.Handcard hc4 = new Handmanager.Handcard //extra random card to test
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 124,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)randcard)
+                };
+                Handmanager.Instance.handCards.Add(hc4);
+
+                randcard = rand.Next(1, cardenumcount);
+                Handmanager.Handcard hc5 = new Handmanager.Handcard //extra random card to test
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 125,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)randcard)
+                };
+                Handmanager.Instance.handCards.Add(hc5);
+
+                randcard = rand.Next(1, cardenumcount);
+                Handmanager.Handcard hc6 = new Handmanager.Handcard //extra random card to test
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 126,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)randcard)
+                };
+                Handmanager.Instance.handCards.Add(hc6);
+
+                randcard = rand.Next(1, cardenumcount);
+                Handmanager.Handcard hc7 = new Handmanager.Handcard //extra random card to test
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 127,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)randcard)
+                };
+                Handmanager.Instance.handCards.Add(hc7);
+
+
                 Helpfunctions.Instance.ErrorLog("test " + i + " " + hc.card.name + " " + hc.card.cardIDenum);
                 if (hc.card.sim_card == null)
                 {
