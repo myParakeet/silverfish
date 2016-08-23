@@ -59,6 +59,9 @@
         public bool canBe_Trial = true;
         public bool canBe_Dart = true;//hunter
 
+        // Kara
+        public bool canBe_cattrick = true;
+
         public int entityId;
 
         public SecretItem()
@@ -98,6 +101,9 @@
 
             this.canBe_Trial = sec.canBe_Trial;
             this.canBe_Dart = sec.canBe_Dart;
+
+            this.canBe_cattrick = sec.canBe_cattrick;
+
 
             this.entityId = sec.entityId;
 
@@ -156,6 +162,15 @@
             {
                 this.canBe_Trial = false;
                 this.canBe_Dart = false;
+            }
+
+            try
+            {
+                this.canBe_cattrick = (canbe[22] == '1');
+            }
+            catch
+            {
+                this.canBe_cattrick = false;
             }
 
             this.updateCanBeTriggered();
@@ -220,6 +235,7 @@
         public void usedTrigger_SpellIsPlayed(bool minionIsTarget)
         {
             this.canBe_counterspell = false;
+            this.canBe_cattrick = false;
             if (minionIsTarget) this.canBe_spellbender = false;
             updateCanBeTriggered();
         }
@@ -283,8 +299,9 @@
             retval += "" + ((canBe_competivespirit) ? "1" : "0");
 
             retval += "" + ((canBe_Trial) ? "1" : "0");
-
-            retval += "" + ((this.canBe_Dart) ? "1" : "0");
+            retval += "" + ((canBe_Dart) ? "1" : "0");
+            
+            retval += "" + ((canBe_cattrick) ? "1" : "0");
 
             return retval + ",";
         }
@@ -297,9 +314,8 @@
             result = result && this.canBe_mirrorentity == s.canBe_mirrorentity && this.canBe_missdirection == s.canBe_missdirection && this.canBe_noblesacrifice == s.canBe_noblesacrifice && this.canBe_redemption == s.canBe_redemption;
             result = result && this.canBe_repentance == s.canBe_repentance && this.canBe_snaketrap == s.canBe_snaketrap && this.canBe_snipe == s.canBe_snipe && this.canBe_spellbender == s.canBe_spellbender && this.canBe_vaporize == s.canBe_vaporize;
             result = result && this.canBe_effigy == s.canBe_effigy && this.canBe_beartrap == s.canBe_beartrap && this.canBe_competivespirit == s.canBe_competivespirit;
-            result = result && this.canBe_Trial == s.canBe_Trial;
-
-            result = result && this.canBe_Dart == s.canBe_Dart;
+            result = result && this.canBe_Trial == s.canBe_Trial && this.canBe_Dart == s.canBe_Dart;
+            result = result && this.canBe_cattrick == s.canBe_cattrick;
 
             return result;
         }
@@ -814,6 +830,11 @@
                 {
                     sec.canBe_Dart = false;
                 }
+
+                if (enemyCardsPlayed.ContainsKey(CardDB.cardIDEnum.KAR_004) && enemyCardsPlayed[CardDB.cardIDEnum.KAR_004] >= 2)
+                {
+                    sec.canBe_cattrick = false;
+                }
             }
 
             if (enemyHeroName == HeroEnum.mage)
@@ -835,6 +856,8 @@
 
                 sec.canBe_Trial = false;
                 sec.canBe_Dart = false;
+
+                sec.canBe_cattrick = false;
 
                 if (enemyCardsPlayed.ContainsKey(CardDB.cardIDEnum.EX1_287) && enemyCardsPlayed[CardDB.cardIDEnum.EX1_287] >= 2)
                 {
@@ -897,6 +920,7 @@
                 sec.canBe_beartrap = false;
                 sec.canBe_Dart = false;
 
+                sec.canBe_cattrick = false;
 
 
                 if (enemyCardsPlayed.ContainsKey(CardDB.cardIDEnum.EX1_132) && enemyCardsPlayed[CardDB.cardIDEnum.EX1_132] >= 2)

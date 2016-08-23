@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace HREngine.Bots
 {
@@ -309,9 +310,9 @@ namespace HREngine.Bots
             BRMA02_1H,
             BRMA02_2,
             BRMA02_2H,
-            BRMA02_2_2_TB,
-            BRMA02_2_2c_TB,
             BRMA02_2t,
+            BRMA02_2_2c_TB,
+            BRMA02_2_2_TB,
             BRMA03_1,
             BRMA03_1H,
             BRMA03_2,
@@ -329,9 +330,9 @@ namespace HREngine.Bots
             BRMA05_2,
             BRMA05_2H,
             BRMA05_3,
+            BRMA05_3e,
             BRMA05_3H,
             BRMA05_3He,
-            BRMA05_3e,
             BRMA06_1,
             BRMA06_1H,
             BRMA06_2,
@@ -345,8 +346,8 @@ namespace HREngine.Bots
             BRMA07_1H,
             BRMA07_2,
             BRMA07_2H,
-            BRMA07_2_2_TB,
             BRMA07_2_2c_TB,
+            BRMA07_2_2_TB,
             BRMA07_3,
             BRMA08_1,
             BRMA08_1H,
@@ -358,8 +359,8 @@ namespace HREngine.Bots
             BRMA09_2,
             BRMA09_2H,
             BRMA09_2Ht,
-            BRMA09_2_TB,
             BRMA09_2t,
+            BRMA09_2_TB,
             BRMA09_3,
             BRMA09_3H,
             BRMA09_3Ht,
@@ -376,8 +377,8 @@ namespace HREngine.Bots
             BRMA10_1,
             BRMA10_1H,
             BRMA10_3,
-            BRMA10_3H,
             BRMA10_3e,
+            BRMA10_3H,
             BRMA10_4,
             BRMA10_4H,
             BRMA10_5,
@@ -598,6 +599,7 @@ namespace HREngine.Bots
             CRED_44,
             CRED_45,
             CRED_46,
+            CS1h_001,
             CS1_042,
             CS1_069,
             CS1_112,
@@ -605,7 +607,6 @@ namespace HREngine.Bots
             CS1_129,
             CS1_129e,
             CS1_130,
-            CS1h_001,
             CS2_003,
             CS2_004,
             CS2_004e,
@@ -694,9 +695,9 @@ namespace HREngine.Bots
             CS2_094,
             CS2_097,
             CS2_101,
+            CS2_101t,
             CS2_101_H1,
             CS2_101_H1_AT_132,
-            CS2_101t,
             CS2_102,
             CS2_102_H1,
             CS2_102_H1_AT_132,
@@ -775,6 +776,9 @@ namespace HREngine.Bots
             DREAM_04,
             DREAM_05,
             DREAM_05e,
+            DS1h_292,
+            DS1h_292_H1,
+            DS1h_292_H1_AT_132,
             DS1_055,
             DS1_070,
             DS1_070o,
@@ -788,9 +792,7 @@ namespace HREngine.Bots
             DS1_188,
             DS1_188e,
             DS1_233,
-            DS1h_292,
-            DS1h_292_H1,
-            DS1h_292_H1_AT_132,
+            ds1_whelptoken,
             EX1_001,
             EX1_001e,
             EX1_002,
@@ -1379,16 +1381,17 @@ namespace HREngine.Bots
             HERO_08c,
             HERO_09,
             HERO_09a,
+            hexfrog,
             HRW02_1,
             HRW02_1e,
             KARA_00_01,
             KARA_00_01H,
             KARA_00_02,
-            KARA_00_02H,
             KARA_00_02a,
+            KARA_00_02H,
             KARA_00_03,
-            KARA_00_03H,
             KARA_00_03c,
+            KARA_00_03H,
             KARA_00_04,
             KARA_00_04H,
             KARA_00_05,
@@ -1438,12 +1441,12 @@ namespace HREngine.Bots
             KARA_08_01,
             KARA_08_01H,
             KARA_08_02,
-            KARA_08_02H,
             KARA_08_02e,
             KARA_08_02eH,
+            KARA_08_02H,
             KARA_08_03,
-            KARA_08_03H,
             KARA_08_03e,
+            KARA_08_03H,
             KARA_08_04,
             KARA_08_04e,
             KARA_08_05,
@@ -1568,8 +1571,8 @@ namespace HREngine.Bots
             KAR_A01_01,
             KAR_A01_01H,
             KAR_A01_02,
-            KAR_A01_02H,
             KAR_A01_02e,
+            KAR_A01_02H,
             KAR_A02_01,
             KAR_A02_01H,
             KAR_A02_02,
@@ -1581,13 +1584,13 @@ namespace HREngine.Bots
             KAR_A02_05,
             KAR_A02_05H,
             KAR_A02_06,
+            KAR_A02_06e2,
             KAR_A02_06H,
             KAR_A02_06He,
-            KAR_A02_06e2,
             KAR_A02_09,
-            KAR_A02_09H,
             KAR_A02_09e,
             KAR_A02_09eH,
+            KAR_A02_09H,
             KAR_A02_10,
             KAR_A02_11,
             KAR_A02_12,
@@ -1702,16 +1705,16 @@ namespace HREngine.Bots
             LOEA09_13,
             LOEA09_1H,
             LOEA09_2,
-            LOEA09_2H,
             LOEA09_2e,
             LOEA09_2eH,
+            LOEA09_2H,
             LOEA09_3,
-            LOEA09_3H,
             LOEA09_3a,
             LOEA09_3aH,
             LOEA09_3b,
             LOEA09_3c,
             LOEA09_3d,
+            LOEA09_3H,
             LOEA09_4,
             LOEA09_4H,
             LOEA09_5,
@@ -1719,8 +1722,8 @@ namespace HREngine.Bots
             LOEA09_6,
             LOEA09_6H,
             LOEA09_7,
-            LOEA09_7H,
             LOEA09_7e,
+            LOEA09_7H,
             LOEA09_8,
             LOEA09_8H,
             LOEA09_9,
@@ -1767,8 +1770,8 @@ namespace HREngine.Bots
             LOEA16_1H,
             LOEA16_2,
             LOEA16_20,
-            LOEA16_20H,
             LOEA16_20e,
+            LOEA16_20H,
             LOEA16_21,
             LOEA16_21H,
             LOEA16_22,
@@ -1889,13 +1892,13 @@ namespace HREngine.Bots
             NAX12_01,
             NAX12_01H,
             NAX12_02,
-            NAX12_02H,
-            NAX12_02H_2_TB,
-            NAX12_02H_2c_TB,
             NAX12_02e,
+            NAX12_02H,
+            NAX12_02H_2c_TB,
+            NAX12_02H_2_TB,
             NAX12_03,
-            NAX12_03H,
             NAX12_03e,
+            NAX12_03H,
             NAX12_04,
             NAX12_04e,
             NAX13_01,
@@ -1912,24 +1915,24 @@ namespace HREngine.Bots
             NAX14_03,
             NAX14_04,
             NAX15_01,
+            NAX15_01e,
             NAX15_01H,
             NAX15_01He,
-            NAX15_01e,
             NAX15_02,
             NAX15_02H,
             NAX15_03n,
             NAX15_03t,
             NAX15_04,
-            NAX15_04H,
             NAX15_04a,
+            NAX15_04H,
             NAX15_05,
+            NAX1h_01,
+            NAX1h_03,
+            NAX1h_04,
             NAX1_01,
             NAX1_03,
             NAX1_04,
             NAX1_05,
-            NAX1h_01,
-            NAX1h_03,
-            NAX1h_04,
             NAX2_01,
             NAX2_01H,
             NAX2_03,
@@ -2283,6 +2286,8 @@ namespace HREngine.Bots
             PRO_001at,
             PRO_001b,
             PRO_001c,
+            skele11,
+            skele21,
             TBA01_1,
             TBA01_4,
             TBA01_5,
@@ -2333,8 +2338,6 @@ namespace HREngine.Bots
             TB_CoOpBossSpell_4,
             TB_CoOpBossSpell_5,
             TB_CoOpBossSpell_6,
-            TB_CoOp_Mechazod,
-            TB_CoOp_Mechazod2,
             TB_CoOpv3_001,
             TB_CoOpv3_002,
             TB_CoOpv3_003,
@@ -2345,26 +2348,28 @@ namespace HREngine.Bots
             TB_CoOpv3_008,
             TB_CoOpv3_009,
             TB_CoOpv3_009e,
+            TB_Coopv3_009t,
             TB_CoOpv3_010,
             TB_CoOpv3_011,
             TB_CoOpv3_012,
             TB_CoOpv3_013,
-            TB_CoOpv3_101e,
-            TB_CoOpv3_104e,
-            TB_CoOpv3_BOSS2e,
-            TB_CoOpv3_BOSS3e,
-            TB_CoOpv3_BOSS4e,
-            TB_CoOpv3_BOSSe,
-            TB_CoOpv3_Boss,
-            TB_Coopv3_009t,
             TB_Coopv3_100,
             TB_Coopv3_101,
+            TB_CoOpv3_101e,
             TB_Coopv3_102,
             TB_Coopv3_102a,
             TB_Coopv3_102b,
             TB_Coopv3_103,
             TB_Coopv3_104,
+            TB_CoOpv3_104e,
             TB_Coopv3_105,
+            TB_CoOpv3_Boss,
+            TB_CoOpv3_BOSS2e,
+            TB_CoOpv3_BOSS3e,
+            TB_CoOpv3_BOSS4e,
+            TB_CoOpv3_BOSSe,
+            TB_CoOp_Mechazod,
+            TB_CoOp_Mechazod2,
             TB_DeckRecipe_MyDeckID,
             TB_DecreasingCardCost,
             TB_DecreasingCardCostDebug,
@@ -2380,13 +2385,17 @@ namespace HREngine.Bots
             TB_FactionWar_Hero_Annoy,
             TB_FactionWar_Hero_Nef,
             TB_FactionWar_Rag1,
-            TB_GP_01e_copy1,
-            TB_GP_01e_v2,
             TB_GiftExchange_Enchantment,
             TB_GiftExchange_Snowball,
             TB_GiftExchange_Treasure,
             TB_GiftExchange_Treasure_Spell,
+            TB_GP_01e_copy1,
+            TB_GP_01e_v2,
             TB_GreatCurves_01,
+            TB_KaraPortals_003,
+            TB_KaraPortal_001,
+            TB_KaraPortal_002,
+            TB_KaraPortal_003,
             TB_KTRAF_08w,
             TB_KTRAF_1,
             TB_KTRAF_10,
@@ -2411,14 +2420,8 @@ namespace HREngine.Bots
             TB_KTRAF_HP_RAF5,
             TB_KTRAF_H_1,
             TB_KTRAF_H_2,
-            TB_KaraPortal_001,
-            TB_KaraPortal_002,
-            TB_KaraPortal_003,
-            TB_KaraPortals_003,
             TB_LadyNazjar_PlayerEnch,
             TB_LevelUp_001,
-            TB_MP_01e,
-            TB_MP_02e,
             TB_MechWar_Boss1,
             TB_MechWar_Boss1_HeroPower,
             TB_MechWar_Boss2,
@@ -2426,6 +2429,8 @@ namespace HREngine.Bots
             TB_MechWar_CommonCards,
             TB_MechWar_Minion1,
             TB_Mini_1e,
+            TB_MP_01e,
+            TB_MP_02e,
             TB_Murgstone_001,
             TB_OG_027,
             TB_PickYourFate,
@@ -2435,16 +2440,16 @@ namespace HREngine.Bots
             TB_PickYourFate_10,
             TB_PickYourFate_10_Ench,
             TB_PickYourFate_10_EnchMinion,
-            TB_PickYourFate_11_Ench,
             TB_PickYourFate_11b,
             TB_PickYourFate_11rand,
+            TB_PickYourFate_11_Ench,
             TB_PickYourFate_12,
             TB_PickYourFate_12_Ench,
             TB_PickYourFate_1_Ench,
             TB_PickYourFate_2,
+            TB_PickYourFate_2nd,
             TB_PickYourFate_2_Ench,
             TB_PickYourFate_2_EnchMinion,
-            TB_PickYourFate_2nd,
             TB_PickYourFate_3,
             TB_PickYourFate_3_Ench,
             TB_PickYourFate_4,
@@ -2460,18 +2465,18 @@ namespace HREngine.Bots
             TB_PickYourFate_7_EnchMinion,
             TB_PickYourFate_7_Ench_2nd,
             TB_PickYourFate_8,
+            TB_PickYourFate_8rand,
             TB_PickYourFate_8_Ench,
             TB_PickYourFate_8_EnchRand,
-            TB_PickYourFate_8rand,
             TB_PickYourFate_9,
             TB_PickYourFate_9_Ench,
             TB_PickYourFate_9_EnchMinion,
             TB_PickYourFate_Confused,
             TB_PickYourFate_Windfury,
             TB_Pilot1,
-            TB_RMC_001,
             TB_RandCardCost,
             TB_RandHero2_001,
+            TB_RMC_001,
             TB_SPT_Boss,
             TB_SPT_BossHeroPower,
             TB_SPT_BossWeapon,
@@ -2486,6 +2491,10 @@ namespace HREngine.Bots
             TB_Superfriends002e,
             TB_YoggServant_Enchant,
             TP_Bling_HP2,
+            tt_004,
+            tt_004o,
+            tt_010,
+            tt_010a,
             TU4a_001,
             TU4a_002,
             TU4a_003,
@@ -2605,14 +2614,6 @@ namespace HREngine.Bots
             XXX_112,
             XXX_113,
             XXX_999_Crash,
-            ds1_whelptoken,
-            hexfrog,
-            skele11,
-            skele21,
-            tt_004,
-            tt_004o,
-            tt_010,
-            tt_010a,
             PlaceholderCard
         }
 
@@ -2622,7 +2623,7 @@ namespace HREngine.Bots
             if (Enum.TryParse<cardIDEnum>(s, false, out CardEnum)) return CardEnum;
             else
             {
-                if (s != "") Helpfunctions.Instance.ErrorLog("[Unidentified card ID: " + s + "]");
+                //if (s != "") Helpfunctions.Instance.ErrorLog("[CardDB] Unidentified card ID: " + s);
                 return CardDB.cardIDEnum.None;
             }
         }
@@ -2634,6 +2635,7 @@ namespace HREngine.Bots
             aberration,
             abomination,
             abusivesergeant,
+            abyssal,
             acidicswampooze,
             acidmaw,
             acolyteofpain,
@@ -2689,6 +2691,7 @@ namespace HREngine.Bots
             animagolem,
             animalcompanion,
             animatedarmor,
+            animatedshield,
             animatedstatue,
             animateearthen,
             annoyotron,
@@ -2704,18 +2707,24 @@ namespace HREngine.Bots
             anubrekhan,
             anyfincanhappen,
             arathiweaponsmith,
+            arcaneanomaly,
             arcaneblast,
             arcaneexplosion,
+            arcanegiant,
             arcanegolem,
             arcaneintellect,
             arcanemissiles,
             arcanenullifierx21,
+            arcanepower,
             arcaneshot,
             arcanitereaper,
+            arcanosmith,
             arcanotron,
             archaedas,
             archmage,
             archmageantonidas,
+            archmagesapprentice,
+            archmagesinsight,
             archthiefrafaam,
             argentcommander,
             argenthorserider,
@@ -2735,6 +2744,8 @@ namespace HREngine.Bots
             assassinate,
             assassinsblade,
             astralcommunion,
+            astralportal,
+            atiesh,
             atramedes,
             attackmode,
             auchenaisoulpriest,
@@ -2742,8 +2753,10 @@ namespace HREngine.Bots
             avenge,
             avengingwrath,
             aviana,
+            avianwatcher,
             axeflinger,
             azuredrake,
+            babblingbook,
             backstab,
             bainebloodhoof,
             ballistashot,
@@ -2751,6 +2764,7 @@ namespace HREngine.Bots
             bamboozle,
             bananas,
             baneofdoom,
+            barnes,
             barongeddon,
             baronrivendare,
             barracks,
@@ -2772,13 +2786,22 @@ namespace HREngine.Bots
             benedictionsplinter,
             benthompson,
             beomkihong,
+            beourguest,
             bestialwrath,
             betrayal,
+            bigbadclaws,
+            bigbadwolf,
             bigbanana,
             biggamehunter,
             bigwisps,
             bilefintidehunter,
             bite,
+            blackbishop,
+            blackking,
+            blackknight,
+            blackpawn,
+            blackqueen,
+            blackrook,
             blackwaterpirate,
             blackwhelp,
             blackwing,
@@ -2810,6 +2833,7 @@ namespace HREngine.Bots
             bloodtoichor,
             bloodwarriors,
             bluegillwarrior,
+            blueportal,
             boar,
             bobfitch,
             bogcreeper,
@@ -2822,6 +2846,7 @@ namespace HREngine.Bots
             boneguardlieutenant,
             boneminions,
             boneraptor,
+            bookwyrm,
             boom,
             boombot,
             boombotjr,
@@ -2837,12 +2862,14 @@ namespace HREngine.Bots
             brianbirmingham,
             brianschwab,
             briarthorntoxin,
+            brilliance,
             broodaffliction,
             broodafflictionblack,
             broodafflictionblue,
             broodafflictionbronze,
             broodafflictiongreen,
             broodafflictionred,
+            broom,
             bryanchang,
             buccaneer,
             burgle,
@@ -2852,21 +2879,28 @@ namespace HREngine.Bots
             cabaliststome,
             cabalshadowpriest,
             cairnebloodhoof,
+            callmediva,
             callofthewild,
             callpet,
             cameronchrisman,
+            candle,
             captaingreenskin,
             captainsparrot,
             capturedjormungar,
             carriongrub,
             cashin,
+            castle,
             catform,
+            catinahat,
+            cattrick,
             cauldron,
+            cellarspider,
             cenarius,
             chains,
             charge,
             chargedhammer,
             chasingtrogg,
+            cheat,
             chicken,
             chieftainscarvash,
             chillmaw,
@@ -2883,9 +2917,11 @@ namespace HREngine.Bots
             cityofstormwind,
             claw,
             cleave,
+            cloakedhuntress,
             clockworkgiant,
             clockworkgnome,
             clockworkknight,
+            coalescethemoonlight,
             cobaltguardian,
             cobrashot,
             coghammer,
@@ -2931,6 +2967,8 @@ namespace HREngine.Bots
             cultapothecary,
             cultmaster,
             cultsorcerer,
+            cup,
+            curator,
             cursed,
             cursedblade,
             curseofrafaam,
@@ -2955,6 +2993,7 @@ namespace HREngine.Bots
             darkironskulker,
             darkironspectator,
             darknesscalls,
+            darkpact,
             darkpeddler,
             darkscalehealer,
             darkshirealchemist,
@@ -2964,6 +3003,7 @@ namespace HREngine.Bots
             darkwispers,
             darnassusaspirant,
             darttrap,
+            deadlyfork,
             deadlypoison,
             deadlyshot,
             deanayala,
@@ -2986,6 +3026,8 @@ namespace HREngine.Bots
             demonfire,
             demonfuse,
             demonheart,
+            demonicpresence,
+            demonsloose,
             demonwrath,
             dereksakamoto,
             desertcamel,
@@ -3027,6 +3069,7 @@ namespace HREngine.Bots
             doomguard,
             doomhammer,
             doomsayer,
+            dorothee,
             doublezap,
             draeneitotemcarver,
             dragonconsort,
@@ -3038,6 +3081,7 @@ namespace HREngine.Bots
             dragonlingmechanic,
             dragonsbreath,
             dragonscalewarrior,
+            dragonsfree,
             dragonteeth,
             drainlife,
             drakkisathscommand,
@@ -3051,6 +3095,7 @@ namespace HREngine.Bots
             dreadsteed,
             dream,
             drinkdeeply,
+            drinkthemoonlight,
             druidoftheclaw,
             druidofthefang,
             druidoftheflame,
@@ -3089,9 +3134,11 @@ namespace HREngine.Bots
             emergencycoolant,
             emperorcobra,
             emperorthaurissan,
+            empowerment,
             enableemotes,
             enableforattack,
             enchant,
+            enchantedraven,
             endlesshunger,
             enhanceomechano,
             enrage,
@@ -3107,9 +3154,11 @@ namespace HREngine.Bots
             eternalsentinel,
             etherealarcanist,
             etherealconjurer,
+            etherealpeddler,
             everyfinisawesome,
             evilheckler,
             eviscerate,
+            evocation,
             evolve,
             evolvedkobold,
             evolvescales,
@@ -3169,6 +3218,7 @@ namespace HREngine.Bots
             fireelemental,
             fireguarddestroyer,
             firehawkform,
+            firelandsportal,
             firesworn,
             fistofjaraxxus,
             fjolalightbane,
@@ -3186,6 +3236,7 @@ namespace HREngine.Bots
             flametonguetotem,
             flamewaker,
             flamewakeracolyte,
+            flamewreath,
             flamewreathedfaceless,
             flare,
             flashheal,
@@ -3193,8 +3244,10 @@ namespace HREngine.Bots
             flesheatingghoul,
             floatingwatcher,
             flyingmachine,
+            flyingmonkey,
             foamsword,
             foereaper4000,
+            foolsbane,
             forbiddenancient,
             forbiddenflame,
             forbiddenhealing,
@@ -3204,6 +3257,7 @@ namespace HREngine.Bots
             forceofnature,
             forcetankmax,
             forgottentorch,
+            fork,
             forkedlightning,
             forlornstalker,
             fossilizeddevilsaur,
@@ -3227,6 +3281,7 @@ namespace HREngine.Bots
             gadgetzanauctioneer,
             gadgetzanjouster,
             gahzrilla,
+            galleryprotection,
             gallywixscoin,
             gangup,
             garr,
@@ -3293,6 +3348,7 @@ namespace HREngine.Bots
             harvestgolem,
             hatefulstrike,
             hauntedcreeper,
+            haywiremech,
             headcrack,
             heal,
             healingtotem,
@@ -3341,6 +3397,7 @@ namespace HREngine.Bots
             icehowl,
             icelance,
             icerager,
+            ickyimp,
             ickytentacle,
             ignitemana,
             illidanstormrage,
@@ -3367,10 +3424,12 @@ namespace HREngine.Bots
             investigatetherunes,
             ironbarkprotector,
             ironbeakowl,
+            ironforgeportal,
             ironforgerifleman,
             ironfurgrizzly,
             ironjuggernaut,
             ironsensei,
+            ivoryknight,
             jainaproudmoore,
             jasonchayes,
             jasonmacallister,
@@ -3386,10 +3445,12 @@ namespace HREngine.Bots
             jonaslaster,
             jonbankard,
             journeybelow,
+            julianne,
             junglemoonkin,
             junglepanther,
             junkbot,
             justicartrueheart,
+            karakazham,
             keeperofthegrove,
             keeperofuldaman,
             keithlandes,
@@ -3400,6 +3461,8 @@ namespace HREngine.Bots
             kidnapper,
             killcommand,
             killthelorewalker,
+            kilrek,
+            kindlygrandmother,
             kingkrush,
             kingmukla,
             kingofbeasts,
@@ -3408,6 +3471,7 @@ namespace HREngine.Bots
             kingselekk,
             kirintormage,
             klaxxiamberweaver,
+            knife,
             knifejuggler,
             knightofthewild,
             koboldgeomancer,
@@ -3428,10 +3492,12 @@ namespace HREngine.Bots
             leaderofthepack,
             leeroyjenkins,
             legacyoftheemperor,
+            legion,
             leokk,
             lepergnome,
             lesserheal,
             levelup,
+            leylines,
             lifetap,
             lightbomb,
             lightningbolt,
@@ -3466,7 +3532,10 @@ namespace HREngine.Bots
             madbomber,
             madderbomber,
             madscientist,
+            maelstromportal,
             maexxna,
+            magearmor,
+            magicmirror,
             magmapulse,
             magmarager,
             magmatron,
@@ -3477,6 +3546,7 @@ namespace HREngine.Bots
             maintank,
             majordomoexecutus,
             makeimmune,
+            malchezaarsimp,
             malfurionstormrage,
             malganis,
             malkorok,
@@ -3484,11 +3554,14 @@ namespace HREngine.Bots
             malorne,
             malygos,
             manaaddict,
+            manastorm,
             manatidetotem,
             manawraith,
             manawyrm,
+            manyimps,
             manywisps,
             maptothegoldenmonkey,
+            markmoonwalker,
             markofnature,
             markofthehorsemen,
             markofthewild,
@@ -3510,9 +3583,16 @@ namespace HREngine.Bots
             mechbearcat,
             mechfan,
             mechwarper,
+            mediva1,
+            mediva2,
+            mediva3,
             medivh,
             medivhslocket,
+            medivhsvalet,
+            medivhtheguardian,
             mekgineerthermaplugg,
+            menageriemagician,
+            menageriewarden,
             mesmash,
             metaltoothleaper,
             michaelschweitzer,
@@ -3522,6 +3602,7 @@ namespace HREngine.Bots
             mill10,
             mill30,
             millhousemanastorm,
+            mime,
             mimironshead,
             mindblast,
             mindcontrol,
@@ -3542,6 +3623,7 @@ namespace HREngine.Bots
             misdirection,
             misha,
             mistressofpain,
+            moatlurker,
             mogorschampion,
             mogortheogre,
             mogushanwarden,
@@ -3550,7 +3632,9 @@ namespace HREngine.Bots
             moltengiant,
             moltenrage,
             moonfire,
+            moongladeportal,
             morgltheoracle,
+            moroes,
             mortalcoil,
             mortalstrike,
             mountaingiant,
@@ -3566,9 +3650,11 @@ namespace HREngine.Bots
             mummyzombie,
             murloc,
             murlocbonus,
+            murlocescaping,
             murlocknight,
             murlocraider,
             murlocscout,
+            murlocsescaping,
             murloctidecaller,
             murloctidehunter,
             murloctinyfin,
@@ -3578,12 +3664,14 @@ namespace HREngine.Bots
             mutatinginjection,
             mutation,
             mysteriouschallenger,
+            mysteriousrune,
             nagamyrmidon,
             nagarepellent,
             nagaseawitch,
             natpagle,
             natthedarkfisher,
             naturalize,
+            nazrawildaxe,
             necroknight,
             necromancy,
             necroticaura,
@@ -3596,7 +3684,13 @@ namespace HREngine.Bots
             nerubianegg,
             nerubianprophet,
             nerubiansoldier,
+            netherbreath,
+            netherrage,
+            netherspite,
+            netherspitehistorian,
             nexuschampionsaraad,
+            nightbane,
+            nightbanetemplar,
             nightblade,
             nightmare,
             noblesacrifice,
@@ -3628,12 +3722,14 @@ namespace HREngine.Bots
             omnotrondefensesystem,
             oneeyedcheat,
             onthehunt,
+            onyxbishop,
             onyxia,
             onyxiclaw,
             ooze,
             openthegates,
             opponentconcede,
             opponentdisconnect,
+            orcwarrior,
             orgrimmaraspirant,
             orsisguard,
             overclock,
@@ -3641,8 +3737,12 @@ namespace HREngine.Bots
             pandarenscout,
             panther,
             pantherform,
+            pantryspider,
+            partyelemental,
+            partyportal,
             patchwerk,
             patientassassin,
+            pawn,
             pearlofthetides,
             perditionsblade,
             pileon,
@@ -3650,11 +3750,13 @@ namespace HREngine.Bots
             pilotedskygolem,
             pintsizedsummoner,
             pirate,
+            pitcher,
             pitfighter,
             pitlord,
             pitofspikes,
             pitsnake,
             plague,
+            plate,
             platemailarmor,
             poisoncloud,
             poisonedblade,
@@ -3665,8 +3767,10 @@ namespace HREngine.Bots
             pollutedhoarder,
             polymorph,
             polymorphboar,
+            pompousthespian,
             possessedvillager,
             poultryizer,
+            pouraround,
             powermace,
             powerofthefirelord,
             powerofthehorde,
@@ -3678,16 +3782,21 @@ namespace HREngine.Bots
             powerwordtentacles,
             preparation,
             priestessofelune,
+            priestofthefeast,
             primalfusion,
+            princemalchezaar,
             princesshuhuran,
             prioritize,
             prophetvelen,
+            protecttheking,
             psychotron,
             puddlestomper,
             purecold,
+            purify,
             putressvial,
             pyroblast,
             quartermaster,
+            questcoin,
             questingadventurer,
             quickshot,
             rachelledavis,
@@ -3717,6 +3826,9 @@ namespace HREngine.Bots
             recruiter,
             recycle,
             redemption,
+            redportal,
+            redridinghood,
+            reflections,
             refreshmentvendor,
             reincarnate,
             reinforce,
@@ -3753,11 +3865,13 @@ namespace HREngine.Bots
             rodofthesun,
             roguesdoit,
             rollingboulder,
+            romulo,
             rooted,
             rottenbanana,
             rumblingelemental,
             rummage,
             runeblade,
+            runicegg,
             rustyhook,
             rustyhorn,
             ryanchew,
@@ -3808,12 +3922,15 @@ namespace HREngine.Bots
             setallminionsto1health,
             sethealthto1,
             sethealthtofull,
+            setthetable,
             seyilyoon,
+            shadeofaran,
             shadeofnaxxramas,
             shadopanmonk,
             shadopanrider,
             shadowbeast,
             shadowbolt,
+            shadowboltvolley,
             shadowbomber,
             shadowboxer,
             shadowcaster,
@@ -3825,6 +3942,7 @@ namespace HREngine.Bots
             shadoworlight,
             shadowstep,
             shadowstrike,
+            shadowvolley,
             shadowworddeath,
             shadowwordhorror,
             shadowwordpain,
@@ -3833,6 +3951,7 @@ namespace HREngine.Bots
             shapeshift,
             shardofsulfuras,
             sharpen,
+            sharpfork,
             shatter,
             shatteredsuncleric,
             shatteringspree,
@@ -3864,6 +3983,8 @@ namespace HREngine.Bots
             silverhandrecruit,
             silverhandregent,
             silvermoonguardian,
+            silvermoonportal,
+            silverwaregolem,
             sinisterstrike,
             siphonsoul,
             sirfinleymrrgglton,
@@ -3913,8 +4034,10 @@ namespace HREngine.Bots
             spider,
             spidertank,
             spikeddecoy,
+            spiritclaws,
             spiritwolf,
             spitefulsmith,
+            spoon,
             spore,
             sporeburst,
             spreadingmadness,
@@ -3927,6 +4050,7 @@ namespace HREngine.Bots
             staffoforigination,
             stafftwopieces,
             stalagg,
+            stampedingbeast,
             stampedingkodo,
             standagainstdarkness,
             starfall,
@@ -3934,8 +4058,10 @@ namespace HREngine.Bots
             starvingbuzzard,
             steadyshot,
             stealcard,
+            steallife,
             steamwheedlesniper,
             stevengabriel,
+            steward,
             stewardofdarkshire,
             stolenwintersveilgift,
             stomp,
@@ -3956,10 +4082,13 @@ namespace HREngine.Bots
             summonarandomsecret,
             summoningportal,
             summoningstone,
+            summonkilrek,
             sunfuryprotector,
             sunraiderphaerix,
             sunwalker,
             supercharge,
+            susiesizzlesong,
+            swashburglar,
             swatfly,
             swingacross,
             swipe,
@@ -3975,10 +4104,13 @@ namespace HREngine.Bots
             taurenwarrior,
             tbdecreasingcardcostdebug,
             tbfactionwarboombotspell,
+            teapot,
             templeenforcer,
             templeescape,
             tentacleofnzoth,
             tentaclesforarms,
+            terestianillhoof,
+            terrifyingroar,
             thaddius,
             thanekorthazz,
             thealchemist,
@@ -3987,8 +4119,11 @@ namespace HREngine.Bots
             theblackknight,
             theboogeymonster,
             thecoin,
+            thecrone,
+            thecurator,
             thedarkness,
             theeye,
+            thehorde,
             themajordomo,
             themistcaller,
             therookery,
@@ -4019,6 +4154,7 @@ namespace HREngine.Bots
             tombpillager,
             tombspider,
             toshley,
+            tossingplates,
             totemgolem,
             totemiccall,
             totemicmight,
@@ -4032,10 +4168,12 @@ namespace HREngine.Bots
             transcendence,
             treant,
             treeoflife,
+            trembling,
             trogghateminions,
             trogghatespells,
             troggzortheearthinator,
             trueform,
+            truelove,
             truesilverchampion,
             tundrarhino,
             tunneltrogg,
@@ -4054,6 +4192,7 @@ namespace HREngine.Bots
             twinemperorveknilash,
             twistedlight,
             twistedworgen,
+            twister,
             twistingnether,
             unbalancingstrike,
             unboundelemental,
@@ -4087,6 +4226,7 @@ namespace HREngine.Bots
             venturecomercenary,
             vilefininquisitor,
             violetapprentice,
+            violetillusionist,
             violetteacher,
             vitalitytotem,
             voidcaller,
@@ -4101,6 +4241,7 @@ namespace HREngine.Bots
             wailingsoul,
             walkacrossgingerly,
             walterkong,
+            wandawonderhooves,
             warbot,
             warglaiveofazzinoth,
             wargolem,
@@ -4118,7 +4259,14 @@ namespace HREngine.Bots
             whirlingblades,
             whirlingzapomatic,
             whirlwind,
+            whitebishop,
+            whiteking,
+            whiteknight,
+            whitepawn,
+            whitequeen,
+            whiterook,
             wickedknife,
+            wickedwitchdoctor,
             wildgrowth,
             wildmagic,
             wildpyromancer,
@@ -4163,6 +4311,7 @@ namespace HREngine.Bots
             zealousinitiate,
             zinaar,
             zombiechow,
+            zoobot,
             zwick,
             placeholdercard,
         }
@@ -4171,7 +4320,11 @@ namespace HREngine.Bots
         {
             CardDB.cardName NameEnum;
             if (Enum.TryParse<cardName>(s, false, out NameEnum)) return NameEnum;
-            else return CardDB.cardName.unknown;
+            else
+            {
+                //if (s != "") Helpfunctions.Instance.ErrorLog("[CardDB] Unidentified card name: " + s);
+                return CardDB.cardName.unknown;
+            }
         }
 
         public enum ErrorType2
@@ -4235,6 +4388,7 @@ namespace HREngine.Bots
             REQ_TARGET_IF_AVAILABLE_AND_MINIMUM_FRIENDLY_MINIONS,//56
             REQ_TARGET_WITH_BATTLECRY,//57
             REQ_TARGET_WITH_DEATHRATTLE,//58
+            REQ_TARGET_IF_AVAILABLE_AND_MINIMUM_FRIENDLY_SECRETS,//59
             REQ_DRAG_TO_PLAY
         }
 
@@ -4291,6 +4445,7 @@ namespace HREngine.Bots
             public int needMinTotalMinions;
             public int needMinOwnMinions;
             public int needMinionsCapIfAvailable;
+            public int needControlaSecret = 0;
 
 
             //additional data
@@ -4343,6 +4498,7 @@ namespace HREngine.Bots
                 this.name = c.name;
                 this.needEmptyPlacesForPlaying = c.needEmptyPlacesForPlaying;
                 this.needMinionsCapIfAvailable = c.needMinionsCapIfAvailable;
+                this.needControlaSecret = c.needControlaSecret;
                 this.needMinNumberOfEnemy = c.needMinNumberOfEnemy;
                 this.needMinTotalMinions = c.needMinTotalMinions;
                 this.needMinOwnMinions = c.needMinOwnMinions;
@@ -4534,6 +4690,9 @@ namespace HREngine.Bots
                         case ErrorType2.REQ_TARGET_IF_AVAILABLE_AND_MINIMUM_FRIENDLY_MINIONS:
                             int tmp = (own) ? p.ownMinions.Count : p.enemyMinions.Count;
                             if (tmp >= needMinOwnMinions) targetAll = true;
+                            continue;
+                        case ErrorType2.REQ_TARGET_IF_AVAILABLE_AND_MINIMUM_FRIENDLY_SECRETS:
+                            if (p.ownSecretsIDList.Count >= needControlaSecret) targetAll = true;
                             continue;
                         //default:
                     }
@@ -5420,6 +5579,9 @@ namespace HREngine.Bots
                     case CardDB.cardName.frostgiant:
                         retval = retval + offset - p.anzUsedOwnHeroPower;
                         break;
+                    case CardDB.cardName.arcanegiant:
+                        retval = retval + offset - p.ownSpellsPlayedThisGame;
+                        break;
                     case CardDB.cardName.golemagg:
                         retval = retval + offset - p.ownHero.maxHp + p.ownHero.Hp;
                         break;
@@ -5458,10 +5620,10 @@ namespace HREngine.Bots
                         retval = retval + offset;
                         break;
                 }
-
-                if (this.Secret && p.playedKirinTorMage)
+                
+                if (this.Secret)
                 {
-                    retval = 0;
+                    if (p.anzOwnCloakedHuntress > 0 || p.playedKirinTorMage) retval = 0;
                 }
 
                 retval = Math.Max(0, retval);
@@ -5569,6 +5731,9 @@ namespace HREngine.Bots
                     case CardDB.cardName.frostgiant:
                         retval = retval + offset - p.ownHeroPowerUses;
                         break;
+                    case CardDB.cardName.arcanegiant:
+                        retval = retval + offset - p.ownSpellsPlayedThisGame;
+                        break;
                     case CardDB.cardName.skycapnkragg:
                         int pirates = 0;
                         foreach (Minion m in p.ownMinions)
@@ -5635,12 +5800,12 @@ namespace HREngine.Bots
                         retval = retval + offset;
                         break;
                 }
-                
-                if (this.Secret && p.playedKirinTorMage)
+
+                if (this.Secret)
                 {
-                    retval = 0;
+                    if (p.anzOwnCloakedHuntress > 0 || p.playedKirinTorMage) retval = 0;
                 }
-                
+
                 retval = Math.Max(0, retval);
 
                 return retval;
@@ -5735,7 +5900,9 @@ namespace HREngine.Bots
                     case CardDB.cardName.frostgiant:
                         retval = retval + offset + p.ownHeroPowerUses;
                         break;
-
+                    case CardDB.cardName.arcanegiant:
+                        retval = retval + offset - p.ownSpellsPlayedThisGame;
+                        break;
                     case CardDB.cardName.skycapnkragg:
                         int pirates = 0;
                         foreach (Minion m in p.ownMinions)
@@ -5781,7 +5948,7 @@ namespace HREngine.Bots
                         break;
                 }
 
-                if (this.Secret && p.playedKirinTorMage)
+                if (this.Secret && (p.anzOwnCloakedHuntress > 0 || p.playedKirinTorMage))
                 {
                     retval = this.cost;
                 }
@@ -5908,11 +6075,8 @@ namespace HREngine.Bots
                 {
                     instance = new CardDB();
                     //instance.enumCreator();// only call this to get latest cardids
-                    /*foreach (KeyValuePair<cardIDEnum, Card> kvp in instance.cardidToCardList)
-                    {
-                        Helpfunctions.Instance.logg(kvp.Value.name + " " + kvp.Value.Attack);
-                    }*/
-                    // have to do it 2 times (or the kids inside the simcards will not have a simcard :D
+
+                    // have to do it 2 times or the kids inside the simcards will not have a simcard :D
                     foreach (Card c in instance.cardlist)
                     {
                         c.sim_card = instance.getSimCard(c.cardIDenum);
@@ -5926,7 +6090,7 @@ namespace HREngine.Bots
 
         private CardDB()
         {
-            string[] lines = new string[0] { };
+            string[] lines = new string[] { };
             try
             {
                 string path = Settings.Instance.path;
@@ -6452,74 +6616,62 @@ namespace HREngine.Bots
                     if (ti == 1) c.HealTarget = true;
                     continue;
                 }
+
                 if (s.Contains("<PlayRequirement"))
                 {
-                    //if (!s.Contains("param=\"\"")) Console.WriteLine(s);
-
                     string temp = s.Split(new string[] { "reqID=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
                     temp = temp.Split('\"')[0];
-                    ErrorType2 et2 = (ErrorType2)Convert.ToInt32(temp);
-                    c.playrequires.Add(et2);
-                }
+                    int reqID = Convert.ToInt32(temp);
+                    c.playrequires.Add((ErrorType2)reqID);
 
-
-                if (s.Contains("<PlayRequirement reqID=\"12\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needEmptyPlacesForPlaying = Convert.ToInt32(temp);
-                    continue;
+                    int param = 0;
+                    temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    try
+                    {
+                        if (char.IsDigit(temp, 0))
+                        {
+                            temp = temp.Split('\"')[0];
+                            param = Convert.ToInt32(temp);
+                        }
+                    }
+                    catch
+                    {
+                        param = 0;
+                    }
+                    if (param > 0)
+                    {
+                        switch (reqID)
+                        {
+                            case 8:
+                                c.needWithMaxAttackValueOf = param;
+                                continue;
+                            case 10:
+                                c.needRaceForPlaying = param;
+                                continue;
+                            case 12:
+                                c.needEmptyPlacesForPlaying = param;
+                                continue;
+                            case 19:
+                                c.needMinionsCapIfAvailable = param;
+                                continue;
+                            case 23:
+                                c.needMinNumberOfEnemy = param;
+                                continue;
+                            case 41:
+                                c.needWithMinAttackValueOf = param;
+                                continue;
+                            case 45:
+                                c.needMinTotalMinions = param;
+                                continue;
+                            case 56:
+                                c.needMinOwnMinions = param;
+                                continue;
+                            case 59:
+                                c.needControlaSecret = param;
+                                continue;
+                        }
+                    }
                 }
-                if (s.Contains("PlayRequirement reqID=\"41\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needWithMinAttackValueOf = Convert.ToInt32(temp);
-                    continue;
-                }
-                if (s.Contains("PlayRequirement reqID=\"8\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needWithMaxAttackValueOf = Convert.ToInt32(temp);
-                    continue;
-                }
-                if (s.Contains("PlayRequirement reqID=\"10\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needRaceForPlaying = Convert.ToInt32(temp);
-                    continue;
-                }
-                if (s.Contains("PlayRequirement reqID=\"23\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needMinNumberOfEnemy = Convert.ToInt32(temp);
-                    continue;
-                }
-                if (s.Contains("PlayRequirement reqID=\"45\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needMinTotalMinions = Convert.ToInt32(temp);
-                    continue;
-                }
-                if (s.Contains("PlayRequirement reqID=\"56\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needMinOwnMinions = Convert.ToInt32(temp);
-                    continue;
-                }
-                if (s.Contains("PlayRequirement reqID=\"19\" param=\""))
-                {
-                    string temp = s.Split(new string[] { "param=\"" }, StringSplitOptions.RemoveEmptyEntries)[1];
-                    temp = temp.Split('\"')[0];
-                    c.needMinionsCapIfAvailable = Convert.ToInt32(temp);
-                    continue;
-                }
-
 
 
                 if (s.Contains("<Tag name="))
@@ -7584,20 +7736,20 @@ namespace HREngine.Bots
                 case cardIDEnum.KAR_003a: return new Sim_KAR_003a();
                 case cardIDEnum.KAR_003b: return new Sim_KAR_003b();
                 case cardIDEnum.KAR_004: return new Sim_KAR_004();
-                case cardIDEnum.KAR_004a: return new Sim_KAR_004a();
+                case cardIDEnum.KAR_004a: return new Sim_KAR_004a();*/
                 case cardIDEnum.KAR_005: return new Sim_KAR_005();
-                case cardIDEnum.KAR_005a: return new Sim_KAR_005a();*/
+                case cardIDEnum.KAR_005a: return new Sim_KAR_005a();
                 case cardIDEnum.KAR_006: return new Sim_KAR_006();/*
                 case cardIDEnum.KAR_009: return new Sim_KAR_009();
                 case cardIDEnum.KAR_010: return new Sim_KAR_010();
-                case cardIDEnum.KAR_010a: return new Sim_KAR_010a();
-                case cardIDEnum.KAR_011: return new Sim_KAR_011();
-                case cardIDEnum.KAR_013: return new Sim_KAR_013();
+                case cardIDEnum.KAR_010a: return new Sim_KAR_010a();*/
+                case cardIDEnum.KAR_011: return new Sim_KAR_011();/*
+                case cardIDEnum.KAR_013: return new Sim_KAR_013();*/
                 case cardIDEnum.KAR_021: return new Sim_KAR_021();
                 case cardIDEnum.KAR_025: return new Sim_KAR_025();
                 case cardIDEnum.KAR_025a: return new Sim_KAR_025a();
                 case cardIDEnum.KAR_025b: return new Sim_KAR_025b();
-                case cardIDEnum.KAR_025c: return new Sim_KAR_025c();*/
+                case cardIDEnum.KAR_025c: return new Sim_KAR_025c();
                 case cardIDEnum.KAR_026: return new Sim_KAR_026();
                 case cardIDEnum.KAR_026t: return new Sim_KAR_026t();/*
                 case cardIDEnum.KAR_028: return new Sim_KAR_028();
@@ -7609,21 +7761,21 @@ namespace HREngine.Bots
                 case cardIDEnum.KAR_036: return new Sim_KAR_036();/*
                 case cardIDEnum.KAR_036e: return new Sim_KAR_036e();
                 case cardIDEnum.KAR_037: return new Sim_KAR_037();
-                case cardIDEnum.KAR_037t: return new Sim_KAR_037t();
-                case cardIDEnum.KAR_041: return new Sim_KAR_041();*/
+                case cardIDEnum.KAR_037t: return new Sim_KAR_037t();*/
+                case cardIDEnum.KAR_041: return new Sim_KAR_041();
                 case cardIDEnum.KAR_044: return new Sim_KAR_044();
                 case cardIDEnum.KAR_044a: return new Sim_KAR_044a();
                 case cardIDEnum.KAR_057: return new Sim_KAR_057();/*
                 case cardIDEnum.KAR_061: return new Sim_KAR_061();
                 case cardIDEnum.KAR_062: return new Sim_KAR_062();
                 case cardIDEnum.KAR_063: return new Sim_KAR_063();
-                case cardIDEnum.KAR_065: return new Sim_KAR_065();
-                case cardIDEnum.KAR_069: return new Sim_KAR_069();
+                case cardIDEnum.KAR_065: return new Sim_KAR_065();*/
+                case cardIDEnum.KAR_069: return new Sim_KAR_069();/*
                 case cardIDEnum.KAR_070: return new Sim_KAR_070();
                 case cardIDEnum.KAR_073: return new Sim_KAR_073();
                 case cardIDEnum.KAR_075: return new Sim_KAR_075();*/
-                case cardIDEnum.KAR_076: return new Sim_KAR_076();/*
-                case cardIDEnum.KAR_077: return new Sim_KAR_077();
+                case cardIDEnum.KAR_076: return new Sim_KAR_076();
+                case cardIDEnum.KAR_077: return new Sim_KAR_077();/*
                 case cardIDEnum.KAR_077e: return new Sim_KAR_077e();
                 case cardIDEnum.KAR_089: return new Sim_KAR_089();
                 case cardIDEnum.KAR_091: return new Sim_KAR_091();
@@ -7634,17 +7786,17 @@ namespace HREngine.Bots
                 case cardIDEnum.KAR_095e: return new Sim_KAR_095e();
                 case cardIDEnum.KAR_096: return new Sim_KAR_096();
                 case cardIDEnum.KAR_097: return new Sim_KAR_097();
-                case cardIDEnum.KAR_097t: return new Sim_KAR_097t();
+                case cardIDEnum.KAR_097t: return new Sim_KAR_097t();*/
                 case cardIDEnum.KAR_114: return new Sim_KAR_114();
-                case cardIDEnum.KAR_114e: return new Sim_KAR_114e();
-                case cardIDEnum.KAR_204: return new Sim_KAR_204();*/
+                //case cardIDEnum.KAR_114e: return new Sim_KAR_114e();
+                case cardIDEnum.KAR_204: return new Sim_KAR_204();
                 case cardIDEnum.KAR_205: return new Sim_KAR_205();
                 case cardIDEnum.KAR_300: return new Sim_KAR_300();/*
                 case cardIDEnum.KAR_702: return new Sim_KAR_702();
                 case cardIDEnum.KAR_702e: return new Sim_KAR_702e();*/
                 case cardIDEnum.KAR_710: return new Sim_KAR_710();
-                case cardIDEnum.KAR_710m: return new Sim_KAR_710m();/*
-                case cardIDEnum.KAR_711: return new Sim_KAR_711();
+                case cardIDEnum.KAR_710m: return new Sim_KAR_710m();
+                case cardIDEnum.KAR_711: return new Sim_KAR_711();/*
                 case cardIDEnum.KAR_712: return new Sim_KAR_712();
                 case cardIDEnum.KAR_A01_01: return new Sim_KAR_A01_01();
                 case cardIDEnum.KAR_A01_01H: return new Sim_KAR_A01_01H();
@@ -9001,27 +9153,15 @@ namespace HREngine.Bots
             }
             Helpfunctions.Instance.writeToBuffer("}");
 
-
-            // cardIdstringToEnum creator:
-            /*Helpfunctions.Instance.writeToBuffer("public cardIDEnum cardIdstringToEnum(string s)");
-            Helpfunctions.Instance.writeToBuffer("{");
-            foreach (string cardid in this.allCardIDS)
-            {
-                Helpfunctions.Instance.writeToBuffer("if(s==\"" + cardid + "\") return CardDB.cardIDEnum." + cardid + ";");
-            }
-            Helpfunctions.Instance.writeToBuffer("return CardDB.cardIDEnum.None;");
-            Helpfunctions.Instance.writeToBuffer("}");
-
+            
+            // cardName creator:
             List<string> namelist = new List<string>();
-
             foreach (string cardid in this.namelist)
             {
                 if (namelist.Contains(cardid)) continue;
                 namelist.Add(cardid);
-            }*/
-
-
-            // cardName creator:
+            }
+            
             Helpfunctions.Instance.writeToBuffer("public enum cardName");
             Helpfunctions.Instance.writeToBuffer("{");
             foreach (string cardid in namelist)
@@ -9030,18 +9170,7 @@ namespace HREngine.Bots
             }
             Helpfunctions.Instance.writeToBuffer("}");
 
-
-            // cardNamestringToEnum creator:
-            /*Helpfunctions.Instance.writeToBuffer("public cardName cardNamestringToEnum(string s)");
-            Helpfunctions.Instance.writeToBuffer("{");
-            foreach (string cardid in namelist)
-            {
-                Helpfunctions.Instance.writeToBuffer("if(s==\"" + cardid + "\") return CardDB.cardName." + cardid + ";");
-            }
-            Helpfunctions.Instance.writeToBuffer("return CardDB.cardName.unknown;");
-            Helpfunctions.Instance.writeToBuffer("}");*/
-
-
+            
             // getSimCard creator:
             Helpfunctions.Instance.writeToBuffer("public SimTemplate getSimCard(cardIDEnum id)");
             Helpfunctions.Instance.writeToBuffer("{");
@@ -9057,6 +9186,11 @@ namespace HREngine.Bots
 
 
             Helpfunctions.Instance.writeBufferToCardDB();
+        }
+
+        private static string removeSpecialChars(string s)
+        {
+            return Regex.Replace(s, "[^a-zA-Z0-9]+", "", RegexOptions.Compiled);
         }
 
         private void setAdditionalData()

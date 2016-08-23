@@ -8,13 +8,29 @@ namespace HREngine.Bots
     {
         //Battlecry: Summon your Deathrattle minions that died this game.
 
+        CardDB CardDBI = CardDB.Instance;
+        CardDB.Card kid = null;
+
         public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             int kids = 7 - p.ownMinions.Count;
-           
-            for (int i = 0; i < kids; i++)
+
+            if (kids > 0)
             {
-                p.callKid(CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.GVG_078), own.zonepos, own.own); 
+                foreach (KeyValuePair<CardDB.cardIDEnum, int> e in Probabilitymaker.Instance.ownCardsPlayed)
+                {
+                    kid = CardDBI.getCardDataFromID(e.Key);
+                    if (kid.deathrattle)
+                    {
+                        for (int i = 0; i < e.Value; i++)
+                        {
+                            p.callKid(kid, own.zonepos, own.own);
+                            kids--;
+                            if (kids < 1) break;
+                        }
+                        if (kids < 1) break;
+                    }
+                }
             }
         }
     }

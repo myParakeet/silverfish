@@ -64,25 +64,25 @@ namespace HREngine.Bots
             this.setWeights(alpha);
 
             Mulligan.Instance.setAutoConcede(Settings.Instance.concede);
-            Helpfunctions.Instance.ErrorLog("set enemy-face-hp to: " + this.enfacehp);
+            Helpfunctions.Instance.ErrorLog("[Settings] set enemy-face-hp to: " + this.enfacehp);
             ComboBreaker.Instance.attackFaceHP = this.enfacehp;
             Ai.Instance.setMaxWide(this.maxwide);
-            Helpfunctions.Instance.ErrorLog("set maxwide to: " + this.maxwide);
+            Helpfunctions.Instance.ErrorLog("[Settings] set maxwide to: " + this.maxwide);
 
             Ai.Instance.setTwoTurnSimulation(false, this.twotsamount);
-            Helpfunctions.Instance.ErrorLog("calculate the second turn of the " + this.twotsamount + " best boards");
+            Helpfunctions.Instance.ErrorLog("[Settings] calculate the second turn of the " + this.twotsamount + " best boards");
             if (this.twotsamount >= 1)
             {
-                if (this.simEnemySecondTurn) Helpfunctions.Instance.ErrorLog("simulates the enemy turn on your second turn");
+                if (this.simEnemySecondTurn) Helpfunctions.Instance.ErrorLog("[Settings] simulates the enemy turn on your second turn");
             }
 
             if (this.useSecretsPlayArround)
             {
-                Helpfunctions.Instance.ErrorLog("playing arround secrets is " + this.useSecretsPlayArround);
+                Helpfunctions.Instance.ErrorLog("[Settings] playing arround secrets is " + this.useSecretsPlayArround);
             }
             Ai.Instance.setPlayAround();
 
-            if (this.writeToSingleFile) Helpfunctions.Instance.ErrorLog("write log to single file");
+            if (this.writeToSingleFile) Helpfunctions.Instance.ErrorLog("[Settings] write log to single file");
         }
 
 
@@ -185,7 +185,7 @@ namespace HREngine.Bots
             float a = ((float)alpha) / 100f;
             this.firstweight = 1f - a;
             this.secondweight = a;
-            Helpfunctions.Instance.ErrorLog("current alpha is " + this.secondweight);
+            Helpfunctions.Instance.ErrorLog("[Settings] current alpha is " + this.secondweight);
         }
 
         public void setFilePath(string path)
