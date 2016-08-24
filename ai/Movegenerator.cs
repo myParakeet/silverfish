@@ -564,6 +564,7 @@
 
                 foreach (Minion trgt in trgts)
                 {
+                    if (p.ownWeaponName == CardDB.cardName.foolsbane && trgt.isHero) continue; //this weapon cant attack heros!
                     int heroAttackPen = 0;
                     if (usePenalityManager)
                     {
@@ -794,6 +795,7 @@
 
                 foreach (Minion trgt in trgts)
                 {
+                    if (p.enemyWeaponName == CardDB.cardName.foolsbane && trgt.isHero) continue; //this weapon cant attack heros!
                     //pf.attackWithWeapon(trgt.target, trgt.targetEntity, heroAttackPen);
                     Action a = new Action(actionEnum.attackWithHero, null, p.enemyHero, 0, trgt, 0, 0);
                     ret.Add(a);

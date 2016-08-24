@@ -2290,7 +2290,7 @@
 
             if (!attackingHero.frozen && weaponAttack >= 1)
             {
-                ghd += weaponAttack;
+                if (weaponName != CardDB.cardName.foolsbane) ghd += weaponAttack;
                 if ((attackingHero.windfury || weaponName == CardDB.cardName.doomhammer) && weaponDurability > 1) ghd += weaponAttack;
             }
 
@@ -2519,7 +2519,7 @@
                 {
                     case CardDB.cardIDEnum.KAR_004: //cattrick
                         pos = this.ownMinions.Count;
-                        callKid(CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_017), pos, true, false);
+                        callKid(CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_004a), pos, true, false);
                         continue;
                 }
             }
@@ -5871,7 +5871,7 @@
 
             hero.Angr += c.Attack;
 
-            hero.windfury = (c.name == CardDB.cardName.doomhammer);
+            hero.windfury = (c.name == CardDB.cardName.doomhammer || c.name == CardDB.cardName.foolsbane); // foolsbane has unlimited attacks but use windfury for simplicity unless it becomes a problem
 
             hero.updateReadyness();
 

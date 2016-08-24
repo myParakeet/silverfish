@@ -965,7 +965,7 @@
             Hrtprozis.Instance.updateSecretStuff(this.ownsecretlist, enemySecretAmount);
 
             bool herowindfury = false;
-            if (this.ownHeroWeapon == "doomhammer") herowindfury = true;
+            if (this.ownHeroWeapon == "doomhammer" || this.ownHeroWeapon == "foolsbane") herowindfury = true;
 
             //create heros:
 
