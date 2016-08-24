@@ -22,7 +22,7 @@ namespace HREngine.Bots
             {
                 hasdragon = true;
             }
-            if (hasdragon && target.Angr <= 3)
+            if (target != null && (hasdragon && target.Angr <= 3))
             {
                 p.minionGetDestroyed(target);
             }

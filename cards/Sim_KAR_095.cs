@@ -10,14 +10,17 @@ namespace HREngine.Bots
 
         public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
-            Minion beastmn = p.ownMinions.Find(beast => beast.handcard.card.race == TAG_RACE.PET);
-            if (beastmn != null) p.minionGetBuffed(beastmn, 1, 1);
+            if (p.ownMinions != null)
+            {
+                Minion beastmn = p.ownMinions.Find(beast => beast.handcard.card.race == TAG_RACE.PET);
+                if (beastmn != null) p.minionGetBuffed(beastmn, 1, 1);
 
-            Minion dragonmn = p.ownMinions.Find(beast => beast.handcard.card.race == TAG_RACE.DRAGON);
-            if (beastmn != null) p.minionGetBuffed(dragonmn, 1, 1);
+                Minion dragonmn = p.ownMinions.Find(beast => beast.handcard.card.race == TAG_RACE.DRAGON);
+                if (dragonmn != null) p.minionGetBuffed(dragonmn, 1, 1);
 
-            Minion murlocmn = p.ownMinions.Find(beast => beast.handcard.card.race == TAG_RACE.MURLOC);
-            if (beastmn != null) p.minionGetBuffed(murlocmn, 1, 1);
+                Minion murlocmn = p.ownMinions.Find(beast => beast.handcard.card.race == TAG_RACE.MURLOC);
+                if (murlocmn != null) p.minionGetBuffed(murlocmn, 1, 1);
+            }
         }
     }
 }

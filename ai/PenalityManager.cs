@@ -3329,7 +3329,6 @@
 
             cardDrawBattleCryDatabase.Add(CardDB.cardName.babblingbook, 1);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.thecurator, 1);
-            cardDrawBattleCryDatabase.Add(CardDB.cardName.netherspitehistorian, 1);
 
 
             //add discover minions
