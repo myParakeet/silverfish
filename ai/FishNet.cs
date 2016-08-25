@@ -12,22 +12,14 @@ namespace HREngine.Bots
 {
     public sealed class FishNet
     {
-        private static readonly FishNet instance = new FishNet();
-
-        static FishNet() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static FishNet instance;
 
         public static FishNet Instance
         {
-            get
-            {
-                return instance;
-            }
+            get { return instance ?? (instance = new FishNet()); }
         }
 
-        private FishNet()
-        {
-
-        }
+        private FishNet() { }
 
         private TcpListener listener;
         private TcpClient client;
