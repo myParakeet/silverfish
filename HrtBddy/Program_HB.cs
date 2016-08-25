@@ -141,7 +141,7 @@ namespace HREngine.Bots
         //LOE stuff###############################################################################################################
         List<CardDB.cardIDEnum> choiceCards = new List<CardDB.cardIDEnum>(); // here we save all available tracking/discover cards ordered from left to right
         public List<int> choiceCardsEntitys = new List<int>(); //list of entitys same order as choiceCards
-
+        
         private static Silverfish instance;
 
         public static Silverfish Instance

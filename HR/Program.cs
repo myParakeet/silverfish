@@ -2097,10 +2097,10 @@ namespace HREngine.Bots
                         KeyValuePair<string, string> msg = FishNet.Instance.readMessage();
                         if (msg.Key != "actionstodo.txt")
                         {
-                            Helpfunctions.Instance.ErrorLog($"[Program] Ignoring Message: {msg.Key}");
+                            Helpfunctions.Instance.ErrorLog("[Program] Ignoring Message: " + msg.Key);
                             continue;
                         }
-                        Helpfunctions.Instance.ErrorLog($"[Program] Message Type: {msg.Key}");
+                        Helpfunctions.Instance.ErrorLog("[Program] Message Type: " + msg.Key);
                         data = msg.Value;
                     }
                     else

@@ -40,12 +40,12 @@ namespace HREngine.Bots
             {
                 listener = new TcpListener(IPAddress.Any, Settings.Instance.tcpPort);
                 listener.Start();
-                Helpfunctions.Instance.ErrorLog($"[Network] Listening for client on port {Settings.Instance.tcpPort}");
+                Helpfunctions.Instance.ErrorLog("[Network] Listening for client on port " + Settings.Instance.tcpPort);
                 listener.BeginAcceptTcpClient(handleConnectionAsync, listener);
             }
             catch (SocketException)
             {
-                Helpfunctions.Instance.ErrorLog($"[Network] Cant bind to port {Settings.Instance.tcpPort}");
+                Helpfunctions.Instance.ErrorLog("[Network] Cant bind to port " + Settings.Instance.tcpPort);
             }
         }
 
@@ -55,16 +55,16 @@ namespace HREngine.Bots
             listener.BeginAcceptTcpClient(handleConnectionAsync, listener); // keep listening for connections in case it goes down
             if (!isConnected(newclient.Client)) return;
 
-            client?.Close();
+            if (client != null) client.Close();
             client = newclient; //new connections replace old, only 1 is intended
-            Helpfunctions.Instance.ErrorLog($"[Network] New connection from {getIp(client.Client)}");
+            Helpfunctions.Instance.ErrorLog("[Network] New connection from " + getIp(client.Client));
         }
 
         public void checkConnection()
         {
             if (client != null && !isConnected(client.Client))
             {
-                client?.Close();
+                client.Close();
                 client = null;
             }
         }
@@ -76,7 +76,7 @@ namespace HREngine.Bots
 
         public async Task startClientAsync(CancellationToken cancellationToken)
         {
-            Helpfunctions.Instance.ErrorLog($"[Network] Connecting to {Settings.Instance.netAddress}:{Settings.Instance.tcpPort}");
+            Helpfunctions.Instance.ErrorLog("[Network] Connecting to " + Settings.Instance.netAddress + ":" + Settings.Instance.tcpPort);
             while (true)
             {
                 try
@@ -96,7 +96,7 @@ namespace HREngine.Bots
                 }
                 catch (Exception ex)
                 {
-                    Helpfunctions.Instance.ErrorLog($"[Network] Connection Error: {ex}");
+                    Helpfunctions.Instance.ErrorLog("[Network] Connection Error: " + ex);
                 }
 
                 await Task.Delay(5000, cancellationToken);
@@ -111,7 +111,7 @@ namespace HREngine.Bots
             }
             catch (SocketException)
             {
-                Helpfunctions.Instance.ErrorLog($"[Network] Connection Terminated: {getIp(socket)}:{getPort(socket)}");
+                Helpfunctions.Instance.ErrorLog("[Network] Connection Terminated: " + getIp(socket) + ":" + getPort(socket));
                 return false;
             }
         }
@@ -143,13 +143,15 @@ namespace HREngine.Bots
         private string getIp(Socket s)
         {
             IPEndPoint remoteIpEndPoint = s.RemoteEndPoint as IPEndPoint;
-            return remoteIpEndPoint?.ToString();
+            if (remoteIpEndPoint != null) return remoteIpEndPoint.ToString();
+            return "";
         }
 
         private string getPort(Socket s)
         {
             IPEndPoint remoteIpEndPoint = s.RemoteEndPoint as IPEndPoint;
-            return remoteIpEndPoint?.Port.ToString();
+            if (remoteIpEndPoint != null) return remoteIpEndPoint.Port.ToString();
+            return "";
         }
 
         public void sendMessage(string msg)
@@ -162,11 +164,11 @@ namespace HREngine.Bots
                 sw.WriteLine(msg);
                 sw.WriteLine("");
                 sw.Flush();
-                //Helpfunctions.Instance.ErrorLog($"[Network] Send Message: {msg}");
+                //Helpfunctions.Instance.ErrorLog("[Network] Send Message: " + msg);
             }
             catch (Exception e)
             {
-                Helpfunctions.Instance.ErrorLog($"[Network] Send Message Error: {e}");
+                Helpfunctions.Instance.ErrorLog("[Network] Send Message Error: " + e);
             }
         }
         
@@ -185,14 +187,14 @@ namespace HREngine.Bots
                 {
                     lines += "\r\n" + line;
                     line = sr.ReadLine();
-                    //Helpfunctions.Instance.ErrorLog($"[Network] Read Line: {line}");
+                    //Helpfunctions.Instance.ErrorLog("[Network] Read Line: " + line);
                 }
             }
             catch (Exception e)
             {
                 client.Close();
                 client = null;
-                Helpfunctions.Instance.ErrorLog($"[Network] Read Message Error: {e.Message}");
+                Helpfunctions.Instance.ErrorLog("[Network] Read Message Error: " + e.Message);
             }
 
             //Helpfunctions.Instance.ErrorLog($"[Network] Message: {header}\r\n{lines}");
