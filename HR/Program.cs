@@ -749,6 +749,9 @@ namespace HREngine.Bots
                     sw.WriteLine(Exception.ToString());
                 }
                 Helpfunctions.Instance.logg("\r\nDLL Crashed! " + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + "\r\nStackTrace ---" + Exception.ToString() + "\r\n\r\n");
+                Helpfunctions.Instance.flushLogg();
+                Helpfunctions.Instance.flushErrorLog();
+
                 if (Settings.Instance.learnmode)
                 {
                     e.action_list.Clear();
@@ -1041,16 +1044,14 @@ namespace HREngine.Bots
         public List<int> choiceCardsEntitys = new List<int>(); //list of entitys same order as choiceCards
         
         private static HSRangerLib.GameState latestGameState;
-        
-        private static readonly Silverfish instance = new Silverfish();
 
-        static Silverfish() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static Silverfish instance;
 
         public static Silverfish Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Silverfish());
             }
         }
 
@@ -1219,6 +1220,10 @@ namespace HREngine.Bots
                 }
             }
 
+            if (p.mana > Ai.Instance.nextMoveGuess.mana && p.ownMaxMana > Ai.Instance.nextMoveGuess.ownMaxMana && Ai.Instance.nextMoveGuess.playactions.Count > 0)
+            {
+                Helpfunctions.Instance.logg("You may have roped last turn!");
+            }
 
             Helpfunctions.Instance.ErrorLog("calculating stuff... " + DateTime.Now.ToString("HH:mm:ss.ffff"));
             if (runExtern)
@@ -2186,15 +2191,13 @@ namespace HREngine.Bots
 
     public sealed class Helpfunctions
     {
-        private static readonly Helpfunctions instance = new Helpfunctions();
-
-        static Helpfunctions() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static Helpfunctions instance;
 
         public static Helpfunctions Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Helpfunctions());
             }
         }
 

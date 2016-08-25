@@ -116,21 +116,19 @@
         CardDB cdb = CardDB.Instance;
 
         private int ownPlayerController;
+        
 
-        private static readonly Hrtprozis instance = new Hrtprozis();
-
-        static Hrtprozis() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
-
-        private Hrtprozis() { }
+        private static Hrtprozis instance;
 
         public static Hrtprozis Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Hrtprozis());
             }
         }
 
+        private Hrtprozis() { }
 
 
         public void setAttackFaceHP(int hp)

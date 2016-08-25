@@ -164,14 +164,16 @@ namespace HREngine.Bots
         private string cleanPath = "";
 
 
-        private static readonly Mulligan instance = new Mulligan();
-
-        static Mulligan() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static Mulligan instance;
 
         public static Mulligan Instance
         {
             get
             {
+                if (instance == null)
+                {
+                    instance = new Mulligan();
+                }
                 return instance;
             }
         }

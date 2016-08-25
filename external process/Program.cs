@@ -294,15 +294,13 @@ namespace HREngine.Bots
         private int anzOgOwnCThunAngrBonus = 0;
         private int anzOgOwnCThunTaunt = 0;
 
-        private static readonly Silverfish instance = new Silverfish();
-
-        static Silverfish() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static Silverfish instance;
 
         public static Silverfish Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Silverfish());
             }
         }
 
@@ -465,15 +463,13 @@ namespace HREngine.Bots
 
     public sealed class Helpfunctions
     {
-        private static readonly Helpfunctions instance = new Helpfunctions();
-
-        static Helpfunctions() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static Helpfunctions instance;
 
         public static Helpfunctions Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Helpfunctions());
             }
         }
 

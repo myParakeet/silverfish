@@ -364,15 +364,13 @@
 
         }
 
-        private static readonly ComboBreaker instance = new ComboBreaker();
-
-        static ComboBreaker() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static ComboBreaker instance;
 
         public static ComboBreaker Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new ComboBreaker());
             }
         }
 
