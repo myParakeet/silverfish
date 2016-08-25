@@ -116,10 +116,10 @@ namespace HREngine.Bots
             Helpfunctions.Instance.ErrorLog("you are now running uai V" + sf.versionnumber);
             Helpfunctions.Instance.ErrorLog("----------------------------");
             //Helpfunctions.Instance.ErrorLog("test... " + Settings.Instance.logpath + Settings.Instance.logfile);
-            if (Settings.Instance.useExternalProcess) Helpfunctions.Instance.ErrorLog("YOU USE SILVER.EXE FOR CALCULATION, MAKE SURE YOU STARTED IT!");
-            if (Settings.Instance.useExternalProcess) Helpfunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + Settings.Instance.path);
+            if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("YOU USE SILVER.EXE FOR CALCULATION, MAKE SURE YOU STARTED IT!");
+            if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + Settings.Instance.path);
             
-            if (Settings.Instance.useExternalProcess)
+            if (set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
             {
                 System.Diagnostics.Process[] pname = System.Diagnostics.Process.GetProcessesByName("Silver");
                 string directory = Settings.Instance.path + "Silver.exe";
@@ -143,7 +143,7 @@ namespace HREngine.Bots
                     System.Diagnostics.Process.Start(startInfo);
                 }
 
-                System.Threading.Thread.Sleep(500);
+                Thread.Sleep(1000);
             }
 
 
@@ -151,7 +151,6 @@ namespace HREngine.Bots
             {
                 Ai.Instance.autoTester(printstuff);
             }
-            writeSettings();
 
             this.doMultipleThingsAtATime = Settings.Instance.speedy;
 
@@ -512,7 +511,7 @@ namespace HREngine.Bots
             //or Hearthranger will never query best move !
             //base.HasBestMoveAI = true;
             e.handled = true;
-            HSRangerLib.BotAction ranger_action ;
+            HSRangerLib.BotAction ranger_action;
             
             try
             {
@@ -745,15 +744,18 @@ namespace HREngine.Bots
             }
             catch (Exception Exception)
             {
-                Helpfunctions.Instance.logg("StackTrace ---" + Exception.ToString());
-                Helpfunctions.Instance.ErrorLog("StackTrace ---" + Exception.ToString());
+                using (StreamWriter sw = File.AppendText(Settings.Instance.logpath + "CrashLog" + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".txt"))
+                {
+                    sw.WriteLine(Exception.ToString());
+                }
+                Helpfunctions.Instance.logg("\r\nDLL Crashed! " + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + "\r\nStackTrace ---" + Exception.ToString() + "\r\n\r\n");
                 if (Settings.Instance.learnmode)
                 {
                     e.action_list.Clear();
-                    return;
                 }
+                throw;
             }
-            return ;
+            return;
         }
 
 
@@ -871,259 +873,10 @@ namespace HREngine.Bots
             if (Mulligan.Instance.shouldConcede(Hrtprozis.Instance.heroNametoEnum(ownh), Hrtprozis.Instance.heroNametoEnum(enemyh)))
             {
                 Helpfunctions.Instance.ErrorLog("not today!!!!");
-                writeSettings();
                 this.isgoingtoconcede = true;
                 return true;
             }
             return false;
-        }
-
-        private void disableRelogger()
-        {
-            string version = sf.versionnumber;
-            string[] lines = new string[0] { };
-            try
-            {
-                string path = SilverFishBotPath.SettingsPath;
-                //string path = (HRSettings.Get.CustomRuleFilePath).Remove(HRSettings.Get.CustomRuleFilePath.Length - 13) + "Common" + System.IO.Path.DirectorySeparatorChar;
-                lines = System.IO.File.ReadAllLines(path + "Settings.ini");
-            }
-            catch
-            {
-                Helpfunctions.Instance.logg("cant find Settings.ini");
-            }
-            List<string> newlines = new List<string>();
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string s = lines[i];
-
-                if (s.Contains("client.relogger"))
-                {
-                    s = "client.relogger=false";
-                }
-                //Helpfunctions.Instance.ErrorLog("add " + s);
-                newlines.Add(s);
-
-            }
-
-
-            try
-            {
-                string path = SilverFishBotPath.SettingsPath;
-                System.IO.File.WriteAllLines(path + "Settings.ini", newlines.ToArray());
-            }
-            catch
-            {
-                Helpfunctions.Instance.logg("cant write Settings.ini");
-            }
-        }
-
-        private void writeSettings()
-        {
-            return;
-            /*string version = sf.versionnumber;
-            string[] lines = new string[0] { };
-            try
-            {
-                string path = SiverFishBotPath.SettingsPath;
-                lines = System.IO.File.ReadAllLines(path + "Settings.ini");
-            }
-            catch
-            {
-                Helpfunctions.Instance.logg("cant find Settings.ini");
-            }
-            List<string> newlines = new List<string>();
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string s = lines[i];
-
-                if (s.Contains("uai.version"))
-                {
-                    s = "uai.version=V" + version;
-                }
-
-                if (s.Contains("uai.concedes"))
-                {
-                    s = "uai.concedes=" + KeepConcede;
-                }
-
-                if (s.Contains("uai.wins"))
-                {
-                    s = "uai.wins=" + this.wins;
-                }
-                if (s.Contains("uai.loses"))
-                {
-                    s = "uai.loses=" + this.loses;
-                }
-                if (s.Contains("uai.winrate"))
-                {
-                    s = "uai.winrate=" + 0;
-                    double winr = 0;
-                    if ((this.wins + this.loses - KeepConcede) != 0)
-                    {
-                        winr = ((double)(this.wins * 100) / (double)(this.wins + this.loses - KeepConcede));
-                        s = "uai.winrate=" + Math.Round(winr, 2);
-                    }
-
-                }
-                if (s.Contains("uai.winph"))
-                {
-                    s = "uai.winph=" + 0;
-                    double winh = 0;
-                    if ((DateTime.Now - starttime).TotalHours >= 0.001)
-                    {
-
-                        winh = (double)this.wins / (DateTime.Now - starttime).TotalHours;
-                        s = "uai.winph=" + Math.Round(winh, 2);
-                    }
-
-                }
-                //Helpfunctions.Instance.ErrorLog("add " + s);
-                newlines.Add(s);
-
-            }
-
-
-            try
-            {
-                string path = SiverFishBotPath.SettingsPath;
-                System.IO.File.WriteAllLines(path + "Settings.ini", newlines.ToArray());
-            }
-            catch
-            {
-                Helpfunctions.Instance.logg("cant write Settings.ini");
-            }*/
-        }
-
-        private void resetSettings()
-        {
-            string[] lines = new string[0] { };
-            try
-            {
-                string path = SilverFishBotPath.SettingsPath;
-                lines = System.IO.File.ReadAllLines(path + "Settings.ini");
-            }
-            catch
-            {
-                Helpfunctions.Instance.logg("cant find Settings.ini");
-            }
-            List<string> newlines = new List<string>();
-            for (int i = 0; i < lines.Length; i++)
-            {
-                string s = lines[i];
-
-                if (s.Contains("uai.reset"))
-                {
-                    s = "uai.reset=false";
-                }
-
-                if (s.Contains("uai.extern"))
-                {
-                    s = "uai.extern=true";
-                }
-                if (s.Contains("uai.passivewait"))
-                {
-                    s = "uai.passivewait=true";
-                }
-                if (s.Contains("uai.wwuaid"))
-                {
-                    s = "uai.wwuaid=false";
-                }
-                if (s.Contains("uai.enemyfacehp"))
-                {
-                    s = "uai.enemyfacehp=15";
-                }
-                if (s.Contains("uai.singleLog"))
-                {
-                    s = "uai.singleLog=false";
-                }
-
-
-                // advanced settings
-                if (s.Contains("uai.maxwide"))
-                {
-                    s = "uai.maxwide=4000";
-                }
-
-                if (s.Contains("uai.maxBoardsEnemysTurn"))
-                {
-                    s = "uai.maxBoardsEnemysTurn=40";
-                }
-
-                if (s.Contains("uai.simulateTwoTurnCounter"))
-                {
-                    s = "uai.simulateTwoTurnCounter=1500";
-                }
-
-                if (s.Contains("uai.maxBoardsEnemysTurnSecondStepp"))
-                {
-                    s = "uai.maxBoardsEnemysTurnSecondStepp=200";
-                }
-
-                if (s.Contains("uai.nextTurnSimDeep"))
-                {
-                    s = "uai.nextTurnSimDeep=6";
-                }
-                if (s.Contains("uai.nextTurnSimWide"))
-                {
-                    s = "uai.nextTurnSimWide=20";
-                }
-                if (s.Contains("uai.nextTurnSimBoards"))
-                {
-                    s = "uai.nextTurnSimBoards=200";
-                }
-
-                if (s.Contains("uai.simulateEnemyOnSecondTurn"))
-                {
-                    s = "uai.simulateEnemyOnSecondTurn=true";
-                }
-                if (s.Contains("uai.maxBoardsEnemysSecondTurn"))
-                {
-                    s = "uai.maxBoardsEnemysSecondTurn=20";
-                }
-
-                if (s.Contains("uai.placement"))
-                {
-                    s = "uai.placement=true";
-                }
-
-                if (s.Contains("uai.secrets"))
-                {
-                    s = "uai.secrets=false";
-                }
-
-                if (s.Contains("uai.playAround"))
-                {
-                    s = "uai.playAround=false";
-                }
-                if (s.Contains("uai.playAroundProb"))
-                {
-                    s = "uai.playAroundProb=40";
-                }
-                if (s.Contains("uai.playAroundProb2"))
-                {
-                    s = "uai.playAroundProb2=80";
-                }
-
-                if (s.Contains("uai.secondweight"))
-                {
-                    s = "uai.secondweight=50";
-                }
-                newlines.Add(s);
-                Helpfunctions.Instance.logg("add " +s);
-
-            }
-
-
-            try
-            {
-                string path = SilverFishBotPath.SettingsPath;
-                System.IO.File.WriteAllLines(path + "Settings.ini", newlines.ToArray());
-            }
-            catch
-            {
-                Helpfunctions.Instance.logg("cant write Settings.ini");
-            }
         }
 
         private void HandleWining()
@@ -1133,8 +886,6 @@ namespace HREngine.Bots
             {
                 this.isgoingtoconcede = false;
             }
-            writeSettings();
-            writeTrigger(1);
             int totalwin = this.wins;
             int totallose = this.loses;
             if ((totalwin + totallose - KeepConcede) != 0)
@@ -1153,14 +904,8 @@ namespace HREngine.Bots
             if (is_concede)
             {
                 this.isgoingtoconcede = false;
-                writeTrigger(0);
                 this.KeepConcede++;
             }
-            else
-            {
-                writeTrigger(2);
-            }
-            writeSettings();
             int totalwin = this.wins;
             int totallose = this.loses;
             if ((totalwin + totallose - KeepConcede) != 0)
@@ -1172,22 +917,6 @@ namespace HREngine.Bots
                 Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: infinity!!!! (division by zero :D)");
             }
 
-        }
-
-        private void writeTrigger(int what)
-        {
-            try
-            {
-                string path = SilverFishBotPath.SettingsPath + System.IO.Path.DirectorySeparatorChar + "uaibattletrigger.txt";
-                string w = "concede";
-                if (what == 1) w = "win";
-                if (what == 2) w = "loss";
-                System.IO.File.WriteAllText(path, w);
-            }
-            catch
-            {
-                Helpfunctions.Instance.logg("cant write trigger");
-            }
         }
 
         private Entity getEntityWithNumber(int number)
@@ -1220,7 +949,6 @@ namespace HREngine.Bots
         {            
             return base.FriendHand;
         }
-
 
     }
 
@@ -1330,26 +1058,23 @@ namespace HREngine.Bots
         {
             this.singleLog = Settings.Instance.writeToSingleFile;
             string path = SilverFishBotPath.AssemblyDirectory + "SilverLogs" + System.IO.Path.DirectorySeparatorChar;
-            System.IO.Directory.CreateDirectory(path);
-            Helpfunctions.Instance.logg("init Silverfish");
-            Helpfunctions.Instance.ErrorLog("init Silverfish");
-            Helpfunctions.Instance.ErrorLog("setlogpath to:" + path);
+            Directory.CreateDirectory(path);
             sttngs.setFilePath(SilverFishBotPath.AssemblyDirectory);
 
-            Helpfunctions.Instance.ErrorLog(path);
-            
-            if (!singleLog)
-            {
-                
-                sttngs.setLoggPath(path);
-            }
-            else
+            if (singleLog)
             {
                 sttngs.setLoggPath(SilverFishBotPath.LogPath + System.IO.Path.DirectorySeparatorChar);
                 sttngs.setLoggFile("SilverLog.txt");
                 Helpfunctions.Instance.createNewLoggfile();
             }
+            else
+            {
+                sttngs.setLoggPath(path);
+            }
+            
+            Helpfunctions.Instance.ErrorLog("init Silverfish");
             Helpfunctions.Instance.ErrorLog("setlogpath to:" + path);
+
             PenalityManager.Instance.setCombos();
             Mulligan m = Mulligan.Instance; // read the mulligan list
             Discovery d = Discovery.Instance; // read the discover list
