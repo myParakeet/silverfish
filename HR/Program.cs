@@ -1219,11 +1219,11 @@ namespace HREngine.Bots
                     }
                 }
             }
-
+            /*
             if (p.mana > Ai.Instance.nextMoveGuess.mana && p.ownMaxMana > Ai.Instance.nextMoveGuess.ownMaxMana && Ai.Instance.nextMoveGuess.playactions.Count > 0)
             {
                 Helpfunctions.Instance.logg("You may have roped last turn!");
-            }
+            }*/
 
             Helpfunctions.Instance.ErrorLog("calculating stuff... " + DateTime.Now.ToString("HH:mm:ss.ffff"));
             if (runExtern)
