@@ -1155,7 +1155,7 @@
             // swap minions
             Swap(ref ownMinions, ref enemyMinions);
 
-            diedMinions?.Clear();
+            if (diedMinions != null) diedMinions.Clear();
             Swap(ref owncards, ref EnemyCards);
 
             Swap(ref spellpower, ref enemyspellpower);
@@ -2290,7 +2290,7 @@
 
             if (!attackingHero.frozen && weaponAttack >= 1)
             {
-                ghd += weaponAttack;
+                if (weaponName != CardDB.cardName.foolsbane) ghd += weaponAttack;
                 if ((attackingHero.windfury || weaponName == CardDB.cardName.doomhammer) && weaponDurability > 1) ghd += weaponAttack;
             }
 
@@ -2519,7 +2519,7 @@
                 {
                     case CardDB.cardIDEnum.KAR_004: //cattrick
                         pos = this.ownMinions.Count;
-                        callKid(CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.EX1_017), pos, true, false);
+                        callKid(CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_004a), pos, true, false);
                         continue;
                 }
             }
@@ -2755,7 +2755,7 @@
             this.complete = false;
 
             this.value = int.MinValue;
-            this.diedMinions?.Clear();//contains only the minions that died in this turn!
+            if (this.diedMinions != null) this.diedMinions.Clear();//contains only the minions that died in this turn!
         }
 
         public void endEnemyTurn() //
@@ -4394,7 +4394,7 @@
 
                 for (int i = 0; i < summonstones; i++)
                 {
-                    summoningStone?.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
+                    if (summoningStone != null) summoningStone.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
                 }
 
                 foreach (Minion m in this.enemyMinions)
@@ -4488,7 +4488,7 @@
 
                 for (int i = 0; i < summonstones; i++)
                 {
-                    summoningStone?.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
+                    if (summoningStone.handcard != null) summoningStone.handcard.card.sim_card.onCardIsGoingToBePlayed(this, hc.card, own, summoningStone, target, choice);
                 }
 
                 foreach (Minion m in this.ownMinions)
@@ -5871,7 +5871,7 @@
 
             hero.Angr += c.Attack;
 
-            hero.windfury = (c.name == CardDB.cardName.doomhammer);
+            hero.windfury = (c.name == CardDB.cardName.doomhammer || c.name == CardDB.cardName.foolsbane); // foolsbane has unlimited attacks but use windfury for simplicity unless it becomes a problem
 
             hero.updateReadyness();
 

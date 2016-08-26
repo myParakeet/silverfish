@@ -1,14 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace HREngine.Bots
 {
-    class Sim_BRM_029 : SimTemplate //Rend Blackhand
+    class Sim_KAR_010 : SimTemplate //Nightbane Templar
     {
-        // If you're holding a Dragon, destroy a Legendary minion.
+        // Battlecry: If you're holding a Dragon, summon two 1/1 Whelps.
 
-        //todo sepefeets - move dragon check to shared function in carddb!
+        CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_010a);//Big Bad Wolf
+
         public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
             bool hasdragon = false;
@@ -23,15 +24,11 @@ namespace HREngine.Bots
             {
                 hasdragon = true;
             }
-
             if (hasdragon)
             {
-                if (target != null && target.handcard.card.rarity >= 5) //requires legendary target
-                {
-                    p.minionGetDestroyed(target);
-                }
+                p.callKid(kid, own.zonepos - 1, own.own);
+                p.callKid(kid, own.zonepos - 1, own.own);
             }
         }
-
     }
 }

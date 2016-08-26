@@ -29,21 +29,18 @@ namespace HREngine.Bots
 
         private List<discoveryitem> discoverylist = new List<discoveryitem>();
 
-        private static readonly Discovery instance = new Discovery();
+        private static Discovery instance;
 
-        static Discovery() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
-        
         public static Discovery Instance
         {
             get
             {
+                if (instance == null)
+                {
+                    instance = new Discovery();
+                }
                 return instance;
             }
-        }
-
-        private Discovery()
-        {
-            readCombos();
         }
 
         public void updateInstance()

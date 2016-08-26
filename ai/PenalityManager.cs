@@ -61,15 +61,13 @@
         Dictionary<CardDB.cardName, int> alsoEquipsWeaponDB = new Dictionary<CardDB.cardName, int>(); //cards that aren't weapons but equip one immediately
 
 
-        private static readonly PenalityManager instance = new PenalityManager();
-
-        static PenalityManager() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static PenalityManager instance;
 
         public static PenalityManager Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new PenalityManager());
             }
         }
 
@@ -1537,7 +1535,7 @@
                     return 50;
                 }*/
 
-                if (name == CardDB.cardName.shadowwordpain)
+                if (name == CardDB.cardName.shadowwordpain || name == CardDB.cardName.bookwyrm)
                 {
                     if (this.specialMinions.ContainsKey(m.name) || m.Angr == 3 || m.Hp >= 4)
                     {
@@ -1560,7 +1558,7 @@
                     pen = 30;
                 }
 
-                if ( m.name == CardDB.cardName.doomsayer)
+                if (m.name == CardDB.cardName.doomsayer)
                 {
                     pen = 0;
                 }
@@ -2042,7 +2040,7 @@
                 {
                     if (m.handcard.card.deathrattle || m.ancestralspirit >= 1 || m.souloftheforest >= 1 || m.enemyBlessingOfWisdom >= 1 || m.explorershat >=1) return 0;
                     if (m.handcard.card.Charge && ((m.numAttacksThisTurn == 1 && !m.windfury) || (m.numAttacksThisTurn == 2 && m.windfury))) return 0;
-                    if (m.wounded || m.Angr < m.handcard.card.Attack || (m.silenced && PenalityManager.instance.specialMinions.ContainsKey(m.name))) return 0;
+                    if (m.wounded || m.Angr < m.handcard.card.Attack || (m.silenced && instance.specialMinions.ContainsKey(m.name))) return 0;
 
 
                     bool hasOnMinionDiesMinion = false;
@@ -2905,6 +2903,7 @@
             HealHeroDatabase.Add(CardDB.cardName.refreshmentvendor, 4);
             HealHeroDatabase.Add(CardDB.cardName.cultapothecary, 2);
             HealHeroDatabase.Add(CardDB.cardName.twilightdarkmender, 10);
+            HealHeroDatabase.Add(CardDB.cardName.ivoryknight, 5); //heal = mana cost of discovered spell
 
             HealTargetDatabase.Add(CardDB.cardName.lightofthenaaru, 3);
             HealTargetDatabase.Add(CardDB.cardName.ancestralhealing, 3);
@@ -2922,6 +2921,7 @@
             HealTargetDatabase.Add(CardDB.cardName.flashheal, 5);
             HealTargetDatabase.Add(CardDB.cardName.darkshirealchemist, 5);
             HealTargetDatabase.Add(CardDB.cardName.forbiddenhealing, 2);//heal = 2x mana spent
+            HealTargetDatabase.Add(CardDB.cardName.moongladeportal, 5);
 
             //HealTargetDatabase.Add(CardDB.cardName.divinespirit, 2);
         }
@@ -3208,6 +3208,8 @@
             attackBuffDatabase.Add(CardDB.cardName.powerwordtentacles, 2);
             attackBuffDatabase.Add(CardDB.cardName.primalfusion, 1);
             attackBuffDatabase.Add(CardDB.cardName.silvermoonportal, 2);
+            attackBuffDatabase.Add(CardDB.cardName.zoobot, 1);
+            attackBuffDatabase.Add(CardDB.cardName.menageriemagician, 2);
         }
 
         private void setupHealthBuff()
@@ -3239,6 +3241,8 @@
             healthBuffDatabase.Add(CardDB.cardName.powerwordtentacles, 6);
             healthBuffDatabase.Add(CardDB.cardName.primalfusion, 1);
             healthBuffDatabase.Add(CardDB.cardName.silvermoonportal, 2);
+            healthBuffDatabase.Add(CardDB.cardName.zoobot, 1);
+            healthBuffDatabase.Add(CardDB.cardName.menageriemagician, 2);
 
             tauntBuffDatabase.Add(CardDB.cardName.markofnature, 1);
             tauntBuffDatabase.Add(CardDB.cardName.markofthewild, 1);
@@ -3321,6 +3325,8 @@
             cardDrawBattleCryDatabase.Add(CardDB.cardName.thistletea, 3);
             cardDrawBattleCryDatabase.Add(CardDB.cardName.xarilpoisonedmind, 1);
 
+            cardDrawBattleCryDatabase.Add(CardDB.cardName.babblingbook, 1);
+            cardDrawBattleCryDatabase.Add(CardDB.cardName.thecurator, 1);
 
 
             //add discover minions
@@ -3372,6 +3378,7 @@
             this.destroyDatabase.Add(CardDB.cardName.shatter, 0);
             
             this.destroyDatabase.Add(CardDB.cardName.moatlurker, 0);
+            this.destroyDatabase.Add(CardDB.cardName.bookwyrm, 0);
 
 
             this.backToHandDatabase.Add(CardDB.cardName.sap, 0);
@@ -4181,6 +4188,7 @@
             randomEffects.Add(CardDB.cardName.ironforgeportal, 1);
             randomEffects.Add(CardDB.cardName.netherspitehistorian, 1);
             randomEffects.Add(CardDB.cardName.atiesh, 1);
+            randomEffects.Add(CardDB.cardName.moongladeportal, 1);
         }
 
         private void setupTargetAbilitys()

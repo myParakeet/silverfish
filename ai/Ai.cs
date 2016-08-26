@@ -53,15 +53,13 @@
         public int bestTrackingStatus;//0=optimal, 1= suboptimal 2=random
 
 
-        private static readonly Ai instance = new Ai();
-
-        static Ai() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static Ai instance;
 
         public static Ai Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Ai());
             }
         }
 

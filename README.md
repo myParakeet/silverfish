@@ -1,24 +1,36 @@
-## botmakers Ultimate AI
-This AI is a Custom Class for Hearthcrawler and intends to simulate all possible turn actions and selects it automatically selects the best.
+## Sepefeets's update to botmaker's Silverfish AI
+This AI is a Custom Class for Hearthranger and Hearthbuddy which intends to simulate all possible turn actions and select the best.
 
 Official Threads:
-- http://www.thecrawlerforum.com/index.php/Thread/5871-The-Ultimate-AI (dead)
-- https://www.thebuddyforum.com/hearthbuddy-forum/hearthbuddy-custom-decks/207520-hearthbuddys-deck-aka-silverfish-ai-aka-ultimate-ai.html
-- http://www.hearthranger.com/forum/yaf_postst4707_silverfish-update.aspx
+- http://www.hearthranger.com/forum/yaf_postst7352_Sepefeets-Silverfish-update--WotOG.aspx
+- https://www.thebuddyforum.com/hearthbuddy-forum/community-developer-forum/249423-sepefeets-silverfish-update-wotog.html
 
 build instructions:
-if your are using HR:
-- copy the Programm.cs and the ai + cards folder in one folder, create a project out of it
-- include HSRangerLib.dll from HR
-- build it, and copy in the bin\Debug or Release-folder the _cardDB.txt file
+- If you plan to do any significant work I recommend using linkshellextension to create junctions instead of actual copies of the "ai" + "cards" + "Penalties"
 
-Hrtbuddy:
-- same like HR, only take the silverfish_HB.cs instead of Programm.cs
-- there might be some builderrors i cant fix (dont own HB) if you know how to fix, let me know
+Hearthranger:
+- copy the "ai" + "cards" + "Penalties" folders to the "HR" folder, then create a project out of everything in the "HR" folder
+- add a reference to HSRangerLib.dll from HR
+- go to Project -> Properties -> Build -> Advanced and set language version to C# 5.0 for HB compatibility
+- build it as Release x86, and copy the _cardDB.txt file to the bin\Release folder
+- build Silver.exe too
+
+Hearthbuddy:
+- copy the "ai" + "cards" + "Penalties" folders to the "HrtBddy" folder, then create a project out of everything in the "HrtBddy" folder
+- add references for Hearthbuddy.exe and all the DLL's that come with it
+- go to Project -> Properties -> Build -> Advanced and set language version to C# 5.0 for HB compatibility
+- build it however you want just to test that it does build but HB uses the source files not a binary
+- there might be some errors I can't fix (I don't own HB), if you know how to fix it then let me know or submit a PR
+- build Silver.exe too
+
+Silver.exe:
+- copy the "ai" + "cards" + "Penalties" folders to the "external process" folder, then create a project out of everything in the "external process"
+- go to Project -> Properties -> Build -> Advanced and set language version to C# 5.0 for HB compatibility
+- build it as Release x86 for performance or Debug x86 for debugging, and copy the _cardDB.txt file to the bin\Release and bin\Debug folders
 
 
 How to simulate boards with silver.exe:
-- create test.txt file in same folder as silver.exe
+- create a "test.txt" file in the same folder as silver.exe
 - copy your current board, like
 ```
 #######################################################################
@@ -53,7 +65,7 @@ enemyDiedMinions:
 og: 169,2;1152,1;248,2;246,2;251,1;557,2;1150,2;209,2;430,2;642,1;372,1;1010,2;371,1;701,2;
 eg: 995,1;708,1;429,2;740,2;495,1;514,1;648,2;333,1;241,2;516,2;1218,1;188,2;749,2;
 ```
-it will then calculate this board and prints the first 100 best boards (sorted from best to worst) and simulate
+it will then calculate this board and print the first 100 best boards (sorted from best to worst) and simulate
 the whole turn of the best one.
 
 if you add "test" to the first line:

@@ -60,15 +60,13 @@
         Helpfunctions help;
         CardDB cdb = CardDB.Instance;
 
-        private static readonly Handmanager instance = new Handmanager();
-
-        static Handmanager() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static Handmanager instance;
 
         public static Handmanager Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Handmanager());
             }
         }
 

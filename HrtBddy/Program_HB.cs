@@ -57,7 +57,7 @@ namespace HREngine.Bots
 
     public sealed class Silverfish
     {
-        public string versionnumber = "123.1SE";
+        public string versionnumber = "123.2SE";
         private bool singleLog = false;
         private string botbehave = "rush";
         public bool waitingForSilver = false;
@@ -141,16 +141,14 @@ namespace HREngine.Bots
         //LOE stuff###############################################################################################################
         List<CardDB.cardIDEnum> choiceCards = new List<CardDB.cardIDEnum>(); // here we save all available tracking/discover cards ordered from left to right
         public List<int> choiceCardsEntitys = new List<int>(); //list of entitys same order as choiceCards
-
-        private static readonly Silverfish instance = new Silverfish();
-
-        static Silverfish() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        
+        private static Silverfish instance;
 
         public static Silverfish Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Silverfish());
             }
         }
 

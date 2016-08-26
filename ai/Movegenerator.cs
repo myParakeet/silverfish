@@ -7,19 +7,17 @@
     {
         PenalityManager pen = PenalityManager.Instance;
 
-        private static readonly Movegenerator instance = new Movegenerator();
-
-        static Movegenerator() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
-
-        private Movegenerator() { }
+        private static Movegenerator instance;
 
         public static Movegenerator Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Movegenerator());
             }
         }
+
+        private Movegenerator() { }
 
 
         public List<Action> doAllChoices(Playfield p, Handmanager.Handcard hcc, bool lethalcheck, bool usePenalityManager, int tracing = 0)
@@ -564,6 +562,7 @@
 
                 foreach (Minion trgt in trgts)
                 {
+                    if (p.ownWeaponName == CardDB.cardName.foolsbane && trgt.isHero) continue; //this weapon cant attack heros!
                     int heroAttackPen = 0;
                     if (usePenalityManager)
                     {
@@ -794,6 +793,7 @@
 
                 foreach (Minion trgt in trgts)
                 {
+                    if (p.enemyWeaponName == CardDB.cardName.foolsbane && trgt.isHero) continue; //this weapon cant attack heros!
                     //pf.attackWithWeapon(trgt.target, trgt.targetEntity, heroAttackPen);
                     Action a = new Action(actionEnum.attackWithHero, null, p.enemyHero, 0, trgt, 0, 0);
                     ret.Add(a);

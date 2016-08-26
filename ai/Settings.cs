@@ -147,22 +147,19 @@ namespace HREngine.Bots
 
         public Behavior behave = new BehaviorControl();
 
-        private static readonly Settings instance = new Settings();
 
-        static Settings() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static Settings instance;
 
         public static Settings Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Settings());
             }
         }
 
-        private Settings()
-        {
-            
-        }
+        private Settings() { }
+
         
         public Behavior updateInstance()
         {

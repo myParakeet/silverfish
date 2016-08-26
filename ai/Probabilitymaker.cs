@@ -349,19 +349,19 @@
         public bool feugenDead;
         public bool stalaggDead;
 
-        private static readonly Probabilitymaker instance = new Probabilitymaker();
 
-        static Probabilitymaker() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
-
-        private Probabilitymaker() { }
+        private static Probabilitymaker instance;
 
         public static Probabilitymaker Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Probabilitymaker());
             }
         }
+
+        private Probabilitymaker() { }
+
 
         public void setOwnCards(List<CardDB.cardIDEnum> list)
         {

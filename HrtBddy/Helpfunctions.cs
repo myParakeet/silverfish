@@ -34,16 +34,12 @@ namespace HREngine.Bots
 
         public bool runningbot = false;
 
-        private static readonly Helpfunctions instance = new Helpfunctions();
 
-        static Helpfunctions() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static Helpfunctions instance;
 
         public static Helpfunctions Instance
         {
-            get
-            {
-                return instance;
-            }
+            get { return instance ?? (instance = new Helpfunctions()); }
         }
 
         private Helpfunctions()

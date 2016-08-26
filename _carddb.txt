@@ -23288,7 +23288,7 @@
     <Tag enumID="203" type="" value="1" />
     <Tag enumID="202" type="" value="4" />
     <Tag enumID="48" type="" value="6" />
-    <Tag enumID="184" type="String">Battlecry: Choose a friendly Beast. Summon a_copy of it.</Tag>
+    <Tag enumID="184" type="String">Battlecry: Choose a friendly Beast. Summon a copy of it.</Tag>
     <Tag enumID="199" type="" value="2" />
     <Tag enumID="47" type="" value="5" />
     <Tag enumID="45" type="" value="5" />

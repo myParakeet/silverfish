@@ -91,6 +91,8 @@ namespace HREngine.Bots
                 sw.WriteLine(e.ExceptionObject.ToString());
             }
             Console.WriteLine(e.ExceptionObject.ToString());
+            Console.WriteLine("");
+            Console.WriteLine("");
             Console.WriteLine("Please report this crash including the CrashLog in your Silverfish\\SilverLogs folder");
             Console.WriteLine("If no CrashLog exists then please post a screenshot instead");
             Console.WriteLine("Press Enter to exit");
@@ -121,6 +123,12 @@ namespace HREngine.Bots
                 Playfield p = new Playfield();
                 Ai.Instance.autoTester(printstuff);
             }
+
+            if (System.IO.File.Exists(SilverFishBotPath.AssemblyDirectory + "crashtest.txt"))
+            {
+                testing(1);
+            }
+
             Helpfunctions.Instance.ErrorLog("wait for board...");
         }
 
@@ -175,18 +183,85 @@ namespace HREngine.Bots
         
         public void testing(int start)
         {
-            for (int i = start; i < sizeof(CardDB.cardIDEnum); i++)
+            int cardenumcount = Enum.GetNames(typeof(CardDB.cardIDEnum)).Length;
+            Random rand = new Random();
+            int randcard = 1;
+
+            for (int i = start; i < cardenumcount; i++)
             {
                 Handmanager.Instance.anzcards = 1;
                 Handmanager.Instance.handCards.Clear();
-                Handmanager.Handcard hc = new Handmanager.Handcard
+
+                Handmanager.Handcard hc = new Handmanager.Handcard //the current card to test
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 121,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)i)
+                };
+                Handmanager.Instance.handCards.Add(hc);
+                
+                randcard = rand.Next(1, cardenumcount);
+                Handmanager.Handcard hc2 = new Handmanager.Handcard //extra random card to test
                 {
                     manacost = 1,
                     position = 1,
                     entity = 122,
-                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum) i)
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)randcard)
                 };
-                Handmanager.Instance.handCards.Add(hc);
+                Handmanager.Instance.handCards.Add(hc2);
+
+                randcard = rand.Next(1, cardenumcount);
+                Handmanager.Handcard hc3 = new Handmanager.Handcard //extra random card to test
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 123,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)randcard)
+                };
+                Handmanager.Instance.handCards.Add(hc3);
+
+                randcard = rand.Next(1, cardenumcount);
+                Handmanager.Handcard hc4 = new Handmanager.Handcard //extra random card to test
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 124,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)randcard)
+                };
+                Handmanager.Instance.handCards.Add(hc4);
+
+                randcard = rand.Next(1, cardenumcount);
+                Handmanager.Handcard hc5 = new Handmanager.Handcard //extra random card to test
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 125,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)randcard)
+                };
+                Handmanager.Instance.handCards.Add(hc5);
+
+                randcard = rand.Next(1, cardenumcount);
+                Handmanager.Handcard hc6 = new Handmanager.Handcard //extra random card to test
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 126,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)randcard)
+                };
+                Handmanager.Instance.handCards.Add(hc6);
+
+                randcard = rand.Next(1, cardenumcount);
+                Handmanager.Handcard hc7 = new Handmanager.Handcard //extra random card to test
+                {
+                    manacost = 1,
+                    position = 1,
+                    entity = 127,
+                    card = CardDB.Instance.getCardDataFromID((CardDB.cardIDEnum)randcard)
+                };
+                Handmanager.Instance.handCards.Add(hc7);
+
+
                 Helpfunctions.Instance.ErrorLog("test " + i + " " + hc.card.name + " " + hc.card.cardIDenum);
                 if (hc.card.sim_card == null)
                 {
@@ -202,7 +277,7 @@ namespace HREngine.Bots
 
     public sealed class Silverfish
     {
-        public string versionnumber = "123.1SE";
+        public string versionnumber = "123.2SE";
         private bool singleLog;
 
         Settings sttngs = Settings.Instance;
@@ -219,15 +294,13 @@ namespace HREngine.Bots
         private int anzOgOwnCThunAngrBonus = 0;
         private int anzOgOwnCThunTaunt = 0;
 
-        private static readonly Silverfish instance = new Silverfish();
-
-        static Silverfish() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static Silverfish instance;
 
         public static Silverfish Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Silverfish());
             }
         }
 
@@ -390,15 +463,13 @@ namespace HREngine.Bots
 
     public sealed class Helpfunctions
     {
-        private static readonly Helpfunctions instance = new Helpfunctions();
-
-        static Helpfunctions() { } // Explicit static constructor to tell C# compiler not to mark type as beforefieldinit
+        private static Helpfunctions instance;
 
         public static Helpfunctions Instance
         {
             get
             {
-                return instance;
+                return instance ?? (instance = new Helpfunctions());
             }
         }
 
