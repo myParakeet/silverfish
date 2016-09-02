@@ -121,29 +121,7 @@ namespace HREngine.Bots
             
             if (set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
             {
-                System.Diagnostics.Process[] pname = System.Diagnostics.Process.GetProcessesByName("Silver");
-                string directory = Settings.Instance.path + "Silver.exe";
-                bool hasToOpen = true;
-                
-                if (pname.Length >= 1)
-                {
-                    
-                    for (int i = 0; i < pname.Length; i++)
-                    {
-                        
-                        string fullPath = pname[i].Modules[0].FileName;
-                        if (fullPath == directory) hasToOpen = false;
-                    }
-                }
-
-                if (hasToOpen)
-                {
-                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(directory);
-                    startInfo.WorkingDirectory = Settings.Instance.path;
-                    System.Diagnostics.Process.Start(startInfo);
-                }
-
-                Thread.Sleep(1000);
+                Task.Run(() => startExeAsync());
             }
 
 
@@ -156,6 +134,33 @@ namespace HREngine.Bots
 
             this.doMultipleThingsAtATime = false; // for easier debugging+bug fixing in the first weeks after update
             //will be false until xytrix fixes it (@xytrix end the action list, after playing a tracking/discover card)
+        }
+
+        private void startExeAsync()
+        {
+            System.Diagnostics.Process[] pname = System.Diagnostics.Process.GetProcessesByName("Silver");
+            string directory = Settings.Instance.path + "Silver.exe";
+            bool hasToOpen = true;
+
+            if (pname.Length >= 1)
+            {
+
+                for (int i = 0; i < pname.Length; i++)
+                {
+
+                    string fullPath = pname[i].Modules[0].FileName;
+                    if (fullPath == directory) hasToOpen = false;
+                }
+            }
+
+            if (hasToOpen)
+            {
+                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(directory);
+                startInfo.WorkingDirectory = Settings.Instance.path;
+                System.Diagnostics.Process.Start(startInfo);
+            }
+
+            Thread.Sleep(1000);
         }
 
         /// <summary>
