@@ -897,8 +897,9 @@ namespace HREngine.Bots
             }
             else
             {
-                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: infinity!!!! (division by zero :D)");
-            }            
+                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: 100");
+            }
+            Helpfunctions.Instance.logg("Match Won!");
         }
 
         private void HandleLosing(bool is_concede)
@@ -917,8 +918,9 @@ namespace HREngine.Bots
             }
             else
             {
-                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: infinity!!!! (division by zero :D)");
+                Helpfunctions.Instance.ErrorLog("#info: win:" + totalwin + " concede:" + KeepConcede + " lose:" + (totallose - KeepConcede) + " real winrate: 100");
             }
+            Helpfunctions.Instance.logg("Match Lost :(");
 
         }
 
