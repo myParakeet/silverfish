@@ -101,7 +101,7 @@
                     List<Minion> trgts = posmoves[0].enemyHeroAblility.card.getTargetsForCardEnemy(posmoves[0]);
                     foreach (Minion trgt in trgts)
                     {
-                        if (trgt.isHero) continue;//do play his ability in basics
+                        //if (trgt.isHero) continue;//do play his ability in basics
                         Action a = new Action(actionEnum.useHeroPower, posmoves[0].enemyHeroAblility, null, 0, trgt, abilityPenality, 0);
                         Playfield pf = new Playfield(posmoves[0]);
                         pf.doAction(a);
