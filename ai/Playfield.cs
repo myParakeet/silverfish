@@ -4642,10 +4642,7 @@
                 foreach (Minion m in this.ownMinions)
                 {
                     if (m.silenced) continue;
-//                    if (m.name == CardDB.cardName.knifejuggler)
-//                    {
-                        m.handcard.card.sim_card.onMinionWasSummoned(this, m, mnn);
-//                    }
+                    m.handcard.card.sim_card.onMinionWasSummoned(this, m, mnn);
 
                     if (m.handcard.card.name == CardDB.cardName.eeriestatue)
                     {
@@ -4659,10 +4656,7 @@
                 foreach (Minion m in this.enemyMinions)
                 {
                     if (m.silenced) continue;
-//                    if (m.name == CardDB.cardName.knifejuggler)
-//                    {
-                        m.handcard.card.sim_card.onMinionWasSummoned(this, m, mnn);
-//                    }
+                    m.handcard.card.sim_card.onMinionWasSummoned(this, m, mnn);
 
                     if (m.handcard.card.name == CardDB.cardName.eeriestatue)
                     {
@@ -6813,20 +6807,15 @@
 
             foreach (Minion m in this.ownMinions)
             {
-                String attrib = "";
-                if (m.taunt) attrib += " tnt";
-                if (m.Ready) attrib += " Ready";
-                if (m.stealth) attrib += " stlth";
-                Helpfunctions.Instance.logg("name,ang, hp: " + m.name + ", " + m.Angr + ", " + m.Hp + " " + m.entityID + attrib);
+                String attrib = this.getMinionString(m);
+                Helpfunctions.Instance.logg(attrib);
             }
 
             Helpfunctions.Instance.logg("ENEMY MINIONS############");
             foreach (Minion m in this.enemyMinions)
             {
-                String attrib = "";
-                if (m.taunt) attrib += " tnt";
-                if (m.stealth) attrib += " stlth";
-                Helpfunctions.Instance.logg("name,ang, hp: " + m.name + ", " + m.Angr + ", " + m.Hp + " " + m.entityID + attrib);
+                String attrib = this.getMinionString(m);
+                Helpfunctions.Instance.logg(attrib);
             }
 
 
