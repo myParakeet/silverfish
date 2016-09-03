@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -106,37 +107,12 @@ namespace HREngine.Bots
             if (HREngine.Bots.Settings.Instance.useExternalProcess) Helpfunctions.Instance.ErrorLog("YOU USE SILVER.EXE FOR CALCULATION, MAKE SURE YOU STARTED IT!");
             if (HREngine.Bots.Settings.Instance.useExternalProcess) Helpfunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + HREngine.Bots.Settings.Instance.path);
             
-            try{
-
-            if (HREngine.Bots.Settings.Instance.useExternalProcess)
+            try
             {
-                System.Diagnostics.Process[] pname = System.Diagnostics.Process.GetProcessesByName("Silver");
-                string directory = HREngine.Bots.Settings.Instance.path + "Silver.exe";
-                directory = Path.GetFullPath(directory);
-                Helpfunctions.Instance.ErrorLog("searching silver.exe in " + directory);
-
-                bool hasToOpen = true;
-                
-                if (pname.Length >= 1)
+                if (set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
                 {
-                    
-                    for (int i = 0; i < pname.Length; i++)
-                    {
-                        
-                        string fullPath = pname[i].Modules[0].FileName;
-                        if (fullPath == directory) hasToOpen = false;
-                    }
+                    Task.Run(() => startExeAsync());
                 }
-
-                if (hasToOpen)
-                {
-                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(directory);
-                    startInfo.WorkingDirectory = HREngine.Bots.Settings.Instance.path;
-                    System.Diagnostics.Process.Start(startInfo);
-                }
-
-                System.Threading.Thread.Sleep(500);
-            }
             }
             catch (Exception e)
             {
@@ -154,51 +130,6 @@ namespace HREngine.Bots
 
             Silverfish.Instance.setnewLoggFile();
             
-           
-            /*Helpfunctions.Instance.ErrorLog("set enemy-face-hp to: " + enfacehp);
-            ComboBreaker.Instance.attackFaceHP = enfacehp;
-
-            Ai.Instance.setMaxWide(mxwde);
-            Helpfunctions.Instance.ErrorLog("set maxwide to: " + mxwde);
-
-            Ai.Instance.setTwoTurnSimulation(false, twotsamount);
-            Helpfunctions.Instance.ErrorLog("calculate the second turn of the " + twotsamount + " best boards");
-            if (twotsamount >= 1)
-            {
-                //Ai.Instance.nextTurnSimulator.setEnemyTurnsim(enemySecondTurnSim);
-                HREngine.Bots.Settings.Instance.simEnemySecondTurn = enemySecondTurnSim;
-                if (enemySecondTurnSim) Helpfunctions.Instance.ErrorLog("simulates the enemy turn on your second turn");
-            }
-
-            if (secrets)
-            {
-
-                HREngine.Bots.Settings.Instance.useSecretsPlayArround = secrets;
-                Helpfunctions.Instance.ErrorLog("playing arround secrets is " + secrets);
-            }
-
-
-            if (playaround)
-            {
-                HREngine.Bots.Settings.Instance.playarround = playaround;
-                HREngine.Bots.Settings.Instance.playaroundprob = playaroundprob;
-                HREngine.Bots.Settings.Instance.playaroundprob2 = playaroundprob2;
-                Ai.Instance.setPlayAround();
-                Helpfunctions.Instance.ErrorLog("activated playaround");
-            }
-
-            HREngine.Bots.Settings.Instance.setWeights(alpha);
-             
-            HREngine.Bots.Settings.Instance.enemyTurnMaxWide = amountBoardsInEnemyTurnSim;
-            HREngine.Bots.Settings.Instance.enemySecondTurnMaxWide = amountBoardsInEnemySecondTurnSim;
-
-            HREngine.Bots.Settings.Instance.nextTurnDeep = nextturnsimDeep;
-            HREngine.Bots.Settings.Instance.nextTurnMaxWide = nextturnsimMaxWidth;
-            HREngine.Bots.Settings.Instance.nextTurnTotalBoards = nexttunsimMaxBoards;
-            //HREngine.Bots.Settings.Instance.ImprovedCalculations = ImprovedCalculations;
-             
-             */
-
 
             bool teststuff = false;
             // set to true, to run a testfile (requires test.txt file in filder where _cardDB.txt file is located)
@@ -214,6 +145,36 @@ namespace HREngine.Bots
             {
                 Ai.Instance.autoTester(printstuff);
             }
+        }
+
+        private void startExeAsync()
+        {
+            System.Diagnostics.Process[] pname = System.Diagnostics.Process.GetProcessesByName("Silver");
+            string directory = HREngine.Bots.Settings.Instance.path + "Silver.exe";
+            directory = Path.GetFullPath(directory);
+            Helpfunctions.Instance.ErrorLog("searching silver.exe in " + directory);
+
+            bool hasToOpen = true;
+
+            if (pname.Length >= 1)
+            {
+
+                for (int i = 0; i < pname.Length; i++)
+                {
+
+                    string fullPath = pname[i].Modules[0].FileName;
+                    if (fullPath == directory) hasToOpen = false;
+                }
+            }
+
+            if (hasToOpen)
+            {
+                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo(directory);
+                startInfo.WorkingDirectory = HREngine.Bots.Settings.Instance.path;
+                System.Diagnostics.Process.Start(startInfo);
+            }
+
+            Thread.Sleep(1000);
         }
 
         #region Scripting
