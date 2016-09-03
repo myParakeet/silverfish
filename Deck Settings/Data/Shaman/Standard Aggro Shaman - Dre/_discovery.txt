@@ -1,11 +1,12 @@
-// This File: _discover.txt
+// This File: _discovery.txt
 //    Author: Dre
-//   Version: 0.5 (23-Jun-16)
+//   Version: 0.6 (22-Aug-16)
 // Deck Name: Aggro-Shaman
 //      Hero: Shaman
 // Deck Type: Face 
 
 //Sir Finley hero powers
+
 //Steady Shot
 DS1h_292,9;all;all
 //Life Tap
