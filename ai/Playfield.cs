@@ -1,4 +1,6 @@
-﻿namespace HREngine.Bots
+﻿using System.ComponentModel;
+
+namespace HREngine.Bots
 {
     using System;
     using System.Collections.Generic;
@@ -1906,7 +1908,7 @@
 
         }
 
-        public int getBestPlace(CardDB.Card card, bool lethal)
+        public int getBestPlace(CardDB.Card card, bool lethal) //todo sepefeets - this function really sucks!!! consider total rewrite.
         {
             //we return the zonepos!
             if (card.type != CardDB.cardtype.MOB) return 1;
@@ -1985,6 +1987,7 @@
                     if (m.handcard.card.name == CardDB.cardName.pintsizedsummoner) tempval += 10;
                     if (m.handcard.card.name == CardDB.cardName.summoningportal) tempval += 10;
                     if (m.handcard.card.name == CardDB.cardName.scavenginghyena) tempval += 10;
+                    //if (PenalityManager.Instance.priorityTargets.ContainsKey(m.handcard.card.name)) tempval += 10*PenalityManager.Instance.priorityTargets[m.handcard.card.name];
 
                     places[i] = tempval;
 
@@ -2151,6 +2154,7 @@
             if (card.name == CardDB.cardName.summoningportal) cardvalue += 10;
             if (card.name == CardDB.cardName.scavenginghyena) cardvalue += 10;
             if (card.name == CardDB.cardName.faeriedragon) cardvalue += 40;
+            //if (card.name == CardDB.cardName.impgangboss) cardvalue += 40;
             cardvalue += 1;
 
             i = 0;
@@ -2180,6 +2184,7 @@
                     if (m.handcard.card.name == CardDB.cardName.summoningportal) tempval += 10;
                     if (m.handcard.card.name == CardDB.cardName.scavenginghyena) tempval += 10;
                     if (m.handcard.card.name == CardDB.cardName.faeriedragon) tempval += 40;
+                    //if (m.handcard.card.name == CardDB.cardName.impgangboss) tempval += 40;
                     if (m.stealth) tempval += 40;
                 }
                 places[i] = tempval;
