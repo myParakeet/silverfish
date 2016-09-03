@@ -1,4 +1,6 @@
-﻿namespace HREngine.Bots
+﻿using System.Security.Policy;
+
+namespace HREngine.Bots
 {
     using System;
     using System.Collections.Generic;
@@ -438,6 +440,7 @@
                                 break;
                             }
                         }
+                        if (p.playactions.Find(a => a.actionType == actionEnum.attackWithMinion) != null) hasownready = true; //we HAD something ready but already attacked with it so penalize it still
                     }
                 }
 
@@ -1855,17 +1858,19 @@
             if (p.ownMaxMana == 1)
             {
                 if (card.name == CardDB.cardName.shrinkmeister) return 20; //don't play early
-                if (card.Attack >= 3 && card.Health >= 4) return -20;
-                if (card.Attack >= 3 && card.Health >= 3) return -10;
-                if (card.Attack >= 3 && card.Health >= 2) return -5;
-                if (card.Health > 0) p.evaluatePenality += -2; //-card.Attack - card.Health; //nudge any minion playable
+
+                if (card.Attack >= 3 && card.Health >= 4) p.evaluatePenality += -20; //changing p.evaluatePenality directly here is messy but we need to check other penalties
+                else if (card.Attack >= 3 && card.Health >= 3) p.evaluatePenality += -10;
+                else if (card.Attack >= 3 && card.Health >= 2) p.evaluatePenality += -5;
+                else if (card.Health > 0) p.evaluatePenality += -2; //-card.Attack - card.Health; //nudge any minion playable
 
             }
 
-            if (p.ownMaxMana == 2 || (p.mana == 2 && p.ownMaxMana == 1)) //todo sepefeets - does coin raise ownMaxMana?
+            if (p.mana <= 2 && p.ownMaxMana <= 2)
             {
                 if (card.name == CardDB.cardName.nerubianegg) return -2;
                 if (card.name == CardDB.cardName.wildgrowth) return -150; //bonus for turn 1 coin+growth or turn 2 growth but not innervate+growth
+                if (card.name == CardDB.cardName.sirfinleymrrgglton) return 5; //don't play early over other options
             }
 
             /*if (card.name == CardDB.cardName.flamewaker && p.turnCounter == 0)
@@ -2523,7 +2528,10 @@
                 if (ready == 0) return 10;
                 if (ready == 1) return 5;
             }
-/*            if (name == CardDB.cardName.abusivesergeant)  //penalty handled by buffing1TurnDatabase
+
+
+/*
+            if (name == CardDB.cardName.abusivesergeant)  //penalty handled by buffing1TurnDatabase
             {
                 int ready = 0;
                 foreach (Minion min in p.ownMinions)
