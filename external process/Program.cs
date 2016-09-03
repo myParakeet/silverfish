@@ -277,7 +277,7 @@ namespace HREngine.Bots
 
     public sealed class Silverfish
     {
-        public string versionnumber = "123.2SE";
+        public string versionnumber = "123.3SE";
         private bool singleLog;
 
         Settings sttngs = Settings.Instance;
