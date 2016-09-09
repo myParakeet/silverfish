@@ -3833,7 +3833,7 @@ namespace HREngine.Bots
                     continue;
                 }
 
-                if (m.name == CardDB.cardName.frothingberserker)
+                if (m.name == CardDB.cardName.frothingberserker && (tempTrigger.ownMinionsGotDmg + tempTrigger.enemyMinionsGotDmg) > 1)
                 {
                     this.minionGetBuffed(m, this.tempTrigger.ownMinionsGotDmg + this.tempTrigger.enemyMinionsGotDmg, 0);
                 }
@@ -3939,7 +3939,7 @@ namespace HREngine.Bots
                     continue;
                 }
 
-                if (m.name == CardDB.cardName.frothingberserker)
+                if (m.name == CardDB.cardName.frothingberserker && (tempTrigger.ownMinionsGotDmg + tempTrigger.enemyMinionsGotDmg) > 1)
                 {
                     this.minionGetBuffed(m, this.tempTrigger.ownMinionsGotDmg + this.tempTrigger.enemyMinionsGotDmg, 0);
                 }
