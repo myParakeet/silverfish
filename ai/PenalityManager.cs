@@ -2568,7 +2568,7 @@ namespace HREngine.Bots
 
                     if (hc.card.name == CardDB.cardName.secretkeeper && p.mana >= card.cost)
                     {
-                        pen += 5;
+                        pen = 500;
                     }
                 }
 
@@ -2580,7 +2580,7 @@ namespace HREngine.Bots
                         smallAngr++;
                     }
                 }
-                if (smallAngr > 0) pen += 100; //not 500 because we might need to protect ourself from lethal
+                if (smallAngr > 0) pen += 50; //not 500 because we might need to protect ourself from lethal
             }
 
             return pen;
