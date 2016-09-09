@@ -548,15 +548,17 @@ namespace HREngine.Bots
                     }*/
 
                     //better test... we checked if isprocessing is true.. after that, we wait little time and test it again.
-                    if (this.gameState.IsProcessingPowers)
+                    if (this.gameState.IsProcessingPowers || this.gameState.IsBlockingServer)
                     {
                         Helpfunctions.Instance.logg("HR is too fast...");
                         Helpfunctions.Instance.ErrorLog("HR is too fast...");
+                        if (this.gameState.IsProcessingPowers) Helpfunctions.Instance.logg("IsProcessingPowers");
+                        if (this.gameState.IsBlockingServer) Helpfunctions.Instance.logg("IsBlockingServer");
 
                         bool ispropow = true;
                         while (ispropow == true)
                         {
-                            if (!this.gameState.IsProcessingPowers)
+                            if (!this.gameState.IsProcessingPowers && !this.gameState.IsBlockingServer)
                             {
                                 ispropow = false;
                             }
@@ -569,13 +571,13 @@ namespace HREngine.Bots
 
                     System.Threading.Thread.Sleep(100);
 
-                    if (this.gameState.IsProcessingPowers)
+                    if (this.gameState.IsProcessingPowers || this.gameState.IsBlockingServer)
                     {
 
                         bool ispropow = true;
                         while (ispropow == true)
                         {
-                            if (!this.gameState.IsProcessingPowers)
+                            if (!this.gameState.IsProcessingPowers && !this.gameState.IsBlockingServer)
                             {
                                 ispropow = false;
                             }
