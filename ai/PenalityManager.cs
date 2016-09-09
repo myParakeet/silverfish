@@ -120,11 +120,12 @@ namespace HREngine.Bots
 
             }
 
-            if (!lethal && target.isHero && !target.own && m.tempAttack >= 3
-                && p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == m.entityID) != null)
+            bool rockbiterMinion = p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == m.entityID) != null;
+            if (!lethal && target.isHero && !target.own && rockbiterMinion)
             {
                 pen += 50;
             }
+            if (!target.isHero && !target.own && rockbiterMinion) pen += -5; //to counter hero not waste rockbiter bonus
 
             if (!m.silenced && (m.name == CardDB.cardName.acolyteofpain || ((m.name == CardDB.cardName.loothoarder || m.name == CardDB.cardName.bloodmagethalnos) && !target.isHero && target.Angr >= m.Hp)))
             {
@@ -163,7 +164,7 @@ namespace HREngine.Bots
                 if (p.ownHero.tempAttack >= 1) totalAngr += p.ownHero.tempAttack;
                 if (totalAngr < target.Hp) return 500;
             }*/
-
+            
             return pen;
         }
 
@@ -378,7 +379,7 @@ namespace HREngine.Bots
                 if (p.playactions.Find(a => a.actionType == actionEnum.attackWithHero) != null) return 500;
                 if (!target.Ready && !target.isHero) return 500;
                 if (!target.isHero && p.ownHero.windfury) return 30;
-                return (target.windfury) ? 5 : 10;
+                return (target.windfury) ? 10 : 15;
             }
 
             if (!target.isHero && !target.own)
