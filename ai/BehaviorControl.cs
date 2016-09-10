@@ -11,9 +11,9 @@
             
             if (p.value >= -2000000) return p.value;
             int retval = 0;
-            int hpboarder = 10;
+            int hpboarder = 12;
             if (p.ownHeroName == HeroEnum.warlock && p.enemyHeroName != HeroEnum.mage) hpboarder = 6;
-            int aggroboarder = 11;
+            int aggroboarder = 13;
             retval -= p.evaluatePenality;
             retval += p.owncards.Count * 5;
 
