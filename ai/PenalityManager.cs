@@ -2799,6 +2799,8 @@ namespace HREngine.Bots
                     return 6;
                 case CardDB.cardName.reliquaryseeker:
                     return (p.ownMinions.Count == 6) ? 0 : 5;
+                case CardDB.cardName.silverwaregolem:
+                    return 10;
                 default:
                     return 0;
             }

@@ -7115,7 +7115,7 @@ namespace HREngine.Bots
                     {
                         this.owncarddraw -= 1;
                         Handmanager.Handcard removedCard = this.owncards[0];
-                        if (removedCard.card.cardIDenum == CardDB.cardIDEnum.AT_022)
+                        if (removedCard.card.cardIDenum == CardDB.cardIDEnum.AT_022 || removedCard.card.cardIDenum == CardDB.cardIDEnum.KAR_205)
                         {
                             removedCard.card.sim_card.onCardIsDiscarded(this, removedCard.card, true);
                         }
