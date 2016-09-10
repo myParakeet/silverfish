@@ -2801,6 +2801,8 @@ namespace HREngine.Bots
                     return (p.ownMinions.Count == 6) ? 0 : 5;
                 case CardDB.cardName.silverwaregolem:
                     return 10;
+                case CardDB.cardName.malchezaarsimp:
+                    return 5;
                 default:
                     return 0;
             }
