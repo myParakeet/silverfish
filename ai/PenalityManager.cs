@@ -1034,7 +1034,7 @@ namespace HREngine.Bots
             if (name == CardDB.cardName.wrath && choice != 2) return 0;
             if (name == CardDB.cardName.nourish && choice != 2) return 0;
             if (name == CardDB.cardName.grovetender && choice != 2) return 0;
-            if (name == CardDB.cardName.quickshot && p.owncards.Count != 1) return 0;
+            if (name == CardDB.cardName.quickshot && p.owncards.Count != 0) return 0;
 
             int carddraw = cardDrawBattleCryDatabase[name];
             if (name == CardDB.cardName.harrisonjones)
