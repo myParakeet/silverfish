@@ -1034,7 +1034,7 @@ namespace HREngine.Bots
             if (name == CardDB.cardName.wrath && choice != 2) return 0;
             if (name == CardDB.cardName.nourish && choice != 2) return 0;
             if (name == CardDB.cardName.grovetender && choice != 2) return 0;
-            if (name == CardDB.cardName.quickshot && p.owncards.Count != 0) return 0;
+            if (name == CardDB.cardName.quickshot && p.owncards.Count != 1) return 0;
 
             int carddraw = cardDrawBattleCryDatabase[name];
             if (name == CardDB.cardName.harrisonjones)
@@ -1112,6 +1112,7 @@ namespace HREngine.Bots
             if (p.owncards.Count + p.cardsPlayedThisTurn > 7) return (5 * carddraw) + 1;
             
             if (name == CardDB.cardName.battlerage) return -carddraw - p.optionsPlayedThisTurn + p.ownMaxMana - p.mana;
+            if (name == CardDB.cardName.quickshot) return -carddraw - p.cardsPlayedThisTurn + p.optionsPlayedThisTurn;
 
             return -carddraw + 2 * p.optionsPlayedThisTurn + p.ownMaxMana - p.mana;
             /*pen = -carddraw + p.ownMaxMana - p.mana;
