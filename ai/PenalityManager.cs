@@ -1861,13 +1861,10 @@ namespace HREngine.Bots
             //bonus for early threat
             if (p.ownMaxMana == 1)
             {
-                if (card.name == CardDB.cardName.shrinkmeister) return 20; //don't play early
-
-                if (card.Attack >= 3 && card.Health >= 4) p.evaluatePenality += -20; //changing p.evaluatePenality directly here is messy but we need to check other penalties
-                else if (card.Attack >= 3 && card.Health >= 3) p.evaluatePenality += -10;
-                else if (card.Attack >= 3 && card.Health >= 2) p.evaluatePenality += -5;
-                else if (card.Health > 0) p.evaluatePenality += -2; //-card.Attack - card.Health; //nudge any minion playable
-
+                if (card.Attack >= 3 && card.Health >= 4) return -10;
+                if (card.Attack >= 3 && card.Health >= 3) return -8;
+                if (card.Attack >= 3 && card.Health >= 2) return -5;
+                if (card.Health > 0) p.evaluatePenality += -3; //-card.Attack - card.Health; //nudge any minion playable
             }
 
             if (p.mana <= 2 && p.ownMaxMana <= 2)
