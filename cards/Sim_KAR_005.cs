@@ -8,7 +8,7 @@ namespace HREngine.Bots
     {
         // Deathrattle: Summon a 3/2 Big Bad Wolf.
 
-        CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_005);//Big Bad Wolf
+        CardDB.Card kid = CardDB.Instance.getCardDataFromID(CardDB.cardIDEnum.KAR_005a);//Big Bad Wolf
 
         public override void onDeathrattle(Playfield p, Minion m)
         {
