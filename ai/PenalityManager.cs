@@ -1333,7 +1333,7 @@ namespace HREngine.Bots
                     continue;
                 }
 
-                if (a.actionType == actionEnum.useHeroPower && (p.ownHeroName != HeroEnum.shaman && p.ownHeroName != HeroEnum.warlock))
+                if (a.actionType == actionEnum.useHeroPower && (p.ownHeroName != HeroEnum.shaman && p.ownHeroName != HeroEnum.warlock)) //todo sepefeets - change this to the actual hero powers for finley
                 {
                     first = false;
                     continue;
