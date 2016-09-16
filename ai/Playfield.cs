@@ -1356,6 +1356,7 @@ namespace HREngine.Bots
                 Minion dis = this.ownMinions[i]; Minion pis = p.ownMinions[i];
                 //if (dis.entitiyID == 0) dis.entitiyID = pis.entitiyID;
                 //if (pis.entitiyID == 0) pis.entitiyID = dis.entitiyID;
+                if (dis.entityID != pis.entityID) minionbool = false;
                 if (dis.name != pis.name) minionbool = false;
                 if (dis.Angr != pis.Angr || dis.Hp != pis.Hp || dis.maxHp != pis.maxHp || dis.numAttacksThisTurn != pis.numAttacksThisTurn) minionbool = false;
                 if (dis.Ready != pis.Ready) minionbool = false; // includes frozen, exhaunted
@@ -1379,6 +1380,7 @@ namespace HREngine.Bots
                 Minion dis = this.enemyMinions[i]; Minion pis = p.enemyMinions[i];
                 //if (dis.entitiyID == 0) dis.entitiyID = pis.entitiyID;
                 //if (pis.entitiyID == 0) pis.entitiyID = dis.entitiyID;
+                if (dis.entityID != pis.entityID) minionbool = false;
                 if (dis.name != pis.name) minionbool = false;
                 if (dis.Angr != pis.Angr || dis.Hp != pis.Hp || dis.maxHp != pis.maxHp || dis.numAttacksThisTurn != pis.numAttacksThisTurn) minionbool = false;
                 if (dis.Ready != pis.Ready) minionbool = false; // includes frozen, exhaunted
@@ -1439,7 +1441,7 @@ namespace HREngine.Bots
 
         public bool isEqualf(Playfield p)
         {
-            if (this.value != p.value) return false;
+            if (Math.Abs(this.value - p.value) > 0) return false;
 
             if (this.ownMinions.Count != p.ownMinions.Count || this.enemyMinions.Count != p.enemyMinions.Count || this.owncards.Count != p.owncards.Count) return false;
 
@@ -1463,7 +1465,7 @@ namespace HREngine.Bots
                 Minion dis = this.ownMinions[i]; Minion pis = p.ownMinions[i];
                 //if (dis.entitiyID == 0) dis.entitiyID = pis.entitiyID;
                 //if (pis.entitiyID == 0) pis.entitiyID = dis.entitiyID;
-                if (dis.entityID != pis.entityID) minionbool = false;
+                if (dis.entityID != pis.entityID && pis.entityID < 1000) minionbool = false;
                 if (dis.Angr != pis.Angr || dis.Hp != pis.Hp || dis.maxHp != pis.maxHp || dis.numAttacksThisTurn != pis.numAttacksThisTurn) minionbool = false;
                 if (dis.Ready != pis.Ready) minionbool = false; // includes frozen, exhaunted
                 if (dis.playedThisTurn != pis.playedThisTurn) minionbool = false;
@@ -1486,7 +1488,7 @@ namespace HREngine.Bots
                 Minion dis = this.enemyMinions[i]; Minion pis = p.enemyMinions[i];
                 //if (dis.entitiyID == 0) dis.entitiyID = pis.entitiyID;
                 //if (pis.entitiyID == 0) pis.entitiyID = dis.entitiyID;
-                if (dis.entityID != pis.entityID) minionbool = false;
+                if (dis.entityID != pis.entityID && pis.entityID < 1000) minionbool = false;
                 if (dis.Angr != pis.Angr || dis.Hp != pis.Hp || dis.maxHp != pis.maxHp || dis.numAttacksThisTurn != pis.numAttacksThisTurn) minionbool = false;
                 if (dis.Ready != pis.Ready) minionbool = false; // includes frozen, exhaunted
                 if (dis.playedThisTurn != pis.playedThisTurn) minionbool = false;
