@@ -1,28 +1,30 @@
 // This File: _mulligan.txt
 //    Author: Dre
-//   Version: 1.0 (10-Sept-2016)
+//   Version: 1.5 (17-Sept-2016)
 // Deck Name: Standard Midrange Hunter
 //      Hero: Hunter
 // Deck Type: Midrange (Control)
 
 // - H U N T E R --------------------------------
-// [1] Fiery Bat (OG_179)		2x
-// [2] Kindly Grandmother (KAR_005)	2x
-// [2] Quick Shot (BRM_013)		2x
-// [2] Kings Elek (AT_058)		2x
-// [3] Deadly Shot (EX1_617)		2x
-// [3] Animal Companion (NEW1_031)	2x
-// [3] Eaglehorn Bow (EX1_536)		2x
-// [3] Kill Command (EX1_539)		2x
-// [3] Unleash the Hounds (EX1_538)	2x
-// [4] Houndmaster (DS1_070)		2x
-// [4] Infested Wolf (OG_216)		2x
-// [6] Savannah Highmane (EX1_534)	2x
-// [8] Call of the Wild (OG_211)	2x
+// [1] Fiery Bat (OG_179)		
+// [2] Kindly Grandmother (KAR_005)	
+// [2] Quick Shot (BRM_013)		
+// [2] Scavenging Hyena (EX1_531) 	
+// [2] Kings Elek (AT_058)		
+// [3] Deadly Shot (EX1_617)		
+// [3] Animal Companion (NEW1_031)	
+// [3] Eaglehorn Bow (EX1_536)		
+// [3] Kill Command (EX1_539)		
+// [3] Unleash the Hounds (EX1_538)	
+// [4] Houndmaster (DS1_070)		
+// [4] Infested Wolf (OG_216)		
+// [5] Tundra Rhino (DS1_178)		
+// [6] Savannah Highmane (EX1_534)	
+// [8] Call of the Wild (OG_211)	
 // - N E U T R A L -----------------------------
-// [2] Huge Toad (LOE_046)		2x
-// [4] Barnes (KAR_114)			1x
-// [8] Ragnaros the Firelord (EX1_298)	1x
+// [2] Huge Toad (LOE_046)		
+// [4] Barnes (KAR_114)			
+// [8] Ragnaros the Firelord (EX1_298)	
 
 // - A L L --------------------------------------
 // 1-DROP
@@ -44,10 +46,15 @@ hold;hunter;all;KAR_005:2;coin
 hold;hunter;all;AT_058:1
 // 2x King's Elekk + coin
 hold;hunter;all;AT_058:2;coin
+// 1x Scavenging Hyena + Fiery Bat
+hold;hunter;all;EX1_531:1:OG_179
+// 1x Scavenging Hyena + 2-drop + coin
+hold;hunter;all;EX1_531:1:LOE_046/KAR_005/AT_058;coin
 
 // 4-DROP
 // 1 x Houndmaster + 1-drop + 2-drop + 3-drop
-hold;hunter;all;DS1_070:1: OG_179+LOE_046+NEW1_031/OG_179+AT_058+NEW1_031/OG_179+KAR_005+NEW1_031
+hold;hunter;all;DS1_070:1:OG_179+LOE_046+NEW1_031/OG_179+AT_058+NEW1_031
+hold;hunter;all;DS1_070:1:OG_179+KAR_005+NEW1_031/OG_179+EX1_531+NEW1_031
 
 // - D R U I D ----------------------------------
 // 3-DROP
@@ -123,6 +130,11 @@ hold;hunter;shaman;EX1_536:1:LOE_046/KAR_005/AT_058
 hold;hunter;shaman;EX1_536:1:OG_179+LOE_046/OG_179+KAR_005/OG_179+AT_058
 // 1 x Eaglehorn Bow + 1 drop + coin
 hold;hunter;shaman;EX1_536:1:OG_179;coin
+// Unleash the Hounds (EX1_538) + coin
+hold;hunter;shaman;EX1_538:1;coin
+// Unleash the Hounds (EX1_538) + 1 or 2 drop
+hold;hunter;shaman;EX1_538:1:LOE_046/OG_179/KAR_005/AT_058/EX1_531
+
 
 // - W A R L O C K ------------------------------
 // 2-DROP

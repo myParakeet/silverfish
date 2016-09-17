@@ -1,6 +1,6 @@
 // This File: settings.txt
 //    Author: Dre
-//   Version: 0.3 (24-Jul-16)
+//   Version: 1.5 (17-Sept-16)
 // Deck Name: Mid-Range Hunter
 //      Hero: Hunter
 // Deck Type: Mid-Range (Control)
@@ -18,7 +18,7 @@ enemySecondTurnMaxWide = 26; //number of enemy boards calculated in enemys secon
 nextTurnDeep = 6; //maximum deep-lvls (total moves) in your second turn (recommended = dont touch this)
 nextTurnMaxWide = 26; //maximum boards calculated in one second turn deep-lvl
 nextTurnTotalBoards = 260; //maximum boards calculated in second turn simulation
-useSecretsPlayArround = false; //try to play around enemy secrets
+useSecretsPlayArround = true; //try to play around enemy secrets
 alpha = 50; //weight in % of your 2nd turn vs your 1st (0<= alpha <= 100) eg. 30 = 30% 2nd turn result + 70% first turn result
 simulatePlacement = true;  //simulate all placements for direwolfalpha/flametongue/defenderofargus
 behave = control; //select the behavior of the ai: control, rush, face (new) or mana (very experimental, dont use that :D)
