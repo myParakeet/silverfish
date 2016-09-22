@@ -1298,10 +1298,13 @@ namespace HREngine.Bots
 
             if (card.name == CardDB.cardName.deadlyshot)
             {
+                int bigminions = 0;
                 foreach (Minion mm in p.enemyMinions)
                 {
                     if (!(mm.Angr > 4 && mm.Hp > 4 || mm.Angr > 6)) pen += 10;
+                    else bigminions += 1;
                 }
+                if (p.enemyMinions.Count == bigminions) pen += -100; //huge bonus if they only have big minions, may be too much
             }
 
             if (p.enemyMinions.Count == 1 && (card.name == CardDB.cardName.deadlyshot
