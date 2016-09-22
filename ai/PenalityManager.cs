@@ -2803,6 +2803,8 @@ namespace HREngine.Bots
                     return 10;
                 case CardDB.cardName.malchezaarsimp:
                     return 5;
+                case CardDB.cardName.scavenginghyena: //play hyena before attacking with beasts
+                    return p.playactions.Find(a => a.actionType == actionEnum.attackWithMinion && a.own.handcard.card.race == TAG_RACE.PET) != null ? 20 : 0;
                 default:
                     return 0;
             }
