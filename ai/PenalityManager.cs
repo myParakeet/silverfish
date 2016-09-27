@@ -1439,6 +1439,11 @@ namespace HREngine.Bots
                 foreach (Handmanager.Handcard hc in p.owncards)
                 {
                     if (this.cardDiscardDatabase.ContainsKey(hc.card.name)) continue;
+                    if (hc.card.name == CardDB.cardName.silverwaregolem || hc.card.name == CardDB.cardName.fistofjaraxxus)
+                    {
+                        pen += -20; //bonus for discarding these
+                        continue;
+                    }
                     if (hc.card.getManaCost(p, hc.manacost) <= newmana)
                     {
                         canplayanothercard = true;
@@ -2803,7 +2808,7 @@ namespace HREngine.Bots
                 case CardDB.cardName.reliquaryseeker:
                     return (p.ownMinions.Count == 6) ? 0 : 5;
                 case CardDB.cardName.silverwaregolem:
-                    return 10;
+                    return 10 + p.owncards.Count;
                 case CardDB.cardName.malchezaarsimp:
                     return 5;
                 case CardDB.cardName.scavenginghyena: //play hyena before attacking with beasts
