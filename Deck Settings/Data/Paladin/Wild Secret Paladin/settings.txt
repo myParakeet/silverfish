@@ -1,6 +1,6 @@
 // This File: Settings.txt
 //    Author: Sepefeets
-//   Version: 0.2 (09-Jan-16)
+//   Version: 0.3 (29-Sept-16)
 // Deck Name: SecretPaladin
 //      Hero: Paladin
 // Deck Type: Tempo (Control)
@@ -18,7 +18,7 @@ enemySecondTurnMaxWide = 40;
 nextTurnDeep = 6;
 nextTurnMaxWide = 20;
 nextTurnTotalBoards = 200;
-useSecretsPlayArround = false; // keep disabled for muster+juggler combo
+useSecretsPlayArround = true;
 alpha = 50;
 simulatePlacement = false;
 useExternalProcess = true;
