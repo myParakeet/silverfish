@@ -4220,17 +4220,15 @@ namespace HREngine.Bots
         private void setupTargetAbilitys()
         {
             this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.CS1h_001, 1);  //Lesser Heal
+            this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.CS1h_001_H1, 1);
             this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.AT_132_PRIEST, 1);
             this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.CS2_034, 1);  //Fireblast
-            this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.AT_132_MAGE, 1);
             this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.CS2_034_H1, 1);
-//            this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.CS2_034_H1_AT_132, 1);
             this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.CS2_034_H2, 1);
-//            this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.CS2_034_H2_AT_132, 1);
+            this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.AT_132_MAGE, 1);
             this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.DS1h_292, 1);  //Steady Shot
-            this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.AT_132_HUNTER, 1);
             this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.DS1h_292_H1, 1);
-//            this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.DS1h_292_H1_AT_132, 1);
+            this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.AT_132_HUNTER, 1);
             this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.EX1_625t, 1);  //Mind Spike r1
             this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.EX1_625t2, 1);  //Mind Spike r2
             this.TargetAbilitysDatabase.Add(CardDB.cardIDEnum.AT_050t, 1);  //Lightning Jolt

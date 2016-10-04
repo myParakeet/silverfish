@@ -600,6 +600,8 @@ namespace HREngine.Bots
             CRED_45,
             CRED_46,
             CS1h_001,
+            CS1h_001_H1,
+            CS1h_001_H1_AT_132,
             CS1_042,
             CS1_069,
             CS1_112,
@@ -2614,7 +2616,7 @@ namespace HREngine.Bots
             XXX_112,
             XXX_113,
             XXX_999_Crash,
-            PlaceholderCard
+            PlaceholderCard,
         }
 
         public cardIDEnum cardIdstringToEnum(string s)
@@ -6973,6 +6975,8 @@ namespace HREngine.Bots
                 case cardIDEnum.CS1_129: return new Sim_CS1_129();
                 case cardIDEnum.CS1_130: return new Sim_CS1_130();
                 case cardIDEnum.CS1h_001: return new Sim_CS1h_001();
+                case cardIDEnum.CS1h_001_H1: return new Sim_CS1h_001();
+                case cardIDEnum.CS1h_001_H1_AT_132: return new Sim_AT_132_PRIEST();
                 case cardIDEnum.CS2_003: return new Sim_CS2_003();
                 case cardIDEnum.CS2_004: return new Sim_CS2_004();
                 case cardIDEnum.CS2_005: return new Sim_CS2_005();
