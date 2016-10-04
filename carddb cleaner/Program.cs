@@ -13,7 +13,7 @@ namespace carddb_cleaner
         static void Main(string[] args)
         {
             string text = File.ReadAllText("_carddb.txt");
-
+            
             text = text.Replace("&lt;b&gt;", "");
             text = text.Replace("&lt;/b&gt;", "");
 
@@ -27,25 +27,26 @@ namespace carddb_cleaner
             text = text.Replace("“", "\"");
             text = text.Replace("”", "\"");
 
-            string pattern = "<Tag(.*?)\n(.*?)</Tag>";
-            string replaceWith = "<Tag$1 $2</Tag>";
+            string pattern = "<Tag([^<>]*?)type=\"String\">([^<>]*?)\n\n([^<>]*?)</Tag>\r\n";
+            string replaceWith = "<Tag$1type=\"String\">$2 $3</Tag>\r\n";
             text = Regex.Replace(text, pattern, replaceWith);
 
-            pattern = "<Tag(.*?)\n(.*?)\n(.*?)</Tag>";
-            replaceWith = "<Tag$1 $2 $3</Tag>";
+            pattern = "<Tag([^<>]*?)type=\"String\">([^<>]*?)\n([^<>]*?)\n([^<>]*?)\n([^<>]*?)\n([^<>]*?)</Tag>\r\n";
+            replaceWith = "<Tag$1type=\"String\">$2 $3 $4 $5 $6</Tag>\r\n";
             text = Regex.Replace(text, pattern, replaceWith);
 
-            pattern = "<Tag(.*?)\n(.*?)\n(.*?)</Tag>";
-            replaceWith = "<Tag$1 $2 $3</Tag>";
+            pattern = "<Tag([^<>]*?)type=\"String\">([^<>]*?)\n([^<>]*?)\n([^<>]*?)\n([^<>]*?)</Tag>\r\n";
+            replaceWith = "<Tag$1type=\"String\">$2 $3 $4 $5</Tag>\r\n";
             text = Regex.Replace(text, pattern, replaceWith);
 
-            pattern = "<Tag(.*?)\n(.*?)\n(.*?)\n(.*?)</Tag>";
-            replaceWith = "<Tag$1 $2 $3 $4</Tag>";
+            pattern = "<Tag([^<>]*?)type=\"String\">([^<>]*?)\n([^<>]*?)\n([^<>]*?)</Tag>\r\n";
+            replaceWith = "<Tag$1type=\"String\">$2 $3 $4</Tag>\r\n";
             text = Regex.Replace(text, pattern, replaceWith);
 
-            pattern = "<Tag(.*?)\n(.*?)\n(.*?)\n(.*?)\n(.*?)</Tag>";
-            replaceWith = "<Tag$1 $2 $3 $4 $5</Tag>";
+            pattern = "<Tag([^<>]*?)type=\"String\">([^<>]*?)\n([^<>]*?)</Tag>\r\n";
+            replaceWith = "<Tag$1type=\"String\">$2 $3</Tag>\r\n";
             text = Regex.Replace(text, pattern, replaceWith);
+            
 
             File.WriteAllText("_carddb.txt", text);
         }
