@@ -220,11 +220,18 @@ namespace HREngine.Bots
                 if (target.isHero && !target.own && rockbiterHero) return -5; //bonus to not waste rockbiter
             }
 
-            //no penalty, but a bonus, if he has weapon on hand!
             if (target.isHero && !target.own && p.ownWeaponName == CardDB.cardName.gorehowl && p.ownWeaponAttack >= 3)
             {
                 return 10;
             }
+
+            if (target.isHero && !target.own && p.ownWeaponName == CardDB.cardName.spiritclaws)
+            {
+                if (target.isHero && !target.own && p.ownWeaponAttack == 1) return 500;
+                if (target.Hp != 1 && p.ownWeaponAttack == 1) return 10;
+            }
+
+            //no penalty, but a bonus, if he has weapon on hand!
             if (p.ownWeaponDurability >= 1)
             {
                 bool hasweapon = false;
@@ -257,7 +264,11 @@ namespace HREngine.Bots
         // penalize overwriting current weapon for worse ones
         public int getEquipWeaponPenalty(CardDB.Card card, Playfield p, bool lethal)
         {
-            if (p.ownWeaponDurability < 1) return 0;
+            if (p.ownWeaponDurability < 1)
+            {
+                if (card.name == CardDB.cardName.spiritclaws) return -3;
+                return 0;
+            }
             if (card.type != CardDB.cardtype.WEAPON && !alsoEquipsWeaponDB.ContainsKey(card.name)) return 0;
             /*
             if (card.type == CardDB.cardtype.WEAPON && card.Attack < p.ownWeaponAttack)
@@ -2813,6 +2824,8 @@ namespace HREngine.Bots
                     return 5;
                 case CardDB.cardName.scavenginghyena: //play hyena before attacking with beasts
                     return p.playactions.Find(a => a.actionType == actionEnum.attackWithMinion && a.own.handcard.card.race == TAG_RACE.PET) != null ? 20 : 0;
+                case CardDB.cardName.maelstromportal:
+                    return -5;
                 default:
                     return 0;
             }

@@ -7650,7 +7650,7 @@ namespace HREngine.Bots
                 case cardIDEnum.KAR_065: return new Sim_KAR_065();
                 case cardIDEnum.KAR_069: return new Sim_KAR_069();
                 case cardIDEnum.KAR_070: return new Sim_KAR_070();
-                //case cardIDEnum.KAR_073: return new Sim_KAR_073();
+                case cardIDEnum.KAR_073: return new Sim_KAR_073();
                 case cardIDEnum.KAR_075: return new Sim_KAR_075();
                 case cardIDEnum.KAR_076: return new Sim_KAR_076();
                 case cardIDEnum.KAR_077: return new Sim_KAR_077();

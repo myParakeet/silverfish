@@ -4584,7 +4584,6 @@ namespace HREngine.Bots
                 }
             }
 
-
         }
 
         public void triggerAMinionIsSummoned(Minion m)
@@ -5854,6 +5853,7 @@ namespace HREngine.Bots
                     hero.Angr -= this.ownWeaponAttack;
                 }
                 this.ownWeaponAttack = c.Attack + this.anzOwnBuccaneer;
+                if (c.name == CardDB.cardName.spiritclaws && spellpower > 0) ownWeaponAttack += 2;
                 this.ownWeaponDurability = c.Durability;
                 this.ownWeaponName = c.name;
             }
@@ -5864,6 +5864,7 @@ namespace HREngine.Bots
                     hero.Angr -= this.enemyWeaponAttack;
                 }
                 this.enemyWeaponAttack = c.Attack + this.anzEnemyBuccaneer;
+                if (c.name == CardDB.cardName.spiritclaws && enemyspellpower > 0) enemyWeaponAttack += 2;
                 this.enemyWeaponDurability = c.Durability;
                 this.enemyWeaponName = c.name;
             }
