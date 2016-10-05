@@ -1127,8 +1127,8 @@ namespace HREngine.Bots
                 return Math.Max(-carddraw + 2 * p.optionsPlayedThisTurn + p.ownMaxMana - p.mana, 0);
             }
 
-            if (p.owncards.Count + carddraw > 10) return 15 * (p.owncards.Count + carddraw - 10);
-            if (p.owncards.Count + p.cardsPlayedThisTurn > 7) return (5 * carddraw) + 1;
+            if (p.owncards.Count + carddraw > 10) return 15 * (p.owncards.Count + carddraw - 10); //big penalty if drawing raises us over 9 cards ( > 10 because 1 card is lost when played to do the drawing)
+            if (p.owncards.Count + carddraw > 8) return 5 * (p.owncards.Count + carddraw - 8); ; //smaller penalty if it brings us to 8-9 cards
             
             if (name == CardDB.cardName.battlerage) return -carddraw - p.optionsPlayedThisTurn + p.ownMaxMana - p.mana;
             if (name == CardDB.cardName.quickshot) return -carddraw - p.cardsPlayedThisTurn + p.optionsPlayedThisTurn;
