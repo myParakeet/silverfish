@@ -177,6 +177,8 @@ namespace HREngine.Bots
             int retval = 0;
             bool rockbiterHero = p.playactions.Find(a => a.actionType == actionEnum.playcard && a.card.card.name == CardDB.cardName.rockbiterweapon && a.target.entityID == p.ownHero.entityID) != null;
 
+            if (p.ownWeaponName == CardDB.cardName.atiesh) return 500;
+
             if (!lethal && p.ownWeaponName == CardDB.cardName.swordofjustice)
             {
                 return 28;
