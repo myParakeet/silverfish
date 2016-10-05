@@ -47,7 +47,9 @@ namespace HREngine.Bots
 
         public bool learnmode = false;
         public bool printlearnmode = true;
-        
+
+        private bool startedexe = false;
+
         public Behavior behave = new BehaviorControl();//change this to new BehaviorRush() for rush mode
         //Behavior behave = new BehaviorRush();
 
@@ -109,8 +111,9 @@ namespace HREngine.Bots
             
             try
             {
-                if (set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
+                if (!startedexe && set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
                 {
+                    startedexe = true;
                     Task.Run(() => startExeAsync());
                 }
             }
@@ -173,8 +176,7 @@ namespace HREngine.Bots
                 startInfo.WorkingDirectory = HREngine.Bots.Settings.Instance.path;
                 System.Diagnostics.Process.Start(startInfo);
             }
-
-            Thread.Sleep(1000);
+            startedexe = false; //reset it in case user closes exe
         }
 
         #region Scripting
