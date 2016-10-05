@@ -1093,6 +1093,12 @@ namespace HREngine.Bots
                 if (carddraw == 0) return 2;
             }
 
+            if (name == CardDB.cardName.netherspitehistorian)
+            {
+                carddraw = (p.ownMinions.Find(m => m.handcard.card.race == TAG_RACE.DRAGON) != null ? 1 : 0);
+                if (carddraw == 0) return 10;
+            }
+
             if (name == CardDB.cardName.lifetap || name == CardDB.cardName.soultap)
             {
                 if (lethal) return 500; //RR no benefit for lethal check
@@ -2828,6 +2834,8 @@ namespace HREngine.Bots
                     return p.playactions.Find(a => a.actionType == actionEnum.attackWithMinion && a.own.handcard.card.race == TAG_RACE.PET) != null ? 20 : 0;
                 case CardDB.cardName.maelstromportal:
                     return -5;
+                case CardDB.cardName.netherspitehistorian:
+                    return -8;
                 default:
                     return 0;
             }

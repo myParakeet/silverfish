@@ -10,7 +10,10 @@ namespace HREngine.Bots
 
         public override void getBattlecryEffect(Playfield p, Minion own, Minion target, int choice)
         {
-            p.drawACard(CardDB.cardName.unknown, own.own);
+            if (p.ownMinions.Find(m => m.handcard.card.race == TAG_RACE.DRAGON) != null)
+            {
+                p.drawACard(CardDB.cardName.unknown, own.own);
+            }
         }
     }
 }
