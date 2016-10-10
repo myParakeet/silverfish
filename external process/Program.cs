@@ -97,6 +97,7 @@ namespace HREngine.Bots
             Console.WriteLine("If no CrashLog exists then please post a screenshot instead");
             Console.WriteLine("Press Enter to exit");
             Console.ReadLine();
+            throw (Exception)e.ExceptionObject;
             Environment.Exit(1);
         }
     }
