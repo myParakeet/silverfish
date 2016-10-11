@@ -392,9 +392,17 @@ namespace HREngine.Bots
 
             if (target.own && name == CardDB.cardName.rockbiterweapon)
             {
-                if (p.playactions.Find(a => a.actionType == actionEnum.attackWithHero) != null) return 500;
-                if (!target.Ready && !target.isHero) return 500;
-                if (!target.isHero && p.ownHero.windfury) return 30;
+                if (p.playactions.Find(a => a.actionType == actionEnum.attackWithMinion && a.own.windfury) != null) return 500;
+                if (target.isHero)
+                {
+                    if (p.playactions.Find(a => a.actionType == actionEnum.attackWithHero) != null) return 500;
+                    if (!target.windfury && (p.ownMinions.Find(m => m.windfury) != null || p.owncards.Find(c => c.card.windfury && c.card.Charge) != null)) return 30;
+                }
+                else
+                {
+                    if (!target.Ready) return 500;
+                    if (p.ownHero.windfury) return 30;
+                }
                 return (target.windfury) ? 10 : 15;
             }
 
