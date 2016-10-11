@@ -227,10 +227,13 @@ namespace HREngine.Bots
                 return 10;
             }
 
-            if (target.isHero && !target.own && p.ownWeaponName == CardDB.cardName.spiritclaws)
+            if (p.ownWeaponName == CardDB.cardName.spiritclaws)
             {
-                if (target.isHero && !target.own && p.ownWeaponAttack == 1) return 500;
-                if (target.Hp != 1 && p.ownWeaponAttack == 1) return 10;
+                if (p.ownWeaponAttack == 1)
+                {
+                    if (target.isHero && !target.own) return 500;
+                    if (target.Hp != 1) return 10;
+                }
             }
 
             //no penalty, but a bonus, if he has weapon on hand!
