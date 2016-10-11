@@ -3755,7 +3755,7 @@ namespace HREngine.Bots
             priorityTargets.Add(CardDB.cardName.lightwarden, 4);
             priorityTargets.Add(CardDB.cardName.secretkeeper, 3);
             priorityTargets.Add(CardDB.cardName.youngdragonhawk, 4);
-            priorityTargets.Add(CardDB.cardName.bloodmagethalnos, 3);
+            priorityTargets.Add(CardDB.cardName.bloodmagethalnos, 10);
             priorityTargets.Add(CardDB.cardName.direwolfalpha, 4);
             priorityTargets.Add(CardDB.cardName.doomsayer, 10);
             priorityTargets.Add(CardDB.cardName.knifejuggler, 10);
