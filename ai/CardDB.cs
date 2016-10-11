@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace HREngine.Bots
@@ -1383,6 +1384,7 @@ namespace HREngine.Bots
             HERO_08c,
             HERO_09,
             HERO_09a,
+            HERO_09b,
             hexfrog,
             HRW02_1,
             HRW02_1e,
@@ -4196,6 +4198,7 @@ namespace HREngine.Bots
             twistedworgen,
             twister,
             twistingnether,
+            tyrandewhisperwind,
             unbalancingstrike,
             unboundelemental,
             uncoverstaffpiece,
@@ -7610,7 +7613,8 @@ namespace HREngine.Bots
                 case cardIDEnum.HERO_08c: return new Sim_HERO_08();
                 case cardIDEnum.HERO_09: return new Sim_HERO_09();
                 case cardIDEnum.HERO_09a: return new Sim_HERO_09();
-                
+                case cardIDEnum.HERO_09b: return new Sim_HERO_09();
+
                 //case cardIDEnum.KAR_003a: return new Sim_KAR_003a();
                 //case cardIDEnum.KAR_003b: return new Sim_KAR_003b();
                 case cardIDEnum.KAR_004: return new Sim_KAR_004();
@@ -8751,6 +8755,7 @@ namespace HREngine.Bots
                 case cardIDEnum.HERO_08c: return new Pen_HERO_08();
                 case cardIDEnum.HERO_09: return new Pen_HERO_09();
                 case cardIDEnum.HERO_09a: return new Pen_HERO_09();
+                case cardIDEnum.HERO_09b: return new Pen_HERO_09();
 
                 case cardIDEnum.LOE_002: return new Pen_LOE_002();
                 case cardIDEnum.LOE_002t: return new Pen_LOE_002t();

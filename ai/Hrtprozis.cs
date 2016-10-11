@@ -232,6 +232,7 @@
                 case "HERO_08c": return "mage";
                 case "HERO_09": return "priest";
                 case "HERO_09a": return "priest";
+                case "HERO_09b": return "priest";
                 case "EX1_323h": return "lordjaraxxus";
                 case "BRM_027h": return "ragnarosthefirelord";
                 case "XXX_040": return "hogger";
