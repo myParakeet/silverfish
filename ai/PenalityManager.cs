@@ -3758,7 +3758,7 @@ namespace HREngine.Bots
             priorityTargets.Add(CardDB.cardName.bloodmagethalnos, 3);
             priorityTargets.Add(CardDB.cardName.direwolfalpha, 4);
             priorityTargets.Add(CardDB.cardName.doomsayer, 10);
-            priorityTargets.Add(CardDB.cardName.knifejuggler, 4);
+            priorityTargets.Add(CardDB.cardName.knifejuggler, 10);
             priorityTargets.Add(CardDB.cardName.koboldgeomancer, 3);
             priorityTargets.Add(CardDB.cardName.manaaddict, 4);
             priorityTargets.Add(CardDB.cardName.masterswordsmith, 2);
@@ -3870,7 +3870,7 @@ namespace HREngine.Bots
 
             //LOE
 
-            this.priorityTargets.Add(CardDB.cardName.brannbronzebeard, 10);
+            this.priorityTargets.Add(CardDB.cardName.brannbronzebeard, 20);
             this.priorityTargets.Add(CardDB.cardName.obsidiandestroyer, 10);
             this.priorityTargets.Add(CardDB.cardName.summoningstone, 10);
             this.priorityTargets.Add(CardDB.cardName.djinniofzephyrs, 5);
