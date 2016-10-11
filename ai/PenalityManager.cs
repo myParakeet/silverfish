@@ -1098,7 +1098,7 @@ namespace HREngine.Bots
 
             if (name == CardDB.cardName.netherspitehistorian)
             {
-                carddraw = (p.ownMinions.Find(m => m.handcard.card.race == TAG_RACE.DRAGON) != null ? 1 : 0);
+                carddraw = (p.owncards.Find(x => x.card.race == TAG_RACE.DRAGON) != null ? 1 : 0);
                 if (carddraw == 0) return 10;
             }
 
