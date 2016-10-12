@@ -62,6 +62,8 @@ namespace HREngine.Bots
         private string botbehave = "rush";
         public bool waitingForSilver = false;
 
+        public bool startedexe = false;
+
 
         Playfield lastpf;
         Settings sttngs = Settings.Instance;

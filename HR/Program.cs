@@ -89,8 +89,6 @@ namespace HREngine.Bots
         int wins = 0;
         int loses = 0;
 
-        private bool startedexe = false;
-
         public Bot()
         {
 
@@ -121,9 +119,9 @@ namespace HREngine.Bots
             if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("YOU USE SILVER.EXE FOR CALCULATION, MAKE SURE YOU STARTED IT!");
             if (set.useExternalProcess) Helpfunctions.Instance.ErrorLog("SILVER.EXE IS LOCATED IN: " + Settings.Instance.path);
             
-            if (!startedexe && set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
+            if (!sf.startedexe && set.useExternalProcess && (!set.useNetwork || (set.useNetwork && set.netAddress == "127.0.0.1")))
             {
-                startedexe = true;
+                sf.startedexe = true;
                 Task.Run(() => startExeAsync());
             }
 
@@ -162,7 +160,7 @@ namespace HREngine.Bots
                 startInfo.WorkingDirectory = Settings.Instance.path;
                 System.Diagnostics.Process.Start(startInfo);
             }
-            startedexe = false; //reset it in case user closes exe
+            sf.startedexe = false; //reset it in case user closes exe
         }
 
         /// <summary>
@@ -972,6 +970,8 @@ namespace HREngine.Bots
         private bool singleLog = false;
         private string botbehave = "rush";
         public bool waitingForSilver = false;
+
+        public bool startedexe = false;
 
 
         Playfield lastpf;
