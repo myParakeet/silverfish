@@ -41,7 +41,7 @@ hold;shaman;all;AT_052:1
 // 2x Totem Golem + 1-Drop + coin
 hold;shaman;all;AT_052:2:LOE_018;coin
 // 1x Flametongue Totem + 2x Tunnel Trogg + coin
-hold;warlock;druid;EX1_565:1:LOE_018,2,2;coin 
+hold;shaman;all;EX1_565:1:LOE_018,2,2;coin 
 
 // 3-DROP
 // 1x Feral Spirit + Tunnel Trogg + coin
