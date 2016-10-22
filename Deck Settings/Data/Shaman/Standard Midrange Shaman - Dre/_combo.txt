@@ -17,6 +17,12 @@ GAME_005,0;LOE_018,0;LOE_018,0;bonus:20;hero:shaman
 // [NUDGE] [5] Thunder Bluff Valiant (AT_049) + [2] Totemic Call (CS2_049)
 AT_049,5;CS2_049,0;bonus:50;hero:shaman
 
+// [NUDGE] [2] Kobold Geomancer (CS2_142) + [2] Maelstrom Portal (KAR_073)
+CS2_142,5;KAR_073,0;bonus:3;hero:shaman
+
+// [NUDGE] [2] Kobold Geomancer (CS2_142) + [1] Spirit Claws x2 (KAR_063)
+CS2_142,5;KAR_063,0;bonus:2;hero:shaman
+
 // [NUDGE] [2] Bloodmage Thalnos (EX1_012) + [2] Maelstrom Portal (KAR_073)
 EX1_012,5;KAR_073,0;bonus:3;hero:shaman
 
@@ -37,6 +43,9 @@ cardvalue:EX1_259,14
 
 // Cardvalue Astral Communion (AT_043) 
 cardvalue:AT_043,500
+
+// Cardvalue Kobold Geomancer (CS2_142)
+cardvalue:CS2_142,11
 
 // Cardvalue Bloodmage Thalnos (EX1_012)
 cardvalue:EX1_012,11
