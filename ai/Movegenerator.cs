@@ -267,7 +267,7 @@
             //play cards:
 
             List<CardDB.cardName> playedcards = new List<CardDB.cardName>();
-
+            /*
             bool superplacement = false;
             bool useplacement = Settings.Instance.simulatePlacement && p.turnCounter == 0 && p.ownMinions.Count >= 2;
             foreach (Minion hc in p.ownMinions)
@@ -280,7 +280,7 @@
                 }
 
             }
-
+            */
             foreach (Handmanager.Handcard hc in p.owncards)
             {
                 CardDB.Card c = hc.card;
@@ -332,13 +332,13 @@
 
                                 if (cardplayPenality < 500)
                                 {
+                                    /*
                                     if (hc.card.name == CardDB.cardName.tuskarrtotemic)
                                     {
                                         bestplace = (p.ownMinions.Count / 2) + 1; //just put it center left
                                         Action a = new Action(actionEnum.playcard, hc, null, bestplace, null, cardplayPenality, 0);
                                         ret.Add(a);
                                     }
-
                                     if (useplacement && ((hc.card.name == CardDB.cardName.direwolfalpha || hc.card.name == CardDB.cardName.flametonguetotem || hc.card.name == CardDB.cardName.defenderofargus || hc.card.name == CardDB.cardName.voidterror) || (superplacement && hc.card.type == CardDB.cardtype.MOB)))
                                     {
                                         int adding = 1;
@@ -362,7 +362,10 @@
                                         Action a = new Action(actionEnum.playcard, hc, null, bestplace, null, cardplayPenality, 0);
                                         //pf.playCard(hc, hc.position - 1, hc.entity, -1, -1, 0, bestplace, cardplayPenality);
                                         ret.Add(a);
-                                    }
+                                    }*/
+
+                                    Action a = new Action(actionEnum.playcard, hc, null, bestplace, null, cardplayPenality, 0);
+                                    ret.Add(a);
                                 }
                             }
                             else
@@ -606,9 +609,6 @@
 
                     foreach (Minion trgt in trgts)
                     {
-
-
-
                         if (usePenalityManager)
                         {
                             abilityPenality = pen.getPlayCardPenality(p.ownHeroAblility, trgt, p, 0, isLethalCheck);

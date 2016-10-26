@@ -163,6 +163,9 @@ namespace HREngine.Bots
 
         public bool weHaveSteamwheedleSniper;
         public bool enemyHaveSteamwheedleSniper;
+        
+        public bool ownSpiritclaws = false;
+        public bool enemySpiritclaws = false;
 
         public bool needGraveyard;
 
@@ -481,6 +484,9 @@ namespace HREngine.Bots
 
             this.feugenDead = Probabilitymaker.Instance.feugenDead;
             this.stalaggDead = Probabilitymaker.Instance.stalaggDead;
+
+            this.ownSpiritclaws = false;
+            this.enemySpiritclaws = false;
 
             this.doublepriest = 0;
             this.enemydoublepriest = 0;
@@ -802,6 +808,10 @@ namespace HREngine.Bots
                         continue;
                 }
             }
+
+            if (this.spellpower > 0 && this.ownWeaponName == CardDB.cardName.spiritclaws) this.ownSpiritclaws = true;
+            if (this.enemyspellpower > 0 && this.enemyWeaponName == CardDB.cardName.spiritclaws) this.enemySpiritclaws = true;
+
             if (this.enemySecretCount >= 1) this.needGraveyard = true;
             if (this.needGraveyard) this.diedMinions = new List<GraveYardItem>(Probabilitymaker.Instance.turngraveyard);
             this.anzMinionsDiedThisTurn = Hrtprozis.Instance.numberMinionsDiedThisTurn;
@@ -1025,6 +1035,11 @@ namespace HREngine.Bots
 
             this.anzOwnMillhouseManastorm = p.anzOwnMillhouseManastorm;
             this.anzEnemyMillhouseManastorm = p.anzEnemyMillhouseManastorm;
+            
+            this.ownSpiritclaws = p.ownSpiritclaws;
+            this.enemySpiritclaws = p.enemySpiritclaws;
+            if (this.spellpower > 0 && this.ownWeaponName == CardDB.cardName.spiritclaws) this.ownSpiritclaws = true;
+            if (this.enemyspellpower > 0 && this.enemyWeaponName == CardDB.cardName.spiritclaws) this.enemySpiritclaws = true;
 
             this.doublepriest = p.doublepriest;
             this.enemydoublepriest = p.enemydoublepriest;
@@ -1914,82 +1929,112 @@ namespace HREngine.Bots
         {
             //we return the zonepos!
             if (card.type != CardDB.cardtype.MOB) return 1;
-            if (this.ownMinions.Count == 0) return 1;
-            if (this.ownMinions.Count == 1) return 2;
+            int omCount = this.ownMinions.Count;
 
-            int[] places = new int[this.ownMinions.Count];
+            if (omCount == 0) return 1;
+            if (omCount == 1)
+            {
+                if (this.ownMinions[0].handcard.card.name == CardDB.cardName.flametonguetotem || this.ownMinions[0].handcard.card.name == CardDB.cardName.direwolfalpha) return 1;
+                if (card.name == CardDB.cardName.impgangboss) return 1;
+                return 2;
+            }
+
+            int[] places = new int[omCount]; //lower values = better places
+            int[] buffplaces = new int[omCount];
+            
             int i = 0;
             int tempval = 0;
-            if (lethal && card.name == CardDB.cardName.defenderofargus)
+            if (lethal)
             {
-                i = 0;
-                foreach (Minion m in this.ownMinions)
+                bool givesBuff = false;
+                switch (card.name)
                 {
-
-                    places[i] = 0;
-                    tempval = 0;
-                    if (m.Ready)
-                    {
-                        tempval -= m.Angr - 1;
-                        if (m.windfury) tempval -= m.Angr - 1;
-                    }
-                    places[i] = tempval;
-
-                    i++;
+                    case CardDB.cardName.defenderofargus: givesBuff = true; break;
+                    case CardDB.cardName.flametonguetotem: givesBuff = true; break;
+                    case CardDB.cardName.direwolfalpha: givesBuff = true; break;
+                    case CardDB.cardName.ancientmage: givesBuff = true; break;
                 }
-
-
-                i = 0;
-                int bestpl = 7;
-                int bestval = 10000;
-                foreach (Minion m in this.ownMinions)
+                if (givesBuff)
                 {
-                    int prev = 0;
-                    int next = 0;
-                    if (i >= 1) prev = places[i - 1];
-                    next = places[i];
-                    if (bestval > prev + next)
+                    if (omCount == 2) return 2;
+                    i = 0;
+                    foreach (Minion m in this.ownMinions)
                     {
-                        bestval = prev + next;
-                        bestpl = i;
+
+                        places[i] = 0;
+                        tempval = 0;
+                        if (m.Ready)
+                        {
+                            tempval -= m.Angr - 1;
+                            if (m.windfury) tempval -= m.Angr - 1;
+                        }
+                        else tempval = 1000;
+                        places[i] = tempval;
+
+                        i++;
                     }
-                    i++;
+
+
+                    i = 0;
+                    int bestpl = 7;
+                    int bestval = 10000;
+                    foreach (Minion m in this.ownMinions)
+                    {
+                        int prev = 0;
+                        int next = 0;
+                        if (i >= 1) prev = places[i - 1];
+                        next = places[i];
+                        if (bestval >= prev + next)
+                        {
+                            bestval = prev + next;
+                            bestpl = i;
+                        }
+                        i++;
+                    }
+                    return bestpl + 1;
                 }
-                return bestpl + 1;
+                else return omCount + 1;
             }
+
             if (card.name == CardDB.cardName.sunfuryprotector || card.name == CardDB.cardName.defenderofargus) // bestplace, if right and left minions have no taunt + lots of hp, dont make priority-minions to taunt
             {
+                if (omCount == 2)
+                {
+                    int val1 = 0;
+                    int val2 = 0;
+                    if (PenalityManager.Instance.priorityDatabase.ContainsKey(this.ownMinions[0].handcard.card.name)) val1 = PenalityManager.Instance.priorityDatabase[this.ownMinions[0].handcard.card.name];
+                    if (PenalityManager.Instance.priorityDatabase.ContainsKey(this.ownMinions[1].handcard.card.name)) val2 = PenalityManager.Instance.priorityDatabase[this.ownMinions[1].handcard.card.name];
+
+                    //don't taunt priority minions IF they are high enough priority
+                    if (val1 > val2 + 5) return 3;
+                    else if (val1 + 5 < val2) return 1;
+                    return 2;
+                }
+                
                 i = 0;
                 foreach (Minion m in this.ownMinions)
                 {
 
                     places[i] = 0;
                     tempval = 0;
-                    if (!m.taunt)
+                    if (m.taunt)
                     {
-                        tempval -= m.Hp;
+                        tempval += -m.Hp + 2;
                     }
                     else
                     {
-                        tempval -= m.Hp + 2;
+                        tempval += -m.Hp;
                     }
 
-                    //todo sepefeets - make this a switch and add priority minions db
+                    if (m.windfury)
+                    {
+                        tempval += 2;
+                    }
+                    
                     if (m.handcard.card.name == CardDB.cardName.flametonguetotem) tempval += 50;
-                    if (m.handcard.card.name == CardDB.cardName.raidleader) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.grimscaleoracle) tempval += 10;
                     if (m.handcard.card.name == CardDB.cardName.direwolfalpha) tempval += 50;
-                    if (m.handcard.card.name == CardDB.cardName.murlocwarleader) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.southseacaptain) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.stormwindchampion) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.timberwolf) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.leokk) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.northshirecleric) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.sorcerersapprentice) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.pintsizedsummoner) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.summoningportal) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.scavenginghyena) tempval += 10;
-                    //if (PenalityManager.Instance.priorityTargets.ContainsKey(m.handcard.card.name)) tempval += 10*PenalityManager.Instance.priorityTargets[m.handcard.card.name];
+
+                    if (PenalityManager.Instance.priorityDatabase.ContainsKey(m.handcard.card.name)) tempval += 2 * PenalityManager.Instance.priorityDatabase[m.handcard.card.name];
 
                     places[i] = tempval;
 
@@ -2024,45 +2069,39 @@ namespace HREngine.Bots
                 if (card.name == CardDB.cardName.flametonguetotem) cardIsBuffer = 2;
                 if (card.name == CardDB.cardName.direwolfalpha) cardIsBuffer = 1;
             }
-            bool commander = false;
+            bool tundrarhino = false;
             foreach (Minion m in this.ownMinions)
             {
-                if (m.handcard.card.name == CardDB.cardName.warsongcommander) commander = true;
+                if (m.handcard.card.name == CardDB.cardName.tundrarhino) tundrarhino = true;
                 if (m.handcard.card.name == CardDB.cardName.flametonguetotem || m.handcard.card.name == CardDB.cardName.direwolfalpha) placebuff = true;
             }
-            //attackmaxing :D
+            //max attack this turn
             if (placebuff)
             {
-
-
                 int cval = 0;
-                if (card.Charge) // ... || (card.Attack <= 3 && commander) //warsong commander fix
+                if (card.Charge || (card.race == TAG_RACE.PET && tundrarhino))
                 {
                     cval = card.Attack;
-                    if (card.windfury) cval += card.Attack;
-
-                    if (commander)//warsong commander fix
-                    {
-                        cval +=1;
-                        if (card.windfury) cval += 1;
-                    }
+                    if (card.windfury) cval = card.Attack;
                 }
                 if (card.name == CardDB.cardName.nerubianegg)
                 {
                     cval += 1;
                 }
-                cval++;
+
                 i = 0;
-                int[] buffplaces = new int[this.ownMinions.Count];
+
                 int[] whirlwindplaces = new int[this.ownMinions.Count];
                 int gesval = 0;
+                int minionsBefore = -1;
+                int minionsAfter = -1;
                 foreach (Minion m in this.ownMinions)
                 {
                     buffplaces[i] = 0;
                     whirlwindplaces[i] = 1;
                     places[i] = 0;
                     tempval = -1;
-                    if (!m.Ready && m.Angr == 0 && !m.playedThisTurn) tempval = 0;
+
                     if (m.Ready)
                     {
                         tempval = m.Angr;
@@ -2071,16 +2110,20 @@ namespace HREngine.Bots
                             tempval += m.Angr;
                             whirlwindplaces[i] = 2;
                         }
-
-
                     }
+                    else whirlwindplaces[i] = 0;
+
                     if (m.handcard.card.name == CardDB.cardName.flametonguetotem)
                     {
                         buffplaces[i] = 2;
+                        if (minionsBefore == -1) minionsBefore = i;
+                        minionsAfter = omCount - i - 1;
                     }
                     if (m.handcard.card.name == CardDB.cardName.direwolfalpha)
                     {
                         buffplaces[i] = 1;
+                        if (minionsBefore == -1) minionsBefore = i;
+                        minionsAfter = omCount - i - 1;
                     }
                     tempval++;
                     places[i] = tempval;
@@ -2090,9 +2133,12 @@ namespace HREngine.Bots
                 //gesval = whole possible damage
                 int bplace = 0;
                 int bvale = 0;
-                tempval = 0;
-                i = 0;
-                for (int j = 0; j <= this.ownMinions.Count; j++)
+                bool needbefore = false;
+                int middle = (omCount + 1) / 2;
+                int middleProximity = 1000;
+                if (minionsBefore > -1 && minionsBefore <= minionsAfter) needbefore = true;
+
+                for (i = 0; i <= omCount; i++)
                 {
                     tempval = gesval;
                     int current = cval;
@@ -2103,130 +2149,175 @@ namespace HREngine.Bots
                         tempval -= places[i - 1];
                         prev = places[i - 1];
                         if (prev >= 0) prev += whirlwindplaces[i - 1] * cardIsBuffer;
-                        if (current > 0) current += buffplaces[i - 1];
-
-                        if (i < this.ownMinions.Count)
+                        if (i < omCount)
                         {
                             prev -= whirlwindplaces[i - 1] * buffplaces[i];
                         }
+                        if (current > 0) current += buffplaces[i - 1];
                     }
-                    if (i < this.ownMinions.Count)
+                    if (i < omCount)
                     {
                         tempval -= places[i];
                         next = places[i];
                         if (next >= 0) next += whirlwindplaces[i] * cardIsBuffer;
-                        if (current > 0) current += buffplaces[i];
+
                         if (i >= 1)
                         {
                             next -= whirlwindplaces[i] * buffplaces[i - 1];
                         }
+                        if (current > 0) current += buffplaces[i];
                     }
                     tempval += current + prev + next;
-                    if (tempval > bvale)
+
+                    bool setVal = false;
+                    if (tempval > bvale) setVal = true;
+                    else if (tempval == bvale)
+                    {
+                        if (needbefore)
+                        {
+                            if (i <= minionsBefore) setVal = true;
+                        }
+                        else
+                        {
+                            if (minionsBefore > -1)
+                            {
+                                if (i >= omCount - minionsAfter) setVal = true;
+                            }
+                            else
+                            {
+                                int tmp = middle - i;
+                                if (tmp < 0) tmp *= -1;
+                                if (tmp <= middleProximity)
+                                {
+                                    middleProximity = tmp;
+                                    setVal = true;
+                                }
+                            }
+                        }
+                    }
+                    if (setVal)
                     {
                         bplace = i;
                         bvale = tempval;
                     }
-                    i++;
+
                 }
                 return bplace + 1;
 
             }
 
             // normal placement
-            int cardvalue = card.Attack * 2 + card.Health;
-            if (card.tank)
-            {
-                cardvalue += 5;
-                cardvalue += card.Health;
-            }
-
-            if (card.name == CardDB.cardName.flametonguetotem) cardvalue += 90;
-            if (card.name == CardDB.cardName.raidleader) cardvalue += 10;
-            if (card.name == CardDB.cardName.grimscaleoracle) cardvalue += 10;
-            if (card.name == CardDB.cardName.direwolfalpha) cardvalue += 90;
-            if (card.name == CardDB.cardName.murlocwarleader) cardvalue += 10;
-            if (card.name == CardDB.cardName.southseacaptain) cardvalue += 10;
-            if (card.name == CardDB.cardName.stormwindchampion) cardvalue += 10;
-            if (card.name == CardDB.cardName.timberwolf) cardvalue += 10;
-            if (card.name == CardDB.cardName.leokk) cardvalue += 10;
-            if (card.name == CardDB.cardName.northshirecleric) cardvalue += 10;
-            if (card.name == CardDB.cardName.sorcerersapprentice) cardvalue += 10;
-            if (card.name == CardDB.cardName.pintsizedsummoner) cardvalue += 10;
-            if (card.name == CardDB.cardName.summoningportal) cardvalue += 10;
-            if (card.name == CardDB.cardName.scavenginghyena) cardvalue += 10;
-            if (card.name == CardDB.cardName.faeriedragon) cardvalue += 40;
-            //if (card.name == CardDB.cardName.impgangboss) cardvalue += 40;
-            cardvalue += 1;
-
-            i = 0;
-            foreach (Minion m in this.ownMinions)
-            {
-                places[i] = 0;
-                tempval = m.Angr * 2 + m.maxHp;
-                if (m.taunt)
-                {
-                    tempval += 6;
-                    tempval += m.maxHp;
-                }
-                if (!m.silenced)
-                {
-                    if (m.handcard.card.name == CardDB.cardName.flametonguetotem) tempval += 90;
-                    if (m.handcard.card.name == CardDB.cardName.raidleader) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.grimscaleoracle) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.direwolfalpha) tempval += 90;
-                    if (m.handcard.card.name == CardDB.cardName.murlocwarleader) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.southseacaptain) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.stormwindchampion) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.timberwolf) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.leokk) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.northshirecleric) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.sorcerersapprentice) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.pintsizedsummoner) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.summoningportal) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.scavenginghyena) tempval += 10;
-                    if (m.handcard.card.name == CardDB.cardName.faeriedragon) tempval += 40;
-                    //if (m.handcard.card.name == CardDB.cardName.impgangboss) tempval += 40;
-                    if (m.stealth) tempval += 40;
-                }
-                places[i] = tempval;
-
-                i++;
-            }
-
-            //bigminion if >=10
             int bestplace = 0;
             int bestvale = 0;
-            tempval = 0;
-            i = 0;
-            for (int j = 0; j <= this.ownMinions.Count; j++)
+            if (Settings.Instance.simulatePlacement == true)
             {
-                int prev = cardvalue;
-                int next = cardvalue;
-                if (i >= 1) prev = places[i - 1];
-                if (i < this.ownMinions.Count) next = places[i];
+                int cardvalue = card.Health * 2 + card.Attack;
+                if (card.Shield) cardvalue = cardvalue * 3 / 2;
+                if (PenalityManager.Instance.priorityDatabase.ContainsKey(card.name)) cardvalue += 2 * PenalityManager.Instance.priorityDatabase[card.name];
 
-
-                if (cardvalue >= prev && cardvalue >= next)
+                i = 0;
+                foreach (Minion m in this.ownMinions)
                 {
-                    tempval = 2 * cardvalue - prev - next;
-                    if (tempval > bestvale)
+                    places[i] = 0;
+                    tempval = m.maxHp * 2 + m.Angr;
+                    if (m.divineshild) tempval = tempval * 3 / 2;
+                    if (PenalityManager.Instance.priorityDatabase.ContainsKey(m.handcard.card.name) && !m.silenced) tempval += 2 * PenalityManager.Instance.priorityDatabase[m.handcard.card.name];
+                    places[i] = tempval;
+                    i++;
+                }
+                
+                for (i = 0; i <= omCount; i++)
+                {
+                    if (i >= omCount - i)
                     {
                         bestplace = i;
-                        bestvale = tempval;
+                        break;
+                    }
+                    if (cardvalue >= places[i])
+                    {
+                        if (cardvalue < places[omCount - i - 1])
+                        {
+                            bestplace = i;
+                            break;
+                        }
+                        else
+                        {
+                            if (places[i] > places[omCount - i - 1]) bestplace = omCount - i;
+                            else bestplace = i;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (cardvalue >= places[omCount - i - 1])
+                        {
+                            bestplace = omCount - i;
+                            break;
+                        }
                     }
                 }
-                if (cardvalue <= prev && cardvalue <= next)
+            }
+            else
+            {
+                int cardvalue = card.Attack * 2 + card.Health;
+                if (card.tank)
                 {
-                    tempval = -2 * cardvalue + prev + next;
-                    if (tempval > bestvale)
-                    {
-                        bestplace = i;
-                        bestvale = tempval;
-                    }
+                    cardvalue += 5;
+                    cardvalue += card.Health;
                 }
 
-                i++;
+
+                if (PenalityManager.Instance.priorityDatabase.ContainsKey(card.name)) cardvalue += 2 * PenalityManager.Instance.priorityDatabase[card.name];
+                cardvalue += 1;
+
+                i = 0;
+                foreach (Minion m in this.ownMinions)
+                {
+                    places[i] = 0;
+                    tempval = m.Angr * 2 + m.maxHp;
+                    if (m.taunt)
+                    {
+                        tempval += 6;
+                        tempval += m.maxHp;
+                    }
+                    if (!m.silenced)
+                    {
+                        if (PenalityManager.Instance.priorityDatabase.ContainsKey(m.handcard.card.name)) tempval += 2 * PenalityManager.Instance.priorityDatabase[m.handcard.card.name];
+                        if (m.stealth) tempval += 40;
+                    }
+                    places[i] = tempval;
+
+                    i++;
+                }
+                
+                for (i = 0; i <= omCount; i++)
+                {
+                    int prev = cardvalue;
+                    int next = cardvalue;
+                    if (i >= 1) prev = places[i - 1];
+                    if (i < omCount) next = places[i];
+                    
+                    if (cardvalue >= prev && cardvalue >= next)
+                    {
+                        tempval = 2 * cardvalue - prev - next;
+                        if (tempval > bestvale)
+                        {
+                            bestplace = i;
+                            bestvale = tempval;
+                        }
+                    }
+                    if (cardvalue <= prev && cardvalue <= next)
+                    {
+                        tempval = -2 * cardvalue + prev + next;
+                        if (tempval > bestvale)
+                        {
+                            bestplace = i;
+                            bestvale = tempval;
+                        }
+                    }
+
+                }
+
             }
 
             return bestplace + 1;
@@ -4046,6 +4137,7 @@ namespace HREngine.Bots
             {
                 if (mnn.silenced) continue;
                 if (mnn.Hp <= 0) continue;
+
                 if (mnn.handcard.card.name == CardDB.cardName.cultmaster)
                 {
                     int anz = this.tempTrigger.ownMinionsDied;
@@ -4096,13 +4188,10 @@ namespace HREngine.Bots
                             //we have no living mechanics -> debuff cogmaster
                             this.minionGetBuffed(mnn, -2, 0);
                         }
-
-
-
                     }
                 }
 
-                if ( mnn.handcard.card.name == CardDB.cardName.cogmasterswrench)
+                if (mnn.handcard.card.name == CardDB.cardName.cogmasterswrench)
                 {
                     if (this.tempTrigger.ownMechanicDied >= 1)
                     {
@@ -4118,9 +4207,6 @@ namespace HREngine.Bots
                             this.ownWeaponAttack -= 2;
                             this.minionGetBuffed(this.ownHero, -2, 0);
                         }
-
-
-
                     }
                 }
 
@@ -4139,8 +4225,8 @@ namespace HREngine.Bots
                 {
                     mnn.updateReadyness(this);
                 }
-
             }
+            
             foreach (Minion mnn in this.enemyMinions)
             {
                 if (mnn.silenced) continue;
@@ -4195,9 +4281,6 @@ namespace HREngine.Bots
                             //we have no living mechanics -> debuff cogmaster
                             this.minionGetBuffed(mnn, -2, 0);
                         }
-
-
-
                     }
                 }
 
@@ -4205,7 +4288,7 @@ namespace HREngine.Bots
                 {
                     if (this.tempTrigger.ownMechanicDied >= 1)
                     {
-                        //check if we have more mechanics, or debuff him
+                        //check if enemy has more mechanics, or debuff him
                         bool hasmechanics = false;
                         foreach (Minion m in this.ownMinions)
                         {
@@ -4217,12 +4300,9 @@ namespace HREngine.Bots
                             this.enemyWeaponAttack -= 2;
                             this.minionGetBuffed(this.enemyHero, -2, 0);
                         }
-
-
-
                     }
                 }
-
+                
                 if (mnn.handcard.card.name == CardDB.cardName.junkbot)
                 {
                     this.minionGetBuffed(mnn, 2 * this.tempTrigger.enemyMechanicDied, 2 * this.tempTrigger.enemyMechanicDied);
@@ -4600,6 +4680,16 @@ namespace HREngine.Bots
                 {
                     if (mnn.silenced) continue;
                     if (mnn.name == CardDB.cardName.murloctidecaller) mnn.handcard.card.sim_card.onMinionIsSummoned(this, mnn, m);
+                }
+
+                if (this.ownWeaponName == CardDB.cardName.spiritclaws && !this.ownSpiritclaws)
+                {
+                    if (this.spellpower > 0 || m.handcard.card.Spellpower)
+                    {
+                        this.ownWeaponAttack += 2;
+                        this.minionGetBuffed(this.ownHero, 2, 0);
+                        this.ownSpiritclaws = true;
+                    }
                 }
 
                 if (this.ownWeaponName == CardDB.cardName.swordofjustice)
@@ -5428,8 +5518,6 @@ namespace HREngine.Bots
 
         public void updateBoards()
         {
-
-
             if (!this.tempTrigger.ownMinionsChanged && !this.tempTrigger.enemyMininsChanged) return;
             List<Minion> deathrattles = new List<Minion>();
 
@@ -5531,6 +5619,37 @@ namespace HREngine.Bots
                 }
                 this.enemyMinions = temp;
                 this.updateAdjacentBuffs(false);
+            }
+
+            if (this.ownWeaponName == CardDB.cardName.spiritclaws)
+            {
+                if (this.spellpower > 0 && !this.ownSpiritclaws)
+                {
+                        this.minionGetBuffed(this.ownHero, 2, 0);
+                        this.ownWeaponAttack += 2;
+                        this.ownSpiritclaws = true;
+                }
+                else if (this.spellpower < 1 && this.ownSpiritclaws)
+                {
+                        this.minionGetBuffed(this.ownHero, -2, 0);
+                        this.ownWeaponAttack += -2;
+                        this.ownSpiritclaws = false;
+                }
+            }
+            if (this.enemyWeaponName == CardDB.cardName.spiritclaws)
+            {
+                if (this.enemyspellpower > 0 && !this.enemySpiritclaws)
+                {
+                    this.minionGetBuffed(this.enemyHero, 2, 0);
+                    this.enemyWeaponAttack += 2;
+                    this.enemySpiritclaws = true;
+                }
+                else if (this.enemyspellpower < 1 && this.enemySpiritclaws)
+                {
+                    this.minionGetBuffed(this.enemyHero, -2, 0);
+                    this.enemyWeaponAttack += -2;
+                    this.enemySpiritclaws = false;
+                }
             }
 
 
@@ -5853,7 +5972,6 @@ namespace HREngine.Bots
                     hero.Angr -= this.ownWeaponAttack;
                 }
                 this.ownWeaponAttack = c.Attack + this.anzOwnBuccaneer;
-                if (c.name == CardDB.cardName.spiritclaws && spellpower > 0) ownWeaponAttack += 2;
                 this.ownWeaponDurability = c.Durability;
                 this.ownWeaponName = c.name;
             }
@@ -5864,7 +5982,6 @@ namespace HREngine.Bots
                     hero.Angr -= this.enemyWeaponAttack;
                 }
                 this.enemyWeaponAttack = c.Attack + this.anzEnemyBuccaneer;
-                if (c.name == CardDB.cardName.spiritclaws && enemyspellpower > 0) enemyWeaponAttack += 2;
                 this.enemyWeaponDurability = c.Durability;
                 this.enemyWeaponName = c.name;
             }
