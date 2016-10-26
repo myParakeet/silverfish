@@ -1720,11 +1720,11 @@ namespace HREngine.Bots
             // penalize playing hero power after spell dmg cards
             if (name == CardDB.cardName.totemiccall || name == CardDB.cardName.totemicslam)  // shaman
             {
-                if (p.ownMinions.Find(m => m.name == CardDB.cardName.wrathofairtotem) != null) return 0;  // already have spelldmg totem, so no penalty
-
                 return p.playactions.FindAll(a => a.actionType == actionEnum.playcard && a.card.card.type == CardDB.cardtype.SPELL
-                    && (DamageTargetSpecialDatabase.ContainsKey(a.card.card.name) || DamageTargetDatabase.ContainsKey(a.card.card.name)
-                        || a.card.card.name == CardDB.cardName.lightningstorm || a.card.card.name == CardDB.cardName.elementaldestruction)).Count;
+                    && (DamageTargetSpecialDatabase.ContainsKey(a.card.card.name) || DamageTargetDatabase.ContainsKey(a.card.card.name) 
+                        || DamageAllEnemysDatabase.ContainsKey(a.card.card.name) || DamageHeroDatabase.ContainsKey(a.card.card.name)
+                        || DamageRandomDatabase.ContainsKey(a.card.card.name) || a.card.card.name == CardDB.cardName.lightningstorm 
+                        || a.card.card.name == CardDB.cardName.elementaldestruction)).Count * 9;
             }
 
             // penalize playing shapeshift after other moves
