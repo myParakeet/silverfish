@@ -47,7 +47,7 @@ namespace HREngine.Bots
 
         Dictionary<CardDB.cardName, int> returnHandDatabase = new Dictionary<CardDB.cardName, int>(); //not used
 
-        Dictionary<CardDB.cardName, int> priorityDatabase = new Dictionary<CardDB.cardName, int>(); //minions we want to keep around
+        public Dictionary<CardDB.cardName, int> priorityDatabase = new Dictionary<CardDB.cardName, int>(); //minions we want to keep around
 
         public Dictionary<CardDB.cardName, int> DamageTargetDatabase = new Dictionary<CardDB.cardName, int>();
         public Dictionary<CardDB.cardName, int> DamageTargetSpecialDatabase = new Dictionary<CardDB.cardName, int>();
@@ -283,6 +283,10 @@ namespace HREngine.Bots
             if (alsoEquipsWeaponDB.ContainsKey(card.name) && alsoEquipsWeaponDB[card.name] < p.ownWeaponAttack)
             {
                 return 25 * ((p.ownWeaponAttack * p.ownWeaponDurability) - (2 * alsoEquipsWeaponDB[card.name]));
+            }
+            if (card.type == CardDB.cardtype.WEAPON && card.Attack <= p.ownWeaponAttack)
+            {
+                return Math.Max(10 + p.ownWeaponAttack * p.ownWeaponDurability - card.Attack * card.Durability, 0); //small penalty for replacing similar attack for more charges
             }
             return 0;
         }
